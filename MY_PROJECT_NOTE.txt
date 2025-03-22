@@ -10,7 +10,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Displaying authenticated user information feature implemented successfully."
+git commit -m "Sign Out feature implemented through Firebase successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------

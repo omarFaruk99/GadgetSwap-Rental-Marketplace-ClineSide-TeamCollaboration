@@ -8,7 +8,7 @@ import AuthContext from "../../Providers/AuthContext.jsx";
 
 const NavbarComponent = () => {
 
-    const {user: registeredUser} = useContext(AuthContext);
+    const {user: registeredUser, signOutCurrentUser} = useContext(AuthContext);
     const darkMode = useSelector((state) => state.darkMode.isDark);
     const dispatch = useDispatch();
 
@@ -38,9 +38,8 @@ const NavbarComponent = () => {
     };
 
 
-    const handleSignOutClick = () => {
-        console.log('user signed out');
-        // In a real app, you would call your auth service logout method here
+    const handleSignOutClick = async () => {
+        await signOutCurrentUser();
     };
 
 

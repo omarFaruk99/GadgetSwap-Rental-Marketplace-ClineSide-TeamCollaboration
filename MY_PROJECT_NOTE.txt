@@ -10,7 +10,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Redux and Redux-Toolkit are installed, configured and applied to toggle dark theme across all components successfully."
+git commit -m "Sign Up feature implemented through Firebase successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------

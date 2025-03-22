@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FiMenu, FiX, FiMoon, FiSun, FiUser} from 'react-icons/fi';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {toggleDarkTheme} from "../../Features/darkLightTheme/darkLightThemeSlice.js";
+import AuthContext from "../../Providers/AuthContext.jsx";
 
 
 const NavbarComponent = () => {
 
-    // const [darkMode, setDarkMode] = useState(false);
+    const {user: registeredUser} = useContext(AuthContext);
     const darkMode = useSelector((state) => state.darkMode.isDark);
     const dispatch = useDispatch();
 
@@ -25,10 +26,10 @@ const NavbarComponent = () => {
 
     // Sample user data - in a real app, this would come from auth context or props
     const user = {
-        isLoggedIn: false,
-        name: "John Doe",
-        email: "john@example.com",
-        profilePicture: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        isLoggedIn: registeredUser !== null,
+        name: registeredUser?.displayName,
+        email: registeredUser?.email,
+        profilePicture: registeredUser?.photoURL,
     };
 
 

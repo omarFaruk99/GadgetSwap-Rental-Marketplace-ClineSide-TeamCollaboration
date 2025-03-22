@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const SignInComponent = () => {
@@ -12,7 +12,7 @@ const SignInComponent = () => {
 
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     // Form state

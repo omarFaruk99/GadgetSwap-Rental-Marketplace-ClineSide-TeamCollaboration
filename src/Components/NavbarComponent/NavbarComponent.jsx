@@ -1,13 +1,21 @@
 import React, {useState} from 'react';
 import {FiMenu, FiX, FiMoon, FiSun, FiUser} from 'react-icons/fi';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleDarkTheme} from "../../Features/darkLightTheme/darkLightThemeSlice.js";
 
 
 const NavbarComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode, toggleDarkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
+    const dispatch = useDispatch();
+
+
+    const toggleDarkMode = () => {
+        dispatch(toggleDarkTheme(darkMode));
+    }
+
 
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);

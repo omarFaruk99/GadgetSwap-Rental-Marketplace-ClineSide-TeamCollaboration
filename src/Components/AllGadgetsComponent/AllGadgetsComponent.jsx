@@ -25,13 +25,13 @@ import {
     FaClock,
     FaWifi,
 } from "react-icons/fa"
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const AllGadgetsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const navigate = useNavigate()

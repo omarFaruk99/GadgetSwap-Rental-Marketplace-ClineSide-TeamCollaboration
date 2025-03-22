@@ -12,13 +12,13 @@ import {
     IoTimeOutline,
     IoThumbsUpOutline
 } from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const WhatOurCustomersSayComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [activeIndex, setActiveIndex] = useState(0);

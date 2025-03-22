@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {FiSend, FiGithub, FiTwitter, FiInstagram, FiLinkedin, FiArrowUp} from 'react-icons/fi';
 import {IoLogoYoutube} from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const FooterComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [email, setEmail] = useState('');

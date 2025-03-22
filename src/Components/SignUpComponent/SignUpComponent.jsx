@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiCheck} from 'react-icons/fi';
 import {FcGoogle} from 'react-icons/fc';
 import {IoWarningOutline} from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const SignUpComponent = () => {
@@ -12,7 +12,7 @@ const SignUpComponent = () => {
 
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     // Form state

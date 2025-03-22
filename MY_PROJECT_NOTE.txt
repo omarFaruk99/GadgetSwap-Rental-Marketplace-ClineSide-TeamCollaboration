@@ -10,7 +10,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "AboutUsComponent design prototype is completed."
+git commit -m "Redux and Redux-Toolkit are installed, configured and applied to toggle dark theme across all components successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------
@@ -110,4 +110,16 @@ Make it fully responsive for all devices. Use breakpoints mentioned in TailwindC
 And avoid writing any function inside return. Better to write all functions above the return and use functions inside return.
 
 After writing the code, no need to write any explanation. Only code in component is alright.
+------------------------------------------------------------------------------------------------------------------------
+
+Learning Redux ---
+Run this command to install necessary packages [npm install @reduxjs/toolkit]. Using this toolkit working with redux will be easy.
+Run this command to install necessary packages [npm install react-redux]. This will connect the React the redux together.
+'Features/darkLightTheme' is created under the 'src' directory.
+'darkLightThemeSlice.js' is created under this 'Features/darkLightTheme' directory. And have written necessary code there.
+'reduxStore.jsx' is created under this 'Providers' directory. And have written necessary code there.
+Wrapped the whole project using a redux given Provider along with the reduxStore in the main.jsx file.
+And the applied the states and action creator functions inside all relevant components using useSelector and useDispatch hook.
+To learn more, visit the tutorial: [ https://www.youtube.com/watch?v=qhll3DXuLHI ]
+
 ------------------------------------------------------------------------------------------------------------------------

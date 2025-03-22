@@ -25,13 +25,13 @@ import {
     FaInstagram,
     FaLinkedin
 } from 'react-icons/fa';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const ContactUsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [formData, setFormData] = useState({

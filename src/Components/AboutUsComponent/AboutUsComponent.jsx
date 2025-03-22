@@ -23,13 +23,13 @@ import {
     FiAward, FiMessageCircle,
 } from "react-icons/fi"
 import {FaLaptop} from "react-icons/fa"
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const AboutUsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

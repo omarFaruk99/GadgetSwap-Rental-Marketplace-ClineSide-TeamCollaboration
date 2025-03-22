@@ -14,13 +14,13 @@ import {
     FiMenu,
     FiX
 } from 'react-icons/fi';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const FAQComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
     const [activeCategory, setActiveCategory] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');

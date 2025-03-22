@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiHome, FiWifi, FiAlertTriangle } from 'react-icons/fi';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const Error404Page = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const handleGoBack = () => {

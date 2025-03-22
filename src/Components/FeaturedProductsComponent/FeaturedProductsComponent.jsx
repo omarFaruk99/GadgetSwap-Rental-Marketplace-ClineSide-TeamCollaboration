@@ -17,13 +17,13 @@ import {
     IoGlassesOutline,
     IoAirplaneOutline
 } from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const FeaturedProductsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [selectedCategory, setSelectedCategory] = useState(null);

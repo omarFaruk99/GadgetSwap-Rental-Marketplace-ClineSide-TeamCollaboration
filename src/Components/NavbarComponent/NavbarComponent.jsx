@@ -108,9 +108,9 @@ const NavbarComponent = () => {
         {name: 'Home', path: '/', isScroll: true, scrollToTop: true},
         {name: 'How It Works', path: '#how-it-works', hideWhenLoggedIn: false, isScroll: true},
         {name: 'Gadgets', path: '/all-gadgets', hideWhenLoggedIn: false},
-        {name: 'About Us', path: '/about-us', hideWhenLoggedIn: false},
+        {name: 'About Us', path: '/about-us', hideWhenLoggedIn: true},
         {name: 'Contact Us', path: '/contact-us', hideWhenLoggedIn: false},
-        {name: 'FAQ', path: '/faq', hideWhenLoggedIn: false},
+        {name: 'FAQ', path: '/faq', hideWhenLoggedIn: true},
         {name: 'Sign Up', path: '/sign-up', hideWhenLoggedIn: true},
         {name: 'Sign In', path: '/sign-in', hideWhenLoggedIn: true},
     ];

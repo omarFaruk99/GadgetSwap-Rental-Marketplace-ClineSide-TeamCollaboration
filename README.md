@@ -51,6 +51,6 @@ Redux is a great choice for our **Rental Marketplace for Gadgets** project becau
 By integrating Redux, we aim to enhance the **efficiency, reliability, and maintainability** of my project, ensuring smooth state transitions and an improved user experience. 
 Testing Purpose
 
-omar
+omar faruk
 
 ---

@@ -19,7 +19,7 @@ import reduxStore from "./Providers/reduxStore.jsx";
 import TermsAndConditionsPage from "./Pages/TermsAndConditionsPage/TermsAndConditionsPage.jsx";
 import CookieSettings from "./Components/CookieSettings/CookieSettings.jsx";
 import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage/PrivacyPolicyPage.jsx";
-import Imprint from "./Components/Imprint/Imprint.jsx";
+import ImprintPage from "./Pages/ImprintPage/ImprintPage.jsx";
 
 
 const queryClient = new QueryClient()
@@ -51,7 +51,7 @@ ReactDOM.createRoot(root).render(
                                 <Route path={'/terms-and-conditions'} element={<TermsAndConditionsPage></TermsAndConditionsPage>}></Route>
                                 <Route path={'/cookie-settings'} element={<CookieSettings></CookieSettings>}></Route>
                                 <Route path={'/privacy-policy'} element={<PrivacyPolicyPage></PrivacyPolicyPage>}></Route>
-                                <Route path={'/imprint'} element={<Imprint></Imprint>}></Route>
+                                <Route path={'/imprint'} element={<ImprintPage></ImprintPage>}></Route>
                             </Route>
                             <Route path={'*'} element={<Error404></Error404>}></Route>
                         </Routes>

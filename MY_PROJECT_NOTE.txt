@@ -10,7 +10,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "ImprintComponent has been created successfully."
+git commit -m "CookieSettingsComponent has been created successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ import GadgetDetailsPage from "./Pages/GadgetDetailsPage/GadgetDetailsPage.jsx";
 import {Provider} from "react-redux";
 import reduxStore from "./Providers/reduxStore.jsx";
 import TermsAndConditionsPage from "./Pages/TermsAndConditionsPage/TermsAndConditionsPage.jsx";
-import CookieSettings from "./Components/CookieSettings/CookieSettings.jsx";
+import CookieSettingsPage from "./Pages/CookieSettingsPage/CookieSettingsPage.jsx";
 import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage/PrivacyPolicyPage.jsx";
 import ImprintPage from "./Pages/ImprintPage/ImprintPage.jsx";
 
@@ -49,7 +49,7 @@ ReactDOM.createRoot(root).render(
                                 <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
 
                                 <Route path={'/terms-and-conditions'} element={<TermsAndConditionsPage></TermsAndConditionsPage>}></Route>
-                                <Route path={'/cookie-settings'} element={<CookieSettings></CookieSettings>}></Route>
+                                <Route path={'/cookie-settings'} element={<CookieSettingsPage></CookieSettingsPage>}></Route>
                                 <Route path={'/privacy-policy'} element={<PrivacyPolicyPage></PrivacyPolicyPage>}></Route>
                                 <Route path={'/imprint'} element={<ImprintPage></ImprintPage>}></Route>
                             </Route>

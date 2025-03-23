@@ -48,7 +48,8 @@ Redux is a great choice for our **Rental Marketplace for Gadgets** project becau
 - **Simplified API Handling:** Manages API responses and caching efficiently to reduce redundant requests.
 - **Better Maintainability:** Enhances project structure, making future modifications and debugging simpler.
 
-By integrating Redux, we aim to enhance the **efficiency, reliability, and maintainability** of my project, ensuring smooth state transitions and an improved user experience.
+By integrating Redux, we aim to enhance the **efficiency, reliability, and maintainability** of my project, ensuring smooth state transitions and an improved user experience. 
+Testing Purpose
 
 omar
 

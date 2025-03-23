@@ -1528,6 +1528,14 @@ const AllGadgetsComponent = () => {
     }
 
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            // behavior: 'smooth'
+        });
+    }, []);
+
+
     const { currentGadgets, totalGadgets } = getCurrentGadgets()
     const { pageNumbers, totalPages } = getPaginationNumbers()
 

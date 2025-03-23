@@ -2,19 +2,14 @@
 
 import {useEffect, useState} from "react"
 import {
-    FiSun,
-    FiMoon,
-    FiMenu,
     FiX,
     FiUsers,
     FiTrendingUp,
     FiShield,
     FiGlobe,
     FiStar,
-    FiMail,
     FiLinkedin,
     FiTwitter,
-    FiInstagram,
     FiArrowRight,
     FiClock,
     FiHeart,
@@ -24,6 +19,7 @@ import {
 } from "react-icons/fi"
 import {FaLaptop} from "react-icons/fa"
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 
 const AboutUsComponent = () => {
@@ -64,7 +60,7 @@ const AboutUsComponent = () => {
         {
             name: "Sarah Johnson",
             role: "Founder & CEO",
-            image: "/placeholder.svg",
+            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742734989/employee_2_hzvyoy.jpg",
             bio: "Former tech executive with a passion for sustainable consumption and the sharing economy.",
             social: {
                 linkedin: "#",
@@ -74,7 +70,7 @@ const AboutUsComponent = () => {
         {
             name: "Michael Chen",
             role: "CTO",
-            image: "/placeholder.svg",
+            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742734990/employee_5_xw4hwn.jpg",
             bio: "Full-stack developer with 10+ years experience building marketplace platforms.",
             social: {
                 linkedin: "#",
@@ -84,7 +80,7 @@ const AboutUsComponent = () => {
         {
             name: "Priya Patel",
             role: "Head of Operations",
-            image: "/placeholder.svg",
+            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742734987/employee_4_ojjq8l.jpg",
             bio: "Supply chain expert focused on creating seamless rental experiences.",
             social: {
                 linkedin: "#",
@@ -94,7 +90,7 @@ const AboutUsComponent = () => {
         {
             name: "David Wilson",
             role: "Marketing Director",
-            image: "/placeholder.svg",
+            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742734989/employee_3_npuhxo.jpg",
             bio: "Digital marketing specialist with experience in growing tech startups.",
             social: {
                 linkedin: "#",
@@ -334,7 +330,7 @@ const AboutUsComponent = () => {
                     {/* Sidebar Navigation - Desktop */}
                     <div className="hidden lg:block w-64 flex-shrink-0">
                         <div
-                            className={`sticky top-8 rounded-xl p-4 ${darkMode ? "bg-gray-800" : "bg-white shadow-sm"}`}>
+                            className={`sticky top-24 rounded-xl p-4 ${darkMode ? "bg-gray-800" : "bg-white shadow-sm"}`}>
                             <nav>
                                 <ul className="space-y-2">
                                     <li>
@@ -687,12 +683,12 @@ const AboutUsComponent = () => {
                                         <div className="mb-4 md:mb-0">
                                             <h3 className="text-xl font-medium mb-2">Ready to join our community?</h3>
                                             <p className={darkMode ? "text-gray-300" : "text-gray-600"}>
-                                                Start renting or listing your gadgets today.
+                                                Start renting exciting gadgets today.
                                             </p>
                                         </div>
                                         <div className="flex space-x-4">
-                                            <a
-                                                href="#rent"
+                                            <Link
+                                                to="/sign-in"
                                                 className={`px-4 py-2 rounded-lg font-medium ${
                                                     darkMode
                                                         ? "bg-blue-600 hover:bg-blue-700 text-white"
@@ -700,8 +696,8 @@ const AboutUsComponent = () => {
                                                 }`}
                                             >
                                                 Rent a Gadget
-                                            </a>
-                                            <a
+                                            </Link>
+                                            {/*<a
                                                 href="#list"
                                                 className={`px-4 py-2 rounded-lg font-medium ${
                                                     darkMode
@@ -710,7 +706,7 @@ const AboutUsComponent = () => {
                                                 }`}
                                             >
                                                 List Your Gadget
-                                            </a>
+                                            </a>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -731,12 +727,12 @@ const AboutUsComponent = () => {
                                         cost.
                                     </p>
                                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                                        <a
-                                            href="#signup"
+                                        <Link
+                                            to={'/sign-up'}
                                             className="px-6 py-3 rounded-lg font-medium bg-white text-blue-600 hover:bg-gray-100 transition-colors"
                                         >
                                             Sign Up Now
-                                        </a>
+                                        </Link>
                                         <a
                                             href="#learn-more"
                                             className="px-6 py-3 rounded-lg font-medium bg-transparent border border-white hover:bg-white/10 transition-colors"

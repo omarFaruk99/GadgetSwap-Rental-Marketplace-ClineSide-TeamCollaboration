@@ -4,13 +4,12 @@ git init
 git add .
 git commit -m "Project setup completed using Vite, React, TailwindCSS and ReactRouter."
 git branch -M main
-git remote add origin https://github.com/MZahidKamal/GadgetSwap-Rental-Marketplace--Client-Side.git
 git push -u origin main
 
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "CookieSettingsComponent has been created successfully."
+git commit -m "Some minor modifications have been done for better user experience."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------
@@ -27,7 +26,6 @@ git push origin newBranchName02
 // Instructions for team members.---------------------------------------------------------------------------------------
 
 Login to your own GitHub profile.
-Visit this project repository [https://github.com/MZahidKamal/GadgetSwap-Rental-Marketplace--Client-Side.git].
 Click 'Fork' just above the About section.
 Keep everything same, and then click 'Create fork' button in the bottom right corner.
 Now you will see a copy of this project into your own GitHub profile.
@@ -62,31 +60,6 @@ Categories: Smartphones, Laptops, Tablets, Smartwatches, Cameras, Gaming, Audio,
 
 
 ok eitai final korlam. akhon ekta boro JSON data banaba, tar moddhe ei category gula array akare diba, abar prottek category er moddhe, mone koro Smartphones category er moddhe
-
-
-
-
-
-
-
-
-
-
-'About Us', clicking this link will redirect to '/about-us';
-'Frequently Asked Questions', clicking this link will redirect to '/faq';
-'Contact Us', clicking this link will redirect to '/contact-us';
-
-'Terms and Conditions', clicking this link will redirect to '/terms-and-conditions';
-'Cookie settings', clicking this link will redirect to '/cookie-settings';
-'Privacy Policy', clicking this link will redirect to '/privacy-policy';
-'Imprint', clicking this link will redirect to '/imprint';
-
-
-
-
-
-
-
 
 
 

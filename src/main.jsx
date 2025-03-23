@@ -20,6 +20,7 @@ import TermsAndConditionsPage from "./Pages/TermsAndConditionsPage/TermsAndCondi
 import CookieSettingsPage from "./Pages/CookieSettingsPage/CookieSettingsPage.jsx";
 import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage/PrivacyPolicyPage.jsx";
 import ImprintPage from "./Pages/ImprintPage/ImprintPage.jsx";
+import DashboardPage from "./Pages/DashboardPage/DashboardPage.jsx";
 
 
 const queryClient = new QueryClient()
@@ -37,16 +38,17 @@ ReactDOM.createRoot(root).render(
                         <Routes>
                             <Route path={'/'} element={<MainLayout></MainLayout>}>
                                 <Route path={'/'} element={<HomePage></HomePage>}></Route>
-                                <Route path={'/about-us'} element={<AboutPage></AboutPage>}></Route>
 
                                 <Route path={'/all-gadgets'} element={<AllGadgetsPage></AllGadgetsPage>}></Route>
                                 <Route path={'/all-gadgets/gadget-details/:id'} element={<GadgetDetailsPage></GadgetDetailsPage>}></Route>
 
+                                <Route path={'/about-us'} element={<AboutPage></AboutPage>}></Route>
                                 <Route path={'/contact-us'} element={<ContactUsPage></ContactUsPage>}></Route>
                                 <Route path={'/faq'} element={<FAQPage></FAQPage>}></Route>
 
                                 <Route path={'/sign-up'} element={<SignUpPage></SignUpPage>}></Route>
                                 <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
+                                <Route path={'/dashboard'} element={<DashboardPage></DashboardPage>}></Route>
 
                                 <Route path={'/terms-and-conditions'} element={<TermsAndConditionsPage></TermsAndConditionsPage>}></Route>
                                 <Route path={'/cookie-settings'} element={<CookieSettingsPage></CookieSettingsPage>}></Route>

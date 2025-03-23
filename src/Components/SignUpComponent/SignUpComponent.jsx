@@ -451,7 +451,7 @@ const SignUpComponent = () => {
                                 <label htmlFor="acceptTerms" className={`font-medium ${
                                     darkMode ? 'text-gray-300' : 'text-gray-700'
                                 } transition-colors duration-300`}>
-                                    I accept the <a href="/terms" className={`${
+                                    I accept the <a href="/terms-and-conditions" className={`${
                                     darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
                                 } transition-colors duration-300`}>Terms and Conditions</a>
                                 </label>

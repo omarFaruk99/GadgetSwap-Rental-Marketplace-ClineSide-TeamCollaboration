@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
     FiAward,
     FiChevronRight,
-    FiChevronDown,
-    FiChevronUp,
     FiGift,
     FiClock,
     FiPercent,
@@ -542,7 +540,7 @@ const LoyaltyAndRewardsComponent = () => {
                                         {tier.id !== 'platinum' && (
                                             <div className="mt-8 text-center">
                                                 <a
-                                                    href="/account/loyalty"
+                                                    href="/dashboard/membership"
                                                     className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                                                         darkMode
                                                             ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-900/20'
@@ -1004,7 +1002,7 @@ const LoyaltyAndRewardsComponent = () => {
                             ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                             : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
                     }`}>
-                        <div className="divide-y divide-gray-700">
+                        <div className={`divide-y ${darkMode ? 'divide-gray-700/80' : 'divide-gray-700/20'}`}>
                             <div className="p-6">
                                 <h4 className={`text-lg font-medium mb-2 ${
                                     darkMode ? 'text-white' : 'text-gray-900'

@@ -1,0 +1,57 @@
+{
+  "id": "",
+  "name": "",
+  "category": "",
+  "brand": "",
+  "model": "",
+  "description": "",
+  "specifications": {
+    "display": "",
+    "processor": "",
+    "storage": "",
+    "camera": "",
+    "battery": "",
+    "os": ""
+  },
+  "included": [
+    "",
+    ""
+  ],
+  "images": [
+    "",
+    ""
+  ],
+  "pricing": {
+    "perDay": 0.00,
+    "deposit": 0.00,
+    "basicInsuranceFee": 0.00,
+    "premiumInsuranceFee": 0.00
+  },
+  "availability": {
+    "status": true,
+    "blockedDates": [
+      "0000-00-00",
+      "0000-00-00"
+    ]
+  },
+  "ratings": [
+    0.0,
+    0.0
+  ],
+  "average_rating": 0.0,
+  "reviews": [
+    {
+      "reviewer_id": "",
+      "reviewer_name": "",
+      "reviewer_email": "",
+      "review_text": ""
+    },
+    {
+      "reviewer_id": "",
+      "reviewer_name": "",
+      "reviewer_email": "",
+      "review_text": ""
+    }
+  ],
+  "totalRentalCount": 0
+}

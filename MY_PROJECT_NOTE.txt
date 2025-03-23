@@ -1,0 +1,113 @@
+// Primary set of commands for initializing the git repository.---------------------------------------------------------
+
+git init
+git add .
+git commit -m "Project setup completed using Vite, React, TailwindCSS and ReactRouter."
+git branch -M main
+git remote add origin https://github.com/MZahidKamal/GadgetSwap-Rental-Marketplace--Client-Side.git
+git push -u origin main
+
+// Commands to push code from now on.-----------------------------------------------------------------------------------
+
+git add .
+git commit -m "AboutUsComponent design prototype is completed."
+git push
+
+// Necessary Git commands.----------------------------------------------------------------------------------------------
+
+[git branch]                            To know the current branch.
+[git branch -M newName]                 To rename the current branch.
+[git remote -v]                         To get the original url where the git will be pushed and be fetched from.
+[git branch newBranchName]              To create a new branch.
+[git checkout newBranchName]            To check out from current branch and enter into newBranchName.
+[git branch -d newBranchName]           To delete the newBranchName. Make sure you are not currently in this branch.
+[git checkout -b newBranchName02]       To check out from current branch, create a new branch and enter into that new branch.
+git push origin newBranchName02
+
+// Instructions for team members.---------------------------------------------------------------------------------------
+
+Login to your own GitHub profile.
+Visit this project repository [https://github.com/MZahidKamal/GadgetSwap-Rental-Marketplace--Client-Side.git].
+Click 'Fork' just above the About section.
+Keep everything same, and then click 'Create fork' button in the bottom right corner.
+Now you will see a copy of this project into your own GitHub profile.
+
+Clone the repository, using the HTTPS web URL, into your local folder.
+Open the project in your VSCode.
+Run the command [npm install] to install all the packages according to the package.json file.
+Run the project. Hopefully everything will be perfect.
+
+Now open the terminal.
+[git checkout -b newFeatureNameAsBranchName] To check out from current branch, create a new branch and enter into that new branch.
+Write necessary code to implement the feature.
+
+[git add .] To add the new code into the git push pipeline.
+[git commit -am "Commit text"] To add the commit text about the added new code, into the new branch, of the repository which .
+[git push origin newFeatureNameAsBranchName] To push the new code into the repository, which you have forked into your GitHub account.
+
+Now got to your forked repository,
+
+// Firebase setup ------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+SmartphonesSpecificationSubComponent, LaptopsSpecificationSubComponent, TabletsSpecificationSubComponent, SmartwatchesSpecificationSubComponent, CamerasSpecificationSubComponent, GamingSpecificationSubComponent, AudioSpecificationSubComponent, HeadphonesSpecificationSubComponent, SpeakersSpecificationSubComponent, WearablesSpecificationSubComponent, VRSpecificationSubComponent, DronesSpecificationSubComponent, ProjectorsSpecificationSubComponent
+Smartphones, Laptops, Tablets, Smartwatches, Cameras, Gaming, Audio, Headphones, Speakers, Wearables, VR, Drones, Projectors
+Categories: Smartphones, Laptops, Tablets, Smartwatches, Cameras, Gaming, Audio, Headphones, Speakers, Wearables, VR, Drones, Projectors
+
+
+ok eitai final korlam. akhon ekta boro JSON data banaba, tar moddhe ei category gula array akare diba, abar prottek category er moddhe, mone koro Smartphones category er moddhe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+v0 command -------------------------------------------------------------------------------------------------------------
+This component will not receive any params.
+
+Use all your creativity to make it uniquely beautiful with clean minimalistic slik design. Don't install/import/use Shadcn, but make the design looks like shadcn.
+
+Make it container-sized maximum width. Do not use Next.js. Use only React and TailwindCSS. Don't use any raw CSS, inline CSS or style attribute. Give me the code in .jsx file.
+
+All necessary icons you can take from React-icons. You may use colours only on icons. Not svg icon. Also correct the image sizes using TailwindCSS not Query Parameters.
+
+Create a state called 'darkMode'. If can be true or false. While using colors, use both colors for dark and light mode.
+
+Make it fully responsive for all devices. Use breakpoints mentioned in TailwindCSS. Avoid writing unnecessary hooks. If the screen size comes below the breakpoing lg, show up the collapsed menu button.
+
+And avoid writing any function inside return. Better to write all functions above the return and use functions inside return.
+
+After writing the code, no need to write any explanation. Only code in component is alright.
+------------------------------------------------------------------------------------------------------------------------

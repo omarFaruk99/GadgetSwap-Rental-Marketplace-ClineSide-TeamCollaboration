@@ -16,6 +16,10 @@ import AllGadgetsPage from "./Pages/AllGadgetsPage/AllGadgetsPage.jsx";
 import GadgetDetailsPage from "./Pages/GadgetDetailsPage/GadgetDetailsPage.jsx";
 import {Provider} from "react-redux";
 import reduxStore from "./Providers/reduxStore.jsx";
+import TermsAndConditions from "./Components/TermsAndConditions/TermsAndConditions.jsx";
+import CookieSettings from "./Components/CookieSettings/CookieSettings.jsx";
+import PrivacyPolicy from "./Components/PrivacyPolicy/PrivacyPolicy.jsx";
+import Imprint from "./Components/Imprint/Imprint.jsx";
 
 
 const queryClient = new QueryClient()
@@ -34,12 +38,20 @@ ReactDOM.createRoot(root).render(
                             <Route path={'/'} element={<MainLayout></MainLayout>}>
                                 <Route path={'/'} element={<HomePage></HomePage>}></Route>
                                 <Route path={'/about-us'} element={<AboutPage></AboutPage>}></Route>
+
                                 <Route path={'/all-gadgets'} element={<AllGadgetsPage></AllGadgetsPage>}></Route>
                                 <Route path={'/all-gadgets/gadget-details/:id'} element={<GadgetDetailsPage></GadgetDetailsPage>}></Route>
+
                                 <Route path={'/contact-us'} element={<ContactUsPage></ContactUsPage>}></Route>
                                 <Route path={'/faq'} element={<FAQPage></FAQPage>}></Route>
+
                                 <Route path={'/sign-up'} element={<SignUpPage></SignUpPage>}></Route>
                                 <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
+
+                                <Route path={'/terms-and-conditions'} element={<TermsAndConditions></TermsAndConditions>}></Route>
+                                <Route path={'/cookie-settings'} element={<CookieSettings></CookieSettings>}></Route>
+                                <Route path={'/privacy-policy'} element={<PrivacyPolicy></PrivacyPolicy>}></Route>
+                                <Route path={'/imprint'} element={<Imprint></Imprint>}></Route>
                             </Route>
                             <Route path={'*'} element={<Error404></Error404>}></Route>
                         </Routes>

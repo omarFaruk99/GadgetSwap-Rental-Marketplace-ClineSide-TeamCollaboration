@@ -8,7 +8,7 @@ import AuthContext from "../../Providers/AuthContext.jsx";
 
 const SignUpComponent = () => {
 
-    const {signUpNewUser} = useContext(AuthContext)
+    const {signUpNewUser, signInWithGoogle} = useContext(AuthContext)
     const navigate = useNavigate();
     const darkMode = useSelector((state) => state.darkMode.isDark);
 
@@ -190,8 +190,8 @@ const SignUpComponent = () => {
     };
 
 
-    const handleGoogleSignIn = () => {
-        // In a real app, this would integrate with Google OAuth
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle();
         console.log('Sign in with Google clicked');
     };
 

@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from "react";
 import {
     FiX,
-    FiUser,
-    FiCalendar,
-    FiDollarSign,
+    FiDatabase,
+    FiServer,
     FiShield,
-    FiLock,
-    FiSlash,
-    FiGlobe,
-    FiInfo,
+    FiHardDrive,
+    FiLink,
+    FiUsers,
+    FiUserCheck,
+    FiEdit,
+    FiMessageCircle,
+    FiClock,
     FiCheckCircle,
     FiAlertTriangle,
     FiFileText,
     FiHelpCircle,
-    FiMessageCircle, FiClock
+    FiLock,
+    FiEye,
+    FiGlobe
 } from "react-icons/fi";
 import {useSelector} from "react-redux";
 
 
-const TermsAndConditionsComponent = () => {
+const PrivacyPolicyComponent = () => {
 
     const darkMode = useSelector((state) => state.darkMode.isDark);
-    const [activeSection, setActiveSection] = useState("introduction");
+    const [activeSection, setActiveSection] = useState("information-collection");
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [lastUpdated] = useState("March 15, 2024");
 
@@ -71,104 +75,142 @@ const TermsAndConditionsComponent = () => {
     // Sections data
     const sections = [
         {
-            id: "introduction",
-            title: "Introduction",
-            icon: <FiInfo/>,
+            id: "information-collection",
+            title: "Information Collection",
+            icon: <FiDatabase />,
             content: `
-            <p>Welcome to GadgetSwap, a platform that enables users to rent and lend gadgets. These Terms and Conditions govern your use of the GadgetSwap website, mobile applications, and services.</p>
-            <p>By accessing or using GadgetSwap, you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the service.</p>
+            <p>GadgetSwap collects personal information when you create an account, list a gadget, rent a gadget, or contact customer support. This information may include:</p>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
+                <li>Name, email address, phone number, and billing address</li>
+                <li>Payment information (processed securely through our payment processors)</li>
+                <li>Government-issued ID for identity verification</li>
+                <li>Device information such as IP address, browser type, and operating system</li>
+                <li>Location data when you use our services</li>
+                <li>Communications with GadgetSwap and other users</li>
+            </ul>
+            <p class="mt-4">We collect this information to provide and improve our services, process transactions, verify identities, and ensure the security of our platform.</p>
             `
         },
         {
-            id: "user-accounts",
-            title: "User Accounts",
-            icon: <FiUser/>,
+            id: "use-of-information",
+            title: "Use of Information",
+            icon: <FiServer />,
             content: `
-            <p>To use certain features of GadgetSwap, you must register for an account. You agree to provide accurate, current, and complete information during the registration process.</p>
-            <p>You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer. You agree to accept responsibility for all activities that occur under your account.</p>
-            <p>Users must be at least 18 years old to create an account and use the services. GadgetSwap reserves the right to refuse service, terminate accounts, or remove content at our discretion.</p>
+            <p>GadgetSwap uses the collected information for the following purposes:</p>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
+                <li>Providing and maintaining our services</li>
+                <li>Processing and completing transactions</li>
+                <li>Verifying user identities and preventing fraud</li>
+                <li>Communicating with users about their accounts, rentals, and support requests</li>
+                <li>Improving our services and developing new features</li>
+                <li>Sending promotional communications (with your consent)</li>
+                <li>Complying with legal obligations</li>
+            </ul>
+            <p class="mt-4">We process your information based on the following legal grounds: performance of our contract with you, our legitimate interests, compliance with legal obligations, and your consent where applicable.</p>
             `
         },
         {
-            id: "rental-terms",
-            title: "Rental Terms",
-            icon: <FiCalendar/>,
+            id: "data-storage",
+            title: "Data Storage and Security",
+            icon: <FiShield />,
             content: `
-            <p>Rental periods begin and end on the dates specified in the rental agreement. Late returns may incur additional charges as outlined in the rental agreement.</p>
-            <p>Renters are responsible for the proper use and care of rented gadgets. Any damage beyond normal wear and tear may result in additional charges.</p>
-            <p>Gadget owners are responsible for ensuring their devices are in good working condition and accurately described on the platform.</p>
-            <p>GadgetSwap is not responsible for any loss of data or privacy breaches that may occur during the rental period. Users are advised to remove personal data before lending or returning gadgets.</p>
+            <p>GadgetSwap takes data security seriously and implements appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+            <p class="mt-4">We store your data on secure servers and use industry-standard encryption to protect data transmission. Payment information is processed by trusted third-party payment processors who comply with PCI DSS standards.</p>
+            <p class="mt-4">We retain your personal information for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements. You may request deletion of your data as described in the User Rights section.</p>
             `
         },
         {
-            id: "payment-terms",
-            title: "Payment Terms",
-            icon: <FiDollarSign/>,
+            id: "cookies",
+            title: "Cookies and Tracking",
+            icon: <FiHardDrive />,
             content: `
-            <p>Rental fees are set by gadget owners and displayed on the listing. GadgetSwap charges a service fee for facilitating the transaction.</p>
-            <p>Security deposits may be required for certain gadgets and will be refunded after the rental period, subject to the condition of the returned gadget.</p>
-            <p>Payments are processed through our secure payment system. GadgetSwap does not store credit card information.</p>
-            <p>Refunds are available under certain circumstances as outlined in our Refund Policy. Cancellation fees may apply depending on when the reservation is canceled.</p>
+            <p>GadgetSwap uses cookies and similar tracking technologies to enhance your experience on our platform. Cookies are small text files stored on your device that help us recognize you and remember your preferences.</p>
+            <p class="mt-4">We use the following types of cookies:</p>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
+                <li><strong>Essential cookies:</strong> Required for the operation of our platform</li>
+                <li><strong>Analytical cookies:</strong> Help us understand how users interact with our platform</li>
+                <li><strong>Functional cookies:</strong> Remember your preferences and settings</li>
+                <li><strong>Advertising cookies:</strong> Used to deliver relevant advertisements</li>
+            </ul>
+            <p class="mt-4">You can manage your cookie preferences through your browser settings. However, disabling certain cookies may affect the functionality of our platform.</p>
             `
         },
         {
-            id: "liability",
-            title: "Liability",
-            icon: <FiShield/>,
+            id: "third-party",
+            title: "Third-Party Services",
+            icon: <FiLink />,
             content: `
-            <p>GadgetSwap is not liable for any damages, injuries, or losses resulting from the use of rented gadgets.</p>
-            <p>Users agree to indemnify and hold harmless GadgetSwap from any claims, damages, or expenses arising from their use of the service or violation of these terms.</p>
-            <p>GadgetSwap provides an optional Protection Plan for additional coverage against damage or theft. Terms of the Protection Plan are outlined separately.</p>
+            <p>GadgetSwap works with trusted third-party service providers to help us operate, improve, and secure our platform. These providers may have access to your personal information but are only permitted to use it for specific purposes related to our services.</p>
+            <p class="mt-4">Our third-party service providers include:</p>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
+                <li>Payment processors</li>
+                <li>Identity verification services</li>
+                <li>Cloud storage providers</li>
+                <li>Analytics services</li>
+                <li>Customer support tools</li>
+                <li>Marketing and communication platforms</li>
+            </ul>
+            <p class="mt-4">We ensure that all third-party providers adhere to appropriate data protection standards. However, we are not responsible for the privacy practices of third-party websites or services that may be linked from our platform.</p>
             `
         },
         {
-            id: "privacy",
-            title: "Privacy",
-            icon: <FiLock/>,
+            id: "user-rights",
+            title: "User Rights",
+            icon: <FiUserCheck />,
             content: `
-            <p>GadgetSwap collects and processes personal data as described in our Privacy Policy. By using our services, you consent to such processing.</p>
-            <p>We implement various security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
-            <p>GadgetSwap may use cookies and similar tracking technologies to enhance user experience and collect usage data.</p>
+            <p>Depending on your location, you may have certain rights regarding your personal information. These may include:</p>
+            <ul class="list-disc pl-6 space-y-2 mt-2">
+                <li><strong>Access:</strong> Request a copy of the personal information we hold about you</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate or incomplete information</li>
+                <li><strong>Deletion:</strong> Request deletion of your personal information</li>
+                <li><strong>Restriction:</strong> Request restriction of processing of your personal information</li>
+                <li><strong>Portability:</strong> Request transfer of your personal information to another service provider</li>
+                <li><strong>Objection:</strong> Object to processing of your personal information</li>
+                <li><strong>Withdrawal of consent:</strong> Withdraw consent where processing is based on consent</li>
+            </ul>
+            <p class="mt-4">To exercise these rights, please contact us at privacy@gadgetswap.com. We will respond to your request within the timeframe required by applicable law.</p>
             `
         },
         {
-            id: "termination",
-            title: "Termination",
-            icon: <FiSlash/>,
+            id: "children",
+            title: "Children's Privacy",
+            icon: <FiUsers />,
             content: `
-            <p>GadgetSwap reserves the right to terminate or suspend accounts without prior notice for violations of these Terms and Conditions.</p>
-            <p>Users may terminate their accounts at any time by contacting customer support. Termination will not affect any pending transactions.</p>
-            <p>Upon termination, certain provisions of these Terms and Conditions will continue to remain in effect, including ownership, warranty disclaimers, and limitations of liability.</p>
+            <p>GadgetSwap services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us immediately.</p>
+            <p class="mt-4">If we become aware that we have collected personal information from a child without parental consent, we will take steps to remove that information from our servers.</p>
             `
         },
         {
-            id: "governing-law",
-            title: "Governing Law",
-            icon: <FiGlobe/>,
+            id: "international",
+            title: "International Transfers",
+            icon: <FiGlobe />,
             content: `
-            <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of the jurisdiction in which GadgetSwap is registered, without regard to its conflict of law provisions.</p>
-            <p>Any disputes arising under or in connection with these Terms and Conditions shall be subject to the exclusive jurisdiction of the courts in that jurisdiction.</p>
+            <p>GadgetSwap operates globally, which means your personal information may be transferred to and processed in countries other than your country of residence. These countries may have different data protection laws than your country.</p>
+            <p class="mt-4">When we transfer your personal information internationally, we implement appropriate safeguards to ensure that your information receives an adequate level of protection, regardless of where it is processed.</p>
+            <p class="mt-4">By using our services, you consent to the transfer of your personal information to countries outside your country of residence, including the United States, where our primary servers are located.</p>
             `
         },
         {
             id: "changes",
-            title: "Changes to Terms",
-            icon: <FiFileText/>,
+            title: "Changes to Privacy Policy",
+            icon: <FiEdit />,
             content: `
-            <p>GadgetSwap reserves the right to modify these Terms and Conditions at any time. We will provide notice of significant changes through the website or via email.</p>
-            <p>Your continued use of the service after such modifications constitutes your acceptance of the updated terms.</p>
-            <p>It is your responsibility to review these Terms and Conditions periodically for changes.</p>
+            <p>GadgetSwap may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes through our platform or via email.</p>
+            <p class="mt-4">The date at the top of this Privacy Policy indicates when it was last updated. We encourage you to review this Privacy Policy periodically to stay informed about how we protect your personal information.</p>
+            <p class="mt-4">Your continued use of our services after any changes to this Privacy Policy constitutes your acceptance of the updated policy.</p>
             `
         },
         {
             id: "contact",
-            title: "Contact Us",
-            icon: <FiHelpCircle/>,
+            title: "Contact Information",
+            icon: <FiHelpCircle />,
             content: `
-            <p>If you have any questions about these Terms and Conditions, please contact us at:</p>
-            <p>Email: legal@gadgetswap.com</p>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us at:</p>
+            <p class="mt-2">Email: privacy@gadgetswap.com</p>
             <p>Phone: +1 (555) 123-4567</p>
             <p>Address: 123 Tech Lane, San Francisco, CA 94107</p>
+            <p class="mt-4">Our Data Protection Officer can be reached at dpo@gadgetswap.com.</p>
+            <p class="mt-4">If you have an unresolved privacy concern that we have not addressed satisfactorily, please contact your local data protection authority.</p>
             `
         }
     ];
@@ -235,7 +277,6 @@ const TermsAndConditionsComponent = () => {
                 </div>
             )}
 
-
             {/* Main Content */}
             <main className="container mx-auto px-4 py-16 pt-32">
                 {/* Section Header */}
@@ -252,10 +293,10 @@ const TermsAndConditionsComponent = () => {
                     <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
                         darkMode ? 'text-white' : 'text-gray-900'
                     }`}>
-                        Terms and Conditions
+                        Privacy Policy
                     </h2>
                     <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                        Please read our terms carefully to understand your rights and responsibilities.
+                        How we collect, use, and protect your personal information.
                     </p>
                 </div>
 
@@ -307,6 +348,29 @@ const TermsAndConditionsComponent = () => {
                         <div className={`p-6 rounded-xl transition-colors ${
                             darkMode ? "bg-gray-800" : "bg-white shadow-sm"
                         }`}>
+                            {/* Introduction */}
+                            <div className="mb-8">
+                                <div className="flex items-center mb-4">
+                                    <div className={`p-3 rounded-full mr-4 ${
+                                        darkMode ? "bg-blue-900/30" : "bg-blue-50"
+                                    }`}>
+                                        <FiLock className={`${
+                                            darkMode ? "text-blue-400" : "text-blue-600"
+                                        }`} size={24} />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-2xl font-bold">Your Privacy Matters</h2>
+                                        <p className={`mt-1 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                                            We're committed to protecting your personal information and being transparent about our practices.
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className={`${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                                    This Privacy Policy explains how GadgetSwap collects, uses, and protects your personal information when you use our website, mobile applications, and services. By using GadgetSwap, you consent to the data practices described in this policy.
+                                </p>
+                            </div>
+
+                            {/* Main Content Sections */}
                             <div className="prose max-w-none prose-headings:mb-4 prose-p:mb-4 prose-p:leading-relaxed">
                                 {sections.map((section) => (
                                     <section
@@ -336,7 +400,7 @@ const TermsAndConditionsComponent = () => {
                             </div>
                         </div>
 
-                        {/* Agreement Section */}
+                        {/* Commitment Section */}
                         <div className={`mt-8 p-6 rounded-xl transition-colors ${
                             darkMode ? "bg-gray-800" : "bg-white shadow-sm"
                         }`}>
@@ -349,11 +413,34 @@ const TermsAndConditionsComponent = () => {
                                     }`} size={24} />
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold mb-2">Agreement to Terms</h3>
+                                    <h3 className="text-xl font-bold mb-2">Our Commitment to Privacy</h3>
                                     <p className={`${
                                         darkMode ? "text-gray-300" : "text-gray-700"
                                     }`}>
-                                        By using GadgetSwap, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.
+                                        At GadgetSwap, we believe in transparency and respect for your privacy. We continuously review and improve our privacy practices to ensure the highest standards of data protection. If you have any questions or concerns about this Privacy Policy, please don't hesitate to contact us.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Data Protection Notice */}
+                        <div className={`mt-8 p-6 rounded-xl transition-colors ${
+                            darkMode ? "bg-blue-900/20" : "bg-blue-50"
+                        } border-l-4 ${
+                            darkMode ? "border-blue-600" : "border-blue-500"
+                        }`}>
+                            <div className="flex items-start">
+                                <FiEye className={`mr-4 flex-shrink-0 ${
+                                    darkMode ? "text-blue-400" : "text-blue-500"
+                                }`} size={24} />
+                                <div>
+                                    <h3 className={`text-lg font-bold mb-2 ${
+                                        darkMode ? "text-blue-400" : "text-blue-700"
+                                    }`}>Your Data Protection Rights</h3>
+                                    <p className={`${
+                                        darkMode ? "text-gray-300" : "text-gray-700"
+                                    }`}>
+                                        Depending on your location, you may have specific rights regarding your personal data. We respect these rights and provide mechanisms for you to exercise them. For more information, please refer to the User Rights section of this policy or contact our Data Protection Officer.
                                     </p>
                                 </div>
                             </div>
@@ -376,7 +463,7 @@ const TermsAndConditionsComponent = () => {
                                     <p className={`${
                                         darkMode ? "text-gray-300" : "text-gray-700"
                                     }`}>
-                                        These Terms and Conditions may be updated periodically. It is your responsibility to check for updates. Continued use of GadgetSwap after changes constitutes acceptance of the modified terms.
+                                        This Privacy Policy may be updated periodically. It is your responsibility to check for updates. Continued use of GadgetSwap after changes constitutes acceptance of the modified policy.
                                     </p>
                                 </div>
                             </div>
@@ -384,14 +471,12 @@ const TermsAndConditionsComponent = () => {
 
                         {/* Print Button */}
                         <div className="mt-8 flex justify-between">
-
                             <div className={`flex items-center px-3 py-1 rounded-full text-xs ${
                                 darkMode ? "bg-gray-800 text-gray-300" : "bg-gray-100 text-gray-600"
                             }`}>
                                 <FiClock className="mr-1" size={14} />
                                 <span>Last updated: {lastUpdated}</span>
                             </div>
-
                             <button
                                 onClick={() => window.print()}
                                 className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
@@ -401,7 +486,7 @@ const TermsAndConditionsComponent = () => {
                                 }`}
                             >
                                 <FiFileText className="mr-2" />
-                                Print Terms
+                                Print Privacy Policy
                             </button>
                         </div>
                     </div>
@@ -411,4 +496,4 @@ const TermsAndConditionsComponent = () => {
     );
 };
 
-export default TermsAndConditionsComponent;
+export default PrivacyPolicyComponent;

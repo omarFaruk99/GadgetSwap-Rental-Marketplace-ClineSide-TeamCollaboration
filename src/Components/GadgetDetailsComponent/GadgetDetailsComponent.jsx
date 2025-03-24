@@ -9,8 +9,6 @@ import {
     FiShare2,
     FiChevronLeft,
     FiChevronRight,
-    FiMoon,
-    FiSun,
     FiMenu,
     FiX,
     FiMessageSquare,
@@ -37,15 +35,17 @@ import {
     FaWifi,
     FaSpeakerDeck,
 } from "react-icons/fa"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchGadgetDetails} from "../../Features/gadgetDetailsById/gadgetDetailsByIdSlice.js";
 
 
 const GadgetDetailsComponent = () => {
 
-    // const [darkMode, setDarkMode] = useState(false);
+    const dispatch = useDispatch();
+    const {gadgetDetails} = useSelector((state) => state.gadgetDetailsById);
+
+
     const darkMode = useSelector((state) => state.darkMode.isDark);
-
-
     const {id} = useParams()
     const [gadget, setGadget] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -53,7 +53,6 @@ const GadgetDetailsComponent = () => {
     const [rentalDuration, setRentalDuration] = useState(3)
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
-    const [relatedGadgets, setRelatedGadgets] = useState([])
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeTab, setActiveTab] = useState("details")
     const [isWishlisted, setIsWishlisted] = useState(false)
@@ -79,30 +78,28 @@ const GadgetDetailsComponent = () => {
     }
 
 
-    // Fetch gadget data
+    // Fetch gadget details on mount
+    useEffect(() => {
+        dispatch(fetchGadgetDetails(id));
+    }, [dispatch, id]);
+
+
+    // Fetch gadget details data
     useEffect(() => {
         const fetchGadgetDetails = async () => {
             setLoading(true)
-            // Simulate API call with ID from params
             setTimeout(() => {
-                // Find gadget by ID or get a random one if ID not found
-                const gadgetData =
-                    mockGadgetsData.find((g) => g.id === id) ||
-                    mockGadgetsData[Math.floor(Math.random() * mockGadgetsData.length)]
-
-                // Get related gadgets (same category but different ID)
-                const related = mockGadgetsData
-                    .filter((g) => g.category === gadgetData.category && g.id !== gadgetData.id)
-                    .slice(0, 4)
-
-                setGadget(gadgetData)
-                setRelatedGadgets(related)
+                if (gadgetDetails?.data !== null) {
+                    // console.log(gadgetDetails?.data)
+                    setGadget(gadgetDetails?.data)
+                    setLoading(false)
+                    return
+                }
                 setLoading(false)
             }, 1000)
         }
-
         fetchGadgetDetails().then()
-    }, [id])
+    }, [gadgetDetails, id])
 
 
     // Handle image navigation
@@ -190,11 +187,11 @@ const GadgetDetailsComponent = () => {
     const calculateTotalPrice = () => {
         if (!gadget) return {basePrice: 0, insuranceFee: 0, total: 0}
 
-        const basePrice = gadget.pricing.perDay * rentalDuration
+        const basePrice = gadget?.pricing?.perDay * rentalDuration
         const insuranceFee =
             insuranceOption === "premium"
-                ? gadget.pricing.premiumInsuranceFee * rentalDuration
-                : gadget.pricing.basicInsuranceFee * rentalDuration
+                ? gadget?.pricing?.premiumInsuranceFee * rentalDuration
+                : gadget?.pricing?.basicInsuranceFee * rentalDuration
 
         return {
             basePrice: basePrice.toFixed(2),
@@ -1012,7 +1009,7 @@ const GadgetDetailsComponent = () => {
                 </div>
 
                 {/* Related Gadgets */}
-                <div className="mt-16">
+                {/*<div className="mt-16">
                     <h2 className="text-2xl font-bold mb-6">You might also like</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {relatedGadgets.map((relatedGadget) => (
@@ -1062,14 +1059,14 @@ const GadgetDetailsComponent = () => {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div>*/}
             </div>
         </div>
     )
 }
 
 // Mock data for gadgets
-const mockGadgetsData = [
+/*const mockGadgetsData = [
     // Smartphone
     {
         id: "smartphone1",
@@ -1700,6 +1697,6 @@ const mockGadgetsData = [
         ],
         totalRentalCount: 29,
     },
-]
+]*/
 
 export default GadgetDetailsComponent;

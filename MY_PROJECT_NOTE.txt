@@ -9,7 +9,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Displaying gadgets listing feature, in Gadgets page, using Redux Thunk, implemented successfully."
+git commit -m "Displaying gadget details feature, in Gadget Details page, using Redux Thunk, implemented successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------
@@ -45,36 +45,15 @@ Write necessary code to implement the feature.
 
 Now got to your forked repository,
 
-// Firebase setup ------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
-
-
-
-SmartphonesSpecificationSubComponent, LaptopsSpecificationSubComponent, TabletsSpecificationSubComponent, SmartwatchesSpecificationSubComponent, CamerasSpecificationSubComponent, GamingSpecificationSubComponent, AudioSpecificationSubComponent, HeadphonesSpecificationSubComponent, SpeakersSpecificationSubComponent, WearablesSpecificationSubComponent, VRSpecificationSubComponent, DronesSpecificationSubComponent, ProjectorsSpecificationSubComponent
-Smartphones, Laptops, Tablets, Smartwatches, Cameras, Gaming, Audio, Headphones, Speakers, Wearables, VR, Drones, Projectors
 Categories: Smartphones, Laptops, Tablets, Smartwatches, Cameras, Gaming, Audio, Headphones, Speakers, Wearables, VR, Drones, Projectors
 
 
-ok eitai final korlam. akhon ekta boro JSON data banaba, tar moddhe ei category gula array akare diba, abar prottek category er moddhe, mone koro Smartphones category er moddhe
 
+// Limitations ---------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-v0 command -------------------------------------------------------------------------------------------------------------
 This component will not receive any params.
 
 Use all your creativity to make it uniquely beautiful with clean minimalistic slik design. Don't install/import/use Shadcn, but make the design looks like shadcn.
@@ -90,6 +69,7 @@ Make it fully responsive for all devices. Use breakpoints mentioned in TailwindC
 And avoid writing any function inside return. Better to write all functions above the return and use functions inside return.
 
 After writing the code, no need to write any explanation. Only code in component is alright.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Learning Redux ---

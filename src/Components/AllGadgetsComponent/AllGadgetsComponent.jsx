@@ -26,7 +26,7 @@ import {
     FaWifi,
 } from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllGadgets} from "../../Features/AllGadgetsForGadgetsPage/AllGadgetsForGadgetsPageSlice.js";
+import {fetchAllGadgets} from "../../Features/allGadgetsForGadgetsPage/allGadgetsForGadgetsPageSlice.js";
 
 
 const AllGadgetsComponent = () => {

@@ -9,7 +9,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Displaying gadget details feature, in Gadget Details page, using Redux Thunk, implemented successfully."
+git commit -m "Displaying featured gadgets, in home page, using Redux Thunk, implemented successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------

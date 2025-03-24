@@ -1,7 +1,9 @@
+import DashboardComponent from "../../Components/DashboardComponent/DashboardComponent.jsx";
+
 const DashboardPage = () => {
     return (
         <div>
-            DashboardPage
+            <DashboardComponent></DashboardComponent>
         </div>
     );
 };

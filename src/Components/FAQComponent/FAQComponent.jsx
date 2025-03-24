@@ -7,9 +7,7 @@ import {
     FiHelpCircle,
     FiShoppingBag,
     FiAward,
-    FiDollarSign,
     FiShield,
-    FiTruck,
     FiClock,
     FiMenu,
     FiX
@@ -19,9 +17,7 @@ import {useSelector} from "react-redux";
 
 const FAQComponent = () => {
 
-    // const [darkMode, setDarkMode] = useState(true);
     const darkMode = useSelector((state) => state.darkMode.isDark);
-
     const [activeCategory, setActiveCategory] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [expandedItems, setExpandedItems] = useState({});

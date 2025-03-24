@@ -12,18 +12,13 @@ import {
     FiMenu,
     FiX,
     FiChevronDown,
-    FiPlus,
-    FiEdit,
     FiTrash2,
     FiStar,
     FiTrendingUp,
-    FiClock,
     FiSearch,
-    FiFilter,
     FiRefreshCw,
     FiBell,
     FiHelpCircle,
-    FiCreditCard,
     FiGift,
     FiTruck,
     FiClipboard,
@@ -36,12 +31,13 @@ import {
     FaCamera,
     FaGamepad
 } from "react-icons/fa";
+import {useSelector} from "react-redux";
 
 
 const DashboardComponent = () => {
 
     // State management
-    const [darkMode, setDarkMode] = useState(false);
+    const darkMode = useSelector((state) => state.darkMode.isDark);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("overview");
     const [activeSubMenu, setActiveSubMenu] = useState(null);
@@ -51,20 +47,18 @@ const DashboardComponent = () => {
     const [dateRange, setDateRange] = useState("week");
     const [isLoading, setIsLoading] = useState(true);
 
-
     // Mock user data - in a real app, this would come from authentication
     const [user, setUser] = useState({
         id: "user123",
         name: "John Doe",
         email: "john.doe@example.com",
         avatar: "/placeholder.svg",
-        role: "admin", // Change to "user" to see user dashboard
+        role: "user", // Change to "user" to see user dashboard
         joinDate: "2023-01-15",
         verified: true,
         balance: 1250.75,
         loyaltyPoints: 450
     });
-
 
     // Mock data for dashboard
     const [dashboardData, setDashboardData] = useState({
@@ -120,38 +114,6 @@ const DashboardComponent = () => {
                 amount: 280.00
             }
         ],
-        myGadgets: [
-            {
-                id: "gadget001",
-                name: "iPad Pro 12.9\"",
-                image: "/placeholder.svg",
-                category: "Tablets",
-                dailyRate: 24.99,
-                status: "available",
-                totalRentals: 12,
-                rating: 4.8
-            },
-            {
-                id: "gadget002",
-                name: "Sony WH-1000XM5",
-                image: "/placeholder.svg",
-                category: "Headphones",
-                dailyRate: 12.50,
-                status: "rented",
-                totalRentals: 8,
-                rating: 4.9
-            },
-            {
-                id: "gadget003",
-                name: "Nintendo Switch OLED",
-                image: "/placeholder.svg",
-                category: "Gaming",
-                dailyRate: 15.99,
-                status: "available",
-                totalRentals: 15,
-                rating: 4.7
-            }
-        ],
         wishlist: [
             {
                 id: "wish001",
@@ -190,18 +152,6 @@ const DashboardComponent = () => {
                 read: true
             }
         ],
-        earnings: {
-            total: 2450.75,
-            pending: 350.25,
-            monthly: [1200, 1350, 980, 1450, 1600, 1800, 2100, 1950, 2300, 2450, 2200, 2450],
-            categories: {
-                Smartphones: 850.50,
-                Laptops: 750.25,
-                Cameras: 450.00,
-                Gaming: 250.00,
-                Audio: 150.00
-            }
-        },
         popularCategories: [
             { name: "Smartphones", count: 85, icon: <FaMobileAlt /> },
             { name: "Laptops", count: 64, icon: <FaLaptop /> },
@@ -214,24 +164,23 @@ const DashboardComponent = () => {
             {
                 id: "notif001",
                 type: "rental",
-                message: "New rental request for your iPad Pro",
+                message: "Your rental request for iPad Pro has been confirmed",
                 time: "10 minutes ago"
             },
             {
                 id: "notif002",
                 type: "return",
-                message: "Your Sony camera has been returned",
+                message: "Return reminder: Your Sony camera is due tomorrow",
                 time: "2 hours ago"
             },
             {
                 id: "notif003",
                 type: "payment",
-                message: "You received a payment of $175.50",
+                message: "Payment of $175.50 was processed for your rental",
                 time: "Yesterday"
             }
         ]
     });
-
 
     // Simulate loading data
     useEffect(() => {
@@ -242,12 +191,10 @@ const DashboardComponent = () => {
         return () => clearTimeout(timer);
     }, []);
 
-
     // Toggle mobile menu
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-
 
     // Handle tab change
     const handleTabChange = (tab) => {
@@ -256,7 +203,6 @@ const DashboardComponent = () => {
             setIsMobileMenuOpen(false);
         }
     };
-
 
     // Toggle submenu
     const toggleSubMenu = (menu) => {
@@ -272,24 +218,20 @@ const DashboardComponent = () => {
         setSearchQuery(e.target.value);
     };
 
-
     // Toggle filter panel
     const toggleFilter = () => {
         setFilterOpen(!filterOpen);
     };
-
 
     // Toggle notifications panel
     const toggleNotifications = () => {
         setNotificationsOpen(!notificationsOpen);
     };
 
-
     // Change date range for analytics
     const handleDateRangeChange = (range) => {
         setDateRange(range);
     };
-
 
     // Format currency
     const formatCurrency = (amount) => {
@@ -300,13 +242,11 @@ const DashboardComponent = () => {
         }).format(amount);
     };
 
-
     // Format date
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         return new Date(dateString).toLocaleDateString('en-US', options);
     };
-
 
     // Get status color
     const getStatusColor = (status) => {
@@ -324,14 +264,12 @@ const DashboardComponent = () => {
         }
     };
 
-
     // Get availability color
     const getAvailabilityColor = (availability) => {
         return availability === 'available'
             ? (darkMode ? 'text-green-400' : 'text-green-600')
             : (darkMode ? 'text-red-400' : 'text-red-600');
     };
-
 
     // Get category icon
     const getCategoryIcon = (category) => {
@@ -352,7 +290,6 @@ const DashboardComponent = () => {
                 return <FiPackage className="text-gray-500" />;
         }
     };
-
 
     // Render loading skeleton
     const renderSkeleton = () => (
@@ -384,7 +321,6 @@ const DashboardComponent = () => {
             </div>
         </div>
     );
-
 
     // Render admin dashboard content
     const renderAdminDashboard = () => {
@@ -510,7 +446,7 @@ const DashboardComponent = () => {
                             </div>
 
                             <div className="h-64 flex items-end space-x-2">
-                                {dashboardData.earnings.monthly.map((value, index) => (
+                                {dashboardData.earnings?.monthly?.map((value, index) => (
                                     <div key={index} className="flex-1 flex flex-col items-center">
                                         <div
                                             className={`w-full rounded-t-sm transition-all ${
@@ -519,8 +455,8 @@ const DashboardComponent = () => {
                                             style={{ height: `${(value / 2500) * 100}%` }}
                                         ></div>
                                         <span className={`text-xs mt-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][index]}
-                                        </span>
+                      {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][index]}
+                    </span>
                                     </div>
                                 ))}
                             </div>
@@ -570,15 +506,15 @@ const DashboardComponent = () => {
                                                     <div className="text-sm font-medium">{formatCurrency(rental.amount)}</div>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    <span className={`px-2 py-1 text-xs rounded-full ${
-                                                        rental.status === 'active'
-                                                            ? darkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-800'
-                                                            : rental.status === 'returned'
-                                                                ? darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-800'
-                                                                : darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'
-                                                    }`}>
-                                                    {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
-                                                    </span>
+                            <span className={`px-2 py-1 text-xs rounded-full ${
+                                rental.status === 'active'
+                                    ? darkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-800'
+                                    : rental.status === 'returned'
+                                        ? darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-800'
+                                        : darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'
+                            }`}>
+                              {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
+                            </span>
                                                 </td>
                                             </tr>
                                         ))}
@@ -803,17 +739,17 @@ const DashboardComponent = () => {
                                             ? 'bg-white/10 hover:bg-white/20 text-white'
                                             : 'bg-white/20 hover:bg-white/30 text-white'
                                     }`}>
-                                        <span className="flex items-center">
-                                            <FiPlus className="mr-2" />
-                                            List a Gadget
-                                        </span>
+                    <span className="flex items-center">
+                      <FiSearch className="mr-2" />
+                      Browse Gadgets
+                    </span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
                         {/* Stats Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                             <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
                                 <div className="flex justify-between items-start">
                                     <div>
@@ -829,23 +765,11 @@ const DashboardComponent = () => {
                             <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>My Gadgets</p>
-                                        <h3 className="text-2xl font-bold mt-1">{dashboardData.myGadgets.length}</h3>
+                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Wishlist Items</p>
+                                        <h3 className="text-2xl font-bold mt-1">{dashboardData.wishlist.length}</h3>
                                     </div>
-                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-purple-900/20' : 'bg-purple-100'}`}>
-                                        <FiPackage className="text-purple-500" size={24} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Earnings</p>
-                                        <h3 className="text-2xl font-bold mt-1">{formatCurrency(dashboardData.earnings.total)}</h3>
-                                    </div>
-                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-amber-900/20' : 'bg-amber-100'}`}>
-                                        <FiDollarSign className="text-amber-500" size={24} />
+                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-pink-900/20' : 'bg-pink-100'}`}>
+                                        <FiHeart className="text-pink-500" size={24} />
                                     </div>
                                 </div>
                             </div>
@@ -895,8 +819,8 @@ const DashboardComponent = () => {
                                                             ? darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-800'
                                                             : darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'
                                                 }`}>
-                                                    {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
-                                                </span>
+                          {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
+                        </span>
                                             </div>
                                         </div>
                                     ))}
@@ -931,9 +855,9 @@ const DashboardComponent = () => {
                                                 <div className="ml-3">
                                                     <h4 className="font-medium">{item.name}</h4>
                                                     <div className="flex items-center mt-1">
-                                                        <span className={`text-xs ${getAvailabilityColor(item.availability)}`}>
-                                                            {item.availability.charAt(0).toUpperCase() + item.availability.slice(1)}
-                                                        </span>
+                            <span className={`text-xs ${getAvailabilityColor(item.availability)}`}>
+                              {item.availability.charAt(0).toUpperCase() + item.availability.slice(1)}
+                            </span>
                                                         <span className="mx-2 text-xs">•</span>
                                                         <span className="text-xs">{formatCurrency(item.dailyRate)}/day</span>
                                                     </div>
@@ -1032,154 +956,6 @@ const DashboardComponent = () => {
                     </div>
                 );
 
-            case 'my-gadgets':
-                return (
-                    <div>
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-bold">My Gadgets</h2>
-                            <button className={`px-4 py-2 rounded-lg transition-colors ${
-                                darkMode
-                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                    : 'bg-blue-600 hover:bg-blue-700 text-white'
-                            }`}>
-                                <span className="flex items-center">
-                                    <FiPlus className="mr-2" />
-                                    Add New Gadget
-                                </span>
-                            </button>
-                        </div>
-
-                        <div className={`rounded-xl overflow-hidden transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                            <div className="p-6 border-b border-gray-700">
-                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                                    <div>
-                                        <h3 className="text-lg font-bold">Your Listed Gadgets</h3>
-                                        <p className={`mt-1 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                            Manage your gadgets available for rent
-                                        </p>
-                                    </div>
-                                    <div className="mt-3 sm:mt-0 flex items-center">
-                                        <div className={`relative mr-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2" size={16} />
-                                            <input
-                                                type="text"
-                                                placeholder="Search gadgets..."
-                                                className={`pl-10 pr-4 py-2 rounded-lg transition-colors ${
-                                                    darkMode
-                                                        ? 'bg-gray-700 border-gray-600 focus:border-gray-500'
-                                                        : 'bg-gray-100 border-gray-200 focus:border-gray-300'
-                                                } border focus:outline-none`}
-                                                value={searchQuery}
-                                                onChange={handleSearch}
-                                            />
-                                        </div>
-                                        <button
-                                            onClick={toggleFilter}
-                                            className={`p-2 rounded-lg transition-colors ${
-                                                darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
-                                            }`}
-                                        >
-                                            <FiFilter size={20} />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="overflow-x-auto">
-                                <table className="w-full">
-                                    <thead>
-                                    <tr className={darkMode ? 'bg-gray-700/50' : 'bg-gray-50'}>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Gadget</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Category</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Daily Rate</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Rentals</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Rating</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
-                                    {dashboardData.myGadgets.map((gadget) => (
-                                        <tr key={gadget.id} className={`transition-colors hover:${darkMode ? 'bg-gray-700/50' : 'bg-gray-50'}`}>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center">
-                                                    <div className="h-10 w-10 flex-shrink-0">
-                                                        <img className="h-10 w-10 rounded-lg object-cover" src={gadget.image || "/placeholder.svg"} alt={gadget.name} />
-                                                    </div>
-                                                    <div className="ml-4">
-                                                        <div className="text-sm font-medium">{gadget.name}</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center">
-                                                    <span className="mr-2">{getCategoryIcon(gadget.category)}</span>
-                                                    <span className="text-sm">{gadget.category}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm font-medium">{formatCurrency(gadget.dailyRate)}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <span className={`px-2 py-1 text-xs rounded-full ${
-                                                    gadget.status === 'available'
-                                                        ? darkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-100 text-green-800'
-                                                        : gadget.status === 'rented'
-                                                            ? darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-800'
-                                                            : darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'
-                                                }`}>
-                                                {gadget.status.charAt(0).toUpperCase() + gadget.status.slice(1)}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="text-sm">{gadget.totalRentals}</div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center">
-                                                    <FiStar className="text-yellow-500 mr-1" size={16} />
-                                                    <span className="text-sm">{gadget.rating}</span>
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex space-x-2">
-                                                    <button className={`p-2 rounded-lg transition-colors ${
-                                                        darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'
-                                                    }`}>
-                                                        <FiEdit size={18} />
-                                                    </button>
-                                                    <button className={`p-2 rounded-lg transition-colors ${
-                                                        darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'
-                                                    }`}>
-                                                        <FiTrash2 size={18} />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {dashboardData.myGadgets.length === 0 && (
-                                <div className="flex flex-col items-center justify-center py-16">
-                                    <FiPackage className={`mb-3 ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} size={48} />
-                                    <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>You haven't listed any gadgets yet</p>
-                                    <button className={`px-4 py-2 rounded-lg transition-colors ${
-                                        darkMode
-                                            ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                            : 'bg-blue-600 hover:bg-blue-700 text-white'
-                                    }`}>
-                                        <span className="flex items-center">
-                                            <FiPlus className="mr-2" />
-                                            Add Your First Gadget
-                                        </span>
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                );
-
             case 'rentals':
                 return (
                     <div>
@@ -1235,8 +1011,8 @@ const DashboardComponent = () => {
                                                             ? darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-800'
                                                             : darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-800'
                                                 }`}>
-                                                    {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
-                                                </span>
+                          {rental.status.charAt(0).toUpperCase() + rental.status.slice(1)}
+                        </span>
                                             </div>
                                             <button className={`px-4 py-2 text-sm rounded-lg transition-colors ${
                                                 darkMode
@@ -1275,10 +1051,10 @@ const DashboardComponent = () => {
                                     ? 'bg-blue-600 hover:bg-blue-700 text-white'
                                     : 'bg-blue-600 hover:bg-blue-700 text-white'
                             }`}>
-                                <span className="flex items-center">
-                                    <FiRefreshCw className="mr-2"/>
-                                    Refresh
-                                </span>
+                <span className="flex items-center">
+                  <FiRefreshCw className="mr-2" />
+                  Refresh
+                </span>
                             </button>
                         </div>
 
@@ -1297,13 +1073,13 @@ const DashboardComponent = () => {
                                             </button>
                                         </div>
                                         <div className="absolute bottom-3 left-3">
-                                            <span className={`px-2 py-1 text-xs rounded-full ${
-                                                item.availability === 'available'
-                                                    ? darkMode ? 'bg-green-900/70 text-green-400' : 'bg-green-100 text-green-800'
-                                                    : darkMode ? 'bg-red-900/70 text-red-400' : 'bg-red-100 text-red-800'
-                                            }`}>
-                                            {item.availability.charAt(0).toUpperCase() + item.availability.slice(1)}
-                                            </span>
+                      <span className={`px-2 py-1 text-xs rounded-full ${
+                          item.availability === 'available'
+                              ? darkMode ? 'bg-green-900/70 text-green-400' : 'bg-green-100 text-green-800'
+                              : darkMode ? 'bg-red-900/70 text-red-400' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {item.availability.charAt(0).toUpperCase() + item.availability.slice(1)}
+                      </span>
                                         </div>
                                     </div>
                                     <div className="p-4">
@@ -1369,7 +1145,7 @@ const DashboardComponent = () => {
                         <div className="p-6 border-b border-gray-700">
                             <h3 className="text-lg font-bold">Messages</h3>
                             <p className={`mt-1 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                Your conversations with other users and support
+                                Your conversations with support and rental inquiries
                             </p>
                         </div>
                         <div className="p-6">
@@ -1379,123 +1155,6 @@ const DashboardComponent = () => {
                                     <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                         Messaging interface will be implemented here
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-
-            case 'earnings':
-                return (
-                    <div>
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-bold">My Earnings</h2>
-                            <div className="flex space-x-2">
-                                <button className={`px-3 py-1 text-sm rounded-lg transition-colors ${
-                                    darkMode
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-blue-600 text-white'
-                                }`}>
-                                    All Time
-                                </button>
-                                <button className={`px-3 py-1 text-sm rounded-lg transition-colors ${
-                                    darkMode
-                                        ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                }`}>
-                                    This Month
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Total Earnings</p>
-                                        <h3 className="text-2xl font-bold mt-1">{formatCurrency(dashboardData.earnings.total)}</h3>
-                                    </div>
-                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-green-900/20' : 'bg-green-100'}`}>
-                                        <FiDollarSign className="text-green-500" size={24} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Pending Payments</p>
-                                        <h3 className="text-2xl font-bold mt-1">{formatCurrency(dashboardData.earnings.pending)}</h3>
-                                    </div>
-                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-amber-900/20' : 'bg-amber-100'}`}>
-                                        <FiClock className="text-amber-500" size={24} />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={`rounded-xl p-6 transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="flex justify-between items-start">
-                                    <div>
-                                        <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Available for Withdrawal</p>
-                                        <h3 className="text-2xl font-bold mt-1">{formatCurrency(dashboardData.earnings.total - dashboardData.earnings.pending)}</h3>
-                                    </div>
-                                    <div className={`p-3 rounded-lg ${darkMode ? 'bg-blue-900/20' : 'bg-blue-100'}`}>
-                                        <FiCreditCard className="text-blue-500" size={24} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            <div className={`rounded-xl transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="p-6 border-b border-gray-700">
-                                    <h3 className="text-lg font-bold">Earnings by Category</h3>
-                                </div>
-                                <div className="p-6">
-                                    {Object.entries(dashboardData.earnings.categories).map(([category, amount], index) => (
-                                        <div key={category} className={`flex items-center justify-between mb-4 ${
-                                            index !== Object.entries(dashboardData.earnings.categories).length - 1 ? 'pb-4 border-b border-gray-700' : ''
-                                        }`}>
-                                            <div className="flex items-center">
-                                                <div className={`p-2 rounded-lg mr-3 ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                                                    {getCategoryIcon(category)}
-                                                </div>
-                                                <div>
-                                                    <div className="font-medium">{category}</div>
-                                                    <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                                        {Math.round((amount / dashboardData.earnings.total) * 100)}% of total
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="font-medium">{formatCurrency(amount)}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className={`rounded-xl transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
-                                <div className="p-6 border-b border-gray-700">
-                                    <h3 className="text-lg font-bold">Payment Methods</h3>
-                                </div>
-                                <div className="p-6">
-                                    <div className="flex justify-center items-center h-64">
-                                        <div className="text-center">
-                                            <FiCreditCard className={`mx-auto mb-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} size={48} />
-                                            <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                                No payment methods added yet
-                                            </p>
-                                            <button className={`px-4 py-2 rounded-lg transition-colors ${
-                                                darkMode
-                                                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                                                    : 'bg-blue-600 hover:bg-blue-700 text-white'
-                                            }`}>
-                                                <span className="flex items-center">
-                                                    <FiPlus className="mr-2" />
-                                                    Add Payment Method
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1678,23 +1337,6 @@ const DashboardComponent = () => {
                                         </li>
                                         <li>
                                             <button
-                                                onClick={() => handleTabChange("my-gadgets")}
-                                                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
-                                                    activeTab === "my-gadgets"
-                                                        ? darkMode
-                                                            ? "bg-blue-900/30 text-blue-400"
-                                                            : "bg-blue-50 text-blue-600"
-                                                        : darkMode
-                                                            ? "hover:bg-gray-700"
-                                                            : "hover:bg-gray-100"
-                                                }`}
-                                            >
-                                                <FiPackage className="mr-3" size={20} />
-                                                <span>My Gadgets</span>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
                                                 onClick={() => handleTabChange("rentals")}
                                                 className={`w-full flex items-center p-3 rounded-lg transition-colors ${
                                                     activeTab === "rentals"
@@ -1746,26 +1388,9 @@ const DashboardComponent = () => {
                                                     <span className={`ml-auto px-2 py-0.5 text-xs rounded-full ${
                                                         darkMode ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
                                                     }`}>
-                                                        {dashboardData.recentMessages.filter(m => !m.read).length}
-                                                    </span>
+                            {dashboardData.recentMessages.filter(m => !m.read).length}
+                          </span>
                                                 )}
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button
-                                                onClick={() => handleTabChange("earnings")}
-                                                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
-                                                    activeTab === "earnings"
-                                                        ? darkMode
-                                                            ? "bg-blue-900/30 text-blue-400"
-                                                            : "bg-blue-50 text-blue-600"
-                                                        : darkMode
-                                                            ? "hover:bg-gray-700"
-                                                            : "hover:bg-gray-100"
-                                                }`}
-                                            >
-                                                <FiDollarSign className="mr-3" size={20} />
-                                                <span>Earnings</span>
                                             </button>
                                         </li>
                                         <li>
@@ -2032,23 +1657,6 @@ const DashboardComponent = () => {
                                             </li>
                                             <li>
                                                 <button
-                                                    onClick={() => handleTabChange("my-gadgets")}
-                                                    className={`w-full flex items-center p-3 rounded-lg transition-colors ${
-                                                        activeTab === "my-gadgets"
-                                                            ? darkMode
-                                                                ? "bg-blue-900/30 text-blue-400"
-                                                                : "bg-blue-50 text-blue-600"
-                                                            : darkMode
-                                                                ? "hover:bg-gray-700"
-                                                                : "hover:bg-gray-100"
-                                                    }`}
-                                                >
-                                                    <FiPackage className="mr-3" size={20} />
-                                                    <span>My Gadgets</span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
                                                     onClick={() => handleTabChange("rentals")}
                                                     className={`w-full flex items-center p-3 rounded-lg transition-colors ${
                                                         activeTab === "rentals"
@@ -2100,26 +1708,9 @@ const DashboardComponent = () => {
                                                         <span className={`ml-auto px-2 py-0.5 text-xs rounded-full ${
                                                             darkMode ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
                                                         }`}>
-                                                            {dashboardData.recentMessages.filter(m => !m.read).length}
-                                                        </span>
+                              {dashboardData.recentMessages.filter(m => !m.read).length}
+                            </span>
                                                     )}
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    onClick={() => handleTabChange("earnings")}
-                                                    className={`w-full flex items-center p-3 rounded-lg transition-colors ${
-                                                        activeTab === "earnings"
-                                                            ? darkMode
-                                                                ? "bg-blue-900/30 text-blue-400"
-                                                                : "bg-blue-50 text-blue-600"
-                                                            : darkMode
-                                                                ? "hover:bg-gray-700"
-                                                                : "hover:bg-gray-100"
-                                                    }`}
-                                                >
-                                                    <FiDollarSign className="mr-3" size={20} />
-                                                    <span>Earnings</span>
                                                 </button>
                                             </li>
                                             <li>

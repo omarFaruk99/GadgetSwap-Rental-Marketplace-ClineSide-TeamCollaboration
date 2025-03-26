@@ -9,7 +9,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Displaying featured gadgets, in home page, using Redux Thunk, implemented successfully."
+git commit -m "DashboardComponent design prototype is completed, containing few more subcomponents."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------
@@ -81,5 +81,15 @@ Run this command to install necessary packages [npm install react-redux]. This w
 Wrapped the whole project using a redux given Provider along with the reduxStore in the main.jsx file.
 And the applied the states and action creator functions inside all relevant components using useSelector and useDispatch hook.
 To learn more, visit the tutorial: [ https://www.youtube.com/watch?v=qhll3DXuLHI ]
+
+------------------------------------------------------------------------------------------------------------------------
+
+User Dashboard
+- Profile
+- My Rentals
+- My Loyalty & Rewards
+- My Wishlist
+- Notifications
+Admin Dashboard
 
 ------------------------------------------------------------------------------------------------------------------------

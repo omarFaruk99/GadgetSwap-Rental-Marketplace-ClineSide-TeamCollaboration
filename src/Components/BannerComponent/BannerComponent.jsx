@@ -48,6 +48,14 @@ const BannerComponent = () => {
     };
 
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            // behavior: 'smooth'
+        });
+    }, []);
+
+
     const featuredGadgets = [
         {
             name: "iPhone 14 Pro",

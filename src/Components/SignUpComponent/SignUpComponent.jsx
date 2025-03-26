@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiCheck} from 'react-icons/fi';
 import {FcGoogle} from 'react-icons/fc';
@@ -196,12 +196,12 @@ const SignUpComponent = () => {
     };
 
 
-    /*useEffect(() => {
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
         });
-    }, []);*/
+    }, []);
 
 
     return (

@@ -1,30 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import {
-    FiSearch,
-    FiChevronDown,
-    FiStar,
-    FiChevronLeft,
-    FiChevronRight,
-    FiX,
-    FiSliders,
-    FiGrid,
-    FiList,
-} from "react-icons/fi"
-import {
-    FaMobileAlt,
-    FaLaptop,
-    FaTabletAlt,
-    FaHeadphones,
-    FaCamera,
-    FaGamepad,
-    FaVolumeUp,
-    FaVrCardboard,
-    FaPlane,
-    FaProjectDiagram,
-    FaClock,
-    FaWifi,
-} from "react-icons/fa"
+import {FiSearch, FiChevronDown, FiStar, FiChevronLeft, FiChevronRight, FiX, FiSliders, FiGrid, FiList} from "react-icons/fi"
+import {FaMobileAlt, FaLaptop, FaTabletAlt, FaHeadphones, FaCamera, FaGamepad, FaVolumeUp, FaVrCardboard, FaPlane, FaProjectDiagram, FaClock, FaWifi} from "react-icons/fa"
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllGadgets} from "../../Features/allGadgetsForGadgetsPage/allGadgetsForGadgetsPageSlice.js";
 
@@ -1323,7 +1300,7 @@ const AllGadgetsComponent = () => {
                     setFilteredGadgets(allGadgets?.data);
                     setIsLoading(false)
                 }
-            }, 1500)
+            }, 1000)
         }
         fetchGadgets().then()
     }, [allGadgets?.data])

@@ -47,6 +47,7 @@ const NavbarComponent = () => {
     const handleSignOutClick = async () => {
         await signOutCurrentUser();
         toggleMenu();
+        navigate('/');
     };
 
 

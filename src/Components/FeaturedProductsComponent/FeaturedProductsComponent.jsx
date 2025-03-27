@@ -160,9 +160,9 @@ const FeaturedProductsComponent = () => {
                 <div className={`max-w-7xl inline-flex flex-wrap justify-center gap-2 p-2 rounded-2xl ${
                     darkMode ? 'bg-gray-800/50 backdrop-blur-md' : 'bg-white/80 backdrop-blur-md shadow-md'
                 }`}>
-                    {categories.map((category) => (
+                    {categories.map((category, index) => (
                         <button
-                            key={category.id}
+                            key={index}
                             onClick={() => handleCategoryClick(category?.name)}
                             className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                                 selectedCategory === category.name

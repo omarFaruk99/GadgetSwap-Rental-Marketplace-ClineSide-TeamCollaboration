@@ -31,6 +31,7 @@ const EidSpecialFunComponent = () => {
     // Calculate countdown to Eid (March 30, 2025)
     useEffect(() => {
         const eidDate = new Date("March 30, 2025 00:00:00").getTime()
+        console.log(eidDate)
 
         const updateCountdown = () => {
             const now = new Date().getTime()
@@ -67,7 +68,7 @@ const EidSpecialFunComponent = () => {
     // Generate random glitter stars
     const renderGlitters = () => {
         const glitters = []
-        const colors = ["text-yellow-400", "text-green-400", "text-blue-400", "text-purple-400", "text-pink-400"]
+        const colors = ["text-yellow-400", "text-green-400", "text-blue-400", "text-purple-400", "text-pink-400", "text-red-400"]
 
         for (let i = 0; i < 30; i++) {
             const size = Math.floor(Math.random() * 16) + 8 // 8-24px

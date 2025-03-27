@@ -9,7 +9,7 @@ import {
     FiSettings,
     FiLogOut,
     FiX,
-    FiHelpCircle
+    FiHelpCircle, FiCreditCard
 } from "react-icons/fi";
 import {useSelector} from "react-redux";
 import LoadingSkeleton from "./LoadingSkeleton.jsx";
@@ -26,6 +26,7 @@ import UserSettingsComponent from "./UserComponents/UserSettingsComponent.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../../Providers/AuthContext.jsx";
 import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt} from "react-icons/fa";
+import UserMembershipComponent from "./UserComponents/UserMembershipComponent.jsx";
 
 
 const DashboardComponent = () => {
@@ -230,6 +231,7 @@ const DashboardComponent = () => {
         {id: 'rentals', name: 'My Rentals', icon: <FiShoppingCart className="mr-3" size={20} />},
         {id: 'wishlist', name: 'Wishlist', icon: <FiHeart className="mr-3" size={20} />},
         {id: 'messages', name: 'Messages', icon: <FiMessageSquare className="mr-3" size={20} />},
+        {id: 'membership', name: 'Membership', icon: <FiCreditCard className="mr-3" size={20} />},
         {id: 'settings', name: 'Settings', icon: <FiSettings className="mr-3" size={20} />}
     ]
 
@@ -276,6 +278,9 @@ const DashboardComponent = () => {
 
             case 'messages':
                 return <UserMessagesComponent></UserMessagesComponent>;
+
+            case 'membership':
+                return <UserMembershipComponent></UserMembershipComponent>;
 
             case 'settings':
                 return <UserSettingsComponent></UserSettingsComponent>;

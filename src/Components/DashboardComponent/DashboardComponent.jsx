@@ -26,7 +26,7 @@ import UserSettingsComponent from "./UserComponents/UserSettingsComponent.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../../Providers/AuthContext.jsx";
 import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt} from "react-icons/fa";
-import UserMembershipComponent from "./UserComponents/UserMembershipComponent.jsx";
+import UserLoyaltyAndRewardComponent from "./UserComponents/UserLoyaltyAndRewardComponent.jsx";
 
 
 const DashboardComponent = () => {
@@ -231,7 +231,7 @@ const DashboardComponent = () => {
         {id: 'rentals', name: 'My Rentals', icon: <FiShoppingCart className="mr-3" size={20} />},
         {id: 'wishlist', name: 'Wishlist', icon: <FiHeart className="mr-3" size={20} />},
         {id: 'messages', name: 'Messages', icon: <FiMessageSquare className="mr-3" size={20} />},
-        {id: 'membership', name: 'Membership', icon: <FiCreditCard className="mr-3" size={20} />},
+        {id: 'loyalty_and_rewards', name: 'Loyalty & Rewards', icon: <FiCreditCard className="mr-3" size={20} />},
         {id: 'settings', name: 'Settings', icon: <FiSettings className="mr-3" size={20} />}
     ]
 
@@ -279,8 +279,8 @@ const DashboardComponent = () => {
             case 'messages':
                 return <UserMessagesComponent></UserMessagesComponent>;
 
-            case 'membership':
-                return <UserMembershipComponent></UserMembershipComponent>;
+            case 'loyalty_and_rewards':
+                return <UserLoyaltyAndRewardComponent></UserLoyaltyAndRewardComponent>;
 
             case 'settings':
                 return <UserSettingsComponent></UserSettingsComponent>;

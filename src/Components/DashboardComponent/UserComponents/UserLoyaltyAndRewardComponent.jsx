@@ -3,7 +3,7 @@ import {FiCreditCard} from "react-icons/fi";
 import {useSelector} from "react-redux";
 
 
-const UserMembershipComponent = () => {
+const UserLoyaltyAndRewardComponent = () => {
 
 
     // State management
@@ -13,9 +13,9 @@ const UserMembershipComponent = () => {
     return (
         <div className={`rounded-xl transition-colors ${darkMode ? 'bg-gray-800' : 'bg-white shadow-sm'}`}>
             <div className="p-6 border-b border-gray-700">
-                <h3 className="text-lg font-bold">Membership</h3>
+                <h3 className="text-lg font-bold">Loyalty & Rewards</h3>
                 <p className={`mt-1 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                    Your membership, loyalty and rewards with payment history
+                    Your membership, loyalty and rewards with benefits
                 </p>
             </div>
             <div className="p-6">
@@ -23,7 +23,7 @@ const UserMembershipComponent = () => {
                     <div className="text-center">
                         <FiCreditCard className={`mx-auto mb-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} size={48} />
                         <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                            Membership interface will be implemented here
+                            Loyalty & Rewards interface will be implemented here
                         </p>
                     </div>
                 </div>
@@ -32,4 +32,4 @@ const UserMembershipComponent = () => {
     );
 };
 
-export default UserMembershipComponent;
+export default UserLoyaltyAndRewardComponent;

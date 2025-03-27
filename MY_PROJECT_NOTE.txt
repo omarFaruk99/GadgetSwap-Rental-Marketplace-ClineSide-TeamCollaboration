@@ -9,7 +9,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "Renamed the UserMembershipComponent into UserLoyaltyAndRewardComponent."
+git commit -m "UserLoyaltyAndRewardComponent design prototype is completed successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------

@@ -14,6 +14,10 @@ import AuthProvider from "./Providers/AuthProvider.jsx";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import AllGadgetsPage from "./Pages/AllGadgetsPage/AllGadgetsPage.jsx";
 import GadgetDetailsPage from "./Pages/GadgetDetailsPage/GadgetDetailsPage.jsx";
+import TermsAndConditionComponent from './Components/TermsAndConditionsComponent/TermsAndConditionComponent.jsx';
+import CookieSettingsComponent from './Components/CookieSettingsComponent/CookieSettingsComponent.jsx';
+import PrivacyPolicyComponent from './Components/PrivacyPolicyComponent/PrivacyPolicyComponent.jsx';
+import ImprintComponent from './Components/ImprintComponent/ImprintComponent.jsx';
 
 
 const queryClient = new QueryClient()
@@ -31,12 +35,20 @@ ReactDOM.createRoot(root).render(
                         <Route path={'/'} element={<MainLayout></MainLayout>}>
                             <Route path={'/'} element={<HomePage></HomePage>}></Route>
                             <Route path={'/about-us'} element={<AboutPage></AboutPage>}></Route>
+                            
                             <Route path={'/all-gadgets'} element={<AllGadgetsPage></AllGadgetsPage>}></Route>
                             <Route path={'/all-gadgets/gadget-details/:id'} element={<GadgetDetailsPage></GadgetDetailsPage>}></Route>
+
                             <Route path={'/contact-us'} element={<ContactUsPage></ContactUsPage>}></Route>
                             <Route path={'/faq'} element={<FAQPage></FAQPage>}></Route>
+
                             <Route path={'/sign-up'} element={<SignUpPage></SignUpPage>}></Route>
                             <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
+
+                            <Route path={'/terms-and-conditions'} element={<TermsAndConditionComponent></TermsAndConditionComponent>}></Route>
+                            <Route path={'cookie-settings'} element={<CookieSettingsComponent></CookieSettingsComponent>}></Route>
+                            <Route path={'/privacy-policy'} element={<PrivacyPolicyComponent></PrivacyPolicyComponent>}></Route>
+                            <Route path={'/imprint'} element={<ImprintComponent></ImprintComponent>}></Route>
                         </Route>
                         <Route path={'*'} element={<Error404></Error404>}></Route>
                     </Routes>

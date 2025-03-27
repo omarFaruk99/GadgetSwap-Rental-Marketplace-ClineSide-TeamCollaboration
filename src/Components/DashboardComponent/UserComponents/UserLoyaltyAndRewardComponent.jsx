@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import {
     FiAward,
     FiStar,
@@ -316,9 +316,17 @@ const UserLoyaltyAndRewardComponent = () => {
     }
 
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            // behavior: 'smooth'
+        });
+    }, []);
+
+
     return (
         <div
-            className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"}`}
+            className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-800"}`}
         >
 
             {/* Points and Membership Summary */}

@@ -14,10 +14,10 @@ import AuthProvider from "./Providers/AuthProvider.jsx";
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import AllGadgetsPage from "./Pages/AllGadgetsPage/AllGadgetsPage.jsx";
 import GadgetDetailsPage from "./Pages/GadgetDetailsPage/GadgetDetailsPage.jsx";
-import ImprintComponent from './Components/ImprintComponent/ImprintComponent.jsx';
 import TermsAndConditionPage from './Pages/TermsAndConditionPage/TermsAndConditionPage.jsx';
 import CookieSettingsPage from './Pages/CookieSettingsPage/CookieSettingsPage.jsx';
 import PrivacyPolicyPage from './Pages/PrivacyPolicyPage/PrivacyPolicyPage.jsx';
+import ImprintPage from './Pages/ImprintPage/ImprintPage.jsx';
 
 
 const queryClient = new QueryClient()
@@ -48,7 +48,7 @@ ReactDOM.createRoot(root).render(
                             <Route path={'/terms-and-conditions'} element={<TermsAndConditionPage></TermsAndConditionPage>}></Route>
                             <Route path={'cookie-settings'} element={<CookieSettingsPage></CookieSettingsPage>}></Route>
                             <Route path={'/privacy-policy'} element={<PrivacyPolicyPage></PrivacyPolicyPage>}></Route>
-                            <Route path={'/imprint'} element={<ImprintComponent></ImprintComponent>}></Route>
+                            <Route path={'/imprint'} element={<ImprintPage></ImprintPage>}></Route>
                         </Route>
                         <Route path={'*'} element={<Error404></Error404>}></Route>
                     </Routes>

@@ -509,7 +509,7 @@ const UserSettingsComponent = () => {
                         <div className="mt-6 flex justify-end">
                             <button
                                 type="submit"
-                                className="px-6 py-3 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
+                                className="px-6 py-2 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
                             >
                                 <FiSave size={18} />
                                 Save Profile
@@ -596,7 +596,7 @@ const UserSettingsComponent = () => {
                             <div className="mt-6 flex justify-end">
                                 <button
                                     type="submit"
-                                    className="px-6 py-3 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
+                                    className="px-6 py-2 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
                                 >
                                     <FiSave size={18} />
                                     Update Password
@@ -655,7 +655,7 @@ const UserSettingsComponent = () => {
                         <div className="mt-6 flex justify-end">
                             <button
                                 type="submit"
-                                className="px-6 py-3 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
+                                className="px-6 py-2 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
                             >
                                 <FiSave size={18} />
                                 Save Professional Info
@@ -777,7 +777,7 @@ const UserSettingsComponent = () => {
                         <div className="mt-6 flex justify-end">
                             <button
                                 type="submit"
-                                className="px-6 py-3 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
+                                className="px-6 py-2 rounded-lg bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium flex items-center gap-2 transition-colors"
                             >
                                 <FiSave size={18} />
                                 Save Billing Address

@@ -120,6 +120,15 @@ const DashboardComponent = () => {
                 rating: 4.9
             },
             {
+                id: "wish001",
+                name: "Canon EOS R5",
+                image: "/placeholder.svg",
+                category: "Cameras",
+                dailyRate: 45.99,
+                availability: "available",
+                rating: 4.9
+            },
+            {
                 id: "wish002",
                 name: "Steam Deck",
                 image: "/placeholder.svg",
@@ -468,6 +477,13 @@ const DashboardComponent = () => {
                                                                 darkMode ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
                                                             }`}>
                                                             {dashboardData.recentMessages.filter(m => !m.read).length}
+                                                        </span>
+                                                        )}
+                                                        {tab.id === 'wishlist' && dashboardData.wishlist.length > 0 && (
+                                                            <span className={`ml-auto px-2 py-0.5 text-xs rounded-full ${
+                                                                darkMode ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
+                                                            }`}>
+                                                            {dashboardData.wishlist.length}
                                                         </span>
                                                         )}
                                                     </button>

@@ -144,7 +144,7 @@ const NavbarComponent = () => {
                     </a>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center space-x-6">
+                    <div className="hidden xl:flex items-center space-x-6">
                         {/* Navigation Buttons */}
                         <div className="flex space-x-4">
                             {navButtons.map((button) => (
@@ -247,7 +247,7 @@ const NavbarComponent = () => {
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="lg:hidden flex items-center space-x-3">
+                    <div className="xl:hidden flex items-center space-x-3">
                         <button
                             onClick={toggleDarkMode}
                             className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 ${
@@ -276,7 +276,7 @@ const NavbarComponent = () => {
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className={`lg:hidden mt-3 py-3 px-2 rounded-lg transition-all duration-300 ${
+                    <div className={`xl:hidden w-11/12 mx-auto mt-3 py-3 px-2 rounded-lg transition-all duration-300 ${
                         darkMode
                             ? 'bg-gray-800/90 backdrop-blur-md border border-purple-900/30'
                             : 'bg-white/90 backdrop-blur-md border border-indigo-200/30'

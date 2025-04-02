@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 import {
     FiShoppingCart,
@@ -6,19 +6,13 @@ import {
     FiAward,
     FiCalendar,
     FiPackage,
-    FiMessageSquare,
     FiBell,
     FiChevronRight,
-    FiUser,
-    FiSettings,
-    FiLogOut,
-    FiMenu,
-    FiX,
+    FiSearch,
     FiTag,
     FiAlertCircle,
     FiCheckCircle,
     FiInfo,
-    FiSearch,
 } from "react-icons/fi"
 import {
     FaCamera,
@@ -36,10 +30,7 @@ const UserOverviewComponent = () => {
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const [isMobileView, setIsMobileView] = useState(false)
     const [notificationsOpen, setNotificationsOpen] = useState(false)
-    // const navigateTo = useNavigate();
 
 
     // Fake user data
@@ -254,27 +245,6 @@ const UserOverviewComponent = () => {
     }
 
 
-    // Toggle mobile menu
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen)
-    }
-
-
-    // Check for mobile view
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobileView(window.innerWidth < 1024)
-        }
-
-        handleResize() // Initial check
-        window.addEventListener("resize", handleResize)
-
-        return () => {
-            window.removeEventListener("resize", handleResize)
-        }
-    }, [])
-
-
     // Get greeting based on time of day
     const getGreeting = () => {
         const hour = new Date().getHours()
@@ -313,22 +283,7 @@ const UserOverviewComponent = () => {
 
 
     return (
-        <div
-            className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"}`}
-        >
-            {/* Header with mobile menu button */}
-            <div className="flex justify-end items-center">
-                {isMobileView && (
-                    <button
-                        onClick={toggleMobileMenu}
-                        className={`p-2 rounded-lg ${darkMode ? "bg-gray-800 text-gray-200" : "bg-gray-100 text-gray-800"} cursor-pointer`}
-                        aria-label="Toggle menu"
-                    >
-                        {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-                    </button>
-                )}
-            </div>
-
+        <div className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"}`}>
             {/* Welcome, Banner */}
             <div
                 className={`rounded-xl p-6 mb-4 bg-gradient-to-r ${
@@ -439,99 +394,9 @@ const UserOverviewComponent = () => {
                 </div>
             </div>
 
-            {/* Mobile Navigation Menu */}
-            {isMobileView && isMobileMenuOpen && (
-                <div className={`mb-6 rounded-xl overflow-hidden ${darkMode ? "bg-gray-800" : "bg-white shadow-md"}`}>
-                    <div className="p-4 border-b border-gray-700 dark:border-gray-700">
-                        <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-full overflow-hidden">
-                                <img
-                                    src={userData.profileImage || "/placeholder.svg"}
-                                    alt={userData.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div>
-                                <div className="font-medium">{userData.name}</div>
-                                <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{userData.email}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="p-2">
-                        <button
-                            onClick={() => navigateTo("/dashboard")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiUser size={18} className="text-blue-500" />
-                            <span>Overview</span>
-                        </button>
-                        <button
-                            onClick={() => navigateTo("/my-rentals")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiShoppingCart size={18} className="text-green-500" />
-                            <span>My Rentals</span>
-                        </button>
-                        <button
-                            onClick={() => navigateTo("/wishlist")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiHeart size={18} className="text-red-500" />
-                            <span>Wishlist</span>
-                        </button>
-                        <button
-                            onClick={() => navigateTo("/loyalty")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiAward size={18} className="text-purple-500" />
-                            <span>Loyalty & Rewards</span>
-                        </button>
-                        <button
-                            onClick={() => navigateTo("/messages")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiMessageSquare size={18} className="text-cyan-500" />
-                            <span>Messages</span>
-                        </button>
-                        <button
-                            onClick={() => navigateTo("/settings")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                        >
-                            <FiSettings size={18} className="text-gray-500" />
-                            <span>Settings</span>
-                        </button>
-                    </div>
-                    <div className="p-4 border-t border-gray-700 dark:border-gray-700">
-                        <button
-                            onClick={() => console.log("Logout")}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${
-                                darkMode ? "hover:bg-gray-700 text-red-400" : "hover:bg-gray-100 text-red-500"
-                            }`}
-                        >
-                            <FiLogOut size={18} />
-                            <span>Logout</span>
-                        </button>
-                    </div>
-                </div>
-            )}
-
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
                 {/* Main Content - Left Column */}
                 <div className="lg:col-span-2 space-y-4">
-
                     {/* Stats Cards */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         <div
@@ -700,8 +565,7 @@ const UserOverviewComponent = () => {
                                             <div className="flex items-center justify-between mb-1">
                                                 <span className="text-xs flex items-center gap-1">
                                                     {getCategoryIcon(item.category)}
-                                                    <span
-                                                        className={darkMode ? "text-gray-400" : "text-gray-500"}>{item.category}</span>
+                                                    <span className={darkMode ? "text-gray-400" : "text-gray-500"}>{item.category}</span>
                                                 </span>
                                                 <span
                                                     className={`text-xs ${
@@ -739,7 +603,6 @@ const UserOverviewComponent = () => {
 
                 {/* Sidebar - Right Column */}
                 <div className="space-y-6">
-
                     {/* User Profile Card */}
                     <div
                         className={`rounded-xl overflow-hidden ${
@@ -790,7 +653,7 @@ const UserOverviewComponent = () => {
                             <div className="mt-4 grid grid-cols-2 gap-2">
                                 <button
                                     onClick={() => navigateTo("/settings")}
-                                    className={`py-2 rounded-lg transition-colors ${
+                                    className={`py-2 rounded-lg transition-colors cursor-pointer ${
                                         darkMode
                                             ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
                                             : "bg-gray-100 hover:bg-gray-200 text-gray-800"
@@ -800,7 +663,7 @@ const UserOverviewComponent = () => {
                                 </button>
                                 <button
                                     onClick={() => navigateTo("/loyalty")}
-                                    className={`py-2 rounded-lg transition-colors ${
+                                    className={`py-2 rounded-lg transition-colors cursor-pointer ${
                                         darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
                                     }`}
                                 >
@@ -836,13 +699,14 @@ const UserOverviewComponent = () => {
                                 userData.notifications.map((notification) => (
                                     <div
                                         key={notification.id}
-                                        className={`p-4 ${
+                                        className={`p-4 cursor-pointer ${
                                             !notification.isRead
                                                 ? darkMode
                                                     ? "bg-gray-700/50"
                                                     : "bg-blue-50/50"
                                                 : "hover:bg-gray-50 dark:hover:bg-gray-700/50"
                                         } transition-colors`}
+                                        onClick={() => markNotificationAsRead(notification.id)}
                                     >
                                         <div className="flex gap-3">
                                             <div className="flex-shrink-0 mt-1">{getNotificationIcon(notification.type)}</div>

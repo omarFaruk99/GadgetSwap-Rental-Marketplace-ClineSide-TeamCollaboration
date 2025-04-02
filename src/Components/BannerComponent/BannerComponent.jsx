@@ -4,7 +4,6 @@ import {FiSearch, FiArrowRight, FiZap, FiCpu} from 'react-icons/fi';
 import {IoSparkles} from 'react-icons/io5';
 import {useSelector} from "react-redux";
 import AuthContext from "../../Providers/AuthContext.jsx";
-import EidSpecialFunComponent from "../EidSpecialFunComponent/EidSpecialFunComponent.jsx";
 
 
 const BannerComponent = () => {
@@ -398,7 +397,6 @@ const BannerComponent = () => {
                     </div>*/}
                 </div>
             </div>
-            <EidSpecialFunComponent></EidSpecialFunComponent>
         </div>
     );
 };

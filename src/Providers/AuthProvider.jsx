@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
     createUserWithEmailAndPassword,
     updateProfile,
@@ -12,13 +12,13 @@ import {
 } from "firebase/auth";
 import AuthContext from "./AuthContext.jsx";
 import auth from "../Firebase/firebase.init.js";
-import {toast} from "react-toastify";
-import {BASE_URL} from "../SharedUtilities/SharedUtilities.jsx";
+import { toast } from "react-toastify";
+import { BASE_URL } from "../SharedUtilities/SharedUtilities.jsx";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
 
     const [user, setUser] = useState(null);
@@ -59,7 +59,8 @@ const AuthProvider = ({children}) => {
 
             await updateProfile(auth.currentUser, {
                 displayName: full_name,
-                photoURL: 'https://avatar.iran.liara.run/public'
+                // photoURL: 'https://avatar.iran.liara.run/public'
+                photoURL: '//ssl.gstatic.com/accounts/ui/avatar_2x.png'
             });
 
             const userInfoForDatabase = {
@@ -73,7 +74,7 @@ const AuthProvider = ({children}) => {
 
             const response = await axios.post(
                 `${BASE_URL}/users/add_new_user`,
-                {newUser: userInfoForDatabase},
+                { newUser: userInfoForDatabase },
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ const AuthProvider = ({children}) => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             // console.log(userCredential)
 
-            if (userCredential){
+            if (userCredential) {
                 const response = await axios.post(
                     `${BASE_URL}/users/get_user_by_email`,
                     { email: email },
@@ -145,7 +146,7 @@ const AuthProvider = ({children}) => {
             });
             // console.log(auth.currentUser)
 
-            if (auth.currentUser){
+            if (auth.currentUser) {
 
                 const response = await axios.patch(
                     `${BASE_URL}/users/update_existing_user`,
@@ -224,7 +225,7 @@ const AuthProvider = ({children}) => {
 
                 const response = await axios.post(
                     `${BASE_URL}/users/add_new_user`,
-                    {newUser: userInfoForDatabase},
+                    { newUser: userInfoForDatabase },
                     {
                         headers: {
                             'Content-Type': 'application/json',
@@ -336,7 +337,7 @@ const AuthProvider = ({children}) => {
     }, []);
 
 
-    const authInfo = {user, userLoading, signUpNewUser, signInExistingUsers, updateExistingUsers, signOutCurrentUser, resetPassword, signInWithGoogle};
+    const authInfo = { user, userLoading, signUpNewUser, signInExistingUsers, updateExistingUsers, signOutCurrentUser, resetPassword, signInWithGoogle };
 
 
     return (

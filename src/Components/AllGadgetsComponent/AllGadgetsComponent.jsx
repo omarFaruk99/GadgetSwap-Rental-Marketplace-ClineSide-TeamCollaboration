@@ -25,13 +25,15 @@ import {
     FaClock,
     FaWifi,
 } from "react-icons/fa"
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { useSelector } from "react-redux";
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const AllGadgetsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const navigate = useNavigate()
@@ -1540,18 +1542,16 @@ const AllGadgetsComponent = () => {
 
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-                        darkMode
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
                             ? 'bg-gray-800/70 text-blue-400 border border-gray-700/50'
                             : 'bg-white/80 text-blue-600 border border-blue-100/50 shadow-sm'
-                    } backdrop-blur-md`}>
+                        } backdrop-blur-md`}>
                         <FiSearch className="mr-2" />
                         <span>Find what you feel</span>
                     </div>
 
-                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>
                         Explore Gadgets
                     </h2>
                     <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -1575,11 +1575,10 @@ const AllGadgetsComponent = () => {
                                     placeholder="Search gadgets..."
                                     value={searchTerm}
                                     onChange={handleSearchChange}
-                                    className={`w-full py-3 px-4 pr-12 focus:outline-none transition-colors ${
-                                        darkMode
+                                    className={`w-full py-3 px-4 pr-12 focus:outline-none transition-colors ${darkMode
                                             ? "bg-gray-700 text-white placeholder-gray-400"
                                             : "bg-gray-100 text-gray-900 placeholder-gray-500"
-                                    }`}
+                                        }`}
                                 />
                                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
                                     <FiSearch className={`transition-colors ${darkMode ? "text-gray-400" : "text-gray-500"}`} size={20} />
@@ -1593,9 +1592,8 @@ const AllGadgetsComponent = () => {
                                 <select
                                     value={sortOption}
                                     onChange={(e) => handleSortChange(e.target.value)}
-                                    className={`appearance-none w-full py-3 px-4 pr-10 rounded-lg focus:outline-none transition-colors ${
-                                        darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-900"
-                                    }`}
+                                    className={`appearance-none w-full py-3 px-4 pr-10 rounded-lg focus:outline-none transition-colors ${darkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-900"
+                                        }`}
                                 >
                                     {sortOptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -1616,11 +1614,10 @@ const AllGadgetsComponent = () => {
                         <div className="flex lg:hidden gap-2">
                             <button
                                 onClick={toggleViewMode}
-                                className={`p-3 rounded-lg transition-colors ${
-                                    darkMode
+                                className={`p-3 rounded-lg transition-colors ${darkMode
                                         ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                }`}
+                                    }`}
                                 aria-label={`Switch to ${viewMode === "grid" ? "list" : "grid"} view`}
                             >
                                 {viewMode === "grid" ? <FiList size={20} /> : <FiGrid size={20} />}
@@ -1628,11 +1625,10 @@ const AllGadgetsComponent = () => {
 
                             <button
                                 onClick={toggleFilterMenu}
-                                className={`flex items-center gap-2 p-3 rounded-lg transition-colors ${
-                                    darkMode
+                                className={`flex items-center gap-2 p-3 rounded-lg transition-colors ${darkMode
                                         ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                }`}
+                                    }`}
                             >
                                 <FiSliders size={20} />
                                 <span>Filter & Sort</span>
@@ -1643,11 +1639,10 @@ const AllGadgetsComponent = () => {
                         <div className="hidden lg:block">
                             <button
                                 onClick={toggleViewMode}
-                                className={`p-3 rounded-lg transition-colors ${
-                                    darkMode
+                                className={`p-3 rounded-lg transition-colors ${darkMode
                                         ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
                                         : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                                }`}
+                                    }`}
                                 aria-label={`Switch to ${viewMode === "grid" ? "list" : "grid"} view`}
                             >
                                 {viewMode === "grid" ? <FiList size={20} /> : <FiGrid size={20} />}
@@ -1676,11 +1671,10 @@ const AllGadgetsComponent = () => {
                                 <select
                                     value={sortOption}
                                     onChange={(e) => handleSortChange(e.target.value)}
-                                    className={`w-full p-2 rounded-lg transition-colors ${
-                                        darkMode
+                                    className={`w-full p-2 rounded-lg transition-colors ${darkMode
                                             ? "bg-gray-800 text-white border border-gray-700"
                                             : "bg-white text-gray-900 border border-gray-300"
-                                    }`}
+                                        }`}
                                 >
                                     {sortOptions.map((option) => (
                                         <option key={option.value} value={option.value}>
@@ -1701,30 +1695,28 @@ const AllGadgetsComponent = () => {
                                         <button
                                             key={category.name}
                                             onClick={() => handleCategoryChange(category.name)}
-                                            className={`px-3 py-2 text-sm rounded-lg transition-all duration-300 ${
-                                                selectedCategory === category.name
+                                            className={`px-3 py-2 text-sm rounded-lg transition-all duration-300 ${selectedCategory === category.name
                                                     ? darkMode
                                                         ? "bg-blue-600 text-white"
                                                         : "bg-blue-600 text-white"
                                                     : darkMode
                                                         ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                                                         : "bg-white text-gray-700 hover:bg-gray-200"
-                                            }`}
+                                                }`}
                                         >
-                                        <span className="flex items-center">
-                                            {category.icon}
-                                            {category.name}
-                                        </span>
+                                            <span className="flex items-center">
+                                                {category.icon}
+                                                {category.name}
+                                            </span>
                                         </button>
                                     ))}
                                     <select
                                         value={selectedCategory}
                                         onChange={(e) => handleCategoryChange(e.target.value)}
-                                        className={`w-full p-2 mt-2 rounded-lg transition-colors ${
-                                            darkMode
+                                        className={`w-full p-2 mt-2 rounded-lg transition-colors ${darkMode
                                                 ? "bg-gray-800 text-white border border-gray-700"
                                                 : "bg-white text-gray-900 border border-gray-300"
-                                        }`}
+                                            }`}
                                     >
                                         <option value="All">All Categories</option>
                                         {categories.slice(1).map((category) => (
@@ -1746,15 +1738,14 @@ const AllGadgetsComponent = () => {
                             <button
                                 key={category.name}
                                 onClick={() => handleCategoryChange(category.name)}
-                                className={`px-4 py-2 rounded-lg transition-all duration-300 ${
-                                    selectedCategory === category.name
+                                className={`px-4 py-2 rounded-lg transition-all duration-300 ${selectedCategory === category.name
                                         ? darkMode
                                             ? "bg-blue-600 text-white"
                                             : "bg-blue-600 text-white"
                                         : darkMode
                                             ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                                             : "bg-white text-gray-700 hover:bg-gray-100 shadow-sm"
-                                }`}
+                                    }`}
                             >
                                 <span className="flex items-center">
                                     {category.icon}
@@ -1824,9 +1815,8 @@ const AllGadgetsComponent = () => {
                                 <div
                                     key={gadget.id}
                                     onClick={() => handleGadgetClick(gadget.id)}
-                                    className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer ${
-                                        darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
-                                    }`}
+                                    className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer ${darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
+                                        }`}
                                 >
                                     <div className="relative h-48 overflow-hidden">
                                         <img
@@ -1835,9 +1825,8 @@ const AllGadgetsComponent = () => {
                                             className="w-full h-full object-cover"
                                         />
                                         <div
-                                            className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${
-                                                darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
-                                            }`}
+                                            className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
+                                                }`}
                                         >
                                             {gadget.category}
                                         </div>
@@ -1851,11 +1840,11 @@ const AllGadgetsComponent = () => {
                                         </p>
                                         <div className="flex justify-between items-center">
                                             <div className="flex items-center">
-                                                <FiStar className="text-yellow-500 mr-1" size={16}/>
+                                                <FiStar className="text-yellow-500 mr-1" size={16} />
                                                 <span
                                                     className={`text-sm font-medium ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
-                                                {gadget.rating.toFixed(1)}
-                                            </span>
+                                                    {gadget.rating.toFixed(1)}
+                                                </span>
                                             </div>
                                             <div
                                                 className={`text-lg font-bold ${darkMode ? "text-blue-400" : "text-blue-600"}`}>
@@ -1880,9 +1869,8 @@ const AllGadgetsComponent = () => {
                                 <div
                                     key={gadget.id}
                                     onClick={() => handleGadgetClick(gadget.id)}
-                                    className={`rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl cursor-pointer ${
-                                        darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
-                                    }`}
+                                    className={`rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl cursor-pointer ${darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
+                                        }`}
                                 >
                                     <div className="flex flex-col sm:flex-row">
                                         <div className="sm:w-1/4 h-48 sm:h-auto relative">
@@ -1892,9 +1880,8 @@ const AllGadgetsComponent = () => {
                                                 className="w-full h-full object-cover"
                                             />
                                             <div
-                                                className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${
-                                                    darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
-                                                }`}
+                                                className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
+                                                    }`}
                                             >
                                                 {gadget.category}
                                             </div>
@@ -1942,15 +1929,14 @@ const AllGadgetsComponent = () => {
                             <button
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className={`p-2 rounded-lg mr-2 transition-colors ${
-                                    currentPage === 1
+                                className={`p-2 rounded-lg mr-2 transition-colors ${currentPage === 1
                                         ? darkMode
                                             ? "text-gray-600 cursor-not-allowed"
                                             : "text-gray-400 cursor-not-allowed"
                                         : darkMode
                                             ? "text-gray-300 hover:bg-gray-800"
                                             : "text-gray-700 hover:bg-gray-100"
-                                }`}
+                                    }`}
                                 aria-label="Previous page"
                             >
                                 <FiChevronLeft size={20} />
@@ -1969,15 +1955,14 @@ const AllGadgetsComponent = () => {
                                         <button
                                             key={page}
                                             onClick={() => handlePageChange(page)}
-                                            className={`w-10 h-10 rounded-lg transition-all duration-300 ${
-                                                currentPage === page
+                                            className={`w-10 h-10 rounded-lg transition-all duration-300 ${currentPage === page
                                                     ? darkMode
                                                         ? "bg-blue-600 text-white"
                                                         : "bg-blue-600 text-white"
                                                     : darkMode
                                                         ? "text-gray-300 hover:bg-gray-800"
                                                         : "text-gray-700 hover:bg-gray-100"
-                                            }`}
+                                                }`}
                                         >
                                             {page}
                                         </button>
@@ -1988,15 +1973,14 @@ const AllGadgetsComponent = () => {
                             <button
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={currentPage === totalPages}
-                                className={`p-2 rounded-lg ml-2 transition-colors ${
-                                    currentPage === totalPages
+                                className={`p-2 rounded-lg ml-2 transition-colors ${currentPage === totalPages
                                         ? darkMode
                                             ? "text-gray-600 cursor-not-allowed"
                                             : "text-gray-400 cursor-not-allowed"
                                         : darkMode
                                             ? "text-gray-300 hover:bg-gray-800"
                                             : "text-gray-700 hover:bg-gray-100"
-                                }`}
+                                    }`}
                                 aria-label="Next page"
                             >
                                 <FiChevronRight size={20} />

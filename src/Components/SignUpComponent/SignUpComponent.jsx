@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
+import AuthContext from '../../Providers/AuthContext';
 // import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
@@ -11,6 +12,7 @@ const SignUpComponent = () => {
 
     const navigate = useNavigate();
     const darkMode = useSelector((state) => state.darkMode.isDark);
+    const { signUpNewUser, signInWithGoogle } = useContext(AuthContext);
 
     // const [darkMode, setDarkMode] = useState(true);
     // const { darkMode } = useTheme();
@@ -177,20 +179,27 @@ const SignUpComponent = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
             // Create user object
-            const user = {
-                fullName: formData.fullName,
-                email: formData.email,
-                password: formData.password,
-                termsAccepted: formData.acceptTerms,
-            };
+            // const user = {
+            //     fullName: formData.fullName,
+            //     email: formData.email,
+            //     password: formData.password,
+            //     termsAccepted: formData.acceptTerms,
+            // };
 
-            // Log user info to console
-            console.log('User registered:', user);
+            // // Log user info to console
+            // console.log('User registered:', user);
+
+            const fullName = formData.fullName;
+            const email = formData.email;
+            const password = formData.password;
+
+            // Signing up using firebase.
+            await signUpNewUser(fullName, email, password);
 
             // Redirect to sign-in page
             navigate('/sign-in');
@@ -198,8 +207,9 @@ const SignUpComponent = () => {
     };
 
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = async () => {
         // In a real app, this would integrate with Google OAuth
+        await signInWithGoogle();
         console.log('Sign in with Google clicked');
     };
 

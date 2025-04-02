@@ -1,6 +1,6 @@
 "use client"
 
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import {
     FiSun,
     FiMoon,
@@ -22,14 +22,16 @@ import {
     FiThumbsUp,
     FiAward, FiMessageCircle,
 } from "react-icons/fi"
-import {FaLaptop} from "react-icons/fa"
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { FaLaptop } from "react-icons/fa"
+import { useSelector } from "react-redux";
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const AboutUsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -109,22 +111,22 @@ const AboutUsComponent = () => {
         {
             title: "Sustainability",
             description: "Reducing e-waste through a circular economy of shared gadgets.",
-            icon: <FiGlobe className="text-green-500" size={24}/>,
+            icon: <FiGlobe className="text-green-500" size={24} />,
         },
         {
             title: "Accessibility",
             description: "Making premium technology accessible to everyone through affordable rentals.",
-            icon: <FiUsers className="text-blue-500" size={24}/>,
+            icon: <FiUsers className="text-blue-500" size={24} />,
         },
         {
             title: "Innovation",
             description: "Constantly improving our platform to provide the best rental experience.",
-            icon: <FiTrendingUp className="text-purple-500" size={24}/>,
+            icon: <FiTrendingUp className="text-purple-500" size={24} />,
         },
         {
             title: "Trust & Safety",
             description: "Ensuring secure transactions and well-maintained gadgets for every rental.",
-            icon: <FiShield className="text-red-500" size={24}/>,
+            icon: <FiShield className="text-red-500" size={24} />,
         },
     ]
 
@@ -192,22 +194,22 @@ const AboutUsComponent = () => {
         {
             value: "25K+",
             label: "Gadgets Available",
-            icon: <FaLaptop className="text-blue-500" size={20}/>,
+            icon: <FaLaptop className="text-blue-500" size={20} />,
         },
         {
             value: "50K+",
             label: "Happy Customers",
-            icon: <FiSmile className="text-yellow-500" size={20}/>,
+            icon: <FiSmile className="text-yellow-500" size={20} />,
         },
         {
             value: "100+",
             label: "Cities Covered",
-            icon: <FiGlobe className="text-green-500" size={20}/>,
+            icon: <FiGlobe className="text-green-500" size={20} />,
         },
         {
             value: "4.8/5",
             label: "Average Rating",
-            icon: <FiStar className="text-amber-500" size={20}/>,
+            icon: <FiStar className="text-amber-500" size={20} />,
         },
     ]
 
@@ -227,7 +229,7 @@ const AboutUsComponent = () => {
                             className={`p-2 rounded-full ${darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"}`}
                             aria-label="Close menu"
                         >
-                            <FiX size={24}/>
+                            <FiX size={24} />
                         </button>
                     </div>
                     <nav className="p-4">
@@ -235,13 +237,12 @@ const AboutUsComponent = () => {
                             <li>
                                 <button
                                     onClick={() => handleSectionChange("story")}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeSection === "story"
-                                            ? "bg-blue-600 text-white"
-                                            : darkMode
-                                                ? "hover:bg-gray-800"
-                                                : "hover:bg-gray-100"
-                                    }`}
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeSection === "story"
+                                        ? "bg-blue-600 text-white"
+                                        : darkMode
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-gray-100"
+                                        }`}
                                 >
                                     Our Story
                                 </button>
@@ -249,13 +250,12 @@ const AboutUsComponent = () => {
                             <li>
                                 <button
                                     onClick={() => handleSectionChange("values")}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeSection === "values"
-                                            ? "bg-blue-600 text-white"
-                                            : darkMode
-                                                ? "hover:bg-gray-800"
-                                                : "hover:bg-gray-100"
-                                    }`}
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeSection === "values"
+                                        ? "bg-blue-600 text-white"
+                                        : darkMode
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-gray-100"
+                                        }`}
                                 >
                                     Our Values
                                 </button>
@@ -263,13 +263,12 @@ const AboutUsComponent = () => {
                             <li>
                                 <button
                                     onClick={() => handleSectionChange("team")}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeSection === "team"
-                                            ? "bg-blue-600 text-white"
-                                            : darkMode
-                                                ? "hover:bg-gray-800"
-                                                : "hover:bg-gray-100"
-                                    }`}
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeSection === "team"
+                                        ? "bg-blue-600 text-white"
+                                        : darkMode
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-gray-100"
+                                        }`}
                                 >
                                     Our Team
                                 </button>
@@ -277,13 +276,12 @@ const AboutUsComponent = () => {
                             <li>
                                 <button
                                     onClick={() => handleSectionChange("journey")}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeSection === "journey"
-                                            ? "bg-blue-600 text-white"
-                                            : darkMode
-                                                ? "hover:bg-gray-800"
-                                                : "hover:bg-gray-100"
-                                    }`}
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeSection === "journey"
+                                        ? "bg-blue-600 text-white"
+                                        : darkMode
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-gray-100"
+                                        }`}
                                 >
                                     Our Journey
                                 </button>
@@ -291,13 +289,12 @@ const AboutUsComponent = () => {
                             <li>
                                 <button
                                     onClick={() => handleSectionChange("testimonials")}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeSection === "testimonials"
-                                            ? "bg-blue-600 text-white"
-                                            : darkMode
-                                                ? "hover:bg-gray-800"
-                                                : "hover:bg-gray-100"
-                                    }`}
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeSection === "testimonials"
+                                        ? "bg-blue-600 text-white"
+                                        : darkMode
+                                            ? "hover:bg-gray-800"
+                                            : "hover:bg-gray-100"
+                                        }`}
                                 >
                                     Testimonials
                                 </button>
@@ -310,18 +307,16 @@ const AboutUsComponent = () => {
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-                        darkMode
-                            ? 'bg-gray-800/70 text-blue-400 border border-gray-700/50'
-                            : 'bg-white/80 text-blue-600 border border-blue-100/50 shadow-sm'
-                    } backdrop-blur-md`}>
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
+                        ? 'bg-gray-800/70 text-blue-400 border border-gray-700/50'
+                        : 'bg-white/80 text-blue-600 border border-blue-100/50 shadow-sm'
+                        } backdrop-blur-md`}>
                         <FiMessageCircle className="mr-2" />
                         <span>To know more</span>
                     </div>
 
-                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>
                         About Us
                     </h2>
                     <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -340,13 +335,12 @@ const AboutUsComponent = () => {
                                     <li>
                                         <button
                                             onClick={() => handleSectionChange("story")}
-                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                                                activeSection === "story"
-                                                    ? "bg-blue-600 text-white"
-                                                    : darkMode
-                                                        ? "hover:bg-gray-700"
-                                                        : "hover:bg-gray-100"
-                                            }`}
+                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${activeSection === "story"
+                                                ? "bg-blue-600 text-white"
+                                                : darkMode
+                                                    ? "hover:bg-gray-700"
+                                                    : "hover:bg-gray-100"
+                                                }`}
                                         >
                                             Our Story
                                         </button>
@@ -354,13 +348,12 @@ const AboutUsComponent = () => {
                                     <li>
                                         <button
                                             onClick={() => handleSectionChange("values")}
-                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                                                activeSection === "values"
-                                                    ? "bg-blue-600 text-white"
-                                                    : darkMode
-                                                        ? "hover:bg-gray-700"
-                                                        : "hover:bg-gray-100"
-                                            }`}
+                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${activeSection === "values"
+                                                ? "bg-blue-600 text-white"
+                                                : darkMode
+                                                    ? "hover:bg-gray-700"
+                                                    : "hover:bg-gray-100"
+                                                }`}
                                         >
                                             Our Values
                                         </button>
@@ -368,13 +361,12 @@ const AboutUsComponent = () => {
                                     <li>
                                         <button
                                             onClick={() => handleSectionChange("team")}
-                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                                                activeSection === "team"
-                                                    ? "bg-blue-600 text-white"
-                                                    : darkMode
-                                                        ? "hover:bg-gray-700"
-                                                        : "hover:bg-gray-100"
-                                            }`}
+                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${activeSection === "team"
+                                                ? "bg-blue-600 text-white"
+                                                : darkMode
+                                                    ? "hover:bg-gray-700"
+                                                    : "hover:bg-gray-100"
+                                                }`}
                                         >
                                             Our Team
                                         </button>
@@ -382,13 +374,12 @@ const AboutUsComponent = () => {
                                     <li>
                                         <button
                                             onClick={() => handleSectionChange("journey")}
-                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                                                activeSection === "journey"
-                                                    ? "bg-blue-600 text-white"
-                                                    : darkMode
-                                                        ? "hover:bg-gray-700"
-                                                        : "hover:bg-gray-100"
-                                            }`}
+                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${activeSection === "journey"
+                                                ? "bg-blue-600 text-white"
+                                                : darkMode
+                                                    ? "hover:bg-gray-700"
+                                                    : "hover:bg-gray-100"
+                                                }`}
                                         >
                                             Our Journey
                                         </button>
@@ -396,13 +387,12 @@ const AboutUsComponent = () => {
                                     <li>
                                         <button
                                             onClick={() => handleSectionChange("testimonials")}
-                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                                                activeSection === "testimonials"
-                                                    ? "bg-blue-600 text-white"
-                                                    : darkMode
-                                                        ? "hover:bg-gray-700"
-                                                        : "hover:bg-gray-100"
-                                            }`}
+                                            className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${activeSection === "testimonials"
+                                                ? "bg-blue-600 text-white"
+                                                : darkMode
+                                                    ? "hover:bg-gray-700"
+                                                    : "hover:bg-gray-100"
+                                                }`}
                                         >
                                             Testimonials
                                         </button>
@@ -434,7 +424,7 @@ const AboutUsComponent = () => {
                                 className={`rounded-xl overflow-hidden mb-8 ${darkMode ? "bg-gray-800" : "bg-white shadow-sm"}`}>
                                 <div className="relative h-64 md:h-80">
                                     <img src="https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742345962/about-us-2_efnfat.jpg" alt="GadgetSwap Team"
-                                         className="w-full h-full object-cover"/>
+                                        className="w-full h-full object-cover" />
                                     <div
                                         className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                                         <div className="p-6">
@@ -489,7 +479,7 @@ const AboutUsComponent = () => {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {companyValues.map((value, index) => (
                                         <div key={index}
-                                             className={`p-5 rounded-lg ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
+                                            className={`p-5 rounded-lg ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
                                             <div className="flex items-center mb-4">
                                                 {value.icon}
                                                 <h3 className="text-xl font-medium ml-3">{value.title}</h3>
@@ -551,14 +541,14 @@ const AboutUsComponent = () => {
                                                         className={`p-2 rounded-full ${darkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
                                                         aria-label={`${member.name}'s LinkedIn`}
                                                     >
-                                                        <FiLinkedin size={16} className="text-blue-500"/>
+                                                        <FiLinkedin size={16} className="text-blue-500" />
                                                     </a>
                                                     <a
                                                         href={member.social.twitter}
                                                         className={`p-2 rounded-full ${darkMode ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
                                                         aria-label={`${member.name}'s Twitter`}
                                                     >
-                                                        <FiTwitter size={16} className="text-blue-400"/>
+                                                        <FiTwitter size={16} className="text-blue-400" />
                                                     </a>
                                                 </div>
                                             </div>
@@ -575,12 +565,11 @@ const AboutUsComponent = () => {
                                     </p>
                                     <a
                                         href="#careers"
-                                        className={`inline-flex items-center px-4 py-2 rounded-lg font-medium ${
-                                            darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
-                                        }`}
+                                        className={`inline-flex items-center px-4 py-2 rounded-lg font-medium ${darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
+                                            }`}
                                     >
                                         View Open Positions
-                                        <FiArrowRight className="ml-2"/>
+                                        <FiArrowRight className="ml-2" />
                                     </a>
                                 </div>
                             </div>
@@ -600,19 +589,18 @@ const AboutUsComponent = () => {
                                     <div className="space-y-12">
                                         {milestones.map((milestone, index) => (
                                             <div key={index}
-                                                 className={`relative ${index % 2 === 0 ? "md:pr-1/2" : "md:pl-1/2 md:ml-auto"}`}>
+                                                className={`relative ${index % 2 === 0 ? "md:pr-1/2" : "md:pl-1/2 md:ml-auto"}`}>
                                                 {/* Timeline dot */}
                                                 <div
                                                     className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 transform -translate-y-1/2 md:-translate-x-1/2"></div>
 
                                                 {/* Content */}
                                                 <div
-                                                    className={`ml-12 md:ml-0 p-5 rounded-lg ${
-                                                        index % 2 === 0 ? "md:mr-8" : "md:ml-8"
-                                                    } ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}
+                                                    className={`ml-12 md:ml-0 p-5 rounded-lg ${index % 2 === 0 ? "md:mr-8" : "md:ml-8"
+                                                        } ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}
                                                 >
                                                     <div className="flex items-center mb-2">
-                                                        <FiClock className="text-blue-500 mr-2"/>
+                                                        <FiClock className="text-blue-500 mr-2" />
                                                         <span
                                                             className={`text-sm font-bold ${darkMode ? "text-blue-400" : "text-blue-600"}`}>
                                                             {milestone.year}
@@ -646,7 +634,7 @@ const AboutUsComponent = () => {
                                 <div className="grid md:grid-cols-3 gap-6">
                                     {testimonials.map((testimonial, index) => (
                                         <div key={index}
-                                             className={`p-5 rounded-xl ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
+                                            className={`p-5 rounded-xl ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
                                             <div className="flex items-center mb-4">
                                                 <img
                                                     src={testimonial.image || "/placeholder.svg"}
@@ -665,13 +653,12 @@ const AboutUsComponent = () => {
                                                 {[...Array(5)].map((_, i) => (
                                                     <FiStar
                                                         key={i}
-                                                        className={`${
-                                                            i < testimonial.rating
-                                                                ? "text-yellow-500 fill-current"
-                                                                : darkMode
-                                                                    ? "text-gray-600"
-                                                                    : "text-gray-300"
-                                                        }`}
+                                                        className={`${i < testimonial.rating
+                                                            ? "text-yellow-500 fill-current"
+                                                            : darkMode
+                                                                ? "text-gray-600"
+                                                                : "text-gray-300"
+                                                            }`}
                                                         size={16}
                                                     />
                                                 ))}
@@ -693,21 +680,19 @@ const AboutUsComponent = () => {
                                         <div className="flex space-x-4">
                                             <a
                                                 href="#rent"
-                                                className={`px-4 py-2 rounded-lg font-medium ${
-                                                    darkMode
-                                                        ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                                        : "bg-blue-600 hover:bg-blue-700 text-white"
-                                                }`}
+                                                className={`px-4 py-2 rounded-lg font-medium ${darkMode
+                                                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                                                    }`}
                                             >
                                                 Rent a Gadget
                                             </a>
                                             <a
                                                 href="#list"
-                                                className={`px-4 py-2 rounded-lg font-medium ${
-                                                    darkMode
-                                                        ? "bg-gray-600 hover:bg-gray-700 text-white"
-                                                        : "bg-gray-200 hover:bg-gray-300 text-gray-800"
-                                                }`}
+                                                className={`px-4 py-2 rounded-lg font-medium ${darkMode
+                                                    ? "bg-gray-600 hover:bg-gray-700 text-white"
+                                                    : "bg-gray-200 hover:bg-gray-300 text-gray-800"
+                                                    }`}
                                             >
                                                 List Your Gadget
                                             </a>
@@ -751,7 +736,7 @@ const AboutUsComponent = () => {
                                 <div className="grid md:grid-cols-3 gap-6">
                                     <div className="text-center">
                                         <div className="flex justify-center mb-3">
-                                            <FiHeart className="text-red-500" size={24}/>
+                                            <FiHeart className="text-red-500" size={24} />
                                         </div>
                                         <h3 className="font-medium mb-2">Eco-Friendly</h3>
                                         <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
@@ -762,7 +747,7 @@ const AboutUsComponent = () => {
 
                                     <div className="text-center">
                                         <div className="flex justify-center mb-3">
-                                            <FiThumbsUp className="text-blue-500" size={24}/>
+                                            <FiThumbsUp className="text-blue-500" size={24} />
                                         </div>
                                         <h3 className="font-medium mb-2">Cost-Effective</h3>
                                         <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
@@ -772,7 +757,7 @@ const AboutUsComponent = () => {
 
                                     <div className="text-center">
                                         <div className="flex justify-center mb-3">
-                                            <FiAward className="text-amber-500" size={24}/>
+                                            <FiAward className="text-amber-500" size={24} />
                                         </div>
                                         <h3 className="font-medium mb-2">Quality Guaranteed</h3>
                                         <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>

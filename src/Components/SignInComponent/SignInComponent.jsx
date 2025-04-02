@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
+import AuthContext from '../../Providers/AuthContext';
 // import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const SignInComponent = () => {
 
     const navigate = useNavigate();
-
+    const { signInExistingUsers, signInWithGoogle } = useContext(AuthContext);
 
     // const [darkMode, setDarkMode] = useState(true);
     // const { darkMode } = useTheme();
@@ -125,7 +126,7 @@ const SignInComponent = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Clear general error
@@ -139,13 +140,19 @@ const SignInComponent = () => {
             // For this example, we'll simulate a successful login
 
             // Create user object
-            const user = {
-                email: formData.email,
-                password: formData.password
-            };
+            // const user = {
+            //     email: formData.email,
+            //     password: formData.password
+            // };
 
-            // Log user info to console
-            console.log('User signed in:', user);
+            // // Log user info to console
+            // console.log('User signed in:', user);
+
+            const email = formData.email;
+            const password = formData.password;
+
+            // Signing in using firebase.
+            await signInExistingUsers(email, password);
 
             // Redirect to home page
             navigate('/');
@@ -153,8 +160,9 @@ const SignInComponent = () => {
     };
 
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = async () => {
         // In a real app, this would integrate with Google OAuth
+        await signInWithGoogle();
         console.log('Sign in with Google clicked');
         // After successful authentication, redirect to home
         // navigate('/');

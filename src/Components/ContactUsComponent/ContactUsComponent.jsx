@@ -25,13 +25,15 @@ import {
     FaInstagram,
     FaLinkedin
 } from 'react-icons/fa';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { useSelector } from 'react-redux';
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const ContactUsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [formData, setFormData] = useState({
@@ -311,18 +313,16 @@ const ContactUsComponent = () => {
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-                        darkMode
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
                             ? 'bg-gray-800/70 text-blue-400 border border-gray-700/50'
                             : 'bg-white/80 text-blue-600 border border-blue-100/50 shadow-sm'
-                    } backdrop-blur-md`}>
+                        } backdrop-blur-md`}>
                         <FiMessageCircle className="mr-2" />
                         <span>Get in Touch</span>
                     </div>
 
-                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>
                         Contact Us
                     </h2>
                     <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -334,19 +334,16 @@ const ContactUsComponent = () => {
                     <div className="flex flex-col lg:flex-row gap-8">
                         {/* Contact Information */}
                         <div className="lg:w-1/3">
-                            <div className={`rounded-xl overflow-hidden h-full ${
-                                darkMode
+                            <div className={`rounded-xl overflow-hidden h-full ${darkMode
                                     ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                                     : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                            }`}>
-                                <div className={`p-6 ${
-                                    darkMode
+                                }`}>
+                                <div className={`p-6 ${darkMode
                                         ? 'bg-gradient-to-br from-blue-900/50 to-purple-900/50 border-b border-gray-700/50'
                                         : 'bg-gradient-to-br from-blue-50 to-indigo-50 border-b border-gray-200/50'
-                                }`}>
-                                    <h3 className={`text-xl font-semibold mb-2 ${
-                                        darkMode ? 'text-white' : 'text-gray-900'
                                     }`}>
+                                    <h3 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'
+                                        }`}>
                                         Contact Information
                                     </h3>
                                     <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
@@ -357,22 +354,19 @@ const ContactUsComponent = () => {
                                 <div className="p-6 space-y-6">
                                     {/* Address */}
                                     <div className="flex">
-                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                            darkMode
+                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                 ? 'bg-gray-700 text-blue-400'
                                                 : 'bg-blue-50 text-blue-600'
-                                        }`}>
+                                            }`}>
                                             <FiMapPin size={20} />
                                         </div>
                                         <div>
-                                            <h4 className={`text-sm font-medium mb-1 ${
-                                                darkMode ? 'text-gray-300' : 'text-gray-500'
-                                            }`}>
+                                            <h4 className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-500'
+                                                }`}>
                                                 Our Office
                                             </h4>
-                                            <address className={`not-italic ${
-                                                darkMode ? 'text-white' : 'text-gray-900'
-                                            }`}>
+                                            <address className={`not-italic ${darkMode ? 'text-white' : 'text-gray-900'
+                                                }`}>
                                                 {contactInfo.address.street}<br />
                                                 {contactInfo.address.city}, {contactInfo.address.state} {contactInfo.address.zip}<br />
                                                 {contactInfo.address.country}
@@ -382,17 +376,15 @@ const ContactUsComponent = () => {
 
                                     {/* Phone */}
                                     <div className="flex">
-                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                            darkMode
+                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                 ? 'bg-gray-700 text-green-400'
                                                 : 'bg-green-50 text-green-600'
-                                        }`}>
+                                            }`}>
                                             <FiPhone size={20} />
                                         </div>
                                         <div>
-                                            <h4 className={`text-sm font-medium mb-1 ${
-                                                darkMode ? 'text-gray-300' : 'text-gray-500'
-                                            }`}>
+                                            <h4 className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-500'
+                                                }`}>
                                                 Phone
                                             </h4>
                                             <p className={`mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -410,17 +402,15 @@ const ContactUsComponent = () => {
 
                                     {/* Email */}
                                     <div className="flex">
-                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                            darkMode
+                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                 ? 'bg-gray-700 text-purple-400'
                                                 : 'bg-purple-50 text-purple-600'
-                                        }`}>
+                                            }`}>
                                             <FiMail size={20} />
                                         </div>
                                         <div>
-                                            <h4 className={`text-sm font-medium mb-1 ${
-                                                darkMode ? 'text-gray-300' : 'text-gray-500'
-                                            }`}>
+                                            <h4 className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-500'
+                                                }`}>
                                                 Email
                                             </h4>
                                             <p className={`mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -438,17 +428,15 @@ const ContactUsComponent = () => {
 
                                     {/* Hours */}
                                     <div className="flex">
-                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                            darkMode
+                                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                 ? 'bg-gray-700 text-amber-400'
                                                 : 'bg-amber-50 text-amber-600'
-                                        }`}>
+                                            }`}>
                                             <FiClock size={20} />
                                         </div>
                                         <div>
-                                            <h4 className={`text-sm font-medium mb-1 ${
-                                                darkMode ? 'text-gray-300' : 'text-gray-500'
-                                            }`}>
+                                            <h4 className={`text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-500'
+                                                }`}>
                                                 Business Hours
                                             </h4>
                                             {contactInfo.hours.map((item, index) => (
@@ -466,9 +454,8 @@ const ContactUsComponent = () => {
 
                                     {/* Social Media */}
                                     <div className="pt-4 border-t border-gray-700/50">
-                                        <h4 className={`text-sm font-medium mb-3 ${
-                                            darkMode ? 'text-gray-300' : 'text-gray-500'
-                                        }`}>
+                                        <h4 className={`text-sm font-medium mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-500'
+                                            }`}>
                                             Connect With Us
                                         </h4>
                                         <div className="flex space-x-3">
@@ -478,11 +465,10 @@ const ContactUsComponent = () => {
                                                     href={item.url}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                                                        darkMode
+                                                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${darkMode
                                                             ? 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white'
                                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900'
-                                                    }`}
+                                                        }`}
                                                     aria-label={item.name}
                                                 >
                                                     {item.icon}
@@ -498,20 +484,18 @@ const ContactUsComponent = () => {
                         <div className="lg:w-2/3">
                             {/* Navigation Tabs - Desktop */}
                             <div className="hidden lg:flex mb-6">
-                                <div className={`inline-flex rounded-lg p-1 ${
-                                    darkMode ? 'bg-gray-800/70 backdrop-blur-md' : 'bg-white/80 backdrop-blur-md shadow-sm'
-                                }`}>
+                                <div className={`inline-flex rounded-lg p-1 ${darkMode ? 'bg-gray-800/70 backdrop-blur-md' : 'bg-white/80 backdrop-blur-md shadow-sm'
+                                    }`}>
                                     <button
                                         onClick={() => handleTabChange('message')}
-                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                                            activeTab === 'message'
+                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'message'
                                                 ? darkMode
                                                     ? 'bg-gray-700 text-white'
                                                     : 'bg-blue-100 text-blue-700'
                                                 : darkMode
                                                     ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                                                     : 'text-gray-700 hover:text-blue-700 hover:bg-blue-50'
-                                        }`}
+                                            }`}
                                     >
                                         <span className="flex items-center">
                                             <FiMessageSquare className="mr-2" />
@@ -521,15 +505,14 @@ const ContactUsComponent = () => {
 
                                     <button
                                         onClick={() => handleTabChange('map')}
-                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                                            activeTab === 'map'
+                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'map'
                                                 ? darkMode
                                                     ? 'bg-gray-700 text-white'
                                                     : 'bg-blue-100 text-blue-700'
                                                 : darkMode
                                                     ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                                                     : 'text-gray-700 hover:text-blue-700 hover:bg-blue-50'
-                                        }`}
+                                            }`}
                                     >
                                         <span className="flex items-center">
                                             <FiMapPin className="mr-2" />
@@ -539,15 +522,14 @@ const ContactUsComponent = () => {
 
                                     <button
                                         onClick={() => handleTabChange('faq')}
-                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                                            activeTab === 'faq'
+                                        className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'faq'
                                                 ? darkMode
                                                     ? 'bg-gray-700 text-white'
                                                     : 'bg-blue-100 text-blue-700'
                                                 : darkMode
                                                     ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                                                     : 'text-gray-700 hover:text-blue-700 hover:bg-blue-50'
-                                        }`}
+                                            }`}
                                     >
                                         <span className="flex items-center">
                                             <FiInfo className="mr-2" />
@@ -561,9 +543,8 @@ const ContactUsComponent = () => {
                             <div className="lg:hidden mb-6">
                                 <button
                                     onClick={toggleMobileMenu}
-                                    className={`flex items-center justify-between w-full px-4 py-3 rounded-xl ${
-                                        darkMode ? 'bg-gray-800/70 text-white' : 'bg-white/90 text-gray-900 shadow-sm'
-                                    }`}
+                                    className={`flex items-center justify-between w-full px-4 py-3 rounded-xl ${darkMode ? 'bg-gray-800/70 text-white' : 'bg-white/90 text-gray-900 shadow-sm'
+                                        }`}
                                 >
                                     <span className="flex items-center">
                                         {activeTab === 'message' && <FiMessageSquare className="mr-2" />}
@@ -578,20 +559,18 @@ const ContactUsComponent = () => {
                                 </button>
 
                                 {isMobileMenuOpen && (
-                                    <div className={`mt-2 rounded-xl overflow-hidden shadow-xl ${
-                                        darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                                    }`}>
+                                    <div className={`mt-2 rounded-xl overflow-hidden shadow-xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+                                        }`}>
                                         <button
                                             onClick={() => handleTabChange('message')}
-                                            className={`flex items-center w-full px-4 py-3 text-left ${
-                                                activeTab === 'message'
+                                            className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'message'
                                                     ? darkMode
                                                         ? 'bg-gray-700 text-white'
                                                         : 'bg-blue-50 text-blue-700'
                                                     : darkMode
                                                         ? 'text-gray-300 hover:bg-gray-700/50'
                                                         : 'text-gray-700 hover:bg-blue-50'
-                                            }`}
+                                                }`}
                                         >
                                             <FiMessageSquare className="mr-2" />
                                             Send Message
@@ -599,15 +578,14 @@ const ContactUsComponent = () => {
 
                                         <button
                                             onClick={() => handleTabChange('map')}
-                                            className={`flex items-center w-full px-4 py-3 text-left ${
-                                                activeTab === 'map'
+                                            className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'map'
                                                     ? darkMode
                                                         ? 'bg-gray-700 text-white'
                                                         : 'bg-blue-50 text-blue-700'
                                                     : darkMode
                                                         ? 'text-gray-300 hover:bg-gray-700/50'
                                                         : 'text-gray-700 hover:bg-blue-50'
-                                            }`}
+                                                }`}
                                         >
                                             <FiMapPin className="mr-2" />
                                             Find Us
@@ -615,15 +593,14 @@ const ContactUsComponent = () => {
 
                                         <button
                                             onClick={() => handleTabChange('faq')}
-                                            className={`flex items-center w-full px-4 py-3 text-left ${
-                                                activeTab === 'faq'
+                                            className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'faq'
                                                     ? darkMode
                                                         ? 'bg-gray-700 text-white'
                                                         : 'bg-blue-50 text-blue-700'
                                                     : darkMode
                                                         ? 'text-gray-300 hover:bg-gray-700/50'
                                                         : 'text-gray-700 hover:bg-blue-50'
-                                            }`}
+                                                }`}
                                         >
                                             <FiInfo className="mr-2" />
                                             Quick Answers
@@ -634,24 +611,21 @@ const ContactUsComponent = () => {
 
                             {/* Message Form */}
                             {activeTab === 'message' && (
-                                <div className={`rounded-xl overflow-hidden ${
-                                    darkMode
+                                <div className={`rounded-xl overflow-hidden ${darkMode
                                         ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                                         : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                                }`}>
+                                    }`}>
                                     <div className="p-6">
-                                        <h3 className={`text-xl font-semibold mb-4 ${
-                                            darkMode ? 'text-white' : 'text-gray-900'
-                                        }`}>
+                                        <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                                            }`}>
                                             Send Us a Message
                                         </h3>
 
                                         {submitSuccess ? (
-                                            <div className={`rounded-lg p-4 mb-6 flex items-start ${
-                                                darkMode
+                                            <div className={`rounded-lg p-4 mb-6 flex items-start ${darkMode
                                                     ? 'bg-green-900/20 border border-green-800/30 text-green-400'
                                                     : 'bg-green-50 border border-green-100 text-green-800'
-                                            }`}>
+                                                }`}>
                                                 <FiCheckCircle className="mt-0.5 mr-3 flex-shrink-0" />
                                                 <div>
                                                     <p className="font-medium">Message sent successfully!</p>
@@ -667,9 +641,8 @@ const ContactUsComponent = () => {
                                                     <div>
                                                         <label
                                                             htmlFor="name"
-                                                            className={`block text-sm font-medium mb-1 ${
-                                                                darkMode ? 'text-gray-300' : 'text-gray-700'
-                                                            }`}
+                                                            className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'
+                                                                }`}
                                                         >
                                                             Your Name
                                                         </label>
@@ -680,15 +653,13 @@ const ContactUsComponent = () => {
                                                                 name="name"
                                                                 value={formData.name}
                                                                 onChange={handleInputChange}
-                                                                className={`w-full px-4 py-2 rounded-lg ${
-                                                                    darkMode
+                                                                className={`w-full px-4 py-2 rounded-lg ${darkMode
                                                                         ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
                                                                         : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
-                                                                } focus:outline-none focus:ring-2 ${
-                                                                    errors.name
+                                                                    } focus:outline-none focus:ring-2 ${errors.name
                                                                         ? darkMode ? 'border-red-500 focus:ring-red-500' : 'border-red-500 focus:ring-red-500'
                                                                         : darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
-                                                                }`}
+                                                                    }`}
                                                                 placeholder="John Doe"
                                                             />
                                                             {errors.name && (
@@ -706,9 +677,8 @@ const ContactUsComponent = () => {
                                                     <div>
                                                         <label
                                                             htmlFor="email"
-                                                            className={`block text-sm font-medium mb-1 ${
-                                                                darkMode ? 'text-gray-300' : 'text-gray-700'
-                                                            }`}
+                                                            className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'
+                                                                }`}
                                                         >
                                                             Your Email
                                                         </label>
@@ -719,15 +689,13 @@ const ContactUsComponent = () => {
                                                                 name="email"
                                                                 value={formData.email}
                                                                 onChange={handleInputChange}
-                                                                className={`w-full px-4 py-2 rounded-lg ${
-                                                                    darkMode
+                                                                className={`w-full px-4 py-2 rounded-lg ${darkMode
                                                                         ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
                                                                         : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
-                                                                } focus:outline-none focus:ring-2 ${
-                                                                    errors.email
+                                                                    } focus:outline-none focus:ring-2 ${errors.email
                                                                         ? darkMode ? 'border-red-500 focus:ring-red-500' : 'border-red-500 focus:ring-red-500'
                                                                         : darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
-                                                                }`}
+                                                                    }`}
                                                                 placeholder="john@example.com"
                                                             />
                                                             {errors.email && (
@@ -746,9 +714,8 @@ const ContactUsComponent = () => {
                                                 <div className="mb-6">
                                                     <label
                                                         htmlFor="subject"
-                                                        className={`block text-sm font-medium mb-1 ${
-                                                            darkMode ? 'text-gray-300' : 'text-gray-700'
-                                                        }`}
+                                                        className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'
+                                                            }`}
                                                     >
                                                         Subject
                                                     </label>
@@ -759,15 +726,13 @@ const ContactUsComponent = () => {
                                                             name="subject"
                                                             value={formData.subject}
                                                             onChange={handleInputChange}
-                                                            className={`w-full px-4 py-2 rounded-lg ${
-                                                                darkMode
+                                                            className={`w-full px-4 py-2 rounded-lg ${darkMode
                                                                     ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
                                                                     : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
-                                                            } focus:outline-none focus:ring-2 ${
-                                                                errors.subject
+                                                                } focus:outline-none focus:ring-2 ${errors.subject
                                                                     ? darkMode ? 'border-red-500 focus:ring-red-500' : 'border-red-500 focus:ring-red-500'
                                                                     : darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
-                                                            }`}
+                                                                }`}
                                                             placeholder="How can we help you?"
                                                         />
                                                         {errors.subject && (
@@ -785,9 +750,8 @@ const ContactUsComponent = () => {
                                                 <div className="mb-6">
                                                     <label
                                                         htmlFor="message"
-                                                        className={`block text-sm font-medium mb-1 ${
-                                                            darkMode ? 'text-gray-300' : 'text-gray-700'
-                                                        }`}
+                                                        className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'
+                                                            }`}
                                                     >
                                                         Message
                                                     </label>
@@ -798,21 +762,19 @@ const ContactUsComponent = () => {
                                                             rows="5"
                                                             value={formData.message}
                                                             onChange={handleInputChange}
-                                                            className={`w-full px-4 py-2 rounded-lg ${
-                                                                darkMode
+                                                            className={`w-full px-4 py-2 rounded-lg ${darkMode
                                                                     ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
                                                                     : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
-                                                            } focus:outline-none focus:ring-2 ${
-                                                                errors.message
+                                                                } focus:outline-none focus:ring-2 ${errors.message
                                                                     ? darkMode ? 'border-red-500 focus:ring-red-500' : 'border-red-500 focus:ring-red-500'
                                                                     : darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
-                                                            }`}
+                                                                }`}
                                                             placeholder="Please provide details about your inquiry..."
                                                         />
                                                         {errors.message && (
                                                             <div
                                                                 className="absolute bottom-3 right-3 flex items-center pr-3 pointer-events-none">
-                                                                <FiAlertCircle className="text-red-500"/>
+                                                                <FiAlertCircle className="text-red-500" />
                                                             </div>
                                                         )}
                                                     </div>
@@ -825,11 +787,10 @@ const ContactUsComponent = () => {
                                                 <button
                                                     type="submit"
                                                     disabled={isSubmitting}
-                                                    className={`w-full py-3 px-4 rounded-lg font-medium flex items-center justify-center transition-colors ${
-                                                        darkMode
+                                                    className={`w-full py-3 px-4 rounded-lg font-medium flex items-center justify-center transition-colors ${darkMode
                                                             ? 'bg-blue-600 hover:bg-blue-700 text-white'
                                                             : 'bg-blue-600 hover:bg-blue-700 text-white'
-                                                    } ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                                        } ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                                                 >
                                                     {isSubmitting ? (
                                                         <>
@@ -850,35 +811,30 @@ const ContactUsComponent = () => {
                                         )}
 
                                         {/* Live Chat Option */}
-                                        <div className={`mt-6 p-4 rounded-lg ${
-                                            darkMode
+                                        <div className={`mt-6 p-4 rounded-lg ${darkMode
                                                 ? 'bg-gray-700/50 border border-gray-600/50'
                                                 : 'bg-gray-50 border border-gray-200/50'
-                                        }`}>
+                                            }`}>
                                             <div className="flex items-start">
-                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                                    darkMode
+                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                         ? 'bg-blue-900/30 text-blue-400'
                                                         : 'bg-blue-100 text-blue-600'
-                                                }`}>
+                                                    }`}>
                                                     <FiMessageCircle size={20} />
                                                 </div>
                                                 <div>
-                                                    <h4 className={`font-medium mb-1 ${
-                                                        darkMode ? 'text-white' : 'text-gray-900'
-                                                    }`}>
+                                                    <h4 className={`font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-900'
+                                                        }`}>
                                                         Need immediate assistance?
                                                     </h4>
-                                                    <p className={`text-sm mb-3 ${
-                                                        darkMode ? 'text-gray-300' : 'text-gray-600'
-                                                    }`}>
+                                                    <p className={`text-sm mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-600'
+                                                        }`}>
                                                         Our support team is available for live chat during business hours.
                                                     </p>
                                                     <button
                                                         onClick={toggleChat}
-                                                        className={`inline-flex items-center text-sm font-medium ${
-                                                            darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
-                                                        }`}
+                                                        className={`inline-flex items-center text-sm font-medium ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'
+                                                            }`}
                                                     >
                                                         <span>Start Live Chat</span>
                                                         <FiArrowRight className="ml-1" size={16} />
@@ -892,15 +848,13 @@ const ContactUsComponent = () => {
 
                             {/* Map */}
                             {activeTab === 'map' && (
-                                <div className={`rounded-xl overflow-hidden ${
-                                    darkMode
+                                <div className={`rounded-xl overflow-hidden ${darkMode
                                         ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                                         : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                                }`}>
+                                    }`}>
                                     <div className="p-6">
-                                        <h3 className={`text-xl font-semibold mb-4 ${
-                                            darkMode ? 'text-white' : 'text-gray-900'
-                                        }`}>
+                                        <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                                            }`}>
                                             Find Us
                                         </h3>
 
@@ -917,28 +871,24 @@ const ContactUsComponent = () => {
                                             ></iframe>
                                         </div>
 
-                                        <div className={`p-4 rounded-lg ${
-                                            darkMode
+                                        <div className={`p-4 rounded-lg ${darkMode
                                                 ? 'bg-gray-700/50 border border-gray-600/50'
                                                 : 'bg-gray-50 border border-gray-200/50'
-                                        }`}>
+                                            }`}>
                                             <div className="flex items-start">
-                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 ${
-                                                    darkMode
+                                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 ${darkMode
                                                         ? 'bg-green-900/30 text-green-400'
                                                         : 'bg-green-100 text-green-600'
-                                                }`}>
+                                                    }`}>
                                                     <FiGlobe size={20} />
                                                 </div>
                                                 <div>
-                                                    <h4 className={`font-medium mb-1 ${
-                                                        darkMode ? 'text-white' : 'text-gray-900'
-                                                    }`}>
+                                                    <h4 className={`font-medium mb-1 ${darkMode ? 'text-white' : 'text-gray-900'
+                                                        }`}>
                                                         Directions
                                                     </h4>
-                                                    <p className={`text-sm mb-3 ${
-                                                        darkMode ? 'text-gray-300' : 'text-gray-600'
-                                                    }`}>
+                                                    <p className={`text-sm mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-600'
+                                                        }`}>
                                                         We're located in the heart of San Francisco's tech district, easily accessible by public transportation.
                                                     </p>
                                                     <div className="flex flex-wrap gap-2">
@@ -946,22 +896,20 @@ const ContactUsComponent = () => {
                                                             href="https://maps.google.com/?q=123+Tech+Avenue,+San+Francisco,+CA+94107"
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${
-                                                                darkMode
+                                                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${darkMode
                                                                     ? 'bg-gray-600 text-white hover:bg-gray-500'
                                                                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             <FiMapPin className="mr-1" size={14} />
                                                             <span>Google Maps</span>
                                                         </a>
                                                         <a
                                                             href="#"
-                                                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${
-                                                                darkMode
+                                                            className={`inline-flex items-center px-3 py-1 rounded-full text-sm ${darkMode
                                                                     ? 'bg-gray-600 text-white hover:bg-gray-500'
                                                                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             <FiTruck className="mr-1" size={14} />
                                                             <span>Parking Info</span>
@@ -976,15 +924,13 @@ const ContactUsComponent = () => {
 
                             {/* Quick Answers */}
                             {activeTab === 'faq' && (
-                                <div className={`rounded-xl overflow-hidden ${
-                                    darkMode
+                                <div className={`rounded-xl overflow-hidden ${darkMode
                                         ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                                         : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                                }`}>
+                                    }`}>
                                     <div className="p-6">
-                                        <h3 className={`text-xl font-semibold mb-4 ${
-                                            darkMode ? 'text-white' : 'text-gray-900'
-                                        }`}>
+                                        <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                                            }`}>
                                             Quick Answers
                                         </h3>
 
@@ -992,22 +938,19 @@ const ContactUsComponent = () => {
                                             {faqData.map((faq, index) => (
                                                 <div
                                                     key={index}
-                                                    className={`rounded-lg overflow-hidden ${
-                                                        darkMode
+                                                    className={`rounded-lg overflow-hidden ${darkMode
                                                             ? 'bg-gray-700/50 border border-gray-600/50'
                                                             : 'bg-gray-50 border border-gray-200/50'
-                                                    }`}
+                                                        }`}
                                                 >
-                                                    <div className={`p-4 font-medium ${
-                                                        darkMode ? 'text-white' : 'text-gray-900'
-                                                    }`}>
+                                                    <div className={`p-4 font-medium ${darkMode ? 'text-white' : 'text-gray-900'
+                                                        }`}>
                                                         {faq.question}
                                                     </div>
-                                                    <div className={`p-4 border-t ${
-                                                        darkMode
+                                                    <div className={`p-4 border-t ${darkMode
                                                             ? 'border-gray-600/50 text-gray-300 bg-gray-700/30'
                                                             : 'border-gray-200/50 text-gray-600 bg-gray-50/50'
-                                                    }`}>
+                                                        }`}>
                                                         {faq.answer}
                                                     </div>
                                                 </div>
@@ -1017,11 +960,10 @@ const ContactUsComponent = () => {
                                         <div className="mt-6 text-center">
                                             <a
                                                 href="/faq"
-                                                className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium ${
-                                                    darkMode
+                                                className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium ${darkMode
                                                         ? 'bg-gray-700 text-white hover:bg-gray-600'
                                                         : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                                                }`}
+                                                    }`}
                                             >
                                                 <span>View All FAQs</span>
                                                 <FiChevronRight className="ml-1" size={16} />
@@ -1037,17 +979,15 @@ const ContactUsComponent = () => {
 
             {/* Live Chat Window */}
             {isChatOpen && (
-                <div className={`fixed bottom-6 right-6 z-50 w-80 md:w-96 rounded-xl overflow-hidden shadow-2xl ${
-                    darkMode
+                <div className={`fixed bottom-6 right-6 z-50 w-80 md:w-96 rounded-xl overflow-hidden shadow-2xl ${darkMode
                         ? 'bg-gray-800 border border-gray-700'
                         : 'bg-white border border-gray-200'
-                }`}>
+                    }`}>
                     {/* Chat Header */}
-                    <div className={`p-4 flex items-center justify-between ${
-                        darkMode
+                    <div className={`p-4 flex items-center justify-between ${darkMode
                             ? 'bg-gradient-to-r from-blue-900 to-indigo-900 text-white'
                             : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
-                    }`}>
+                        }`}>
                         <div className="flex items-center">
                             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3">
                                 <FiMessageCircle size={16} className="text-white" />
@@ -1078,38 +1018,34 @@ const ContactUsComponent = () => {
                     {/* Chat Body */}
                     {!isMinimized && (
                         <>
-                            <div className={`h-80 overflow-y-auto p-4 ${
-                                darkMode ? 'bg-gray-800' : 'bg-white'
-                            }`}>
+                            <div className={`h-80 overflow-y-auto p-4 ${darkMode ? 'bg-gray-800' : 'bg-white'
+                                }`}>
                                 {chatMessages.map((msg) => (
                                     <div
                                         key={msg.id}
                                         className={`mb-4 flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                                     >
                                         {msg.sender === 'system' && (
-                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 flex-shrink-0 ${
-                                                darkMode
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-2 flex-shrink-0 ${darkMode
                                                     ? 'bg-blue-900/30 text-blue-400'
                                                     : 'bg-blue-100 text-blue-600'
-                                            }`}>
+                                                }`}>
                                                 <FiMessageCircle size={16} />
                                             </div>
                                         )}
-                                        <div className={`max-w-[75%] rounded-lg px-4 py-2 ${
-                                            msg.sender === 'user'
+                                        <div className={`max-w-[75%] rounded-lg px-4 py-2 ${msg.sender === 'user'
                                                 ? darkMode
                                                     ? 'bg-blue-600 text-white'
                                                     : 'bg-blue-600 text-white'
                                                 : darkMode
                                                     ? 'bg-gray-700 text-gray-200'
                                                     : 'bg-gray-100 text-gray-800'
-                                        }`}>
+                                            }`}>
                                             <p className="text-sm">{msg.text}</p>
-                                            <p className={`text-xs mt-1 ${
-                                                msg.sender === 'user'
+                                            <p className={`text-xs mt-1 ${msg.sender === 'user'
                                                     ? 'text-blue-100'
                                                     : darkMode ? 'text-gray-400' : 'text-gray-500'
-                                            }`}>
+                                                }`}>
                                                 {formatChatTime(msg.timestamp)}
                                             </p>
                                         </div>
@@ -1119,30 +1055,26 @@ const ContactUsComponent = () => {
                             </div>
 
                             {/* Chat Input */}
-                            <div className={`p-3 border-t ${
-                                darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
-                            }`}>
+                            <div className={`p-3 border-t ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+                                }`}>
                                 <form onSubmit={sendChatMessage} className="flex items-center">
                                     <input
                                         type="text"
                                         value={currentMessage}
                                         onChange={handleChatInputChange}
                                         placeholder="Type your message..."
-                                        className={`flex-1 px-3 py-2 rounded-lg ${
-                                            darkMode
+                                        className={`flex-1 px-3 py-2 rounded-lg ${darkMode
                                                 ? 'bg-gray-700 border border-gray-600 text-white placeholder-gray-400'
                                                 : 'bg-gray-100 border border-gray-200 text-gray-900 placeholder-gray-500'
-                                        } focus:outline-none focus:ring-2 ${
-                                            darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
-                                        }`}
+                                            } focus:outline-none focus:ring-2 ${darkMode ? 'focus:ring-blue-500' : 'focus:ring-blue-500'
+                                            }`}
                                     />
                                     <button
                                         type="submit"
-                                        className={`ml-2 p-2 rounded-full ${
-                                            darkMode
+                                        className={`ml-2 p-2 rounded-full ${darkMode
                                                 ? 'bg-blue-600 text-white hover:bg-blue-700'
                                                 : 'bg-blue-600 text-white hover:bg-blue-700'
-                                        }`}
+                                            }`}
                                         disabled={!currentMessage.trim()}
                                         aria-label="Send message"
                                     >

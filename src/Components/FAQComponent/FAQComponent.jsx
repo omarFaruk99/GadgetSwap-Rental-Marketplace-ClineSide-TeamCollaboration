@@ -14,13 +14,15 @@ import {
     FiMenu,
     FiX
 } from 'react-icons/fi';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { useSelector } from 'react-redux';
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const FAQComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
     const [activeCategory, setActiveCategory] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
@@ -228,18 +230,16 @@ const FAQComponent = () => {
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-                        darkMode
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
                             ? 'bg-gray-800 text-blue-400 border border-gray-700'
                             : 'bg-white text-blue-600 border border-gray-200 shadow-sm'
-                    }`}>
+                        }`}>
                         <FiHelpCircle className="mr-2" />
                         <span>Support Center</span>
                     </div>
 
-                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>
                         Frequently Asked Questions
                     </h2>
                     <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -249,9 +249,8 @@ const FAQComponent = () => {
 
                 {/* Search Bar */}
                 <div className="max-w-2xl mx-auto mb-10">
-                    <div className={`relative rounded-lg overflow-hidden ${
-                        darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
-                    }`}>
+                    <div className={`relative rounded-lg overflow-hidden ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
+                        }`}>
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <FiSearch className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
                         </div>
@@ -261,11 +260,10 @@ const FAQComponent = () => {
                             placeholder="Search for questions..."
                             value={searchQuery}
                             onChange={handleSearchChange}
-                            className={`block w-full pl-10 pr-10 py-3 ${
-                                darkMode
+                            className={`block w-full pl-10 pr-10 py-3 ${darkMode
                                     ? 'bg-gray-800 text-white placeholder-gray-400 focus:ring-blue-500'
                                     : 'bg-white text-gray-900 placeholder-gray-500 focus:ring-blue-500'
-                            } focus:outline-none focus:ring-2 focus:border-transparent`}
+                                } focus:outline-none focus:ring-2 focus:border-transparent`}
                         />
                         {searchQuery && (
                             <button
@@ -282,12 +280,10 @@ const FAQComponent = () => {
                 <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
                     {/* Category Navigation - Desktop */}
                     <div className="hidden lg:block w-64 flex-shrink-0">
-                        <div className={`sticky top-24 rounded-xl overflow-hidden ${
-                            darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
-                        }`}>
-                            <div className={`py-3 px-4 font-medium ${
-                                darkMode ? 'bg-gray-700 text-white' : 'bg-gray-50 text-gray-900 border-b border-gray-200'
+                        <div className={`sticky top-24 rounded-xl overflow-hidden ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
                             }`}>
+                            <div className={`py-3 px-4 font-medium ${darkMode ? 'bg-gray-700 text-white' : 'bg-gray-50 text-gray-900 border-b border-gray-200'
+                                }`}>
                                 Categories
                             </div>
                             <nav className="p-2">
@@ -295,21 +291,19 @@ const FAQComponent = () => {
                                     <button
                                         key={category.id}
                                         onClick={() => handleCategoryChange(category.id)}
-                                        className={`flex items-center w-full px-3 py-2 rounded-lg text-left mb-1 transition-colors ${
-                                            activeCategory === category.id
+                                        className={`flex items-center w-full px-3 py-2 rounded-lg text-left mb-1 transition-colors ${activeCategory === category.id
                                                 ? darkMode
                                                     ? 'bg-gray-700 text-white'
                                                     : 'bg-blue-50 text-blue-700'
                                                 : darkMode
                                                     ? 'text-gray-300 hover:bg-gray-700'
                                                     : 'text-gray-700 hover:bg-gray-100'
-                                        }`}
+                                            }`}
                                     >
-                                        <span className={`mr-2 ${
-                                            activeCategory === category.id
+                                        <span className={`mr-2 ${activeCategory === category.id
                                                 ? darkMode ? 'text-blue-400' : 'text-blue-600'
                                                 : ''
-                                        }`}>
+                                            }`}>
                                             {category.icon}
                                         </span>
                                         <span>{category.name}</span>
@@ -326,34 +320,31 @@ const FAQComponent = () => {
                     <div className="lg:hidden mb-6">
                         <button
                             onClick={toggleMobileMenu}
-                            className={`flex items-center justify-between w-full px-4 py-3 rounded-xl ${
-                                darkMode ? 'bg-gray-800 text-white border border-gray-700' : 'bg-white text-gray-900 border border-gray-200 shadow-sm'
-                            }`}
+                            className={`flex items-center justify-between w-full px-4 py-3 rounded-xl ${darkMode ? 'bg-gray-800 text-white border border-gray-700' : 'bg-white text-gray-900 border border-gray-200 shadow-sm'
+                                }`}
                         >
                             <span className="flex items-center">
                                 {categories.find(cat => cat.id === activeCategory)?.icon}
                                 <span className="ml-2">{getCategoryName(activeCategory)}</span>
                             </span>
-                            {isMobileMenuOpen ? <FiX/> : <FiMenu/>}
+                            {isMobileMenuOpen ? <FiX /> : <FiMenu />}
                         </button>
 
                         {isMobileMenuOpen && (
-                            <div className={`mt-2 rounded-xl overflow-hidden shadow-xl ${
-                                darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-                            }`}>
+                            <div className={`mt-2 rounded-xl overflow-hidden shadow-xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+                                }`}>
                                 {categories.map(category => (
                                     <button
                                         key={category.id}
                                         onClick={() => handleCategoryChange(category.id)}
-                                        className={`flex items-center w-full px-4 py-3 text-left ${
-                                            activeCategory === category.id
+                                        className={`flex items-center w-full px-4 py-3 text-left ${activeCategory === category.id
                                                 ? darkMode
                                                     ? 'bg-gray-700 text-white'
                                                     : 'bg-blue-50 text-blue-700'
                                                 : darkMode
                                                     ? 'text-gray-300 hover:bg-gray-700'
                                                     : 'text-gray-700 hover:bg-gray-100'
-                                        } ${category.id !== categories[categories.length - 1].id ? 'border-b border-gray-700' : ''}`}
+                                            } ${category.id !== categories[categories.length - 1].id ? 'border-b border-gray-700' : ''}`}
                                     >
                                         <span className="mr-2">{category.icon}</span>
                                         <span>{category.name}</span>
@@ -369,9 +360,8 @@ const FAQComponent = () => {
                     {/* FAQ Content */}
                     <div className="flex-1">
                         {filteredFaqs.length === 0 ? (
-                            <div className={`text-center py-12 rounded-xl ${
-                                darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
-                            }`}>
+                            <div className={`text-center py-12 rounded-xl ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
+                                }`}>
                                 <FiHelpCircle className={`mx-auto mb-4 text-4xl ${darkMode ? 'text-gray-600' : 'text-gray-400'}`} />
                                 <h3 className="text-xl font-medium mb-2">No questions found</h3>
                                 <p className={darkMode ? 'text-gray-400' : 'text-gray-500'}>
@@ -382,11 +372,10 @@ const FAQComponent = () => {
                                         setSearchQuery('');
                                         setActiveCategory('all');
                                     }}
-                                    className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
-                                        darkMode
+                                    className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${darkMode
                                             ? 'bg-gray-700 text-white hover:bg-gray-600'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                                    }`}
+                                        }`}
                                 >
                                     Reset filters
                                 </button>
@@ -397,63 +386,53 @@ const FAQComponent = () => {
                                 Object.keys(groupedFaqs).map(categoryId => (
                                     <div key={categoryId} className="mb-8">
                                         <div className="flex items-center mb-4">
-                                            <span className={`mr-2 ${
-                                                darkMode ? 'text-blue-400' : 'text-blue-600'
-                                            }`}>
-                                            {categories.find(cat => cat.id === categoryId)?.icon}
+                                            <span className={`mr-2 ${darkMode ? 'text-blue-400' : 'text-blue-600'
+                                                }`}>
+                                                {categories.find(cat => cat.id === categoryId)?.icon}
                                             </span>
-                                            <h3 className={`text-xl font-semibold ${
-                                                darkMode ? 'text-white' : 'text-gray-900'
-                                            }`}>
+                                            <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'
+                                                }`}>
                                                 {getCategoryName(categoryId)}
                                             </h3>
                                         </div>
 
-                                        <div className={`rounded-xl overflow-hidden mb-6 ${
-                                            darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
-                                        }`}>
+                                        <div className={`rounded-xl overflow-hidden mb-6 ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
+                                            }`}>
                                             {groupedFaqs[categoryId].map((faq, index) => (
                                                 <div
                                                     key={faq.id}
-                                                    className={`${
-                                                        index !== 0 ? (darkMode ? 'border-t border-gray-700' : 'border-t border-gray-200') : ''
-                                                    }`}
+                                                    className={`${index !== 0 ? (darkMode ? 'border-t border-gray-700' : 'border-t border-gray-200') : ''
+                                                        }`}
                                                 >
                                                     <button
                                                         onClick={() => toggleItem(faq.id)}
-                                                        className={`flex items-center justify-between w-full text-left p-5 ${
-                                                            expandedItems[faq.id]
+                                                        className={`flex items-center justify-between w-full text-left p-5 ${expandedItems[faq.id]
                                                                 ? darkMode ? 'bg-gray-700' : 'bg-gray-50'
                                                                 : ''
-                                                        }`}
+                                                            }`}
                                                         aria-expanded={expandedItems[faq.id]}
                                                         aria-controls={`answer-${faq.id}`}
                                                     >
-                                                        <span className={`font-medium ${
-                                                            darkMode ? 'text-white' : 'text-gray-900'
-                                                        }`}>
+                                                        <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'
+                                                            }`}>
                                                             {faq.question}
                                                         </span>
-                                                        <span className={`ml-4 flex-shrink-0 ${
-                                                            expandedItems[faq.id]
+                                                        <span className={`ml-4 flex-shrink-0 ${expandedItems[faq.id]
                                                                 ? darkMode ? 'text-blue-400' : 'text-blue-600'
                                                                 : darkMode ? 'text-gray-400' : 'text-gray-500'
-                                                        }`}>
-                                                            {expandedItems[faq.id] ? <FiMinus/> : <FiPlus/>}
+                                                            }`}>
+                                                            {expandedItems[faq.id] ? <FiMinus /> : <FiPlus />}
                                                         </span>
                                                     </button>
 
                                                     <div
                                                         id={`answer-${faq.id}`}
-                                                        className={`overflow-hidden transition-all duration-300 ${
-                                                            expandedItems[faq.id] ? 'max-h-96' : 'max-h-0'
-                                                        }`}
+                                                        className={`overflow-hidden transition-all duration-300 ${expandedItems[faq.id] ? 'max-h-96' : 'max-h-0'
+                                                            }`}
                                                     >
-                                                        <div className={`p-5 ${
-                                                            darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-600'
-                                                        } border-t ${
-                                                            darkMode ? 'border-gray-600' : 'border-gray-200'
-                                                        }`}>
+                                                        <div className={`p-5 ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-600'
+                                                            } border-t ${darkMode ? 'border-gray-600' : 'border-gray-200'
+                                                            }`}>
                                                             {faq.answer}
                                                         </div>
                                                     </div>
@@ -464,51 +443,43 @@ const FAQComponent = () => {
                                 ))
                             ) : (
                                 // Display flat list when specific category is selected
-                                <div className={`rounded-xl overflow-hidden ${
-                                    darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
-                                }`}>
+                                <div className={`rounded-xl overflow-hidden ${darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200 shadow-sm'
+                                    }`}>
                                     {filteredFaqs.map((faq, index) => (
                                         <div
                                             key={faq.id}
-                                            className={`${
-                                                index !== 0 ? (darkMode ? 'border-t border-gray-700' : 'border-t border-gray-200') : ''
-                                            }`}
+                                            className={`${index !== 0 ? (darkMode ? 'border-t border-gray-700' : 'border-t border-gray-200') : ''
+                                                }`}
                                         >
                                             <button
                                                 onClick={() => toggleItem(faq.id)}
-                                                className={`flex items-center justify-between w-full text-left p-5 ${
-                                                    expandedItems[faq.id]
+                                                className={`flex items-center justify-between w-full text-left p-5 ${expandedItems[faq.id]
                                                         ? darkMode ? 'bg-gray-700' : 'bg-gray-50'
                                                         : ''
-                                                }`}
+                                                    }`}
                                                 aria-expanded={expandedItems[faq.id]}
                                                 aria-controls={`answer-${faq.id}`}
                                             >
-                                                <span className={`font-medium ${
-                                                    darkMode ? 'text-white' : 'text-gray-900'
-                                                }`}>
+                                                <span className={`font-medium ${darkMode ? 'text-white' : 'text-gray-900'
+                                                    }`}>
                                                     {faq.question}
                                                 </span>
-                                                <span className={`ml-4 flex-shrink-0 ${
-                                                    expandedItems[faq.id]
+                                                <span className={`ml-4 flex-shrink-0 ${expandedItems[faq.id]
                                                         ? darkMode ? 'text-blue-400' : 'text-blue-600'
                                                         : darkMode ? 'text-gray-400' : 'text-gray-500'
-                                                }`}>
-                                                    {expandedItems[faq.id] ? <FiMinus/> : <FiPlus/>}
+                                                    }`}>
+                                                    {expandedItems[faq.id] ? <FiMinus /> : <FiPlus />}
                                                 </span>
                                             </button>
 
                                             <div
                                                 id={`answer-${faq.id}`}
-                                                className={`overflow-hidden transition-all duration-300 ${
-                                                    expandedItems[faq.id] ? 'max-h-96' : 'max-h-0'
-                                                }`}
+                                                className={`overflow-hidden transition-all duration-300 ${expandedItems[faq.id] ? 'max-h-96' : 'max-h-0'
+                                                    }`}
                                             >
-                                                <div className={`p-5 ${
-                                                    darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-600'
-                                                } border-t ${
-                                                    darkMode ? 'border-gray-600' : 'border-gray-200'
-                                                }`}>
+                                                <div className={`p-5 ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-50 text-gray-600'
+                                                    } border-t ${darkMode ? 'border-gray-600' : 'border-gray-200'
+                                                    }`}>
                                                     {faq.answer}
                                                 </div>
                                             </div>
@@ -519,14 +490,12 @@ const FAQComponent = () => {
                         )}
 
                         {/* Still Have Questions Section */}
-                        <div className={`mt-10 p-6 rounded-xl text-center ${
-                            darkMode
+                        <div className={`mt-10 p-6 rounded-xl text-center ${darkMode
                                 ? 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700'
                                 : 'bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100'
-                        }`}>
-                            <h3 className={`text-xl font-semibold mb-2 ${
-                                darkMode ? 'text-white' : 'text-gray-900'
                             }`}>
+                            <h3 className={`text-xl font-semibold mb-2 ${darkMode ? 'text-white' : 'text-gray-900'
+                                }`}>
                                 Still have questions?
                             </h3>
                             <p className={`mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -535,29 +504,27 @@ const FAQComponent = () => {
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
                                 <a
                                     href="/contact"
-                                    className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                                        darkMode
+                                    className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${darkMode
                                             ? 'bg-gray-700 text-white hover:bg-gray-600'
                                             : 'bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
-                                    }`}
+                                        }`}
                                 >
-                                <span className="flex items-center justify-center">
-                                    <FiHelpCircle className="mr-2"/>
-                                    Contact Support
-                                </span>
+                                    <span className="flex items-center justify-center">
+                                        <FiHelpCircle className="mr-2" />
+                                        Contact Support
+                                    </span>
                                 </a>
                                 <a
                                     href="/live-chat"
-                                    className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                                        darkMode
+                                    className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${darkMode
                                             ? 'bg-blue-600 text-white hover:bg-blue-700'
                                             : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
-                                    }`}
+                                        }`}
                                 >
-                                <span className="flex items-center justify-center">
-                                    <FiShield className="mr-2"/>
-                                    Live Chat
-                                </span>
+                                    <span className="flex items-center justify-center">
+                                        <FiShield className="mr-2" />
+                                        Live Chat
+                                    </span>
                                 </a>
                             </div>
                         </div>

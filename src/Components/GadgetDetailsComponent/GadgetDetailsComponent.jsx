@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react"
-import {useParams} from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import {
     FiArrowLeft,
     FiStar,
@@ -37,16 +37,18 @@ import {
     FaWifi,
     FaSpeakerDeck,
 } from "react-icons/fa"
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { useSelector } from "react-redux";
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const GadgetDetailsComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
-    const {id} = useParams()
+    const { id } = useParams()
     const [gadget, setGadget] = useState(null)
     const [loading, setLoading] = useState(true)
     const [selectedImage, setSelectedImage] = useState(0)
@@ -63,19 +65,19 @@ const GadgetDetailsComponent = () => {
 
     // Category icons mapping
     const categoryIcons = {
-        Smartphones: <FaMobileAlt className="text-blue-500"/>,
-        Laptops: <FaLaptop className="text-purple-500"/>,
-        Tablets: <FaTabletAlt className="text-green-500"/>,
-        Smartwatches: <FaClock className="text-pink-500"/>,
-        Cameras: <FaCamera className="text-red-500"/>,
-        Gaming: <FaGamepad className="text-indigo-500"/>,
-        Audio: <FaVolumeUp className="text-yellow-500"/>,
-        Headphones: <FaHeadphones className="text-cyan-500"/>,
-        Speakers: <FaSpeakerDeck className="text-orange-500"/>,
-        VR: <FaVrCardboard className="text-orange-500"/>,
-        Drones: <FaPlane className="text-teal-500"/>,
-        Projectors: <FaProjectDiagram className="text-amber-500"/>,
-        Wearables: <FaWifi className="text-lime-500"/>,
+        Smartphones: <FaMobileAlt className="text-blue-500" />,
+        Laptops: <FaLaptop className="text-purple-500" />,
+        Tablets: <FaTabletAlt className="text-green-500" />,
+        Smartwatches: <FaClock className="text-pink-500" />,
+        Cameras: <FaCamera className="text-red-500" />,
+        Gaming: <FaGamepad className="text-indigo-500" />,
+        Audio: <FaVolumeUp className="text-yellow-500" />,
+        Headphones: <FaHeadphones className="text-cyan-500" />,
+        Speakers: <FaSpeakerDeck className="text-orange-500" />,
+        VR: <FaVrCardboard className="text-orange-500" />,
+        Drones: <FaPlane className="text-teal-500" />,
+        Projectors: <FaProjectDiagram className="text-amber-500" />,
+        Wearables: <FaWifi className="text-lime-500" />,
     }
 
 
@@ -188,7 +190,7 @@ const GadgetDetailsComponent = () => {
 
     // Calculate total price
     const calculateTotalPrice = () => {
-        if (!gadget) return {basePrice: 0, insuranceFee: 0, total: 0}
+        if (!gadget) return { basePrice: 0, insuranceFee: 0, total: 0 }
 
         const basePrice = gadget.pricing.perDay * rentalDuration
         const insuranceFee =
@@ -208,7 +210,7 @@ const GadgetDetailsComponent = () => {
     const formatDate = (dateString) => {
         if (!dateString) return ""
         const date = new Date(dateString)
-        return date.toLocaleDateString("en-US", {weekday: "short", month: "short", day: "numeric"})
+        return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })
     }
 
 
@@ -267,16 +269,15 @@ const GadgetDetailsComponent = () => {
             <div
                 className={`container mx-auto px-4 py-16 text-center ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}
             >
-                <FiAlertCircle className="mx-auto mb-4" size={48}/>
+                <FiAlertCircle className="mx-auto mb-4" size={48} />
                 <h2 className="text-2xl font-bold mb-2">Gadget Not Found</h2>
                 <p className="mb-6">The gadget you're looking for doesn't exist or has been removed.</p>
                 <button
                     onClick={handleBack}
-                    className={`px-6 py-2 rounded-lg flex items-center mx-auto ${
-                        darkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                    }`}
+                    className={`px-6 py-2 rounded-lg flex items-center mx-auto ${darkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                        }`}
                 >
-                    <FiArrowLeft className="mr-2"/>
+                    <FiArrowLeft className="mr-2" />
                     Back to All Gadgets
                 </button>
             </div>
@@ -307,7 +308,7 @@ const GadgetDetailsComponent = () => {
                             className={`p-2 rounded-full ${darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"}`}
                             aria-label="Close menu"
                         >
-                            <FiX size={24}/>
+                            <FiX size={24} />
                         </button>
                     </div>
                     <nav className="p-4">
@@ -318,13 +319,12 @@ const GadgetDetailsComponent = () => {
                                         handleTabChange("details")
                                         toggleMobileMenu()
                                     }}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeTab === "details"
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeTab === "details"
                                             ? "bg-blue-600 text-white"
                                             : darkMode
                                                 ? "hover:bg-gray-800"
                                                 : "hover:bg-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     Details
                                 </button>
@@ -335,13 +335,12 @@ const GadgetDetailsComponent = () => {
                                         handleTabChange("specs")
                                         toggleMobileMenu()
                                     }}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeTab === "specs"
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeTab === "specs"
                                             ? "bg-blue-600 text-white"
                                             : darkMode
                                                 ? "hover:bg-gray-800"
                                                 : "hover:bg-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     Specifications
                                 </button>
@@ -352,13 +351,12 @@ const GadgetDetailsComponent = () => {
                                         handleTabChange("reviews")
                                         toggleMobileMenu()
                                     }}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeTab === "reviews"
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeTab === "reviews"
                                             ? "bg-blue-600 text-white"
                                             : darkMode
                                                 ? "hover:bg-gray-800"
                                                 : "hover:bg-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     Reviews
                                 </button>
@@ -369,13 +367,12 @@ const GadgetDetailsComponent = () => {
                                         handleTabChange("rental")
                                         toggleMobileMenu()
                                     }}
-                                    className={`w-full text-left px-4 py-2 rounded-lg ${
-                                        activeTab === "rental"
+                                    className={`w-full text-left px-4 py-2 rounded-lg ${activeTab === "rental"
                                             ? "bg-blue-600 text-white"
                                             : darkMode
                                                 ? "hover:bg-gray-800"
                                                 : "hover:bg-gray-100"
-                                    }`}
+                                        }`}
                                 >
                                     Rental Options
                                 </button>
@@ -391,44 +388,40 @@ const GadgetDetailsComponent = () => {
                 <div className="flex justify-between items-center mb-6">
                     <button
                         onClick={handleBack}
-                        className={`flex items-center px-3 py-2 rounded-lg ${
-                            darkMode
+                        className={`flex items-center px-3 py-2 rounded-lg ${darkMode
                                 ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                                 : "bg-white text-gray-700 hover:bg-gray-100 shadow-sm"
-                        }`}
+                            }`}
                         aria-label="Go back"
                     >
-                        <FiArrowLeft className="mr-2"/>
+                        <FiArrowLeft className="mr-2" />
                         <span className="hidden sm:inline">Back</span>
                     </button>
 
                     <div className="flex items-center space-x-2">
                         <button
                             onClick={toggleWishlist}
-                            className={`p-2 rounded-full ${
-                                darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
-                            }`}
+                            className={`p-2 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
+                                }`}
                             aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                         >
-                            <FiHeart size={20} className={isWishlisted ? "text-red-500 fill-current" : ""}/>
+                            <FiHeart size={20} className={isWishlisted ? "text-red-500 fill-current" : ""} />
                         </button>
 
                         <button
-                            className={`p-2 rounded-full ${
-                                darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
-                            }`}
+                            className={`p-2 rounded-full ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
+                                }`}
                             aria-label="Share"
                         >
-                            <FiShare2 size={20}/>
+                            <FiShare2 size={20} />
                         </button>
                         <button
                             onClick={toggleMobileMenu}
-                            className={`p-2 rounded-full lg:hidden ${
-                                darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
-                            }`}
+                            className={`p-2 rounded-full lg:hidden ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-white hover:bg-gray-100 shadow-sm"
+                                }`}
                             aria-label="Open menu"
                         >
-                            <FiMenu size={20}/>
+                            <FiMenu size={20} />
                         </button>
                     </div>
                 </div>
@@ -452,7 +445,7 @@ const GadgetDetailsComponent = () => {
                                 className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"
                                 aria-label="Previous image"
                             >
-                                <FiChevronLeft size={24}/>
+                                <FiChevronLeft size={24} />
                             </button>
 
                             <button
@@ -460,7 +453,7 @@ const GadgetDetailsComponent = () => {
                                 className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"
                                 aria-label="Next image"
                             >
-                                <FiChevronRight size={24}/>
+                                <FiChevronRight size={24} />
                             </button>
 
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -480,9 +473,8 @@ const GadgetDetailsComponent = () => {
                                 <button
                                     key={index}
                                     onClick={() => setSelectedImage(index)}
-                                    className={`rounded-lg overflow-hidden aspect-square ${
-                                        selectedImage === index ? "ring-2 ring-blue-500" : darkMode ? "bg-gray-800" : "bg-gray-100"
-                                    }`}
+                                    className={`rounded-lg overflow-hidden aspect-square ${selectedImage === index ? "ring-2 ring-blue-500" : darkMode ? "bg-gray-800" : "bg-gray-100"
+                                        }`}
                                 >
                                     <img
                                         src={image || "/placeholder.svg"}
@@ -499,16 +491,15 @@ const GadgetDetailsComponent = () => {
                         <div>
                             <div className="flex items-center mb-2">
                                 <span
-                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                        darkMode ? "bg-blue-900 text-blue-200" : "bg-blue-100 text-blue-800"
-                                    }`}
+                                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${darkMode ? "bg-blue-900 text-blue-200" : "bg-blue-100 text-blue-800"
+                                        }`}
                                 >
                                     {categoryIcons[gadget.category]}
                                     <span className="ml-1">{gadget.category}</span>
                                 </span>
 
                                 <div className="flex items-center ml-4">
-                                    <FiStar className="text-yellow-500"/>
+                                    <FiStar className="text-yellow-500" />
                                     <span className="ml-1 text-sm font-medium">{averageRating}</span>
                                     <span className={`ml-1 text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
                                         ({gadget.ratings.length} reviews)
@@ -539,41 +530,37 @@ const GadgetDetailsComponent = () => {
                                 <nav className="flex space-x-8">
                                     <button
                                         onClick={() => handleTabChange("details")}
-                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                                            activeTab === "details"
+                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === "details"
                                                 ? "border-blue-500 text-blue-600 dark:text-blue-400"
                                                 : "border-transparent hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300"
-                                        }`}
+                                            }`}
                                     >
                                         Details
                                     </button>
                                     <button
                                         onClick={() => handleTabChange("specs")}
-                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                                            activeTab === "specs"
+                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === "specs"
                                                 ? "border-blue-500 text-blue-600 dark:text-blue-400"
                                                 : "border-transparent hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300"
-                                        }`}
+                                            }`}
                                     >
                                         Specifications
                                     </button>
                                     <button
                                         onClick={() => handleTabChange("reviews")}
-                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                                            activeTab === "reviews"
+                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === "reviews"
                                                 ? "border-blue-500 text-blue-600 dark:text-blue-400"
                                                 : "border-transparent hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300"
-                                        }`}
+                                            }`}
                                     >
                                         Reviews
                                     </button>
                                     <button
                                         onClick={() => handleTabChange("rental")}
-                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                                            activeTab === "rental"
+                                        className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === "rental"
                                                 ? "border-blue-500 text-blue-600 dark:text-blue-400"
                                                 : "border-transparent hover:text-gray-700 hover:border-gray-300 dark:hover:text-gray-300"
-                                        }`}
+                                            }`}
                                     >
                                         Rental Options
                                     </button>
@@ -590,7 +577,7 @@ const GadgetDetailsComponent = () => {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                                         <div className={`p-4 rounded-lg ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}>
                                             <div className="flex items-center mb-2">
-                                                <FiShield className="text-green-500 mr-2"/>
+                                                <FiShield className="text-green-500 mr-2" />
                                                 <h3 className="font-medium">Damage Protection</h3>
                                             </div>
                                             <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
@@ -601,14 +588,14 @@ const GadgetDetailsComponent = () => {
 
                                         <div className={`p-4 rounded-lg ${darkMode ? "bg-gray-800" : "bg-gray-100"}`}>
                                             <div className="flex items-center mb-2">
-                                                <FiPackage className="text-blue-500 mr-2"/>
+                                                <FiPackage className="text-blue-500 mr-2" />
                                                 <h3 className="font-medium">What's Included</h3>
                                             </div>
                                             <ul className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                                                 {gadget.included.slice(0, 2).map((item, index) => (
                                                     <li key={index} className="flex items-center">
                                                         <FiCheckCircle className="text-green-500 mr-1 flex-shrink-0"
-                                                                       size={14}/>
+                                                            size={14} />
                                                         <span>{item}</span>
                                                     </li>
                                                 ))}
@@ -627,7 +614,7 @@ const GadgetDetailsComponent = () => {
                                         <h3 className="font-medium mb-2">Rental Stats</h3>
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center">
-                                                <FiBarChart2 className="text-purple-500 mr-2"/>
+                                                <FiBarChart2 className="text-purple-500 mr-2" />
                                                 <div>
                                                     <p className="font-medium">Total Rentals</p>
                                                     <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
@@ -636,7 +623,7 @@ const GadgetDetailsComponent = () => {
                                                 </div>
                                             </div>
                                             <div className="flex items-center">
-                                                <FiLayers className="text-teal-500 mr-2"/>
+                                                <FiLayers className="text-teal-500 mr-2" />
                                                 <div>
                                                     <p className="font-medium">Availability</p>
                                                     <p className={`text-sm ${gadget.availability.status ? "text-green-500" : "text-red-500"}`}>
@@ -658,14 +645,13 @@ const GadgetDetailsComponent = () => {
                                             {Object.entries(gadget.specifications).map(([key, value], index, arr) => (
                                                 <div
                                                     key={key}
-                                                    className={`flex py-3 px-4 ${
-                                                        index !== arr.length - 1 ? "border-b border-gray-200 dark:border-gray-700" : ""
-                                                    }`}
+                                                    className={`flex py-3 px-4 ${index !== arr.length - 1 ? "border-b border-gray-200 dark:border-gray-700" : ""
+                                                        }`}
                                                 >
                                                     <span
                                                         className={`w-1/3 font-medium capitalize ${darkMode ? "text-gray-300" : "text-gray-700"}`}
                                                     >
-                                                    {key}
+                                                        {key}
                                                     </span>
                                                     <span
                                                         className={`w-2/3 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>{value}</span>
@@ -679,7 +665,7 @@ const GadgetDetailsComponent = () => {
                                         <ul className="space-y-2">
                                             {gadget.included.map((item, index) => (
                                                 <li key={index} className="flex items-start">
-                                                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0"/>
+                                                    <FiCheckCircle className="text-green-500 mt-1 mr-2 flex-shrink-0" />
                                                     <span>{item}</span>
                                                 </li>
                                             ))}
@@ -688,7 +674,7 @@ const GadgetDetailsComponent = () => {
 
                                     <div className={`p-4 rounded-lg ${darkMode ? "bg-blue-900/20" : "bg-blue-50"}`}>
                                         <div className="flex items-start">
-                                            <FiInfo className="text-blue-500 mt-1 mr-2 flex-shrink-0"/>
+                                            <FiInfo className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
                                             <div>
                                                 <h4 className={`font-medium ${darkMode ? "text-blue-400" : "text-blue-800"}`}>
                                                     Care Instructions
@@ -708,7 +694,7 @@ const GadgetDetailsComponent = () => {
                                 <div className="space-y-6">
                                     <div className="flex items-center">
                                         <div className="flex items-center">
-                                            <FiStar className="text-yellow-500" size={24}/>
+                                            <FiStar className="text-yellow-500" size={24} />
                                             <span className="ml-2 text-2xl font-bold">{averageRating}</span>
                                         </div>
                                         <div className="ml-4">
@@ -719,7 +705,7 @@ const GadgetDetailsComponent = () => {
                                     <div className="space-y-4">
                                         {gadget.reviews.map((review, index) => (
                                             <div key={index}
-                                                 className={`p-4 rounded-lg ${darkMode ? "bg-gray-800" : "bg-white"}`}>
+                                                className={`p-4 rounded-lg ${darkMode ? "bg-gray-800" : "bg-white"}`}>
                                                 <div className="flex justify-between items-start">
                                                     <div className="flex items-center">
                                                         <div
@@ -762,9 +748,8 @@ const GadgetDetailsComponent = () => {
 
                                     {gadget.reviews.length > 2 && (
                                         <button
-                                            className={`w-full py-2 rounded-lg text-center text-sm ${
-                                                darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
-                                            }`}
+                                            className={`w-full py-2 rounded-lg text-center text-sm ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
+                                                }`}
                                         >
                                             View All Reviews
                                         </button>
@@ -790,14 +775,13 @@ const GadgetDetailsComponent = () => {
                                                         value={startDate}
                                                         onChange={handleStartDateChange}
                                                         min={new Date().toISOString().split("T")[0]}
-                                                        className={`w-full p-2 pr-10 rounded-lg border ${
-                                                            darkMode
+                                                        className={`w-full p-2 pr-10 rounded-lg border ${darkMode
                                                                 ? "bg-gray-700 border-gray-600 text-white"
                                                                 : "bg-white border-gray-300 text-gray-900"
-                                                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                     />
                                                     <FiCalendar
-                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>
+                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                                 </div>
                                             </div>
 
@@ -811,11 +795,10 @@ const GadgetDetailsComponent = () => {
                                                     <select
                                                         value={rentalDuration}
                                                         onChange={handleDurationChange}
-                                                        className={`w-full p-2 pr-10 rounded-lg border appearance-none ${
-                                                            darkMode
+                                                        className={`w-full p-2 pr-10 rounded-lg border appearance-none ${darkMode
                                                                 ? "bg-gray-700 border-gray-600 text-white"
                                                                 : "bg-white border-gray-300 text-gray-900"
-                                                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                                            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
                                                     >
                                                         {[1, 2, 3, 5, 7, 14, 30].map((days) => (
                                                             <option key={days} value={days}>
@@ -824,7 +807,7 @@ const GadgetDetailsComponent = () => {
                                                         ))}
                                                     </select>
                                                     <FiClock
-                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>
+                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                                 </div>
                                             </div>
 
@@ -839,14 +822,13 @@ const GadgetDetailsComponent = () => {
                                                         type="date"
                                                         value={endDate}
                                                         disabled
-                                                        className={`w-full p-2 pr-10 rounded-lg border ${
-                                                            darkMode
+                                                        className={`w-full p-2 pr-10 rounded-lg border ${darkMode
                                                                 ? "bg-gray-700 border-gray-600 text-white"
                                                                 : "bg-white border-gray-300 text-gray-900"
-                                                        } focus:outline-none focus:ring-2 focus:ring-blue-500 opacity-70`}
+                                                            } focus:outline-none focus:ring-2 focus:ring-blue-500 opacity-70`}
                                                     />
                                                     <FiCalendar
-                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"/>
+                                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                                 </div>
                                             </div>
 
@@ -859,15 +841,14 @@ const GadgetDetailsComponent = () => {
                                                 <div className="grid grid-cols-2 gap-3">
                                                     <button
                                                         onClick={() => handleInsuranceChange("basic")}
-                                                        className={`p-3 rounded-lg border text-left ${
-                                                            insuranceOption === "basic"
+                                                        className={`p-3 rounded-lg border text-left ${insuranceOption === "basic"
                                                                 ? darkMode
                                                                     ? "bg-blue-900/30 border-blue-500"
                                                                     : "bg-blue-50 border-blue-500"
                                                                 : darkMode
                                                                     ? "bg-gray-700 border-gray-600"
                                                                     : "bg-white border-gray-300"
-                                                        }`}
+                                                            }`}
                                                     >
                                                         <div className="flex justify-between items-center mb-1">
                                                             <span className="font-medium">Basic</span>
@@ -882,15 +863,14 @@ const GadgetDetailsComponent = () => {
 
                                                     <button
                                                         onClick={() => handleInsuranceChange("premium")}
-                                                        className={`p-3 rounded-lg border text-left ${
-                                                            insuranceOption === "premium"
+                                                        className={`p-3 rounded-lg border text-left ${insuranceOption === "premium"
                                                                 ? darkMode
                                                                     ? "bg-blue-900/30 border-blue-500"
                                                                     : "bg-blue-50 border-blue-500"
                                                                 : darkMode
                                                                     ? "bg-gray-700 border-gray-600"
                                                                     : "bg-white border-gray-300"
-                                                        }`}
+                                                            }`}
                                                     >
                                                         <div className="flex justify-between items-center mb-1">
                                                             <span className="font-medium">Premium</span>
@@ -947,9 +927,8 @@ const GadgetDetailsComponent = () => {
                                                 {gadget.availability.blockedDates.map((date, index) => (
                                                     <span
                                                         key={index}
-                                                        className={`px-3 py-1 rounded-md text-sm ${
-                                                            darkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-700"
-                                                        }`}
+                                                        className={`px-3 py-1 rounded-md text-sm ${darkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-700"
+                                                            }`}
                                                     >
                                                         {formatDate(date)}
                                                     </span>
@@ -967,11 +946,10 @@ const GadgetDetailsComponent = () => {
 
                         {/* Rent Now Button */}
                         <button
-                            className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-                                startDate
+                            className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${startDate
                                     ? "bg-blue-600 hover:bg-blue-700 text-white"
                                     : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
-                            }`}
+                                }`}
                             disabled={!startDate}
                         >
                             {startDate ? "Rent Now" : "Select a start date"}
@@ -981,30 +959,27 @@ const GadgetDetailsComponent = () => {
                         <div className="flex gap-3 mt-4">
                             <button
                                 onClick={toggleWishlist}
-                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${
-                                    darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
-                                }`}
+                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
                             >
                                 <FiHeart className={`mr-2 ${isWishlisted ? "text-red-500 fill-current" : ""}`}
-                                         size={16}/>
+                                    size={16} />
                                 {isWishlisted ? "Saved" : "Save"}
                             </button>
 
                             <button
-                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${
-                                    darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
-                                }`}
+                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
                             >
-                                <FiMessageSquare className="mr-2" size={16}/>
+                                <FiMessageSquare className="mr-2" size={16} />
                                 Contact Owner
                             </button>
 
                             <button
-                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${
-                                    darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
-                                }`}
+                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium flex items-center justify-center ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-gray-100 hover:bg-gray-200"
+                                    }`}
                             >
-                                <FiShare2 className="mr-2" size={16}/>
+                                <FiShare2 className="mr-2" size={16} />
                                 Share
                             </button>
                         </div>
@@ -1018,9 +993,8 @@ const GadgetDetailsComponent = () => {
                         {relatedGadgets.map((relatedGadget) => (
                             <div
                                 key={relatedGadget.id}
-                                className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer ${
-                                    darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
-                                }`}
+                                className={`rounded-xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl cursor-pointer ${darkMode ? "bg-gray-800 hover:bg-gray-750 shadow-lg" : "bg-white hover:bg-gray-50 shadow-md"
+                                    }`}
                             >
                                 <div className="relative h-48 overflow-hidden">
                                     <img
@@ -1029,9 +1003,8 @@ const GadgetDetailsComponent = () => {
                                         className="w-full h-full object-cover"
                                     />
                                     <div
-                                        className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${
-                                            darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
-                                        }`}
+                                        className={`absolute top-3 right-3 px-2 py-1 rounded-md text-xs font-medium transition-colors ${darkMode ? "bg-gray-900/80 text-white" : "bg-white/80 text-gray-900"
+                                            }`}
                                     >
                                         {relatedGadget.category}
                                     </div>
@@ -1044,7 +1017,7 @@ const GadgetDetailsComponent = () => {
                                     </h3>
                                     <div className="flex justify-between items-center">
                                         <div className="flex items-center">
-                                            <FiStar className="text-yellow-500 mr-1" size={16}/>
+                                            <FiStar className="text-yellow-500 mr-1" size={16} />
                                             <span
                                                 className={`text-sm font-medium transition-colors ${darkMode ? "text-gray-200" : "text-gray-700"}`}
                                             >

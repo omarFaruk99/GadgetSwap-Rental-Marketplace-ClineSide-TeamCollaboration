@@ -12,14 +12,15 @@ import {
     IoTimeOutline,
     IoThumbsUpOutline
 } from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import { useSelector } from 'react-redux';
+// import useTheme from "../../CustomHooks/useTheme.jsx";
 
 
 const WhatOurCustomersSayComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode} = useTheme();
-
+    // const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -152,7 +153,7 @@ const WhatOurCustomersSayComponent = () => {
                 className={`${index < rating
                     ? darkMode ? 'text-amber-400' : 'text-amber-500'
                     : darkMode ? 'text-gray-600' : 'text-gray-300'
-                }`}
+                    }`}
                 size={16}
                 fill={index < rating ? 'currentColor' : 'none'}
             />
@@ -161,9 +162,8 @@ const WhatOurCustomersSayComponent = () => {
 
 
     return (
-        <div className={`w-full py-16 transition-colors duration-300 ${
-            darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
-        }`}>
+        <div className={`w-full py-16 transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+            }`}>
 
             {/* Background Elements */}
             <div className="absolute inset-0 overflow-hidden -z-10">
@@ -175,20 +175,18 @@ const WhatOurCustomersSayComponent = () => {
 
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-                        darkMode
+                    <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
                             ? 'bg-gray-800/70 text-cyan-300 border border-cyan-800/50'
                             : 'bg-white/80 text-indigo-700 border border-indigo-200/50'
-                    } backdrop-blur-md`}>
+                        } backdrop-blur-md`}>
                         <FiMessageSquare className="mr-2" />
                         <span>Customer Testimonials</span>
                     </div>
 
-                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-                        darkMode
+                    <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode
                             ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400'
                             : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600'
-                    }`}>
+                        }`}>
                         What Our Customers Say
                     </h2>
                     <p className={`text-lg max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -203,11 +201,10 @@ const WhatOurCustomersSayComponent = () => {
                     onMouseLeave={handleMouseLeave}
                 >
                     {/* Main Testimonial Card */}
-                    <div className={`px-5 relative rounded-2xl overflow-hidden transition-all duration-500 ${
-                        darkMode
+                    <div className={`px-5 relative rounded-2xl overflow-hidden transition-all duration-500 ${darkMode
                             ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                             : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl'
-                    }`}>
+                        }`}>
 
                         {/* Decorative Elements */}
                         <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-full blur-3xl -z-10"></div>
@@ -225,20 +222,18 @@ const WhatOurCustomersSayComponent = () => {
                             {/* Customer Avatar - Mobile View Top, Desktop View Left */}
                             <div className="flex flex-col items-center md:items-start">
                                 <div className="relative mb-4">
-                                    <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 ${
-                                        darkMode ? 'border-gray-700' : 'border-white'
-                                    } shadow-lg`}>
+                                    <div className={`w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 ${darkMode ? 'border-gray-700' : 'border-white'
+                                        } shadow-lg`}>
                                         <img
                                             src={testimonials[activeIndex].avatar || "/placeholder.svg"}
                                             alt={testimonials[activeIndex].name}
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
-                                    <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center ${
-                                        darkMode
+                                    <div className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center ${darkMode
                                             ? 'bg-gray-800 border border-gray-700'
                                             : 'bg-white border border-gray-200'
-                                    }`}>
+                                        }`}>
                                         <IoThumbsUpOutline className={darkMode ? 'text-cyan-400' : 'text-indigo-600'} size={16} />
                                     </div>
                                 </div>
@@ -255,26 +250,25 @@ const WhatOurCustomersSayComponent = () => {
                                 </div>
 
                                 {/* Rental Details */}
-                                <div className={`w-full rounded-xl p-4 mt-2 ${
-                                    darkMode
+                                <div className={`w-full rounded-xl p-4 mt-2 ${darkMode
                                         ? 'bg-gray-800/80 border border-gray-700/50'
                                         : 'bg-gray-50/80 border border-gray-200/50'
-                                }`}>
+                                    }`}>
                                     <div className="flex items-center mb-2">
-                                        <FiUser className={darkMode ? 'text-purple-400' : 'text-indigo-600'} size={16}/>
+                                        <FiUser className={darkMode ? 'text-purple-400' : 'text-indigo-600'} size={16} />
                                         <span className="ml-2 text-sm font-medium">Rented:</span>
                                         <span
                                             className={`ml-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                          {testimonials[activeIndex].gadgetRented}
+                                            {testimonials[activeIndex].gadgetRented}
                                         </span>
                                     </div>
                                     <div className="flex items-center">
                                         <IoTimeOutline className={darkMode ? 'text-cyan-400' : 'text-indigo-600'}
-                                                       size={16}/>
+                                            size={16} />
                                         <span className="ml-2 text-sm font-medium">Duration:</span>
                                         <span
                                             className={`ml-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                          {testimonials[activeIndex].rentalDuration}
+                                            {testimonials[activeIndex].rentalDuration}
                                         </span>
                                     </div>
                                 </div>
@@ -283,39 +277,35 @@ const WhatOurCustomersSayComponent = () => {
                             {/* Testimonial Content */}
                             <div className="md:col-span-2 flex flex-col justify-between">
                                 <div>
-                                    <div className={`text-sm md:text-base leading-relaxed mt-20 mb-8 text-justify ${
-                                        darkMode ? 'text-gray-300' : 'text-gray-700'
-                                    }`}>
+                                    <div className={`text-sm md:text-base leading-relaxed mt-20 mb-8 text-justify ${darkMode ? 'text-gray-300' : 'text-gray-700'
+                                        }`}>
                                         "{testimonials[activeIndex].review}"
                                     </div>
 
                                     {/* Key Benefits */}
                                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                                        <div className={`p-3 rounded-xl ${
-                                            darkMode
+                                        <div className={`p-3 rounded-xl ${darkMode
                                                 ? 'bg-gray-800/80 border border-gray-700/50'
                                                 : 'bg-gray-50/80 border border-gray-200/50'
-                                        }`}>
+                                            }`}>
                                             <div className="flex items-center">
                                                 <IoSparklesOutline className={darkMode ? 'text-purple-400' : 'text-indigo-600'} size={18} />
                                                 <span className="ml-2 text-sm font-medium">Premium Quality</span>
                                             </div>
                                         </div>
-                                        <div className={`p-3 rounded-xl ${
-                                            darkMode
+                                        <div className={`p-3 rounded-xl ${darkMode
                                                 ? 'bg-gray-800/80 border border-gray-700/50'
                                                 : 'bg-gray-50/80 border border-gray-200/50'
-                                        }`}>
+                                            }`}>
                                             <div className="flex items-center">
                                                 <IoTimeOutline className={darkMode ? 'text-cyan-400' : 'text-indigo-600'} size={18} />
                                                 <span className="ml-2 text-sm font-medium">On-time Delivery</span>
                                             </div>
                                         </div>
-                                        <div className={`p-3 rounded-xl ${
-                                            darkMode
+                                        <div className={`p-3 rounded-xl ${darkMode
                                                 ? 'bg-gray-800/80 border border-gray-700/50'
                                                 : 'bg-gray-50/80 border border-gray-200/50'
-                                        }`}>
+                                            }`}>
                                             <div className="flex items-center">
                                                 <IoThumbsUpOutline className={darkMode ? 'text-pink-400' : 'text-pink-600'} size={18} />
                                                 <span className="ml-2 text-sm font-medium">Easy Returns</span>
@@ -333,15 +323,14 @@ const WhatOurCustomersSayComponent = () => {
                                             <button
                                                 key={`indicator-${index}`}
                                                 onClick={() => goToIndex(index)}
-                                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                                    activeIndex === index
+                                                className={`w-2 h-2 rounded-full transition-all duration-300 ${activeIndex === index
                                                         ? darkMode
                                                             ? 'bg-cyan-500 scale-125'
                                                             : 'bg-indigo-600 scale-125'
                                                         : darkMode
                                                             ? 'bg-gray-700 hover:bg-gray-600'
                                                             : 'bg-gray-300 hover:bg-gray-400'
-                                                }`}
+                                                    }`}
                                                 aria-label={`Go to testimonial ${index + 1}`}
                                             />
                                         ))}
@@ -351,22 +340,20 @@ const WhatOurCustomersSayComponent = () => {
                                     <div className="flex space-x-2">
                                         <button
                                             onClick={goToPrev}
-                                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                                                darkMode
+                                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${darkMode
                                                     ? 'bg-gray-800/70 text-white border border-gray-700/50 hover:bg-gray-700/70'
                                                     : 'bg-white/70 text-gray-700 border border-gray-200/50 hover:bg-gray-100/70'
-                                            }`}
+                                                }`}
                                             aria-label="Previous testimonial"
                                         >
                                             <FiChevronLeft size={20} />
                                         </button>
                                         <button
                                             onClick={goToNext}
-                                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                                                darkMode
+                                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${darkMode
                                                     ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
                                                     : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
-                                            }`}
+                                                }`}
                                             aria-label="Next testimonial"
                                         >
                                             <FiChevronRight size={20} />
@@ -381,11 +368,10 @@ const WhatOurCustomersSayComponent = () => {
                     <div className="mt-8 text-center">
                         <a
                             href="/testimonials"
-                            className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
-                                darkMode
+                            className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${darkMode
                                     ? 'bg-gray-800/70 text-white border border-gray-700/50 hover:bg-gray-700/70'
                                     : 'bg-white/70 text-indigo-600 border border-indigo-200/50 hover:bg-gray-50/70'
-                            }`}
+                                }`}
                         >
                             <span>Read More Customer Stories</span>
                             <FiArrowRight className="ml-2" />
@@ -395,16 +381,14 @@ const WhatOurCustomersSayComponent = () => {
 
                 {/* Testimonial Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16">
-                    <div className={`p-6 rounded-xl text-center ${
-                        darkMode
+                    <div className={`p-6 rounded-xl text-center ${darkMode
                             ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                             : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                    }`}>
-                        <div className={`text-4xl font-bold mb-2 ${
-                            darkMode
+                        }`}>
+                        <div className={`text-4xl font-bold mb-2 ${darkMode
                                 ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400'
                                 : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600'
-                        }`}>
+                            }`}>
                             98%
                         </div>
                         <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
@@ -412,16 +396,14 @@ const WhatOurCustomersSayComponent = () => {
                         </p>
                     </div>
 
-                    <div className={`p-6 rounded-xl text-center ${
-                        darkMode
+                    <div className={`p-6 rounded-xl text-center ${darkMode
                             ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                             : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                    }`}>
-                        <div className={`text-4xl font-bold mb-2 ${
-                            darkMode
+                        }`}>
+                        <div className={`text-4xl font-bold mb-2 ${darkMode
                                 ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400'
                                 : 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600'
-                        }`}>
+                            }`}>
                             10K+
                         </div>
                         <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>
@@ -429,16 +411,14 @@ const WhatOurCustomersSayComponent = () => {
                         </p>
                     </div>
 
-                    <div className={`p-6 rounded-xl text-center ${
-                        darkMode
+                    <div className={`p-6 rounded-xl text-center ${darkMode
                             ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
                             : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
-                    }`}>
-                        <div className={`text-4xl font-bold mb-2 ${
-                            darkMode
+                        }`}>
+                        <div className={`text-4xl font-bold mb-2 ${darkMode
                                 ? 'text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400'
                                 : 'text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600'
-                        }`}>
+                            }`}>
                             4.9
                         </div>
                         <p className={darkMode ? 'text-gray-300' : 'text-gray-700'}>

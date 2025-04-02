@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt} from "react-icons/fa";
 
 
-const AdminOverviewComponent = () => {
+const AdminTotalOverviewComponent = () => {
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark);
@@ -453,4 +453,4 @@ const AdminOverviewComponent = () => {
     );
 };
 
-export default AdminOverviewComponent;
+export default AdminTotalOverviewComponent;

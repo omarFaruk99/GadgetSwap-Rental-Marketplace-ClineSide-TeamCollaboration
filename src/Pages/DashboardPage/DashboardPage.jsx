@@ -19,8 +19,8 @@ import {
     FiAward,
 } from "react-icons/fi"
 import AuthContext from "../../Providers/AuthContext.jsx"
-import LoadingSkeleton from "../../Components/DashboardComponent/LoadingSkeleton.jsx"
 import { Outlet } from "react-router"
+import LoadingSkeleton from "./LoadingSkeleton.jsx";
 
 
 const DashboardPage = () => {
@@ -41,8 +41,8 @@ const DashboardPage = () => {
         name: "John Doe",
         email: "john.doe@example.com",
         avatar: "/placeholder.svg",
-        // role: "admin",                    // Activate this line to see admin dashboard
-        role: "user", // Activate this line to see user dashboard
+        role: "admin",                    // Activate this line to see admin dashboard
+        // role: "user", // Activate this line to see user dashboard
         joinDate: "2023-01-15",
         verified: true,
         balance: 1250.75,
@@ -200,7 +200,7 @@ const DashboardPage = () => {
     // Handle tab change
     const handleTabChange = (tab) => {
         setActiveTab(tab)
-        navigateTo(`/dashboard/user/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
+        navigateTo(`/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
         if (isMobileMenuOpen) {
             setIsMobileMenuOpen(false) // Close mobile menu if open
         }

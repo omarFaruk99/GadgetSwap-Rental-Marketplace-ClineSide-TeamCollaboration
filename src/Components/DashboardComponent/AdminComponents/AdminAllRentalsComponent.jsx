@@ -3,7 +3,7 @@ import {FiShoppingCart} from "react-icons/fi";
 import {useSelector} from "react-redux";
 
 
-const AdminRentalsComponent = () => {
+const AdminAllRentalsComponent = () => {
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark);
@@ -31,4 +31,4 @@ const AdminRentalsComponent = () => {
     );
 };
 
-export default AdminRentalsComponent;
+export default AdminAllRentalsComponent;

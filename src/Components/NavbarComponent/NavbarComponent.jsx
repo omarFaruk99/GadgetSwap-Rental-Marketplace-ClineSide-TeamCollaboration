@@ -30,6 +30,8 @@ const NavbarComponent = () => {
         name: registeredUser?.displayName,
         email: registeredUser?.email,
         profilePicture: registeredUser?.photoURL,
+        role: 'admin',
+        // role: 'user',
     };
 
 
@@ -39,7 +41,7 @@ const NavbarComponent = () => {
 
 
     const handleDashboardClick = async () => {
-        navigate('/dashboard');
+        navigate(`${user.role === 'admin' ? '/dashboard/admin/total_overview' : '/dashboard/user/overview'}`);
         toggleMenu();
     };
 

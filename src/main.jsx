@@ -27,6 +27,11 @@ import UserWishlistPage from "./Pages/DashboardPage/UserDashboardPages/UserWishl
 import UserMessagesPage from "./Pages/DashboardPage/UserDashboardPages/UserMessagesPage.jsx";
 import UserLoyaltyAndRewardPage from "./Pages/DashboardPage/UserDashboardPages/UserLoyaltyAndRewardPage.jsx";
 import UserSettingsPage from "./Pages/DashboardPage/UserDashboardPages/UserSettingsPage.jsx";
+import AdminTotalOverviewPage from "./Pages/DashboardPage/AdminDashboardPages/AdminTotalOverviewPage.jsx";
+import AdminAllUsersPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllUsersPage.jsx";
+import AdminAllGadgetsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllGadgetsPage.jsx";
+import AdminAllRentalsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllRentalsPage.jsx";
+import AdminSettingsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminSettingsPage.jsx";
 
 
 const queryClient = new QueryClient()
@@ -56,13 +61,18 @@ ReactDOM.createRoot(root).render(
                                 <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
 
                                 <Route path={'/dashboard'} element={<DashboardLayout></DashboardLayout>}>
-                                    <Route index element={<UserOverviewPage />} /> {/* Index route */}
                                     <Route path={'/dashboard/user/overview'} element={<UserOverviewPage></UserOverviewPage>} />
                                     <Route path={'/dashboard/user/my_rentals'} element={<UserMyRentalsPage></UserMyRentalsPage>} />
                                     <Route path={'/dashboard/user/wishlist'} element={<UserWishlistPage></UserWishlistPage>} />
                                     <Route path={'/dashboard/user/messages'} element={<UserMessagesPage></UserMessagesPage>} />
                                     <Route path={'/dashboard/user/loyalty_and_rewards'} element={<UserLoyaltyAndRewardPage></UserLoyaltyAndRewardPage>} />
                                     <Route path={'/dashboard/user/settings'} element={<UserSettingsPage></UserSettingsPage>} />
+
+                                    <Route path={'/dashboard/admin/total_overview'} element={<AdminTotalOverviewPage></AdminTotalOverviewPage>} />
+                                    <Route path={'/dashboard/admin/all_users'} element={<AdminAllUsersPage></AdminAllUsersPage>} />
+                                    <Route path={'/dashboard/admin/all_gadgets'} element={<AdminAllGadgetsPage></AdminAllGadgetsPage>} />
+                                    <Route path={'/dashboard/admin/all_rentals'} element={<AdminAllRentalsPage></AdminAllRentalsPage>} />
+                                    <Route path={'/dashboard/admin/settings'} element={<AdminSettingsPage></AdminSettingsPage>} />
                                 </Route>
 
                                 <Route path={'/terms-and-conditions'} element={<TermsAndConditionsPage></TermsAndConditionsPage>}></Route>

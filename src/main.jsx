@@ -29,6 +29,7 @@ import UserLoyaltyAndRewardPage from "./Pages/DashboardPage/UserDashboardPages/U
 import UserSettingsPage from "./Pages/DashboardPage/UserDashboardPages/UserSettingsPage.jsx";
 import AdminTotalOverviewPage from "./Pages/DashboardPage/AdminDashboardPages/AdminTotalOverviewPage.jsx";
 import AdminAllUsersPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllUsersPage.jsx";
+import AdminAllMessagesPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllMessagesPage.jsx";
 import AdminAllGadgetsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllGadgetsPage.jsx";
 import AdminAllRentalsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllRentalsPage.jsx";
 import AdminSettingsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminSettingsPage.jsx";
@@ -70,6 +71,7 @@ ReactDOM.createRoot(root).render(
 
                                     <Route path={'/dashboard/admin/total_overview'} element={<AdminTotalOverviewPage></AdminTotalOverviewPage>} />
                                     <Route path={'/dashboard/admin/all_users'} element={<AdminAllUsersPage></AdminAllUsersPage>} />
+                                    <Route path={'/dashboard/admin/all_messages'} element={<AdminAllMessagesPage></AdminAllMessagesPage>} />
                                     <Route path={'/dashboard/admin/all_gadgets'} element={<AdminAllGadgetsPage></AdminAllGadgetsPage>} />
                                     <Route path={'/dashboard/admin/all_rentals'} element={<AdminAllRentalsPage></AdminAllRentalsPage>} />
                                     <Route path={'/dashboard/admin/settings'} element={<AdminSettingsPage></AdminSettingsPage>} />

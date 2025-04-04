@@ -239,6 +239,7 @@ const DashboardPage = () => {
     const AdminLeftSidebarTabs = [
         { id: "total_overview", name: "Total Overview", icon: <FiHome className="mr-3" size={20} /> },
         { id: "all_users", name: "All Users", icon: <FiUsers className="mr-3" size={20} /> },
+        { id: "all_messages", name: "All Messages", icon: <FiMessageSquare className="mr-3" size={20} /> },
         { id: "all_gadgets", name: "All Gadgets", icon: <FiPackage className="mr-3" size={20} /> },
         { id: "all_rentals", name: "All Rentals", icon: <FiShoppingCart className="mr-3" size={20} /> },
         { id: "settings", name: "Settings", icon: <FiSettings className="mr-3" size={20} /> },

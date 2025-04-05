@@ -357,7 +357,7 @@ const AdminAllRentalsComponent = () => {
         <div className={`w-full mx-auto rounded-xl ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
 
             {/* Search and Filter Bar */}
-            <div className="flex flex-col lg:flex-row gap-4 mb-6">
+            <div className="flex flex-col lg:flex-row gap-4 mb-4">
                 <div className="relative flex-grow">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <FiSearch className="text-gray-400" />

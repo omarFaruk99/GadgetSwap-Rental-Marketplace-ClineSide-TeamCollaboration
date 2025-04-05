@@ -28,6 +28,7 @@
     "premiumInsuranceFee": 0.00
   },
   "availability": {
+    "total_copy": 0,
     "status": true,
     "blockedDates": [
       "0000-00-00",

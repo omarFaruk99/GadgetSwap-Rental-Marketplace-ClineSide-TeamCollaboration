@@ -286,7 +286,7 @@ const AdminAllUsersComponent = () => {
 
             {/* Users Table */}
             <div className={`overflow-x-auto rounded-lg border ${darkMode ? 'border-gray-700' : 'border-gray-200'} shadow-sm mb-6`}>
-                <table className="min-w-full divide-y divide-gray-200">
+                <table className="min-w-full divide-y divide-gray-700">
                     <thead className={darkMode ? 'bg-gray-800' : 'bg-gray-50'}>
                     <tr>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">

@@ -1099,6 +1099,7 @@ const GadgetDetailsComponent = () => {
             premiumInsuranceFee: 5.99,
         },
         availability: {
+            total_unit: 5,
             status: true,
             blockedDates: ["2023-12-24", "2023-12-25", "2023-12-31", "2024-01-01"],
         },

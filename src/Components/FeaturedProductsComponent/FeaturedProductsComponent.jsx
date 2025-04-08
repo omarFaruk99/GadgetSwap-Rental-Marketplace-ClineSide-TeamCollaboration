@@ -50,7 +50,7 @@ const FeaturedProductsComponent = () => {
             id: 's2',
             name: 'Samsung Galaxy S23 Ultra',
             category: 'smartphone',
-            image: 'https://images.unsplash.com/photo-1678911820864-e5cfd0309d3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            image: 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHNhbXN1bmclMjBHYWxheHklMjBzMjMlMjB1bHRyYXxlbnwwfHwwfHx8MA%3D%3D',
             pricePerDay: 11.99,
             rating: 4.7,
             description: '200MP camera, S Pen, and powerful Snapdragon processor'

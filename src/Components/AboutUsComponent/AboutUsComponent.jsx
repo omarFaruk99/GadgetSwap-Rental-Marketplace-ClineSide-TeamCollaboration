@@ -39,12 +39,17 @@ const AboutUsComponent = () => {
 
 
     // Handle section change
+    // const handleSectionChange = (section) => {
+    //     setActiveSection(section)
+    //     if (isMobileMenuOpen) {
+    //         setIsMobileMenuOpen(false)
+    //     }
+    // }
+        // Handle section change
     const handleSectionChange = (section) => {
-        setActiveSection(section)
-        if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false)
-        }
-    }
+        setActiveSection(section);
+        isMobileMenuOpen && setIsMobileMenuOpen(false);
+    };
 
 
     useEffect(() => {

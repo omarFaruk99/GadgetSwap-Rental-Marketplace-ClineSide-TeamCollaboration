@@ -41,8 +41,8 @@ const DashboardPage = () => {
         name: "John Doe",
         email: "john.doe@example.com",
         avatar: "/placeholder.svg",
-        role: "admin",                    // Activate this line to see admin dashboard
-        // role: "user",                    // Activate this line to see user dashboard
+        // role: "admin",                    // Activate this line to see admin dashboard
+        role: "user",                    // Activate this line to see user dashboard
         joinDate: "2023-01-15",
         verified: true,
         balance: 1250.75,

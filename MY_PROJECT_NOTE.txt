@@ -9,7 +9,7 @@ git push -u origin main
 // Commands to push code from now on.-----------------------------------------------------------------------------------
 
 git add .
-git commit -m "AdminSettingsComponent design prototype is completed successfully."
+git commit -m "AdminTotalOverviewComponent design prototype is completed successfully."
 git push
 
 // Necessary Git commands.----------------------------------------------------------------------------------------------
@@ -93,3 +93,170 @@ User Dashboard
 Admin Dashboard
 
 ------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Initial fake user data
+    const initialUserData = {
+        phone: "+1 (555) 123-4567",
+        profession: "Software Engineer",
+        bio: "Passionate about technology and gadgets. Love to try out new devices before buying them.",
+        profileImage: "/placeholder.svg",
+        joinedDate: "January 2023",
+        billingAddress: {
+            street: "123 Tech Street",
+            city: "San Francisco",
+            state: "CA",
+            zipCode: "94105",
+            country: "United States",
+        },
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fake rentals data ## Rental order will create an object into a rentalOrderCollection and then rental order id will be
+saved serially in an array under the user object, and through an api endpoint the mongodb will get the use email, get the
+user object, will get the rentalOrders array of ids, then from the rentalOrderCollection it will collect all the rental
+orders, create an array, and then will send it to client side.----------------------------------------------------------------------------------------------------
+    const [rentals, setRentals] = useState([
+        {
+            id: "ORD-2023-001",
+            gadgetName: "iPhone 15 Pro Max",
+            gadgetImage: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
+            category: "Smartphones",
+            startDate: "2023-11-10",
+            endDate: "2023-11-17",
+            status: "active",
+            amount: 175.5,
+            discount: 10,
+            membershipTier: "Silver",
+            pointsEarned: 150,
+            paymentMethod: "Credit Card (**** 4582)",
+            hasInvoice: true,
+            isReviewed: false,
+            rating: 0,
+        },
+    ])
+
+
+
+// Initial fake wishlist data ## Gadget ids will be saved serially in an array under the user object, and through an api
+endpoint the below object will be constructed inside MBD and will be sent to client side.------------------------------------------------------------------------
+    const [wishlistItems, setWishlistItems] = useState([
+        {
+            gadget_id: "12345678987654321",
+            name: "iPhone 15 Pro Max",
+            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
+            category: "Smartphones",
+            dailyRate: 24.99,
+            availability: "available",
+            rating: 4.9,
+            description: "Latest iPhone with A17 Pro chip, 48MP camera system, and titanium design.",
+        }
+    ])
+
+
+
+// Initial fake messages data ## Alternatively see message_collection.json---------------------------------------------------------------------------------------
+    const initialMessages = [
+        {
+            id: 1,
+            sender: "user",
+            text: "Hello, I'm interested in renting the MacBook Pro. Is it available next week?",
+            timestamp: new Date("2023-11-01T09:30:00").getTime(),
+            read: true,
+        },
+        {
+            id: 2,
+            sender: "admin",
+            text: "Hi Alex! Yes, the MacBook Pro is available for rent next week. When exactly do you need it?",
+            timestamp: new Date("2023-11-01T09:35:00").getTime(),
+            read: true,
+        },
+        {
+            id: 3,
+            sender: "user",
+            text: "Great! I need it from Monday to Friday. What's the total cost for 5 days?",
+            timestamp: new Date("2023-11-01T09:40:00").getTime(),
+            read: true,
+        },
+        {
+            id: 4,
+            sender: "admin",
+            text: "For 5 days, the total would be $175. That includes insurance and a charger. Would you like to proceed with the booking?",
+            timestamp: new Date("2023-11-01T09:45:00").getTime(),
+            read: true,
+        }
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

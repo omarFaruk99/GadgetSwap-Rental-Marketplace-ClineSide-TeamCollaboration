@@ -30,8 +30,8 @@ const NavbarComponent = () => {
         name: registeredUser?.displayName,
         email: registeredUser?.email,
         profilePicture: registeredUser?.photoURL,
-        role: 'admin',
-        // role: 'user',
+        // role: 'admin',              // Activate this line to see admin dashboard
+        role: 'user',                // Activate this line to see user dashboard
     };
 
 

@@ -1,0 +1,24 @@
+{
+  "_id": "12345678987654321",
+  "user_email": "example_user@domain.com",
+  "activity_history_chain": [
+    {
+      "type": "rental",
+      "description": "Rented iPhone 15 Pro Max",
+      "date": "2023-11-10",
+      "pointsEarned": 150
+    },
+    {
+      "type": "review",
+      "description": "Reviewed Sony A7 IV Camera",
+      "date": "2023-11-05",
+      "pointsEarned": 50
+    },
+    {
+      "type": "referral",
+      "description": "Referred Sarah Williams",
+      "date": "2023-10-28",
+      "pointsEarned": 200
+    }
+  ]
+}

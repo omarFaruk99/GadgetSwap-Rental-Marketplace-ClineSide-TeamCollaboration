@@ -1,0 +1,48 @@
+{
+  "uid": "XWetZ3OoiQae894HJS9rpes5jcz1",
+  "displayName": "Mohammad Zahid Kamal",
+  "email": "kamal.md.zahid@gmail.com",
+  "personalDetails": {
+    "bio": "Passionate about technology and gadgets. Love to try out new devices before buying them.",
+    "profession": "Software Engineer",
+    "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJph7mFDCH6kN7bPJPBZke7ci8b_qsx-A7IK5HYKD7cEjBMCx6O=s288-c-no",
+    "phone": "+4917673251642",
+    "billingAddress": {
+      "street": "Heddernheimer Landstrasse 41",
+      "city": "Frankfurt am Main",
+      "zipCode": "60439",
+      "state": "Hessen",
+      "country": "Germany"
+    }
+  },
+  "role": "user",
+  "membershipDetails": {
+    "memberSince": "2025-03-23T10:22:18.636Z",
+    "membershipTier": "Silver",
+    "points": 2750,
+    "loyaltyProgressPercentage": 55,
+    "rentalStreak": 8,
+    "referrals": 3,
+    "nextTier": "Gold",
+    "pointsToNextTier": 2250
+  },
+  "wishlist": [
+    "67f05ae80d376805d0e19097",
+    "67f05ae80d376805d0e19096"
+  ],
+  "rentalOrders": [
+    "12345678987654321",
+    "12345678987654321"
+  ],
+  "messageChain": "12345678987654321",
+  "notificationChain": "12345678987654321",
+  "activityHistoryChain": "12345678987654321",
+  "stats": {
+    "activeRentals": 0,
+    "pastRentals": 12,
+    "wishlistedItems": 2,
+    "totalSpent": 1245.5,
+    "pointsEarned": 2750,
+    "reviewsGiven": 8
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "_id": "12345678987654321",
+  "user_email": "example_user@domain.com",
+  "message_chain": [
+    {
+      "sender": "user",
+      "text": "Hello, I'm interested in renting the MacBook Pro. Is it available next week?",
+      "timestamp": 1698821400000,
+      "read": true
+    },
+    {
+      "sender": "admin",
+      "text": "Hi Alex! Yes, the MacBook Pro is available for rent next week. When exactly do you need it?",
+      "timestamp": 1698821700000,
+      "read": true
+    },
+    {
+      "sender": "user",
+      "text": "Great! I need it from Monday to Friday. What's the total cost for 5 days?",
+      "timestamp": 1698822000000,
+      "read": false
+    },
+    {
+      "sender": "admin",
+      "text": "For 5 days, the total would be $175. That includes insurance and a charger. Would you like to proceed with the booking?",
+      "timestamp": 1698822300000,
+      "read": false
+    }
+  ]
+}

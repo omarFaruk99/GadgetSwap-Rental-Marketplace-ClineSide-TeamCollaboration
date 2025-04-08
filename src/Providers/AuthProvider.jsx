@@ -59,7 +59,7 @@ const AuthProvider = ({children}) => {
 
             await updateProfile(auth.currentUser, {
                 displayName: full_name,
-                photoURL: 'https://avatar.iran.liara.run/public'
+                photoURL: '//ssl.gstatic.com/accounts/ui/avatar_2x.png'     // Random generic avatar.
             });
 
             const userInfoForDatabase = {

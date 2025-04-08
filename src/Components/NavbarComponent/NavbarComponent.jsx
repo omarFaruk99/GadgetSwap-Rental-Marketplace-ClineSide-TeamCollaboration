@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {FiMenu, FiX, FiMoon, FiSun, FiUser} from 'react-icons/fi';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleDarkTheme} from "../../Features/darkLightTheme/darkLightThemeSlice.js";
+import AuthContext from "../../Providers/AuthContext.jsx";
 
 
 const NavbarComponent = () => {
 
-    // const [darkMode, setDarkMode] = useState(false);
-    const {darkMode, toggleDarkMode} = useTheme();
+    const {user: registeredUser, signOutCurrentUser} = useContext(AuthContext);
+    const darkMode = useSelector((state) => state.darkMode.isDark);
+    const dispatch = useDispatch();
+
+
+    const toggleDarkMode = () => {
+        dispatch(toggleDarkTheme(darkMode));
+    }
+
 
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,10 +26,12 @@ const NavbarComponent = () => {
 
     // Sample user data - in a real app, this would come from auth context or props
     const user = {
-        isLoggedIn: false,
-        name: "John Doe",
-        email: "john@example.com",
-        profilePicture: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        isLoggedIn: registeredUser !== null,
+        name: registeredUser?.displayName,
+        email: registeredUser?.email,
+        profilePicture: registeredUser?.photoURL,
+        // role: 'admin',              // Activate this line to see admin dashboard
+        role: 'user',                // Activate this line to see user dashboard
     };
 
 
@@ -29,9 +40,16 @@ const NavbarComponent = () => {
     };
 
 
-    const handleSignOutClick = () => {
-        console.log('user signed out');
-        // In a real app, you would call your auth service logout method here
+    const handleDashboardClick = async () => {
+        navigate(`${user.role === 'admin' ? '/dashboard/admin/total_overview' : '/dashboard/user/overview'}`);
+        toggleMenu();
+    };
+
+
+    const handleSignOutClick = async () => {
+        await signOutCurrentUser();
+        toggleMenu();
+        navigate('/');
     };
 
 
@@ -100,9 +118,9 @@ const NavbarComponent = () => {
         {name: 'Home', path: '/', isScroll: true, scrollToTop: true},
         {name: 'How It Works', path: '#how-it-works', hideWhenLoggedIn: false, isScroll: true},
         {name: 'Gadgets', path: '/all-gadgets', hideWhenLoggedIn: false},
-        {name: 'About Us', path: '/about-us', hideWhenLoggedIn: false},
-        {name: 'Contact Us', path: '/contact-us', hideWhenLoggedIn: false},
-        {name: 'FAQ', path: '/faq', hideWhenLoggedIn: false},
+        {name: 'About Us', path: '/about-us', hideWhenLoggedIn: true},
+        {name: 'Contact Us', path: '/contact-us', hideWhenLoggedIn: true},
+        {name: 'FAQ', path: '/faq', hideWhenLoggedIn: true},
         {name: 'Sign Up', path: '/sign-up', hideWhenLoggedIn: true},
         {name: 'Sign In', path: '/sign-in', hideWhenLoggedIn: true},
     ];
@@ -128,7 +146,7 @@ const NavbarComponent = () => {
                     </a>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center space-x-6">
+                    <div className="hidden xl:flex items-center space-x-6">
                         {/* Navigation Buttons */}
                         <div className="flex space-x-4">
                             {navButtons.map((button) => (
@@ -163,23 +181,35 @@ const NavbarComponent = () => {
                             ))}
 
                             {user.isLoggedIn && (
-                                <button
-                                    onClick={handleSignOutClick}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
-                                        darkMode
-                                            ? 'text-gray-300 hover:bg-purple-900/40 hover:text-white'
-                                            : 'text-gray-700 hover:bg-indigo-100/60 hover:text-indigo-800'
-                                    }`}
-                                >
-                                    Sign Out
-                                </button>
+                                <>
+                                    <button
+                                        onClick={handleDashboardClick}
+                                        className={`px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 transform hover:scale-105 ${
+                                            darkMode
+                                                ? 'text-gray-300 hover:bg-purple-900/40 hover:text-white'
+                                                : 'text-gray-700 hover:bg-indigo-100/60 hover:text-indigo-800'
+                                        }`}
+                                    >
+                                        Dashboard
+                                    </button>
+                                    <button
+                                        onClick={handleSignOutClick}
+                                        className={`px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 transform hover:scale-105 ${
+                                            darkMode
+                                                ? 'text-gray-300 hover:bg-purple-900/40 hover:text-white'
+                                                : 'text-gray-700 hover:bg-indigo-100/60 hover:text-indigo-800'
+                                        }`}
+                                    >
+                                        Sign Out
+                                    </button>
+                                </>
                             )}
                         </div>
 
                         {/* Dark Mode Toggle */}
                         <button
                             onClick={toggleDarkMode}
-                            className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 ${
+                            className={`p-2 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-110 ${
                                 darkMode
                                     ? 'bg-purple-900/50 text-yellow-300 hover:bg-purple-800/60'
                                     : 'bg-indigo-100/60 text-indigo-600 hover:bg-indigo-200/70'
@@ -219,7 +249,7 @@ const NavbarComponent = () => {
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <div className="lg:hidden flex items-center space-x-3">
+                    <div className="xl:hidden flex items-center space-x-3">
                         <button
                             onClick={toggleDarkMode}
                             className={`p-2 rounded-full transition-all duration-300 transform hover:scale-110 ${
@@ -248,7 +278,7 @@ const NavbarComponent = () => {
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className={`lg:hidden mt-3 py-3 px-2 rounded-lg transition-all duration-300 ${
+                    <div className={`xl:hidden w-11/12 mx-auto mt-3 py-3 px-2 rounded-lg transition-all duration-300 ${
                         darkMode
                             ? 'bg-gray-800/90 backdrop-blur-md border border-purple-900/30'
                             : 'bg-white/90 backdrop-blur-md border border-indigo-200/30'
@@ -289,10 +319,18 @@ const NavbarComponent = () => {
                             {user.isLoggedIn && (
                                 <>
                                     <button
-                                        onClick={() => {
-                                            handleSignOutClick();
-                                            toggleMenu();
-                                        }}
+                                        onClick={handleDashboardClick}
+                                        className={`px-4 py-2 rounded-lg text-sm font-medium text-left transition-all duration-200 ${
+                                            darkMode
+                                                ? 'text-gray-300 hover:bg-purple-900/40 hover:text-white'
+                                                : 'text-gray-700 hover:bg-indigo-100/60 hover:text-indigo-800'
+                                        }`}
+                                    >
+                                        Dashboard
+                                    </button>
+
+                                    <button
+                                        onClick={handleSignOutClick}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium text-left transition-all duration-200 ${
                                             darkMode
                                                 ? 'text-gray-300 hover:bg-purple-900/40 hover:text-white'

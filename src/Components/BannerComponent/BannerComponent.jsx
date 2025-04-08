@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Link } from 'react-router-dom';
-import {
-    FiSearch,
-    FiArrowRight,
-    FiSmartphone,
-    FiCamera,
-    FiHeadphones,
-    FiWatch,
-    FiZap,
-    FiWifi,
-    FiMonitor,
-    FiCpu,
-    FiServer
-} from 'react-icons/fi';
-import {
-    IoGameController,
-    IoLaptop,
-    IoTabletLandscape,
-    IoSparkles
-} from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {FiSearch, FiArrowRight, FiZap, FiCpu} from 'react-icons/fi';
+import {IoSparkles} from 'react-icons/io5';
+import {useSelector} from "react-redux";
+import AuthContext from "../../Providers/AuthContext.jsx";
 
 
 const BannerComponent = () => {
 
-    // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
-
-
+    const {user} = useContext(AuthContext);
+    const darkMode = useSelector((state) => state.darkMode.isDark);
     const [searchQuery, setSearchQuery] = useState('');
     const [activeGadget, setActiveGadget] = useState(0);
     const [isHovering, setIsHovering] = useState(false);
@@ -66,16 +48,12 @@ const BannerComponent = () => {
     };
 
 
-    /*const categories = [
-        { name: 'Smartphones', icon: <FiSmartphone size={20} /> },
-        { name: 'Laptops', icon: <IoLaptop size={20} /> },
-        { name: 'Cameras', icon: <FiCamera size={20} /> },
-        { name: 'Gaming', icon: <IoGameController size={20} /> },
-        { name: 'Audio', icon: <FiHeadphones size={20} /> },
-        { name: 'Wearables', icon: <FiWatch size={20} /> },
-        { name: 'VR', icon: <FiMonitor size={20} /> },
-        { name: 'Drones', icon: <FiWifi size={20} /> },
-    ];*/
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            // behavior: 'smooth'
+        });
+    }, []);
 
 
     const featuredGadgets = [
@@ -242,7 +220,7 @@ const BannerComponent = () => {
                             {/* CTA Buttons with Animated Accents */}
                             <div className="flex flex-wrap gap-4">
                                 <Link
-                                    to="/rent"
+                                    to={user ? '/all-gadgets' : '/sign-in'}
                                     className={`group w-6/12 relative px-6 py-3 rounded-xl font-medium transition-all duration-300 overflow-hidden ${
                                         darkMode
                                             ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-900/20'

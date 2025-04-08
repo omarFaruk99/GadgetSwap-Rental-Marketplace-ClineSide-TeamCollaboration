@@ -1,0 +1,30 @@
+{
+  "_id": "12345678987654321",
+  "user_email": "example_user@domain.com",
+  "notification_chain": [
+    {
+      "type": "rental",
+      "message": "Your rental for iPhone 15 Pro Max has been confirmed",
+      "timestamp": 1698821400000,
+      "isRead": true
+    },
+    {
+      "type": "return",
+      "message": "Return reminder: Your MacBook Pro is due in 3 days",
+      "timestamp": 1698821400000,
+      "isRead": true
+    },
+    {
+      "type": "loyalty",
+      "message": "Congratulations! You've earned 150 points from your recent rental",
+      "timestamp": 1698821400000,
+      "isRead": false
+    },
+    {
+      "type": "promo",
+      "message": "Special weekend offer: 15% off on all camera rentals",
+      "timestamp": 1698821400000,
+      "isRead": false
+    }
+  ]
+}

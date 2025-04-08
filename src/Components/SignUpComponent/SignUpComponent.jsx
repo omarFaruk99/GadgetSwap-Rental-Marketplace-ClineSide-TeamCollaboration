@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiCheck} from 'react-icons/fi';
 import {FcGoogle} from 'react-icons/fc';
-import {IoWarningOutline} from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
+import AuthContext from "../../Providers/AuthContext.jsx";
 
 
 const SignUpComponent = () => {
 
+    const {signUpNewUser, signInWithGoogle} = useContext(AuthContext)
     const navigate = useNavigate();
-
-
-    // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     // Form state
@@ -175,20 +173,16 @@ const SignUpComponent = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (validateForm()) {
-            // Create user object
-            const user = {
-                fullName: formData.fullName,
-                email: formData.email,
-                password: formData.password,
-                termsAccepted: formData.acceptTerms,
-            };
+            const fullName = formData.fullName;
+            const email = formData.email;
+            const password = formData.password;
 
-            // Log user info to console
-            console.log('User registered:', user);
+            // Signing up using firebase.
+            await signUpNewUser(fullName, email, password);
 
             // Redirect to sign-in page
             navigate('/sign-in');
@@ -196,18 +190,18 @@ const SignUpComponent = () => {
     };
 
 
-    const handleGoogleSignIn = () => {
-        // In a real app, this would integrate with Google OAuth
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle();
         console.log('Sign in with Google clicked');
     };
 
 
-    /*useEffect(() => {
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
         });
-    }, []);*/
+    }, []);
 
 
     return (
@@ -457,7 +451,7 @@ const SignUpComponent = () => {
                                 <label htmlFor="acceptTerms" className={`font-medium ${
                                     darkMode ? 'text-gray-300' : 'text-gray-700'
                                 } transition-colors duration-300`}>
-                                    I accept the <a href="/terms" className={`${
+                                    I accept the <a href="/terms-and-conditions" className={`${
                                     darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
                                 } transition-colors duration-300`}>Terms and Conditions</a>
                                 </label>

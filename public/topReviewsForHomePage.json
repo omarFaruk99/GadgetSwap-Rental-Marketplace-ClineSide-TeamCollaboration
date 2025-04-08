@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Alex Johnson",
+    "profession": "Software Developer",
+    "avatar": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "rating": 5,
+    "review": "GadgetSwap has completely changed how I approach tech. Instead of spending thousands on the latest MacBook Pro, I rented it for a crucial project. The device arrived in pristine condition, and the return process was effortless. I'm now a regular customer!",
+    "gadgetRented": "MacBook Pro 16\"",
+    "rentalDuration": "2 weeks"
+  },
+  {
+    "name": "Sophia Chen",
+    "profession": "Content Creator",
+    "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "rating": 5,
+    "review": "As a content creator, I need different cameras for different projects. GadgetSwap lets me access high-end equipment without the massive investment. Their Sony Alpha A7 IV was delivered on time and in perfect condition. The customer service is exceptional!",
+    "gadgetRented": "Sony Alpha A7 IV",
+    "rentalDuration": "10 days"
+  },
+  {
+    "name": "Marcus Williams",
+    "profession": "Gaming Enthusiast",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "rating": 4,
+    "review": "I wanted to try the PS5 before committing to a purchase. GadgetSwap made it possible with their affordable rental options. The console was in great condition with all accessories included. Only giving 4 stars because delivery was a day late, but everything else was perfect.",
+    "gadgetRented": "PlayStation 5",
+    "rentalDuration": "1 month"
+  },
+  {
+    "name": "Emma Rodriguez",
+    "profession": "Architect",
+    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "rating": 5,
+    "review": "I needed a powerful laptop for rendering 3D models while traveling. GadgetSwap's Razer Blade 17 was the perfect solution. The performance was outstanding, and the rental process was seamless from start to finish. Will definitely use again for future projects!",
+    "gadgetRented": "Razer Blade 17",
+    "rentalDuration": "3 weeks"
+  },
+  {
+    "name": "David Kim",
+    "profession": "Photographer",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    "rating": 5,
+    "review": "GadgetSwap has been a game-changer for my photography business. I rented the Canon EOS R5 for a wedding shoot, and the results were spectacular. The equipment was in pristine condition, and the rental cost was a fraction of the purchase price. Highly recommended!",
+    "gadgetRented": "Canon EOS R5",
+    "rentalDuration": "Weekend"
+  }
+]

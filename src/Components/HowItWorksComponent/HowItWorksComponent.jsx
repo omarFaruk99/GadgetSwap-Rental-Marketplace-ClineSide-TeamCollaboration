@@ -13,13 +13,13 @@ import {
     FiPause
 } from 'react-icons/fi';
 import {IoSparkles, IoFlash, IoRocket, IoShieldCheckmark} from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
 
 
 const HowItWorksComponent = () => {
 
     // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     const [activeStep, setActiveStep] = useState(0);
@@ -636,7 +636,7 @@ const HowItWorksComponent = () => {
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <a
-                            href="/browse"
+                            href="/all-gadgets"
                             className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
                                 darkMode
                                     ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-900/20'

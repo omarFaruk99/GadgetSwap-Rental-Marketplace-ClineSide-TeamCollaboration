@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
-import useTheme from "../../CustomHooks/useTheme.jsx";
+import {useSelector} from "react-redux";
+import AuthContext from "../../Providers/AuthContext.jsx";
 
 
 const SignInComponent = () => {
 
+    const {signInExistingUsers} = useContext(AuthContext);
     const navigate = useNavigate();
-
-
-    // const [darkMode, setDarkMode] = useState(true);
-    const {darkMode} = useTheme();
+    const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
     // Form state
@@ -123,7 +122,7 @@ const SignInComponent = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Clear general error
@@ -133,17 +132,11 @@ const SignInComponent = () => {
         }));
 
         if (validateForm()) {
-            // In a real app, you would make an API call to authenticate the user
-            // For this example, we'll simulate a successful login
+            const email = formData.email;
+            const password = formData.password;
 
-            // Create user object
-            const user = {
-                email: formData.email,
-                password: formData.password
-            };
-
-            // Log user info to console
-            console.log('User signed in:', user);
+            // Signing in using firebase.
+            await signInExistingUsers(email, password);
 
             // Redirect to home page
             navigate('/');
@@ -159,12 +152,12 @@ const SignInComponent = () => {
     };
 
 
-    /*useEffect(() => {
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
         });
-    }, []);*/
+    }, []);
 
 
     return (

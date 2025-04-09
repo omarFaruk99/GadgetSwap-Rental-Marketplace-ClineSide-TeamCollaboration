@@ -182,14 +182,6 @@ const DashboardPage = () => {
     })
 
 
-    // Simulate loading data
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setIsLoading(false)
-    //     }, 1000)
-
-    //     return () => clearTimeout(timer)
-    // }, [])
 
     // Simulate loading data
         useEffect(() => {
@@ -203,20 +195,6 @@ const DashboardPage = () => {
     }
 
 
-    // // Handle tab change
-    // const handleTabChange = (tab) => {
-    //     setActiveTab(tab)
-    //     navigateTo(`/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
-    //     if (isMobileMenuOpen) {
-    //         setIsMobileMenuOpen(false) // Close mobile menu if open
-    //     }
-    // }
-
-
-    // const handleSignOutClick = async () => {
-    //     await signOutCurrentUser()
-    //     navigateTo("/")
-    // }
 
     // Handle tab change
     const handleTabChange = (tab) => {
@@ -236,29 +214,6 @@ const DashboardPage = () => {
         navigateTo("/")
     }
 
-
-
-    // // Check for mobile view
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         setIsMobileView(window.innerWidth < 1024)
-    //     }
-
-    //     handleResize() // Initial check
-    //     window.addEventListener("resize", handleResize)
-
-    //     return () => {
-    //         window.removeEventListener("resize", handleResize)
-    //     }
-    // }, [])
-
-
-    // useEffect(() => {
-    //     window.scrollTo({
-    //         top: 0,
-    //         // behavior: 'smooth'
-    //     })
-    // }, [])
 
     
 

@@ -21,9 +21,16 @@ import {useSelector} from "react-redux";
 
 const CookieSettingsComponent = () => {
 
+    // Redux state for dark mode
     const darkMode = useSelector((state) => state.darkMode.isDark);
+
+    // Local state for mobile menu and cookie settings
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    // Alert state for mandatory cookies
     const [showAlert, setShowAlert] = useState(false);
+
+    // State for expanded section
     const [expandedSection, setExpandedSection] = useState(null);
 
 
@@ -77,17 +84,27 @@ const CookieSettingsComponent = () => {
 
 
     // Check if mandatory cookies are selected
-    useEffect(() => {
-        const mandatorySelected = Object.keys(cookieSettings).every(key =>
-            !cookieSettings[key].mandatory || cookieSettings[key].enabled
-        );
+    // useEffect(() => {
+    //     const mandatorySelected = Object.keys(cookieSettings).every(key =>
+    //         !cookieSettings[key].mandatory || cookieSettings[key].enabled
+    //     );
 
-        if (!mandatorySelected) {
-            setShowAlert(true);
-        } else {
-            setShowAlert(false);
-        }
+    //     if (!mandatorySelected) {
+    //         setShowAlert(true);
+    //     } else {
+    //         setShowAlert(false);
+    //     }
+    // }, [cookieSettings]);
+
+    // Check if mandatory cookies are unselected
+    useEffect(() => {
+        const hasUnselectedMandatory = Object.values(cookieSettings).some(
+            ({ mandatory, enabled }) => mandatory && !enabled
+        );
+    
+        setShowAlert(hasUnselectedMandatory);
     }, [cookieSettings]);
+    
 
 
     // Toggle mobile menu

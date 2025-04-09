@@ -3,6 +3,7 @@ import CookieSettingsComponent from "../../Components/CookieSettingsComponent/Co
 const CookieSettingsPage = () => {
     return (
         <div>
+            {/* calling cookieSettingsComponent */}
             <CookieSettingsComponent></CookieSettingsComponent>
         </div>
     );

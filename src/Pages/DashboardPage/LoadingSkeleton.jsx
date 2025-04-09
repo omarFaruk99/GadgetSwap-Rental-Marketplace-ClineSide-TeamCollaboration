@@ -8,7 +8,9 @@ const LoadingSkeleton = () => {
 
 
     return (
+        
       <div className="animate-pulse">
+         {/* skeleton loaders for both the card grid and user list */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className={`rounded-xl p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
@@ -17,7 +19,7 @@ const LoadingSkeleton = () => {
                     </div>
                 ))}
             </div>
-
+       
             <div className={`rounded-xl mb-8 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                 <div className="p-4 border-b border-gray-700">
                     <div className={`h-6 w-1/4 rounded ${darkMode ? 'bg-gray-700' : 'bg-gray-300'}`}></div>

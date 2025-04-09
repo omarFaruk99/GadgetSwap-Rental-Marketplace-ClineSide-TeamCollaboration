@@ -50,17 +50,21 @@ const TermsAndConditionsComponent = () => {
     };
 
 
-    // Close mobile menu on window resize
+    // Automatically close the mobile menu when resizing to desktop width
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+            const isDesktop = window.innerWidth >= 1024;
+            if (isDesktop && isMobileMenuOpen) {
                 setIsMobileMenuOpen(false);
             }
         };
 
         window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, [isMobileMenuOpen]);
+
 
 
     useEffect(() => {

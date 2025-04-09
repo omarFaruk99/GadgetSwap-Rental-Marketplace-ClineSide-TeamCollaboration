@@ -96,7 +96,7 @@ const CookieSettingsComponent = () => {
     //     }
     // }, [cookieSettings]);
 
-    // Check if mandatory cookies are unselected
+    // Check if mandatory cookies are unselected(cleaner version)
     useEffect(() => {
         const hasUnselectedMandatory = Object.values(cookieSettings).some(
             ({ mandatory, enabled }) => mandatory && !enabled
@@ -128,30 +128,50 @@ const CookieSettingsComponent = () => {
 
 
     // Toggle section expansion
+    // const toggleSection = (section) => {
+    //     if (expandedSection === section) {
+    //         setExpandedSection(null);
+    //     } else {
+    //         setExpandedSection(section);
+    //     }
+    // };
+
+    // toggle section function
     const toggleSection = (section) => {
-        if (expandedSection === section) {
-            setExpandedSection(null);
-        } else {
-            setExpandedSection(section);
-        }
+        setExpandedSection(prev => (prev === section ? null : section));
     };
 
 
     // Accept all cookies
+    // const acceptAllCookies = () => {
+    //     const updatedSettings = {};
+
+    //     Object.keys(cookieSettings).forEach(key => {
+    //         updatedSettings[key] = {
+    //             ...cookieSettings[key],
+    //             enabled: true
+    //         };
+    //     });
+
+    //     setCookieSettings(updatedSettings);
+    //     setShowAlert(false);
+    //     console.log("All cookies accepted:", updatedSettings);
+    // };
+
+    // Accept all cookies function
     const acceptAllCookies = () => {
-        const updatedSettings = {};
-
-        Object.keys(cookieSettings).forEach(key => {
-            updatedSettings[key] = {
-                ...cookieSettings[key],
-                enabled: true
-            };
-        });
-
+        const updatedSettings = Object.fromEntries(
+            Object.entries(cookieSettings).map(([key, value]) => [
+                key,
+                { ...value, enabled: true }
+            ])
+        );
+    
         setCookieSettings(updatedSettings);
         setShowAlert(false);
         console.log("All cookies accepted:", updatedSettings);
     };
+    
 
 
     // Accept only necessary cookies

@@ -154,11 +154,12 @@ const FeaturedProductsComponent = () => {
                     <span className="w-24 h-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"></span>
                 </div>
                 <p
-                    className={`text-lg max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'
+                    className={`text-lg md:text-xl max-w-2xl mx-auto leading-relaxed tracking-wide transition-colors duration-300 ${darkMode ? 'text-gray-300' : 'text-gray-600'
                         }`}
                 >
-                    Explore our premium selection of high-tech gadgets available for rent
+                    Discover our curated collection of cutting-edge gadgets — all available for rent, designed to upgrade your digital lifestyle.
                 </p>
+
             </div>
 
 

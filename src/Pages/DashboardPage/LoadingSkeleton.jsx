@@ -5,8 +5,10 @@ const LoadingSkeleton = () => {
 
     const darkMode = useSelector((state) => state.darkMode.isDark);
 
+
+
     return (
-        <div className="animate-pulse">
+      <div className="animate-pulse">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className={`rounded-xl p-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
@@ -32,7 +34,7 @@ const LoadingSkeleton = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </div>  
     );
 };
 

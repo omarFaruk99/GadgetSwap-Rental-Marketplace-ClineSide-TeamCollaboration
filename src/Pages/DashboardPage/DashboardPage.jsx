@@ -190,7 +190,7 @@ const DashboardPage = () => {
 
     //     return () => clearTimeout(timer)
     // }, [])
-    
+
     // Simulate loading data
         useEffect(() => {
         const timer = setTimeout(() => setIsLoading(false), 1000);
@@ -203,20 +203,39 @@ const DashboardPage = () => {
     }
 
 
+    // // Handle tab change
+    // const handleTabChange = (tab) => {
+    //     setActiveTab(tab)
+    //     navigateTo(`/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
+    //     if (isMobileMenuOpen) {
+    //         setIsMobileMenuOpen(false) // Close mobile menu if open
+    //     }
+    // }
+
+
+    // const handleSignOutClick = async () => {
+    //     await signOutCurrentUser()
+    //     navigateTo("/")
+    // }
+
     // Handle tab change
     const handleTabChange = (tab) => {
+        const path = `/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`
         setActiveTab(tab)
-        navigateTo(`/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
+        navigateTo(path)
+
+        // Close mobile menu if it's open
         if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false) // Close mobile menu if open
+            setIsMobileMenuOpen(false)
         }
     }
 
-
+    // Handle user sign out
     const handleSignOutClick = async () => {
         await signOutCurrentUser()
         navigateTo("/")
     }
+
 
 
     // Check for mobile view

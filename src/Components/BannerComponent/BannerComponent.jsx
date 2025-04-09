@@ -20,10 +20,8 @@ const BannerComponent = () => {
     };
 
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        console.log('Searching for:', searchQuery);
-    };
+    const handleSearchSubmit = e => e.preventDefault() || console.log('Searching for:', searchQuery);
+
 
 
     // Auto-rotate featured gadgets

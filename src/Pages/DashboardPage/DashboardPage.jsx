@@ -182,14 +182,12 @@ const DashboardPage = () => {
     })
 
 
-    // Simulate loading data
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
 
-        return () => clearTimeout(timer)
-    }, [])
+    // Simulate loading data
+        useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Toggle mobile menu
     const toggleMobileMenu = () => {
@@ -197,21 +195,27 @@ const DashboardPage = () => {
     }
 
 
+
     // Handle tab change
     const handleTabChange = (tab) => {
+        const path = `/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`
         setActiveTab(tab)
-        navigateTo(`/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`) // Navigate to the corresponding route
+        navigateTo(path)
+
+        // Close mobile menu if it's open
         if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false) // Close mobile menu if open
+            setIsMobileMenuOpen(false)
         }
     }
 
-
+    // Handle user sign out
     const handleSignOutClick = async () => {
         await signOutCurrentUser()
         navigateTo("/")
     }
 
+
+    
 
     // Check for mobile view
     useEffect(() => {

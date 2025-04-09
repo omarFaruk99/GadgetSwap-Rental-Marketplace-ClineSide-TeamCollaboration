@@ -183,13 +183,19 @@ const DashboardPage = () => {
 
 
     // Simulate loading data
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setIsLoading(false)
+    //     }, 1000)
 
-        return () => clearTimeout(timer)
-    }, [])
+    //     return () => clearTimeout(timer)
+    // }, [])
+    
+    // Simulate loading data
+        useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Toggle mobile menu
     const toggleMobileMenu = () => {

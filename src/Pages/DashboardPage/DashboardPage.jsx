@@ -1,23 +1,8 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt } from "react-icons/fa"
-import {
-    FiHome,
-    FiUsers,
-    FiPackage,
-    FiShoppingCart,
-    FiHeart,
-    FiMessageSquare,
-    FiSettings,
-    FiLogOut,
-    FiX,
-    FiHelpCircle,
-    FiCreditCard,
-    FiMenu,
-    FiUser,
-    FiAward,
-} from "react-icons/fi"
+import {FiHome, FiUsers, FiPackage, FiShoppingCart, FiHeart, FiMessageSquare, FiSettings, FiLogOut, FiX, FiHelpCircle, FiCreditCard, FiMenu, FiUser, FiAward} from "react-icons/fi"
 import AuthContext from "../../Providers/AuthContext.jsx"
 import { Outlet } from "react-router"
 import LoadingSkeleton from "./LoadingSkeleton.jsx";
@@ -26,27 +11,22 @@ import LoadingSkeleton from "./LoadingSkeleton.jsx";
 const DashboardPage = () => {
 
     // State management
-    const { signOutCurrentUser } = useContext(AuthContext)
+    const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
     const darkMode = useSelector((state) => state.darkMode.isDark)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isMobileView, setIsMobileView] = useState(false)
     const [activeTab, setActiveTab] = useState("overview")
     const [isLoading, setIsLoading] = useState(true)
     const navigateTo = useNavigate()
+    const currentUrl = useLocation()
 
 
-    // Mock user data - in a real app, this would come from authentication
     const [user, setUser] = useState({
-        id: "user123",
-        name: "John Doe",
-        email: "john.doe@example.com",
-        avatar: "/placeholder.svg",
-        // role: "admin",                    // Activate this line to see admin dashboard
-        role: "user",                    // Activate this line to see user dashboard
-        joinDate: "2023-01-15",
-        verified: true,
-        balance: 1250.75,
-        loyaltyPoints: 450,
+        name: registeredUser?.displayName,
+        email: registeredUser?.email,
+        avatar: registeredUser?.personalDetails?.photoURL,
+        role: registeredUser?.role,
+        joinDate: registeredUser?.joinDate,
     })
 
 

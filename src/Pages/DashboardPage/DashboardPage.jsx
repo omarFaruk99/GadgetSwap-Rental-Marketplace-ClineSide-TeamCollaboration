@@ -160,14 +160,17 @@ const DashboardPage = () => {
             },
         ],
     })
-
+    // TODO: Replace with the real data from backend.
 
 
     // Simulate loading data
-        useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 1000);
-        return () => clearTimeout(timer);
-    }, []);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false)
+        }, 500)
+
+        return () => clearTimeout(timer)
+    }, [])
 
     // Toggle mobile menu
     const toggleMobileMenu = () => {

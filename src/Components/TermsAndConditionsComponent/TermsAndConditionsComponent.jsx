@@ -101,10 +101,10 @@ const TermsAndConditionsComponent = () => {
             title: "Rental Terms",
             icon: <FiCalendar/>,
             content: `
-            <p>Rental periods begin and end on the dates specified in the rental agreement. Late returns may incur additional charges as outlined in the rental agreement.</p>
-            <p>Renters are responsible for the proper use and care of rented gadgets. Any damage beyond normal wear and tear may result in additional charges.</p>
-            <p>Gadget owners are responsible for ensuring their devices are in good working condition and accurately described on the platform.</p>
-            <p>GadgetSwap is not responsible for any loss of data or privacy breaches that may occur during the rental period. Users are advised to remove personal data before lending or returning gadgets.</p>
+            <p>Rental periods start and end on the dates agreed upon in the rental contract. Late returns may result in extra fees as specified in the agreement.</p>
+            <p>Renters must use and care for the gadgets responsibly. Damage beyond normal wear and tear may lead to additional charges.</p>
+            <p>Gadget owners are expected to ensure their devices are fully functional and accurately listed on the platform.</p>
+            <p>GadgetSwap is not liable for data loss or privacy issues during the rental period. Users should remove personal information before lending or returning any device.</p>
             `
         },
         {

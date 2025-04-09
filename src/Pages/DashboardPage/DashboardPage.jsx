@@ -238,6 +238,30 @@ const DashboardPage = () => {
 
 
 
+    // // Check for mobile view
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         setIsMobileView(window.innerWidth < 1024)
+    //     }
+
+    //     handleResize() // Initial check
+    //     window.addEventListener("resize", handleResize)
+
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize)
+    //     }
+    // }, [])
+
+
+    // useEffect(() => {
+    //     window.scrollTo({
+    //         top: 0,
+    //         // behavior: 'smooth'
+    //     })
+    // }, [])
+
+    
+
     // Check for mobile view
     useEffect(() => {
         const handleResize = () => {

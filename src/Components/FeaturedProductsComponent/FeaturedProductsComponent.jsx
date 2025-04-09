@@ -144,8 +144,8 @@ const FeaturedProductsComponent = () => {
             <div className="mb-12 text-center space-y-4">
                 <h2
                     className={`text-4xl md:text-5xl font-extrabold tracking-tight inline-block transition-all duration-500 ${darkMode
-                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 drop-shadow-lg'
-                            : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 drop-shadow-md'
+                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 drop-shadow-lg'
+                        : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 drop-shadow-md'
                         }`}
                 >
                     Featured Gadgets
@@ -201,8 +201,20 @@ const FeaturedProductsComponent = () => {
                                 <span>{categories.find(c => c.id === selectedCategory)?.name}</span>
                             </>
                             : <>
-                                <IoSparklesOutline className={darkMode ? 'text-purple-400' : 'text-indigo-500'} size={20} />
-                                <span>All Categories</span>
+                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full shadow-sm bg-white/10 dark:bg-white/5 backdrop-blur-md transition-all duration-300">
+                                    <IoSparklesOutline
+                                        className={`transition-colors duration-300 ${darkMode ? 'text-purple-400' : 'text-indigo-500'
+                                            }`}
+                                        size={20}
+                                    />
+                                    <span
+                                        className={`font-medium tracking-wide ${darkMode ? 'text-gray-200' : 'text-gray-700'
+                                            }`}
+                                    >
+                                        All Categories
+                                    </span>
+                                </div>
+
                             </>
                         }
                     </span>

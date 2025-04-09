@@ -32,17 +32,20 @@ const TermsAndConditionsComponent = () => {
     };
 
 
-    // Handle section change
+
+    // Handles navigation to a specific section and closes the mobile menu if open
     const handleSectionChange = (sectionId) => {
         setActiveSection(sectionId);
+
+        // Close mobile menu on section change
         if (isMobileMenuOpen) {
             setIsMobileMenuOpen(false);
         }
 
-        // Scroll to section
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+        // Smooth scroll to the selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         }
     };
 

@@ -175,20 +175,35 @@ const CookieSettingsComponent = () => {
 
 
     // Accept only necessary cookies
+    // const acceptNecessaryCookies = () => {
+    //     const updatedSettings = {};
+
+    //     Object.keys(cookieSettings).forEach(key => {
+    //         updatedSettings[key] = {
+    //             ...cookieSettings[key],
+    //             enabled: cookieSettings[key].mandatory
+    //         };
+    //     });
+
+    //     setCookieSettings(updatedSettings);
+    //     setShowAlert(false);
+    //     console.log("Only necessary cookies accepted:", updatedSettings);
+    // };
+
+    // Accept only necessary cookies function
     const acceptNecessaryCookies = () => {
-        const updatedSettings = {};
-
-        Object.keys(cookieSettings).forEach(key => {
-            updatedSettings[key] = {
-                ...cookieSettings[key],
-                enabled: cookieSettings[key].mandatory
-            };
-        });
-
+        const updatedSettings = Object.fromEntries(
+            Object.entries(cookieSettings).map(([key, value]) => [
+                key,
+                { ...value, enabled: value.mandatory }
+            ])
+        );
+    
         setCookieSettings(updatedSettings);
         setShowAlert(false);
         console.log("Only necessary cookies accepted:", updatedSettings);
     };
+    
 
 
     // Save cookie preferences
@@ -199,18 +214,31 @@ const CookieSettingsComponent = () => {
 
 
     // Reset cookie preferences
+    // const resetCookiePreferences = () => {
+    //     const updatedSettings = {};
+
+    //     Object.keys(cookieSettings).forEach(key => {
+    //         updatedSettings[key] = {
+    //             ...cookieSettings[key],
+    //             enabled: cookieSettings[key].mandatory
+    //         };
+    //     });
+
+    //     setCookieSettings(updatedSettings);
+    // };
+
+    // Reset cookie preferences function
     const resetCookiePreferences = () => {
-        const updatedSettings = {};
-
-        Object.keys(cookieSettings).forEach(key => {
-            updatedSettings[key] = {
-                ...cookieSettings[key],
-                enabled: cookieSettings[key].mandatory
-            };
-        });
-
+        const updatedSettings = Object.fromEntries(
+            Object.entries(cookieSettings).map(([key, value]) => [
+                key,
+                { ...value, enabled: value.mandatory }
+            ])
+        );
+    
         setCookieSettings(updatedSettings);
     };
+    
 
 
     useEffect(() => {

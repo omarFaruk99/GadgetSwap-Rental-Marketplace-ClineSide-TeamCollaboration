@@ -82,8 +82,8 @@ const TermsAndConditionsComponent = () => {
             title: "Introduction",
             icon: <FiInfo/>,
             content: `
-            <p>Welcome to GadgetSwap, a platform that enables users to rent and lend gadgets. These Terms and Conditions govern your use of the GadgetSwap website, mobile applications, and services.</p>
-            <p>By accessing or using GadgetSwap, you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the service.</p>
+            <p>Welcome to GadgetSwap — a platform designed for users to rent and lend gadgets with ease. These Terms and Conditions outline the rules and guidelines for using our website, mobile apps, and related services.</p>
+            <p>By using GadgetSwap, you acknowledge and agree to comply with these Terms and Conditions. If you do not agree with any part of them, please refrain from using our services.</p>
             `
         },
         {

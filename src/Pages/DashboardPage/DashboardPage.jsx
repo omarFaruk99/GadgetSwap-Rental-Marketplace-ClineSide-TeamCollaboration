@@ -181,24 +181,22 @@ const DashboardPage = () => {
 
     // Handle tab change
     const handleTabChange = (tab) => {
-        const path = `/dashboard/${user.role}/${tab === "overview" ? "overview" : tab}`
-        setActiveTab(tab)
-        navigateTo(path)
-
-        // Close mobile menu if it's open
+        navigateTo(`/dashboard/${user.role}/${tab}`);
         if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false)
+            setIsMobileMenuOpen(false);
         }
     }
 
-    // Handle user sign out
+
+    useEffect(() => {
+        setActiveTab(currentUrl.pathname.split("/")[3])
+    }, [currentUrl]);
+
+
     const handleSignOutClick = async () => {
         await signOutCurrentUser()
         navigateTo("/")
     }
-
-
-    
 
     // Check for mobile view
     useEffect(() => {

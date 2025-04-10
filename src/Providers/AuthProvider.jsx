@@ -194,7 +194,7 @@ const AuthProvider = ({children}) => {
         try {
             await sendPasswordResetEmail(auth, email);
 
-            toast.success('Password reset email sent!');
+            toast.success('Password reset email sent. Please check your inbox!');
 
         } catch (error) {
             toast.error(`ERROR MESSAGE: ${error.code}: ${error.message}`);

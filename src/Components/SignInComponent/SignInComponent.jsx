@@ -5,13 +5,20 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
 import {useSelector} from "react-redux";
 import AuthContext from "../../Providers/AuthContext.jsx";
+import axios from 'axios';
+import { BASE_URL } from '../../SharedUtilities/SharedUtilities.jsx';
 
 
 const SignInComponent = () => {
 
-    const {signInExistingUsers} = useContext(AuthContext);
+    const { signInExistingUsers, resetPassword } = useContext(AuthContext);
     const navigate = useNavigate();
     const darkMode = useSelector((state) => state.darkMode.isDark);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [resetEmail, setResetEmail] = useState('');
+    const [resetError, setResetError] = useState('');
+
 
 
     // Form state
@@ -151,7 +158,6 @@ const SignInComponent = () => {
         // navigate('/');
     };
 
-
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -248,12 +254,15 @@ const SignInComponent = () => {
                                 } transition-colors duration-300`}>
                                     Password
                                 </label>
-                                <div className="text-sm">
-                                    <a href="#" className={`font-medium ${
+                                <div 
+                                    type="button"
+                                    onClick={() => setIsModalOpen(true)}
+                                    className="text-sm">
+                                    <button  className={`font-medium cursor-pointer ${
                                         darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
                                     } transition-colors duration-300`}>
                                         Forgot your password?
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                             <div className="mt-1 relative">
@@ -377,6 +386,79 @@ const SignInComponent = () => {
                     </div>
                 </form>
             </div>
+            {isModalOpen && (
+                <div 
+                    className="fixed inset-0 backdrop-blur-xl bg-black/10 flex items-center justify-center z-50"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div 
+                        className={`rounded-lg w-full max-w-md p-6 transform transition-all duration-300 ease-out ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-xl animate-fadeInSlide`}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h2 className="text-lg font-semibold mb-4">Reset Password</h2>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={resetEmail}
+                            onChange={(e) => setResetEmail(e.target.value)}
+                            className="w-full border px-3 py-2 rounded mb-3 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                        />
+                        {resetError && 
+                            <p className="mb-4 text-xs text-red-500 flex items-center">
+                                <IoWarningOutline className="mr-1 text-yellow-500" />
+                                {resetError}
+                            </p>
+                        }
+                        <div className="flex justify-end space-x-2">
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium bg-gray-500 text-white hover:bg-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-300 transform hover:scale-[1.02]"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={async () => {
+                                if (!resetEmail.trim()) {
+                                    setResetError('Email is required!');
+                                    return;
+                                }
+                                if(!resetEmail.includes("@")) {
+                                    setResetError('Email is invalid!');
+                                    return;
+                                }
+                                try {
+                                    const res = await axios.post(`${BASE_URL}/users/find_availability_by_email`, {
+                                        email: resetEmail
+                                    });
+                                    if (!res.data.exists) {
+                                        setResetError('No account found with this email');
+                                        return;
+                                    }
+                                    await resetPassword(resetEmail);
+                                    setResetError('');
+                                    setIsModalOpen(false);
+                                    // alert('Password reset email sent. Please check your inbox.');
+                                    setResetEmail('');
+                                } catch (err) {
+                                    setResetError(err.message || 'Failed to send email');
+                                }
+                            }}
+                            // className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
+                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white cursor-pointer ${
+                                darkMode
+                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
+                            } focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                                darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
+                            } transition-all duration-300 transform hover:scale-[1.02]`}
+                        >
+                            Send Reset Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+
         </div>
     );
 };

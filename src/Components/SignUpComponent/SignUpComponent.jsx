@@ -57,19 +57,18 @@ const SignUpComponent = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-
-    const handleChange = (e) => {
-        const {name, value, type, checked} = e.target;
+    // Using destructuring to get name, value, type, and checked from the event target
+    const handleChange = ({ target: { name, value, type, checked } }) => {
         const newValue = type === 'checkbox' ? checked : value;
-
-        setFormData({
-            ...formData,
-            [name]: newValue
-        });
-
-        // Validate on change
+      
+        setFormData(prev => ({
+          ...prev,
+          [name]: newValue
+        }));
+      
         validateField(name, newValue);
-    };
+      };
+      
 
 
     const handleBlur = (e) => {
@@ -83,75 +82,73 @@ const SignUpComponent = () => {
         validateField(name, formData[name]);
     };
 
-
+    // Validate each field based on its name and value and set the corresponding error message if validation fails
     const validateField = (name, value) => {
+        const trimmedValue = typeof value === 'string' ? value.trim() : value;
         let errorMessage = '';
-
+      
+        // Set confirm password error state separately to avoid unnecessary re-renders
+        const setConfirmPasswordError = (msg) =>
+          setErrors((prev) => ({ ...prev, confirmPassword: msg }));
+      
         switch (name) {
-            case 'fullName':
-                if (!value.trim()) {
-                    errorMessage = 'Full name is required';
-                } else if (value.trim().length < 3) {
-                    errorMessage = 'Full name must be at least 3 characters';
-                }
-                break;
-
-            case 'email':
-                if (!value.trim()) {
-                    errorMessage = 'Email is required';
-                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    errorMessage = 'Please enter a valid email address';
-                }
-                break;
-
-            case 'password':
-                if (!value) {
-                    errorMessage = 'Password is required';
-                } else if (value.length < 8) {
-                    errorMessage = 'Password must be at least 8 characters';
-                } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
-                    errorMessage = 'Password must contain uppercase, lowercase, and number';
-                }
-
-                // Also validate confirm password if it has been entered
-                if (formData.confirmPassword && value !== formData.confirmPassword) {
-                    setErrors(prev => ({
-                        ...prev,
-                        confirmPassword: 'Passwords do not match'
-                    }));
-                } else if (formData.confirmPassword) {
-                    setErrors(prev => ({
-                        ...prev,
-                        confirmPassword: ''
-                    }));
-                }
-                break;
-
-            case 'confirmPassword':
-                if (!value) {
-                    errorMessage = 'Please confirm your password';
-                } else if (value !== formData.password) {
-                    errorMessage = 'Passwords do not match';
-                }
-                break;
-
-            case 'acceptTerms':
-                if (!value) {
-                    errorMessage = 'You must accept the terms and conditions';
-                }
-                break;
-
-            default:
-                break;
+          case 'fullName':
+            if (!trimmedValue) {
+              errorMessage = 'Full name is required';
+            } else if (trimmedValue.length < 3) {
+              errorMessage = 'Full name must be at least 3 characters';
+            }
+            break;
+      
+          case 'email':
+            if (!trimmedValue) {
+              errorMessage = 'Email is required';
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+              errorMessage = 'Please enter a valid email address';
+            }
+            break;
+      
+          case 'password':
+            if (!value) {
+              errorMessage = 'Password is required';
+            } else if (value.length < 8) {
+              errorMessage = 'Password must be at least 8 characters';
+            } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+              errorMessage = 'Password must contain uppercase, lowercase, and number';
+            }
+      
+            if (formData.confirmPassword) {
+              const match = value === formData.confirmPassword;
+              setConfirmPasswordError(match ? '' : 'Passwords do not match');
+            }
+            break;
+      
+          case 'confirmPassword':
+            if (!value) {
+              errorMessage = 'Please confirm your password';
+            } else if (value !== formData.password) {
+              errorMessage = 'Passwords do not match';
+            }
+            break;
+      
+          case 'acceptTerms':
+            if (!value) {
+              errorMessage = 'You must accept the terms and conditions';
+            }
+            break;
+      
+          default:
+            break;
         }
-
-        setErrors(prev => ({
-            ...prev,
-            [name]: errorMessage
+      
+        setErrors((prev) => ({
+          ...prev,
+          [name]: errorMessage
         }));
-
+      
         return !errorMessage;
-    };
+      };
+      
 
 
     const validateForm = () => {
@@ -192,7 +189,7 @@ const SignUpComponent = () => {
 
     const handleGoogleSignIn = async () => {
         await signInWithGoogle();
-        console.log('Sign in with Google clicked');
+        // console.log('Sign in with Google clicked');
     };
 
 

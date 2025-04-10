@@ -53,7 +53,7 @@ const LoyaltyAndRewardsComponent = () => {
             name: 'Bronze',
             icon: <FiAward className="text-amber-700" size={24} />,
             pointsRequired: 0,
-            color: 'from-amber-700 to-amber-600',
+            color: 'from-amber-600 to-amber-500',
             benefits: [
                 { id: 'b1', text: 'Access to basic gadget catalog', icon: <FiGift size={16} /> },
                 { id: 'b2', text: 'Standard delivery options', icon: <FiTruck size={16} /> },
@@ -64,9 +64,9 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'silver',
             name: 'Silver',
-            icon: <FiAward className="text-gray-400" size={24} />,
+            icon: <FiAward className="text-gray-300" size={24} />,
             pointsRequired: 500,
-            color: 'from-gray-400 to-gray-300',
+            color: 'from-gray-500 to-gray-400',
             benefits: [
                 { id: 's1', text: 'All Bronze benefits', icon: <FiGift size={16} /> },
                 { id: 's2', text: 'Priority customer support', icon: <FiHeart size={16} /> },
@@ -95,7 +95,7 @@ const LoyaltyAndRewardsComponent = () => {
             name: 'Platinum',
             icon: <FiAward className="text-purple-400" size={24} />,
             pointsRequired: 5000,
-            color: 'from-purple-500 to-indigo-500',
+            color: 'from-purple-600 to-indigo-500',
             benefits: [
                 { id: 'p1', text: 'All Gold benefits', icon: <FiGift size={16} /> },
                 { id: 'p2', text: '25% discount on extended rentals', icon: <FiPercent size={16} /> },
@@ -114,7 +114,7 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'rental-discounts',
             name: 'Rental Discounts',
-            icon: <FiPercent className="text-green-500" size={24} />,
+            icon: <FiPercent className="text-emerald-500" size={24} />,
             description: 'Redeem points for discounts on your next gadget rental. The more points you use, the bigger the discount!',
             redemptionOptions: [
                 { points: 200, value: '10% off your next rental' },
@@ -148,7 +148,7 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'insurance-coverage',
             name: 'Insurance Coverage',
-            icon: <FiShield className="text-red-500" size={24} />,
+            icon: <FiShield className="text-sky-500" size={24} />,
             description: 'Redeem points for insurance coverage on your rentals for peace of mind.',
             redemptionOptions: [
                 { points: 250, value: 'Basic damage protection' },
@@ -159,7 +159,7 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'exclusive-access',
             name: 'Exclusive Access',
-            icon: <IoTrophyOutline className="text-amber-500" size={24} />,
+            icon: <IoTrophyOutline className="text-yellow-500" size={24} />,
             description: 'Use points to gain early or exclusive access to limited edition and high-demand gadgets.',
             redemptionOptions: [
                 { points: 800, value: 'Early access to new releases' },
@@ -170,7 +170,7 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'gift-cards',
             name: 'Gift Cards',
-            icon: <IoWalletOutline className="text-pink-500" size={24} />,
+            icon: <IoWalletOutline className="text-fuchsia-500" size={24} />,
             description: 'Convert your loyalty points into gift cards for popular retailers and online stores.',
             redemptionOptions: [
                 { points: 1000, value: '$25 gift card' },
@@ -186,7 +186,7 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'rentals',
             name: 'Complete Rentals',
-            icon: <FiGift className="text-indigo-500" size={24} />,
+            icon: <FiGift className="text-violet-500" size={24} />,
             description: 'Earn 10 points for every $1 spent on rentals',
             example: 'Rent a $100 gadget and earn 1,000 points'
         },
@@ -200,14 +200,14 @@ const LoyaltyAndRewardsComponent = () => {
         {
             id: 'referrals',
             name: 'Refer Friends',
-            icon: <FiHeart className="text-pink-500" size={24} />,
+            icon: <FiHeart className="text-rose-500" size={24} />,
             description: 'Earn 500 points when a referred friend completes their first rental',
             example: 'Refer 5 friends and earn 2,500 points'
         },
         {
             id: 'streak',
             name: 'Rental Streak',
-            icon: <IoSparklesOutline className="text-purple-500" size={24} />,
+            icon: <IoSparklesOutline className="text-indigo-500" size={24} />,
             description: 'Earn bonus points for consecutive monthly rentals',
             example: 'Rent for 3 consecutive months and earn a 1,000 point bonus'
         }
@@ -248,16 +248,16 @@ const LoyaltyAndRewardsComponent = () => {
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
                     <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium mb-4 ${darkMode
-                            ? 'bg-gray-800/70 text-cyan-300 border border-cyan-800/50'
-                            : 'bg-white/80 text-indigo-700 border border-indigo-200/50'
+                        ? 'bg-gray-800/70 text-cyan-300 border border-cyan-800/50'
+                        : 'bg-white/80 text-indigo-700 border border-indigo-200/50'
                         } backdrop-blur-md`}>
                         <FiAward className="mr-2" />
                         <span>Membership Program</span>
                     </div>
 
                     <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode
-                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400'
-                            : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600'
+                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400'
+                        : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600'
                         }`}>
                         Loyalty & Rewards
                     </h2>
@@ -273,12 +273,12 @@ const LoyaltyAndRewardsComponent = () => {
                         <button
                             onClick={() => handleTabChange('tiers')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'tiers'
-                                    ? darkMode
-                                        ? 'bg-gray-700 text-white'
-                                        : 'bg-indigo-100 text-indigo-700'
-                                    : darkMode
-                                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                                        : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
+                                ? darkMode
+                                    ? 'bg-gray-700 text-white'
+                                    : 'bg-indigo-100 text-indigo-700'
+                                : darkMode
+                                    ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                                    : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
                                 }`}
                         >
                             <span className="flex items-center">
@@ -290,12 +290,12 @@ const LoyaltyAndRewardsComponent = () => {
                         <button
                             onClick={() => handleTabChange('rewards')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'rewards'
-                                    ? darkMode
-                                        ? 'bg-gray-700 text-white'
-                                        : 'bg-indigo-100 text-indigo-700'
-                                    : darkMode
-                                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                                        : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
+                                ? darkMode
+                                    ? 'bg-gray-700 text-white'
+                                    : 'bg-indigo-100 text-indigo-700'
+                                : darkMode
+                                    ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                                    : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
                                 }`}
                         >
                             <span className="flex items-center">
@@ -307,12 +307,12 @@ const LoyaltyAndRewardsComponent = () => {
                         <button
                             onClick={() => handleTabChange('earn')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${activeTab === 'earn'
-                                    ? darkMode
-                                        ? 'bg-gray-700 text-white'
-                                        : 'bg-indigo-100 text-indigo-700'
-                                    : darkMode
-                                        ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                                        : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
+                                ? darkMode
+                                    ? 'bg-gray-700 text-white'
+                                    : 'bg-indigo-100 text-indigo-700'
+                                : darkMode
+                                    ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                                    : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
                                 }`}
                         >
                             <span className="flex items-center">
@@ -348,12 +348,12 @@ const LoyaltyAndRewardsComponent = () => {
                             <button
                                 onClick={() => handleTabChange('tiers')}
                                 className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'tiers'
-                                        ? darkMode
-                                            ? 'bg-gray-700 text-white'
-                                            : 'bg-indigo-50 text-indigo-700'
-                                        : darkMode
-                                            ? 'text-gray-300 hover:bg-gray-700/50'
-                                            : 'text-gray-700 hover:bg-indigo-50'
+                                    ? darkMode
+                                        ? 'bg-gray-700 text-white'
+                                        : 'bg-indigo-50 text-indigo-700'
+                                    : darkMode
+                                        ? 'text-gray-300 hover:bg-gray-700/50'
+                                        : 'text-gray-700 hover:bg-indigo-50'
                                     }`}
                             >
                                 <FiAward className="mr-2" />
@@ -363,12 +363,12 @@ const LoyaltyAndRewardsComponent = () => {
                             <button
                                 onClick={() => handleTabChange('rewards')}
                                 className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'rewards'
-                                        ? darkMode
-                                            ? 'bg-gray-700 text-white'
-                                            : 'bg-indigo-50 text-indigo-700'
-                                        : darkMode
-                                            ? 'text-gray-300 hover:bg-gray-700/50'
-                                            : 'text-gray-700 hover:bg-indigo-50'
+                                    ? darkMode
+                                        ? 'bg-gray-700 text-white'
+                                        : 'bg-indigo-50 text-indigo-700'
+                                    : darkMode
+                                        ? 'text-gray-300 hover:bg-gray-700/50'
+                                        : 'text-gray-700 hover:bg-indigo-50'
                                     }`}
                             >
                                 <FiGift className="mr-2" />
@@ -378,12 +378,12 @@ const LoyaltyAndRewardsComponent = () => {
                             <button
                                 onClick={() => handleTabChange('earn')}
                                 className={`flex items-center w-full px-4 py-3 text-left ${activeTab === 'earn'
-                                        ? darkMode
-                                            ? 'bg-gray-700 text-white'
-                                            : 'bg-indigo-50 text-indigo-700'
-                                        : darkMode
-                                            ? 'text-gray-300 hover:bg-gray-700/50'
-                                            : 'text-gray-700 hover:bg-indigo-50'
+                                    ? darkMode
+                                        ? 'bg-gray-700 text-white'
+                                        : 'bg-indigo-50 text-indigo-700'
+                                    : darkMode
+                                        ? 'text-gray-300 hover:bg-gray-700/50'
+                                        : 'text-gray-700 hover:bg-indigo-50'
                                     }`}
                             >
                                 <IoSparklesOutline className="mr-2" />
@@ -405,10 +405,10 @@ const LoyaltyAndRewardsComponent = () => {
                                         key={tier.id}
                                         onClick={() => handleTierSelect(tier.id)}
                                         className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTier === tier.id
-                                                ? `bg-gradient-to-r ${tier.color} text-white`
-                                                : darkMode
-                                                    ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                                                    : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
+                                            ? `bg-gradient-to-r ${tier.color} text-white`
+                                            : darkMode
+                                                ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                                                : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
                                             }`}
                                     >
                                         <span className="flex items-center">
@@ -429,10 +429,10 @@ const LoyaltyAndRewardsComponent = () => {
                                         key={tier.id}
                                         onClick={() => handleTierSelect(tier.id)}
                                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${activeTier === tier.id
-                                                ? `bg-gradient-to-r ${tier.color} text-white`
-                                                : darkMode
-                                                    ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
-                                                    : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
+                                            ? `bg-gradient-to-r ${tier.color} text-white`
+                                            : darkMode
+                                                ? 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                                                : 'text-gray-700 hover:text-indigo-700 hover:bg-indigo-50'
                                             }`}
                                     >
                                         <span className="flex items-center justify-center">
@@ -451,8 +451,8 @@ const LoyaltyAndRewardsComponent = () => {
                                 className={`${activeTier === tier.id ? 'block' : 'hidden'}`}
                             >
                                 <div className={`rounded-2xl overflow-hidden ${darkMode
-                                        ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                                        : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl'
+                                    ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                                    : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl'
                                     }`}>
                                     {/* Tier Header */}
                                     <div className={`bg-gradient-to-r ${tier.color} p-6 md:p-8 text-white`}>
@@ -495,14 +495,14 @@ const LoyaltyAndRewardsComponent = () => {
                                                 <div
                                                     key={benefit.id}
                                                     className={`flex items-center p-4 rounded-xl ${darkMode
-                                                            ? 'bg-gray-700/50 border border-gray-600/50'
-                                                            : 'bg-gray-50/80 border border-gray-200/50'
+                                                        ? 'bg-gray-700/50 border border-gray-600/50'
+                                                        : 'bg-gray-50/80 border border-gray-200/50'
                                                         }`}
                                                 >
                                                     <div
                                                         className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${darkMode
-                                                                ? 'bg-gray-800 text-white'
-                                                                : 'bg-white text-indigo-600 shadow-sm'
+                                                            ? 'bg-gray-800 text-white'
+                                                            : 'bg-white text-indigo-600 shadow-sm'
                                                             }`}>
                                                         {benefit.icon}
                                                     </div>
@@ -519,8 +519,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                 <a
                                                     href="/dashboard/membership"
                                                     className={`inline-flex items-center px-6 py-3 rounded-xl font-medium transition-all duration-300 ${darkMode
-                                                            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-900/20'
-                                                            : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-600/20'
+                                                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-lg hover:shadow-purple-900/20'
+                                                        : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-lg hover:shadow-indigo-600/20'
                                                         }`}
                                                 >
                                                     <span>Upgrade to {tier.id === 'bronze' ? 'Silver' : tier.id === 'silver' ? 'Gold' : 'Platinum'}</span>
@@ -533,8 +533,8 @@ const LoyaltyAndRewardsComponent = () => {
 
                                 {/* Tier Comparison */}
                                 <div className={`mt-8 rounded-xl overflow-hidden ${darkMode
-                                        ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                                        : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
+                                    ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                                    : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
                                     }`}>
                                     <div className="p-6">
                                         <h4 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
@@ -551,8 +551,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                             <th
                                                                 key={`th-${t.id}`}
                                                                 className={`py-3 px-4 text-center ${activeTier === t.id
-                                                                        ? darkMode ? 'text-purple-400' : 'text-indigo-600'
-                                                                        : ''
+                                                                    ? darkMode ? 'text-purple-400' : 'text-indigo-600'
+                                                                    : ''
                                                                     }`}
                                                             >
                                                                 {t.name}
@@ -632,16 +632,16 @@ const LoyaltyAndRewardsComponent = () => {
                                 <div
                                     key={reward.id}
                                     className={`rounded-xl overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-1 ${darkMode
-                                            ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50 hover:shadow-lg hover:shadow-purple-900/20'
-                                            : 'bg-white/80 backdrop-blur-md border border-gray-200/50 hover:shadow-lg hover:shadow-indigo-200/50'
+                                        ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50 hover:shadow-lg hover:shadow-purple-900/20'
+                                        : 'bg-white/80 backdrop-blur-md border border-gray-200/50 hover:shadow-lg hover:shadow-indigo-200/50'
                                         }`}
                                 >
                                     <div className="p-6">
                                         <div className="flex items-center mb-4">
                                             <div
                                                 className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${darkMode
-                                                        ? 'bg-gray-700'
-                                                        : 'bg-gray-100'
+                                                    ? 'bg-gray-700'
+                                                    : 'bg-gray-100'
                                                     }`}>
                                                 {reward.icon}
                                             </div>
@@ -666,8 +666,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                     <div
                                                         key={`${reward.id}-option-${index}`}
                                                         className={`flex justify-between items-center py-2 px-2 rounded-lg mb-2 last:mb-0 ${darkMode
-                                                                ? 'bg-gray-800/70 hover:bg-gray-800'
-                                                                : 'bg-white hover:bg-gray-50'
+                                                            ? 'bg-gray-800/70 hover:bg-gray-800'
+                                                            : 'bg-white hover:bg-gray-50'
                                                             }`}
                                                     >
                                                         <span
@@ -687,8 +687,8 @@ const LoyaltyAndRewardsComponent = () => {
                                             <a
                                                 href={`/rewards/redeem/${reward.id}`}
                                                 className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${darkMode
-                                                        ? 'bg-gray-700 text-white hover:bg-gray-600'
-                                                        : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
+                                                    ? 'bg-gray-700 text-white hover:bg-gray-600'
+                                                    : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
                                                     }`}
                                             >
                                                 <span>Redeem Now</span>
@@ -702,8 +702,8 @@ const LoyaltyAndRewardsComponent = () => {
 
                         {/* Points Balance Card */}
                         <div className={`mt-10 rounded-xl overflow-hidden ${darkMode
-                                ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                                : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
+                            ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                            : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
                             }`}>
                             <div className="p-6 md:p-8">
                                 <div className="flex flex-col md:flex-row justify-between items-center">
@@ -721,8 +721,8 @@ const LoyaltyAndRewardsComponent = () => {
                                         <a
                                             href="/login"
                                             className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${darkMode
-                                                    ? 'bg-gray-700 text-white hover:bg-gray-600'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-gray-700 text-white hover:bg-gray-600'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             Sign In
@@ -730,8 +730,8 @@ const LoyaltyAndRewardsComponent = () => {
                                         <a
                                             href="/signup"
                                             className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${darkMode
-                                                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
-                                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                                                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
+                                                : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
                                                 }`}
                                         >
                                             Sign Up
@@ -747,8 +747,8 @@ const LoyaltyAndRewardsComponent = () => {
                 {activeTab === 'earn' && (
                     <div className="w-11/12 mx-auto">
                         <div className={`rounded-2xl overflow-hidden mb-10 ${darkMode
-                                ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                                : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl'
+                            ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                            : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-xl'
                             }`}>
                             <div className="p-6 md:p-8">
                                 <h3 className={`text-xl font-semibold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'
@@ -761,15 +761,15 @@ const LoyaltyAndRewardsComponent = () => {
                                         <div
                                             key={item.id}
                                             className={`rounded-xl p-5 transition-all duration-300 ${darkMode
-                                                    ? 'bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50'
-                                                    : 'bg-gray-50/80 hover:bg-gray-100/80 border border-gray-200/50'
+                                                ? 'bg-gray-700/50 hover:bg-gray-700/70 border border-gray-600/50'
+                                                : 'bg-gray-50/80 hover:bg-gray-100/80 border border-gray-200/50'
                                                 }`}
                                         >
                                             <div className="flex items-start">
                                                 <div
                                                     className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${darkMode
-                                                            ? 'bg-gray-800'
-                                                            : 'bg-white shadow-sm'
+                                                        ? 'bg-gray-800'
+                                                        : 'bg-white shadow-sm'
                                                         }`}>
                                                     {item.icon}
                                                 </div>
@@ -782,8 +782,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                         {item.description}
                                                     </p>
                                                     <div className={`text-xs px-3 py-1 rounded-full inline-block ${darkMode
-                                                            ? 'bg-gray-800/70 text-gray-300'
-                                                            : 'bg-gray-200/70 text-gray-700'
+                                                        ? 'bg-gray-800/70 text-gray-300'
+                                                        : 'bg-gray-200/70 text-gray-700'
                                                         }`}>
                                                         Example: {item.example}
                                                     </div>
@@ -797,11 +797,11 @@ const LoyaltyAndRewardsComponent = () => {
 
                         {/* Points Calculator */}
                         <div className={`rounded-xl overflow-hidden ${darkMode
-                                ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                                : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
+                            ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                            : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
                             }`}>
                             <div className="p-6 md:p-8">
-                                <h3 className={`text-xl font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'
+                                <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'
                                     }`}>
                                     Points Calculator
                                 </h3>
@@ -811,8 +811,8 @@ const LoyaltyAndRewardsComponent = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className={`col-span-2 rounded-xl p-5 ${darkMode
-                                            ? 'bg-gray-700/50 border border-gray-600/50'
-                                            : 'bg-gray-50/80 border border-gray-200/50'
+                                        ? 'bg-gray-700/50 border border-gray-600/50'
+                                        : 'bg-gray-50/80 border border-gray-200/50'
                                         }`}>
                                         <div className="mb-4">
                                             <label className={`block text-sm font-medium mb-1 ${darkMode ? 'text-gray-300' : 'text-gray-700'
@@ -823,8 +823,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                 type="number"
                                                 placeholder="Enter amount"
                                                 className={`w-full px-4 py-2 rounded-lg ${darkMode
-                                                        ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
-                                                        : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
+                                                    ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
+                                                    : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
                                                     } focus:outline-none focus:ring-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
                                                     }`}
                                                 defaultValue="100"
@@ -840,8 +840,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                 type="number"
                                                 placeholder="Enter number"
                                                 className={`w-full px-4 py-2 rounded-lg ${darkMode
-                                                        ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
-                                                        : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
+                                                    ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
+                                                    : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
                                                     } focus:outline-none focus:ring-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
                                                     }`}
                                                 defaultValue="1"
@@ -857,8 +857,8 @@ const LoyaltyAndRewardsComponent = () => {
                                                 type="number"
                                                 placeholder="Enter number"
                                                 className={`w-full px-4 py-2 rounded-lg ${darkMode
-                                                        ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
-                                                        : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
+                                                    ? 'bg-gray-800 border border-gray-700 text-white placeholder-gray-500'
+                                                    : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'
                                                     } focus:outline-none focus:ring-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
                                                     }`}
                                                 defaultValue="0"
@@ -867,8 +867,8 @@ const LoyaltyAndRewardsComponent = () => {
 
                                         <button
                                             className={`w-full py-2 rounded-lg font-medium transition-all duration-300 ${darkMode
-                                                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
-                                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                                                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white'
+                                                : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
                                                 }`}
                                         >
                                             Calculate Points
@@ -876,8 +876,8 @@ const LoyaltyAndRewardsComponent = () => {
                                     </div>
 
                                     <div className={`rounded-xl p-5 ${darkMode
-                                            ? 'bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-800/30'
-                                            : 'bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100'
+                                        ? 'bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-800/30'
+                                        : 'bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100'
                                         }`}>
                                         <h4 className={`text-lg font-medium mb-3 ${darkMode ? 'text-white' : 'text-gray-900'
                                             }`}>
@@ -885,8 +885,8 @@ const LoyaltyAndRewardsComponent = () => {
                                         </h4>
 
                                         <div className={`text-4xl font-bold mb-4 ${darkMode
-                                                ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400'
-                                                : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600'
+                                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400'
+                                            : 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600'
                                             }`}>
                                             1,250
                                         </div>
@@ -906,7 +906,7 @@ const LoyaltyAndRewardsComponent = () => {
                                             </div>
                                         </div>
 
-                                        <div className={`mt-4 pt-4 text-sm ${darkMode ? 'border-t border-purple-800/30' : 'border-t border-indigo-200/50'
+                                        <div className={`mt-4 pt-4 text-sm ${darkMode ? 'border-t border-purple-800/80' : 'border-t border-indigo-300/50'
                                             }`}>
                                             <div className="flex justify-between font-medium">
                                                 <span>Current Tier:</span>
@@ -935,8 +935,8 @@ const LoyaltyAndRewardsComponent = () => {
                     </h3>
 
                     <div className={`rounded-xl overflow-hidden ${darkMode
-                            ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
-                            : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
+                        ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                        : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'
                         }`}>
                         <div className={`divide-y ${darkMode ? 'divide-gray-700/80' : 'divide-gray-700/20'}`}>
                             <div className="p-6">

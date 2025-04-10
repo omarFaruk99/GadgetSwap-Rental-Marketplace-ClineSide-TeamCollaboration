@@ -32,32 +32,39 @@ const TermsAndConditionsComponent = () => {
     };
 
 
-    // Handle section change
+
+    // Handles navigation to a specific section and closes the mobile menu if open
     const handleSectionChange = (sectionId) => {
         setActiveSection(sectionId);
+
+        // Close mobile menu on section change
         if (isMobileMenuOpen) {
             setIsMobileMenuOpen(false);
         }
 
-        // Scroll to section
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+        // Smooth scroll to the selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
 
-    // Close mobile menu on window resize
+    // Automatically close the mobile menu when resizing to desktop width
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+            const isDesktop = window.innerWidth >= 1024;
+            if (isDesktop && isMobileMenuOpen) {
                 setIsMobileMenuOpen(false);
             }
         };
 
         window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, [isMobileMenuOpen]);
+
 
 
     useEffect(() => {
@@ -75,8 +82,8 @@ const TermsAndConditionsComponent = () => {
             title: "Introduction",
             icon: <FiInfo/>,
             content: `
-            <p>Welcome to GadgetSwap, a platform that enables users to rent and lend gadgets. These Terms and Conditions govern your use of the GadgetSwap website, mobile applications, and services.</p>
-            <p>By accessing or using GadgetSwap, you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the service.</p>
+            <p>Welcome to GadgetSwap — a platform designed for users to rent and lend gadgets with ease. These Terms and Conditions outline the rules and guidelines for using our website, mobile apps, and related services.</p>
+            <p>By using GadgetSwap, you acknowledge and agree to comply with these Terms and Conditions. If you do not agree with any part of them, please refrain from using our services.</p>
             `
         },
         {
@@ -94,10 +101,10 @@ const TermsAndConditionsComponent = () => {
             title: "Rental Terms",
             icon: <FiCalendar/>,
             content: `
-            <p>Rental periods begin and end on the dates specified in the rental agreement. Late returns may incur additional charges as outlined in the rental agreement.</p>
-            <p>Renters are responsible for the proper use and care of rented gadgets. Any damage beyond normal wear and tear may result in additional charges.</p>
-            <p>Gadget owners are responsible for ensuring their devices are in good working condition and accurately described on the platform.</p>
-            <p>GadgetSwap is not responsible for any loss of data or privacy breaches that may occur during the rental period. Users are advised to remove personal data before lending or returning gadgets.</p>
+            <p>Rental periods start and end on the dates agreed upon in the rental contract. Late returns may result in extra fees as specified in the agreement.</p>
+            <p>Renters must use and care for the gadgets responsibly. Damage beyond normal wear and tear may lead to additional charges.</p>
+            <p>Gadget owners are expected to ensure their devices are fully functional and accurately listed on the platform.</p>
+            <p>GadgetSwap is not liable for data loss or privacy issues during the rental period. Users should remove personal information before lending or returning any device.</p>
             `
         },
         {

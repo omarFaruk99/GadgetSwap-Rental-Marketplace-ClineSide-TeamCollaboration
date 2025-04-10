@@ -33,6 +33,12 @@ const LoyaltyAndRewardsComponent = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
+    // Accordion state
+    const [activeIndex, setActiveIndex] = useState(null);
+    const toggleAccordion = (index) => {
+        setActiveIndex(activeIndex === index ? null : index);
+    };
+
 
     // Check if mobile view
     useEffect(() => {
@@ -928,7 +934,7 @@ const LoyaltyAndRewardsComponent = () => {
                 )}
 
                 {/* FAQ Section */}
-                <div className="w-10/12 mx-auto mt-16">
+                {/* <div className="w-10/12 mx-auto mt-16">
                     <h3 className={`text-2xl font-bold mb-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'
                         }`}>
                         Frequently Asked Questions
@@ -982,6 +988,80 @@ const LoyaltyAndRewardsComponent = () => {
                                     threshold. Silver requires 500 points, Gold requires 1,500 points, and Platinum
                                     requires 5,000 points.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div> */}
+
+                {/* FAQ Section in Accordion */}
+                <div className="w-10/12 mx-auto mt-16">
+                    <h3 className={`text-2xl font-bold mb-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                        Frequently Asked Questions
+                    </h3>
+
+                    <div className={`rounded-xl overflow-hidden ${darkMode
+                        ? 'bg-gray-800/50 backdrop-blur-md border border-gray-700/50'
+                        : 'bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-lg'}`}>
+                        <div className={`divide-y ${darkMode ? 'divide-gray-700/80' : 'divide-gray-700/20'}`}>
+                            <div
+                                className="p-6 cursor-pointer"
+                                onClick={() => toggleAccordion(0)}
+                            >
+                                <h4 className={`text-lg font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    How do I earn loyalty points?
+                                </h4>
+                                {activeIndex === 0 && (
+                                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                        You earn 10 points for every $1 spent on rentals. Additional points can be earned by
+                                        writing reviews, referring friends, and maintaining a rental streak.
+                                    </p>
+                                )}
+                            </div>
+
+                            <div
+                                className="p-6 cursor-pointer"
+                                onClick={() => toggleAccordion(1)}
+                            >
+                                <h4 className={`text-lg font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    When do my points expire?
+                                </h4>
+                                {activeIndex === 1 && (
+                                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                        Points are valid for 12 months from the date they are earned. Any activity on your
+                                        account will extend all your points for another 12 months.
+                                    </p>
+                                )}
+                            </div>
+
+                            <div
+                                className="p-6 cursor-pointer"
+                                onClick={() => toggleAccordion(2)}
+                            >
+                                <h4 className={`text-lg font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    How do I redeem my points?
+                                </h4>
+                                {activeIndex === 2 && (
+                                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                        You can redeem your points through your account dashboard. Select the reward you
+                                        want to redeem and follow the instructions. Points will be deducted automatically.
+                                    </p>
+                                )}
+                            </div>
+
+                            <div
+                                className="p-6 cursor-pointer"
+                                onClick={() => toggleAccordion(3)}
+                            >
+                                <h4 className={`text-lg font-medium mb-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    How do I upgrade my membership tier?
+                                </h4>
+                                {activeIndex === 3 && (
+                                    <p className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+                                        Membership tiers are automatically upgraded when you reach the required points
+                                        threshold. Silver requires 500 points, Gold requires 1,500 points, and Platinum
+                                        requires 5,000 points.
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>

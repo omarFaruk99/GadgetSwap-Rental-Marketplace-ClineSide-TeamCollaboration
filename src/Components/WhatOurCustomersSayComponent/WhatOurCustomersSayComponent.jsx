@@ -82,19 +82,15 @@ const WhatOurCustomersSayComponent = () => {
     ];
 
 
-    // Check if mobile view
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        const updateMobileView = () => setIsMobile(window.innerWidth < 768);
+    
+        updateMobileView(); // Initial check
+        window.addEventListener('resize', updateMobileView);
+    
+        return () => window.removeEventListener('resize', updateMobileView);
     }, []);
+    
 
 
     // Autoplay functionality

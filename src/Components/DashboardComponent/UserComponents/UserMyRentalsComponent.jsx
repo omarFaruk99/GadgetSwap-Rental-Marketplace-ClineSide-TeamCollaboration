@@ -290,9 +290,8 @@ const UserMyRentalsComponent = () => {
                         {(searchQuery || startDate || endDate) && (
                             <button
                                 onClick={resetFilters}
-                                className={`ml-4 flex items-center gap-1 text-sm ${
-                                    darkMode ? "text-gray-400 hover:text-gray-300" : "text-gray-500 hover:text-gray-700"
-                                }`}
+                                className={`ml-4 flex items-center gap-1 text-sm ${darkMode ? "text-gray-400 hover:text-gray-300" : "text-gray-500 hover:text-gray-700"
+                                    }`}
                             >
                                 <FiX size={14} />
                                 <span>Clear</span>
@@ -306,43 +305,40 @@ const UserMyRentalsComponent = () => {
                         <div className="flex space-x-2">
                             <button
                                 onClick={() => setActiveTab("active")}
-                                className={`px-4 py-1 rounded-lg transition-colors ${
-                                    activeTab === "active"
-                                        ? darkMode
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-blue-600 text-white"
-                                        : darkMode
-                                            ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
-                                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                                }`}
+                                className={`px-4 py-1 rounded-lg transition-colors ${activeTab === "active"
+                                    ? darkMode
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-blue-600 text-white"
+                                    : darkMode
+                                        ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                                    }`}
                             >
                                 Active
                             </button>
                             <button
                                 onClick={() => setActiveTab("past")}
-                                className={`px-4 py-1 rounded-lg transition-colors ${
-                                    activeTab === "past"
-                                        ? darkMode
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-blue-600 text-white"
-                                        : darkMode
-                                            ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
-                                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                                }`}
+                                className={`px-4 py-1 rounded-lg transition-colors ${activeTab === "past"
+                                    ? darkMode
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-blue-600 text-white"
+                                    : darkMode
+                                        ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                                    }`}
                             >
                                 Past
                             </button>
                             <button
                                 onClick={() => setActiveTab("all")}
-                                className={`px-4 py-1 rounded-lg transition-colors ${
-                                    activeTab === "all"
-                                        ? darkMode
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-blue-600 text-white"
-                                        : darkMode
-                                            ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
-                                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                                }`}
+                                className={`px-4 py-1 rounded-lg transition-colors ${activeTab === "all"
+                                    ? darkMode
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-blue-600 text-white"
+                                    : darkMode
+                                        ? "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                                    }`}
                             >
                                 All
                             </button>
@@ -358,11 +354,10 @@ const UserMyRentalsComponent = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search by order #"
-                                className={`pl-10 pr-4 py-1 w-full md:w-64 rounded-lg ${
-                                    darkMode
-                                        ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
-                                        : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
-                                } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                                className={`pl-10 pr-4 py-1 w-full md:w-64 rounded-lg ${darkMode
+                                    ? "bg-gray-700 border-gray-600 text-gray-200 placeholder-gray-400"
+                                    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                                    } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
                             />
                         </div>
                     </div>
@@ -384,9 +379,8 @@ const UserMyRentalsComponent = () => {
                                     type="date"
                                     value={startDate}
                                     onChange={(e) => setStartDate(e.target.value)}
-                                    className={`pl-10 pr-4 py-2 w-full rounded-lg ${
-                                        darkMode ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-900"
-                                    } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                                    className={`pl-10 pr-4 py-2 w-full rounded-lg ${darkMode ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-900"
+                                        } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
                                 />
                             </div>
                         </div>
@@ -403,9 +397,8 @@ const UserMyRentalsComponent = () => {
                                     value={endDate}
                                     onChange={(e) => setEndDate(e.target.value)}
                                     min={startDate}
-                                    className={`pl-10 pr-4 py-2 w-full rounded-lg ${
-                                        darkMode ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-900"
-                                    } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                                    className={`pl-10 pr-4 py-2 w-full rounded-lg ${darkMode ? "bg-gray-700 border-gray-600 text-gray-200" : "bg-white border-gray-300 text-gray-900"
+                                        } border focus:outline-none focus:ring-1 focus:ring-blue-500`}
                                 />
                             </div>
                         </div>
@@ -426,9 +419,8 @@ const UserMyRentalsComponent = () => {
                     {filteredRentals.map((rental) => (
                         <div
                             key={rental.id}
-                            className={`rounded-xl overflow-hidden shadow-sm transition-all ${
-                                darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                            }`}
+                            className={`rounded-xl overflow-hidden shadow-sm transition-all ${darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
+                                }`}
                         >
                             {/* Main rental info */}
                             <div className="p-4">
@@ -443,17 +435,16 @@ const UserMyRentalsComponent = () => {
                                             />
                                             <div className="absolute -bottom-0 left-0 p-1">
                                                 <span
-                                                    className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium ${
-                                                        rental.status === "active"
-                                                            ? darkMode
-                                                                ? "bg-green-900/80 text-green-300"
-                                                                : "bg-green-100 text-green-800"
-                                                            : darkMode
-                                                                ? "bg-gray-700 text-gray-300"
-                                                                : "bg-gray-100 text-gray-800"
-                                                    }`}
+                                                    className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium ${rental.status === "active"
+                                                        ? darkMode
+                                                            ? "bg-green-900/80 text-green-300"
+                                                            : "bg-green-100 text-green-800"
+                                                        : darkMode
+                                                            ? "bg-gray-700 text-gray-300"
+                                                            : "bg-gray-100 text-gray-800"
+                                                        }`}
                                                 >
-                                                {rental.status === "active" ? "Active" : "Past"}
+                                                    {rental.status === "active" ? "Active" : "Past"}
                                                 </span>
                                             </div>
                                         </div>
@@ -493,11 +484,10 @@ const UserMyRentalsComponent = () => {
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={() => toggleOrderDetails(rental.id)}
-                                                className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${
-                                                    darkMode
-                                                        ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
-                                                        : "bg-gray-100 hover:bg-gray-200 text-gray-800"
-                                                }`}
+                                                className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${darkMode
+                                                    ? "bg-gray-700 hover:bg-gray-600 text-gray-200"
+                                                    : "bg-gray-100 hover:bg-gray-200 text-gray-800"
+                                                    }`}
                                             >
                                                 {expandedOrder === rental.id ? (
                                                     <>
@@ -513,11 +503,10 @@ const UserMyRentalsComponent = () => {
                                             {rental.hasInvoice && (
                                                 <button
                                                     onClick={() => handleDownloadInvoice(rental.id)}
-                                                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${
-                                                        darkMode
-                                                            ? "bg-blue-600 hover:bg-blue-700 text-white"
-                                                            : "bg-blue-600 hover:bg-blue-700 text-white"
-                                                    }`}
+                                                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${darkMode
+                                                        ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                                        : "bg-blue-600 hover:bg-blue-700 text-white"
+                                                        }`}
                                                 >
                                                     <FiDownload size={14} /> Invoice
                                                 </button>
@@ -530,9 +519,8 @@ const UserMyRentalsComponent = () => {
                             {/* Expanded details */}
                             {expandedOrder === rental.id && (
                                 <div
-                                    className={`p-4 border-t ${
-                                        darkMode ? "border-gray-700 bg-gray-800/50" : "border-gray-200 bg-gray-50/50"
-                                    }`}
+                                    className={`p-4 border-t ${darkMode ? "border-gray-700 bg-gray-800/50" : "border-gray-200 bg-gray-50/50"
+                                        }`}
                                 >
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {/* Order details */}
@@ -549,26 +537,26 @@ const UserMyRentalsComponent = () => {
                                                 <div className="flex justify-between">
                                                     <span
                                                         className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                                    Membership Tier:
+                                                        Membership Tier:
                                                     </span>
                                                     <span className="text-sm font-medium flex items-center gap-1">
-                                                    <FiAward
-                                                        className={
-                                                            rental.membershipTier === "Gold"
-                                                                ? "text-yellow-500"
-                                                                : rental.membershipTier === "Silver"
-                                                                    ? "text-gray-400"
-                                                                    : "text-amber-700"
-                                                        }
-                                                        size={14}
-                                                    />
+                                                        <FiAward
+                                                            className={
+                                                                rental.membershipTier === "Gold"
+                                                                    ? "text-yellow-500"
+                                                                    : rental.membershipTier === "Silver"
+                                                                        ? "text-gray-400"
+                                                                        : "text-amber-700"
+                                                            }
+                                                            size={14}
+                                                        />
                                                         {rental.membershipTier}
                                                     </span>
                                                 </div>
                                                 <div className="flex justify-between">
                                                     <span
                                                         className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                                    Points Earned:
+                                                        Points Earned:
                                                     </span>
                                                     <span
                                                         className="text-sm font-medium">{rental.pointsEarned} pts</span>
@@ -576,10 +564,10 @@ const UserMyRentalsComponent = () => {
                                                 <div className="flex justify-between">
                                                     <span
                                                         className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                                    Rental Duration:
+                                                        Rental Duration:
                                                     </span>
                                                     <span className="text-sm font-medium">
-                                                    {Math.ceil((new Date(rental.endDate) - new Date(rental.startDate)) / (1000 * 60 * 60 * 24))}{" "}
+                                                        {Math.ceil((new Date(rental.endDate) - new Date(rental.startDate)) / (1000 * 60 * 60 * 24))}{" "}
                                                         days
                                                     </span>
                                                 </div>
@@ -596,7 +584,7 @@ const UserMyRentalsComponent = () => {
                                                 <div className="flex justify-between">
                                                     <span
                                                         className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                                    Payment Method:
+                                                        Payment Method:
                                                     </span>
                                                     <span className="text-sm font-medium">{rental.paymentMethod}</span>
                                                 </div>
@@ -610,10 +598,10 @@ const UserMyRentalsComponent = () => {
                                                     <div className="flex justify-between">
                                                         <span
                                                             className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
-                                                        Discount ({rental.discount}%):
+                                                            Discount ({rental.discount}%):
                                                         </span>
                                                         <span className="text-sm font-medium text-green-500">
-                                                        -{formatCurrency((rental.amount / (1 - rental.discount / 100)) * (rental.discount / 100))}
+                                                            -{formatCurrency((rental.amount / (1 - rental.discount / 100)) * (rental.discount / 100))}
                                                         </span>
                                                     </div>
                                                 )}
@@ -626,7 +614,7 @@ const UserMyRentalsComponent = () => {
                                     </div>
 
                                     {/* Review section */}
-                                    <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                    <div className={`mt-6 pt-4 border-t ${darkMode ? "border-gray-700" : "border-gray-300"}`}>
                                         <div className="flex items-center justify-between">
                                             <h3 className="text-sm font-medium flex items-center gap-2">
                                                 <FiStar className="text-yellow-500" />
@@ -636,11 +624,10 @@ const UserMyRentalsComponent = () => {
                                             {rental.status === "past" && !rental.isReviewed ? (
                                                 <button
                                                     onClick={() => handleReviewNavigation(rental.id)}
-                                                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${
-                                                        darkMode
-                                                            ? "bg-yellow-600 hover:bg-yellow-700 text-white"
-                                                            : "bg-yellow-500 hover:bg-yellow-600 text-white"
-                                                    }`}
+                                                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors flex items-center gap-1 ${darkMode
+                                                        ? "bg-yellow-600 hover:bg-yellow-700 text-white"
+                                                        : "bg-yellow-500 hover:bg-yellow-600 text-white"
+                                                        }`}
                                                 >
                                                     <FiStar size={14} /> Write Review
                                                 </button>
@@ -672,9 +659,8 @@ const UserMyRentalsComponent = () => {
             ) : (
                 // Empty state
                 <div
-                    className={`rounded-xl p-8 text-center ${
-                        darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
-                    }`}
+                    className={`rounded-xl p-8 text-center ${darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
+                        }`}
                 >
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-700">
                         <FiShoppingCart className={`${darkMode ? "text-gray-500" : "text-gray-400"}`} size={32} />
@@ -689,9 +675,8 @@ const UserMyRentalsComponent = () => {
                     </p>
                     <button
                         onClick={() => (window.location.href = "/all-gadgets")}
-                        className={`px-4 py-2 rounded-lg transition-colors ${
-                            darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
-                        }`}
+                        className={`px-4 py-2 rounded-lg transition-colors ${darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
+                            }`}
                     >
                         Browse Gadgets
                     </button>

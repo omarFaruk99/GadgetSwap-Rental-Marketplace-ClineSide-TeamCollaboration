@@ -38,5 +38,6 @@ const darkLightThemeSlice = createSlice({
   },
 });
 
-export const { toggleDarkTheme, setTheme } = darkLightThemeSlice.actions;
+// export const { toggleDarkTheme, setTheme } = darkLightThemeSlice.actions;
+export const { toggleDarkTheme } = darkLightThemeSlice.actions;
 export default darkLightThemeSlice.reducer;

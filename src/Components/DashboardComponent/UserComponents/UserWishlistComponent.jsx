@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react"
-import {FiHeart, FiPackage, FiRefreshCw, FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
-import { useSelector } from "react-redux"
+import {useContext, useEffect, useState} from "react"
+import {FiHeart, FiPackage,  FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
+import { useDispatch,useSelector } from "react-redux"
 import {
     FaCamera,
     FaGamepad,
@@ -11,11 +11,21 @@ import {
     FaVrCardboard,
 } from "react-icons/fa"
 
+import AuthContext from "../../../Providers/AuthContext.jsx";
+import {addOrRemoveWishlistGadget, getWishlistGadgetsDetails} from "../../../Features/gadgetWishlist/gadgetWishlistSlice.js";
+import {useNavigate} from "react-router-dom";
+
 
 const UserWishlistComponent = () => {
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
+    const {user: registeredUser} = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const {wishlistGadgetDetails} = useSelector((state) => state.gadgetWishlist);
+
+    const [wishlistItems, setWishlistItems] = useState([]);
+    const navigateTo = useNavigate();
 
 
     // Initial fake wishlist data

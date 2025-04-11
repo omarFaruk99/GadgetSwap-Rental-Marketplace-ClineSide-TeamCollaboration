@@ -4,7 +4,7 @@ import { FiArrowLeft, FiHome, FiWifi, FiAlertTriangle } from 'react-icons/fi';
 import {useSelector} from "react-redux";
 
 
-const Error404Page = () => {<q></q>
+const Error404Page = () => {
                     <div className="p-8 md:p-12 flex flex-col md:flex-row items-center">
 
                         {/* Left Side - Error Code */}
@@ -174,8 +174,8 @@ const Error404Page = () => {<q></q>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+              
+           
 
             {/* Add animation keyframes to the global style */}
             <style>{`
@@ -208,7 +208,7 @@ const Error404Page = () => {<q></q>
                     animation: float 6s ease-in-out infinite;
                 }
             `}</style>
-        </div>
+        
     );
 };
 

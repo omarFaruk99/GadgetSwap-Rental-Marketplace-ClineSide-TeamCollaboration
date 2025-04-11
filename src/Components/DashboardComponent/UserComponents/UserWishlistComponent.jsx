@@ -1,16 +1,7 @@
 import {useContext, useEffect, useState} from "react"
 import {FiHeart, FiPackage,  FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
 import { useDispatch,useSelector } from "react-redux"
-import {
-    FaCamera,
-    FaGamepad,
-    FaHeadphones,
-    FaLaptop,
-    FaMobileAlt,
-    FaTabletAlt,
-    FaVrCardboard,
-} from "react-icons/fa"
-
+import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt, FaVrCardboard} from "react-icons/fa"
 import AuthContext from "../../../Providers/AuthContext.jsx";
 import {addOrRemoveWishlistGadget, getWishlistGadgetsDetails} from "../../../Features/gadgetWishlist/gadgetWishlistSlice.js";
 import {useNavigate} from "react-router-dom";
@@ -82,7 +73,11 @@ const UserWishlistComponent = () => {
     }
 
 
-   
+    // Handle remove from wishlist
+    const handleRemoveFromWishlist = async (id) => {
+        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id}));
+        await dispatch(getWishlistGadgetsDetails(registeredUser?.email));
+    }
 
 
     // Handle rent now
@@ -96,8 +91,7 @@ const UserWishlistComponent = () => {
 
     // Handle view details
     const handleViewDetails = (id) => {
-        // In a real app, this would use router navigation
-        window.location.href = `/all-gadgets/gadget-details/${id}`
+        navigateTo(`/all-gadgets/gadget-details/${id}`);
     }
 
 

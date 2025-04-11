@@ -29,9 +29,8 @@ const NavbarComponent = () => {
         isLoggedIn: registeredUser !== null,
         name: registeredUser?.displayName,
         email: registeredUser?.email,
-        profilePicture: registeredUser?.photoURL,
-        // role: 'admin',              // Activate this line to see admin dashboard
-        role: 'user',                // Activate this line to see user dashboard
+        profilePicture: registeredUser?.personalDetails?.photoURL,
+         role: registeredUser?.role,              // Activate this line to see user dashboard
     };
 
 
@@ -239,7 +238,7 @@ const NavbarComponent = () => {
                                         darkMode ? 'ring-purple-500' : 'ring-indigo-400'
                                     }`}>
                                     <img
-                                        src={user.profilePicture || "/placeholder.svg"}
+                                        src={user.profilePicture ? user.profilePicture : "/placeholder.svg"}
                                         alt="Profile"
                                         className="h-full w-full object-cover"
                                     />
@@ -350,7 +349,7 @@ const NavbarComponent = () => {
                                                 darkMode ? 'ring-purple-500' : 'ring-indigo-400'
                                             }`}>
                                             <img
-                                                src={user.profilePicture || "/placeholder.svg"}
+                                                 src={user.profilePicture ? user.profilePicture : "/placeholder.svg"}
                                                 alt="Profile"
                                                 className="h-full w-full object-cover"
                                             />

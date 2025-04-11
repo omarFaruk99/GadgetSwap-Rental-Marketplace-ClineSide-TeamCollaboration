@@ -38,9 +38,11 @@ const featuredGadgetsForHomePageSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchFeaturedGadgets.rejected, (state, action) => {
+      state.featuredGadgets = [];
+      state.isLoading = false;
       state.isError = true;
       state.error = action.error?.message;
-      state.isLoading = false;
+      //   state.isLoading = false;
     });
   },
 });

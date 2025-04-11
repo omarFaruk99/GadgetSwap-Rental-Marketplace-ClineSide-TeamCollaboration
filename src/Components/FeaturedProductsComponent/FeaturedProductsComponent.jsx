@@ -259,7 +259,7 @@ const FeaturedProductsComponent = () => {
                     >
                         {/* Hover Effect */}
                         <div
-                            className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            className="absolute inset-0 bg-gradient-to-t from-sky-300/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                         {/* Image */}
                         <div className="relative h-48 overflow-hidden">

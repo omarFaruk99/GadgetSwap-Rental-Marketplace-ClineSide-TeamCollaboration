@@ -9,14 +9,15 @@ import EidSpecialFunComponent from "../../Components/EidSpecialFunComponent/EidS
 
 const HomePage = () => {
     return (
-        <div>
-            <BannerComponent></BannerComponent>
-            <FeaturedProductsComponent></FeaturedProductsComponent>
-            <HowItWorksComponent></HowItWorksComponent>
-            <LoyaltyAndRewardsComponent></LoyaltyAndRewardsComponent>
-            <WhatOurCustomersSayComponent></WhatOurCustomersSayComponent>
-            {/*<EidSpecialFunComponent></EidSpecialFunComponent>*/}
-        </div>
+        <>
+            <BannerComponent />
+            <FeaturedProductsComponent />
+            <HowItWorksComponent />
+            <LoyaltyAndRewardsComponent />
+            <WhatOurCustomersSayComponent />
+            {/* <EidSpecialFunComponent /> */}
+        </>
+
     );
 };
 

@@ -82,10 +82,7 @@ const UserWishlistComponent = () => {
     }
 
 
-    // Handle remove from wishlist
-    const handleRemoveFromWishlist = (id) => {
-        setWishlistItems(wishlistItems.filter((item) => item.id !== id))
-    }
+   
 
 
     // Handle rent now

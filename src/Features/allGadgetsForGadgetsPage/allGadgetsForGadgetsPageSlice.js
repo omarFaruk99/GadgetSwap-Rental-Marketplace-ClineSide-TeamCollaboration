@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {BASE_URL} from "../../SharedUtilities/SharedUtilities.jsx";
 
 
+// Define the initial state for the gadgets slice
 const initialState = {
     allGadgets: [],
     isLoading: false,

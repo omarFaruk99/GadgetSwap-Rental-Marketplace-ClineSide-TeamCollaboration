@@ -112,7 +112,7 @@ const Error404Page = () => {
                                         : 'bg-gray-100/50 border border-indigo-200/30'
                                 } flex items-center justify-center relative overflow-hidden`}>
 
-                                    {/* Animated Circles */}
+                                    {/* Animated Circles 
                                     <div className="absolute inset-0">
                                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-4 border-dashed animate-spin-slow opacity-20"
                                              style={{animationDuration: '15s'}}
@@ -121,6 +121,21 @@ const Error404Page = () => {
                                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full border-4 border-dashed animate-spin-slow opacity-10"
                                              style={{animationDuration: '30s', animationDirection: 'reverse'}}
                                              className={darkMode ? 'border-cyan-500' : 'border-purple-500'}
+                                        ></div>
+                                    </div>*/}
+                                                                        {/* Animated Circles */}
+                                    <div className="absolute inset-0">
+                                        <div
+                                            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-4 border-dashed animate-spin-slow opacity-20 ${
+                                                darkMode ? 'border-purple-500' : 'border-indigo-500'
+                                            }`}
+                                            style={{ animationDuration: '15s' }}
+                                        ></div>
+                                        <div
+                                            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full border-4 border-dashed animate-spin-slow opacity-10 ${
+                                                darkMode ? 'border-cyan-500' : 'border-purple-500'
+                                            }`}
+                                            style={{ animationDuration: '30s', animationDirection: 'reverse' }}
                                         ></div>
                                     </div>
 
@@ -144,7 +159,7 @@ const Error404Page = () => {
                                     </div>
                                 </div>
 
-                                {/* Floating Elements */}
+                                {/* Floating Elements 
                                 <div className="absolute -top-4 -right-4 w-12 h-12 rounded-lg transform rotate-12 animate-float"
                                      style={{animationDelay: '0s'}}
                                      className={darkMode
@@ -165,6 +180,32 @@ const Error404Page = () => {
                                          ? 'bg-gradient-to-br from-cyan-600/30 to-blue-600/30 backdrop-blur-md border border-cyan-500/20'
                                          : 'bg-gradient-to-br from-purple-600/30 to-pink-600/30 backdrop-blur-md border border-purple-500/20'
                                      }
+                                ></div>*/}
+
+                                {/* Floating Elements */}
+                                <div
+                                    className={`absolute -top-4 -right-4 w-12 h-12 rounded-lg transform rotate-12 animate-float ${
+                                        darkMode
+                                            ? 'bg-gradient-to-br from-purple-600/30 to-pink-600/30 backdrop-blur-md border border-purple-500/20'
+                                            : 'bg-gradient-to-br from-indigo-600/30 to-purple-600/30 backdrop-blur-md border border-indigo-500/20'
+                                    }`}
+                                    style={{ animationDelay: '0s' }}
+                                ></div>
+                                <div
+                                    className={`absolute -bottom-6 -left-6 w-16 h-16 rounded-lg transform -rotate-12 animate-float ${
+                                        darkMode
+                                            ? 'bg-gradient-to-br from-blue-600/30 to-cyan-600/30 backdrop-blur-md border border-blue-500/20'
+                                            : 'bg-gradient-to-br from-blue-600/30 to-indigo-600/30 backdrop-blur-md border border-blue-500/20'
+                                    }`}
+                                    style={{ animationDelay: '1s' }}
+                                ></div>
+                                <div
+                                    className={`absolute top-1/2 -right-8 w-10 h-10 rounded-full transform animate-float ${
+                                        darkMode
+                                            ? 'bg-gradient-to-br from-cyan-600/30 to-blue-600/30 backdrop-blur-md border border-cyan-500/20'
+                                            : 'bg-gradient-to-br from-purple-600/30 to-pink-600/30 backdrop-blur-md border border-purple-500/20'
+                                    }`}
+                                    style={{ animationDelay: '2s' }}
                                 ></div>
                             </div>
                         </div>

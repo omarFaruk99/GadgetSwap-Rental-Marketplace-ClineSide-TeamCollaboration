@@ -4,6 +4,8 @@ import allGadgetsForGadgetsPageReducer from "../Features/allGadgetsForGadgetsPag
 import gadgetDetailsByIdReducer from "../Features/gadgetDetailsById/gadgetDetailsByIdSlice";
 import featuredGadgetsForHomePageReducer from "../Features/featuredGadgetsForHomePage/featuredGadgetsForHomePageSlice";
 import userProfileDetailsReducer from "../Features/userProfileDetails/userProfileDetailsSlice.js";
+import gadgetWishlistReducer from "../Features/gadgetWishlist/gadgetWishlistSlice.js";
+// import gadgetWishlistReducer from "../Features/gadgetWishlist/gadgetWishlistSlice.js";
 
 
 
@@ -14,6 +16,7 @@ const reduxStore = configureStore({
         gadgetDetailsById: gadgetDetailsByIdReducer,
         featuredGadgetsForHomePage: featuredGadgetsForHomePageReducer,
         userProfileDetails: userProfileDetailsReducer,
+        gadgetWishlist: gadgetWishlistReducer,
     },
 });
 

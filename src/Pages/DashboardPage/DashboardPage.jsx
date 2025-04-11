@@ -1,33 +1,38 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { useSelector } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt } from "react-icons/fa"
 import {FiHome, FiUsers, FiPackage, FiShoppingCart, FiHeart, FiMessageSquare, FiSettings, FiLogOut, FiX, FiHelpCircle, FiCreditCard, FiMenu, FiUser, FiAward} from "react-icons/fi"
 import AuthContext from "../../Providers/AuthContext.jsx"
 import { Outlet } from "react-router"
 import LoadingSkeleton from "./LoadingSkeleton.jsx";
+import {getUserProfileDetails} from "../../Features/userProfileDetails/userProfileDetailsSlice.js";
 
 
 const DashboardPage = () => {
 
     // State management
-    const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
     const darkMode = useSelector((state) => state.darkMode.isDark)
+    const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
+    const dispatch = useDispatch()
+    const {userProfileDetails} = useSelector(state => state.userProfileDetails);
+
+    const [user, setUser] = useState({})
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isMobileView, setIsMobileView] = useState(false)
     const [activeTab, setActiveTab] = useState("overview")
     const [isLoading, setIsLoading] = useState(true)
     const navigateTo = useNavigate()
     const currentUrl = useLocation()
+    
 
+    // Fetch user profile detail on mount
+    useEffect(() => {
+        if (registeredUser?.email){
+            dispatch(getUserProfileDetails(registeredUser?.email));
+        }
+    }, [dispatch, registeredUser?.email]);
 
-    const [user, setUser] = useState({
-        name: registeredUser?.displayName,
-        email: registeredUser?.email,
-        avatar: registeredUser?.personalDetails?.photoURL,
-        role: registeredUser?.role,
-        joinDate: registeredUser?.joinDate,
-    })
 
 
     // Mock data for dashboard

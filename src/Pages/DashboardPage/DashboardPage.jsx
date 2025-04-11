@@ -24,7 +24,7 @@ const DashboardPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const navigateTo = useNavigate()
     const currentUrl = useLocation()
-    
+
 
     // Fetch user profile detail on mount
     useEffect(() => {
@@ -34,7 +34,22 @@ const DashboardPage = () => {
     }, [dispatch, registeredUser?.email]);
 
 
-
+        // After fetching get user profile details data
+        useEffect(() => {
+            const getUserProfileDetailsData = async () => {
+                if (userProfileDetails !== null) {
+                    setUser({
+                        name: userProfileDetails?.displayName,
+                        email: userProfileDetails?.email,
+                        avatar: userProfileDetails?.personalDetails?.photoURL,
+                        role: userProfileDetails?.role,
+                        joinDate: userProfileDetails?.joinDate,
+                    })
+                }
+            }
+            getUserProfileDetailsData().then();
+        }, [userProfileDetails]);
+        
     // Mock data for dashboard
     const [dashboardData, setDashboardData] = useState({
         stats: {

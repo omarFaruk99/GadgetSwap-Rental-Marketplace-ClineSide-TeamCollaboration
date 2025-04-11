@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { useSelector } from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt } from "react-icons/fa"
 import {FiHome, FiUsers, FiPackage, FiShoppingCart, FiHeart, FiMessageSquare, FiSettings, FiLogOut, FiX, FiHelpCircle, FiCreditCard, FiMenu, FiUser, FiAward} from "react-icons/fi"
 import AuthContext from "../../Providers/AuthContext.jsx"
 import { Outlet } from "react-router"
 import LoadingSkeleton from "./LoadingSkeleton.jsx";
+import {getUserProfileDetails} from "../../Features/userProfileDetails/userProfileDetailsSlice.js";
 
 
 const DashboardPage = () => {
 
     // State management
-    const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
     const darkMode = useSelector((state) => state.darkMode.isDark)
+    const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
+    const dispatch = useDispatch()
+    const {userProfileDetails} = useSelector(state => state.userProfileDetails);
+
+    const [user, setUser] = useState({})
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isMobileView, setIsMobileView] = useState(false)
     const [activeTab, setActiveTab] = useState("overview")
@@ -21,98 +26,33 @@ const DashboardPage = () => {
     const currentUrl = useLocation()
 
 
-    const [user, setUser] = useState({
-        name: registeredUser?.displayName,
-        email: registeredUser?.email,
-        avatar: registeredUser?.personalDetails?.photoURL,
-        role: registeredUser?.role,
-        joinDate: registeredUser?.joinDate,
-    })
+    // Fetch user profile detail on mount
+    useEffect(() => {
+        if (registeredUser?.email){
+            dispatch(getUserProfileDetails(registeredUser?.email));
+        }
+    }, [dispatch, registeredUser?.email]);
 
 
-    // Mock data for dashboard
+        // After fetching get user profile details data
+        useEffect(() => {
+            const getUserProfileDetailsData = async () => {
+                if (userProfileDetails !== null) {
+                    setUser({
+                        name: userProfileDetails?.displayName,
+                        email: userProfileDetails?.email,
+                        avatar: userProfileDetails?.personalDetails?.photoURL,
+                        role: userProfileDetails?.role,
+                        joinDate: userProfileDetails?.joinDate,
+                    })
+                }
+            }
+            getUserProfileDetailsData().then();
+        }, [userProfileDetails]);
+
+
+        // Mock data for dashboard
     const [dashboardData, setDashboardData] = useState({
-        stats: {
-            totalUsers: 1245,
-            activeRentals: 78,
-            totalGadgets: 342,
-            totalRevenue: 28750.5,
-            pendingReturns: 12,
-            newMessages: 8,
-            completedRentals: 156,
-            wishlistedItems: 24,
-        },
-        recentRentals: [
-            {
-                id: "rent001",
-                gadgetName: "iPhone 15 Pro Max",
-                gadgetImage: "/placeholder.svg",
-                renterName: "Alice Johnson",
-                startDate: "2023-11-10",
-                endDate: "2023-11-17",
-                status: "active",
-                amount: 175.5,
-            },
-            {
-                id: "rent002",
-                gadgetName: 'MacBook Pro 16"',
-                gadgetImage: "/placeholder.svg",
-                renterName: "Bob Smith",
-                startDate: "2023-11-08",
-                endDate: "2023-11-22",
-                status: "active",
-                amount: 349.99,
-            },
-            {
-                id: "rent003",
-                gadgetName: "Sony A7 IV Camera",
-                gadgetImage: "/placeholder.svg",
-                renterName: "Carol White",
-                startDate: "2023-11-05",
-                endDate: "2023-11-12",
-                status: "returned",
-                amount: 210.0,
-            },
-            {
-                id: "rent004",
-                gadgetName: "DJI Mavic 3 Pro",
-                gadgetImage: "/placeholder.svg",
-                renterName: "David Brown",
-                startDate: "2023-11-01",
-                endDate: "2023-11-08",
-                status: "returned",
-                amount: 280.0,
-            },
-        ],
-        wishlist: [
-            {
-                id: "wish001",
-                name: "Canon EOS R5",
-                image: "/placeholder.svg",
-                category: "Cameras",
-                dailyRate: 45.99,
-                availability: "available",
-                rating: 4.9,
-            },
-            {
-                id: "wish001",
-                name: "Canon EOS R5",
-                image: "/placeholder.svg",
-                category: "Cameras",
-                dailyRate: 45.99,
-                availability: "available",
-                rating: 4.9,
-            },
-            {
-                id: "wish002",
-                name: "Steam Deck",
-                image: "/placeholder.svg",
-                category: "Gaming",
-                dailyRate: 18.5,
-                availability: "unavailable",
-                rating: 4.7,
-            },
-        ],
         recentMessages: [
             {
                 id: "msg001",
@@ -130,35 +70,7 @@ const DashboardPage = () => {
                 time: "Yesterday",
                 read: false,
             },
-        ],
-        popularCategories: [
-            { name: "Smartphones", count: 85, icon: <FaMobileAlt /> },
-            { name: "Laptops", count: 64, icon: <FaLaptop /> },
-            { name: "Tablets", count: 42, icon: <FaTabletAlt /> },
-            { name: "Headphones", count: 38, icon: <FaHeadphones /> },
-            { name: "Cameras", count: 35, icon: <FaCamera /> },
-            { name: "Gaming", count: 30, icon: <FaGamepad /> },
-        ],
-        notifications: [
-            {
-                id: "notif001",
-                type: "rental",
-                message: "Your rental request for iPad Pro has been confirmed",
-                time: "10 minutes ago",
-            },
-            {
-                id: "notif002",
-                type: "return",
-                message: "Return reminder: Your Sony camera is due tomorrow",
-                time: "2 hours ago",
-            },
-            {
-                id: "notif003",
-                type: "payment",
-                message: "Payment of $175.50 was processed for your rental",
-                time: "Yesterday",
-            },
-        ],
+        ]
     })
     // TODO: Replace with the real data from backend.
 
@@ -176,7 +88,6 @@ const DashboardPage = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
     }
-
 
 
     // Handle tab change
@@ -239,6 +150,7 @@ const DashboardPage = () => {
         { id: "loyalty_and_rewards", name: "Loyalty & Rewards", icon: <FiCreditCard className="mr-3" size={20} /> },
         { id: "settings", name: "Settings", icon: <FiSettings className="mr-3" size={20} /> },
     ]
+
 
 
     return (
@@ -446,13 +358,13 @@ const DashboardPage = () => {
                                                                     {dashboardData.recentMessages.filter((m) => !m.read).length}
                                                                 </span>
                                                             )}
-                                                        {tab.id === "wishlist" && dashboardData.wishlist.length > 0 && (
+                                                         {tab.id === "wishlist" && userProfileDetails?.wishlist?.length > 0 && (
                                                             <span
                                                                 className={`ml-auto px-2 py-0.5 text-xs rounded-full ${
                                                                     darkMode ? "bg-blue-900/50 text-blue-400" : "bg-blue-100 text-blue-600"
                                                                 }`}
                                                             >
-                                                                {dashboardData.wishlist.length}
+                                                                  {userProfileDetails?.wishlist?.length}
                                                             </span>
                                                         )}
                                                     </button>

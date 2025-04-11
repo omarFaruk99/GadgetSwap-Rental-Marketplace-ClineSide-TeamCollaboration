@@ -21,7 +21,7 @@ const getInitialTheme = () => {
 
 const darkLightThemeSlice = createSlice({
     name: "darkLightTheme",
-    initialState: getInitialTheme(), // Call helper to set initial state
+    initialState: getInitialTheme(), // Call a function to set initial state
     reducers: {
         toggleDarkTheme: (state) => {
             state.isDark = !state.isDark; // Toggle theme

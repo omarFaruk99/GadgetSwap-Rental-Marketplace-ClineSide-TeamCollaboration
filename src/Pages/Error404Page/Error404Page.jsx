@@ -5,6 +5,42 @@ import {useSelector} from "react-redux";
 
 
 const Error404Page = () => {
+
+    // const [darkMode, setDarkMode] = useState(true);
+    const darkMode = useSelector((state) => state.darkMode.isDark);
+
+
+    const handleGoBack = () => {
+        window.history.back();
+    };
+
+
+    return (
+        <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
+            darkMode ? 'bg-gray-900' : 'bg-gray-50'
+        }`}>
+            <div className="container px-4 mx-auto">
+                <div className={`max-w-5xl mx-auto relative overflow-hidden ${
+                    darkMode
+                        ? 'bg-gray-800/70 border border-purple-900/30'
+                        : 'bg-white/80 border border-indigo-200/30'
+                } backdrop-blur-md rounded-2xl shadow-xl transition-all duration-300`}>
+
+                    {/* Decorative Elements */}
+                    <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-full blur-3xl -z-10"></div>
+                    <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-full blur-3xl -z-10"></div>
+
+                    {/* Circuit-like Lines */}
+                    <div className="absolute inset-0 overflow-hidden opacity-10">
+                        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent animate-pulse"></div>
+                        <div className="absolute top-2/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+                        <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-pulse" style={{animationDelay: '2s'}}></div>
+
+                        <div className="absolute left-1/4 top-0 h-full w-px bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                        <div className="absolute left-2/4 top-0 h-full w-px bg-gradient-to-b from-transparent via-indigo-500 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
+                        <div className="absolute left-3/4 top-0 h-full w-px bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-pulse" style={{animationDelay: '2.5s'}}></div>
+                    </div>
+
                     <div className="p-8 md:p-12 flex flex-col md:flex-row items-center">
 
                         {/* Left Side - Error Code */}
@@ -174,8 +210,8 @@ const Error404Page = () => {
                             </div>
                         </div>
                     </div>
-              
-           
+                </div>
+            </div>
 
             {/* Add animation keyframes to the global style */}
             <style>{`
@@ -208,7 +244,7 @@ const Error404Page = () => {
                     animation: float 6s ease-in-out infinite;
                 }
             `}</style>
-        
+        </div>
     );
 };
 

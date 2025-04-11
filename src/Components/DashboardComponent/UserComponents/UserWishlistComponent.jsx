@@ -1,88 +1,41 @@
-import {useEffect, useState} from "react"
-import {FiHeart, FiPackage, FiRefreshCw, FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
-import { useSelector } from "react-redux"
-import {
-    FaCamera,
-    FaGamepad,
-    FaHeadphones,
-    FaLaptop,
-    FaMobileAlt,
-    FaTabletAlt,
-    FaVrCardboard,
-} from "react-icons/fa"
+import {useContext, useEffect, useState} from "react"
+import {FiHeart, FiPackage,  FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
+import { useDispatch,useSelector } from "react-redux"
+import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt, FaVrCardboard} from "react-icons/fa"
+import AuthContext from "../../../Providers/AuthContext.jsx";
+import {addOrRemoveWishlistGadget, getWishlistGadgetsDetails} from "../../../Features/gadgetWishlist/gadgetWishlistSlice.js";
+import {useNavigate} from "react-router-dom";
 
 
 const UserWishlistComponent = () => {
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
+    const {user: registeredUser} = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const {wishlistGadgetDetails} = useSelector((state) => state.gadgetWishlist);
+
+    const [wishlistItems, setWishlistItems] = useState([]);
+    const navigateTo = useNavigate();
 
 
-    // Initial fake wishlist data
-    const [wishlistItems, setWishlistItems] = useState([
-        {
-            id: "gadget001",
-            name: "iPhone 15 Pro Max",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Smartphones",
-            dailyRate: 24.99,
-            availability: "available",
-            rating: 4.9,
-            description: "Latest iPhone with A17 Pro chip, 48MP camera system, and titanium design.",
-        },
-        {
-            id: "gadget002",
-            name: 'MacBook Pro 16"',
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Laptops",
-            dailyRate: 49.99,
-            availability: "available",
-            rating: 4.8,
-            description:
-                "Powerful laptop with M2 Pro chip, 16-inch Liquid Retina XDR display, and up to 22 hours of battery life.",
-        },
-        {
-            id: "gadget003",
-            name: "Sony A7 IV Camera",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Cameras",
-            dailyRate: 39.99,
-            availability: "unavailable",
-            rating: 4.7,
-            description: "Full-frame mirrorless camera with 33MP sensor, 4K 60p video, and advanced autofocus.",
-        },
-        {
-            id: "gadget004",
-            name: "DJI Mavic 3 Pro",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Drones",
-            dailyRate: 59.99,
-            availability: "available",
-            rating: 4.9,
-            description: "Professional drone with Hasselblad camera, 4/3 CMOS sensor, and 46 minutes of flight time.",
-        },
-        {
-            id: "gadget005",
-            name: "Oculus Quest 3",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "VR",
-            dailyRate: 29.99,
-            availability: "available",
-            rating: 4.6,
-            description:
-                "Advanced VR headset with high-resolution display, wireless design, and immersive gaming experience.",
-        },
-        {
-            id: "gadget006",
-            name: "Bose QuietComfort Ultra",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Headphones",
-            dailyRate: 14.99,
-            availability: "unavailable",
-            rating: 4.8,
-            description: "Premium noise-cancelling headphones with spatial audio and up to 24 hours of battery life.",
-        },
-    ])
+     // Fetch wishlist gadget details on mount
+     useEffect(() => {
+        if (registeredUser?.email) {
+            dispatch(getWishlistGadgetsDetails(registeredUser?.email))
+        }
+    }, [dispatch, registeredUser?.email]);
+
+
+    // After fetching get wishlist gadget details data
+    useEffect(() => {
+        const getWishlistGadgetsDetails = async () => {
+            if (wishlistGadgetDetails !== null) {
+                setWishlistItems(wishlistGadgetDetails)
+            }
+        }
+        getWishlistGadgetsDetails().then();
+    }, [wishlistGadgetDetails]);
 
 
     // Format currency
@@ -121,8 +74,9 @@ const UserWishlistComponent = () => {
 
 
     // Handle remove from wishlist
-    const handleRemoveFromWishlist = (id) => {
-        setWishlistItems(wishlistItems.filter((item) => item.id !== id))
+    const handleRemoveFromWishlist = async (id) => {
+        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id}));
+        await dispatch(getWishlistGadgetsDetails(registeredUser?.email));
     }
 
 
@@ -137,8 +91,7 @@ const UserWishlistComponent = () => {
 
     // Handle view details
     const handleViewDetails = (id) => {
-        // In a real app, this would use router navigation
-        window.location.href = `/all-gadgets/gadget-details/${id}`
+        navigateTo(`/all-gadgets/gadget-details/${id}`);
     }
 
 
@@ -160,7 +113,7 @@ const UserWishlistComponent = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {wishlistItems.map((item) => (
                         <div
-                            key={item.id}
+                            key={item?.id}
                             className={`rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-md ${
                                 darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                             }`}
@@ -168,8 +121,8 @@ const UserWishlistComponent = () => {
                             {/* Image Section */}
                             <div className="relative h-48 overflow-hidden group">
                                 <img
-                                    src={item.image || "/placeholder.svg"}
-                                    alt={item.name}
+                                    src={item?.image[0] || "/placeholder.svg"}
+                                    alt={item?.name}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
 
@@ -177,7 +130,7 @@ const UserWishlistComponent = () => {
                                 <div className="absolute top-3 left-3">
                                     <span
                                         className={`px-2 py-1 text-xs font-medium rounded-full ${
-                                            item.availability === "available"
+                                            item?.availability?.status
                                                 ? darkMode
                                                     ? "bg-green-900/80 text-green-300"
                                                     : "bg-green-100 text-green-800"
@@ -186,21 +139,21 @@ const UserWishlistComponent = () => {
                                                     : "bg-red-100 text-red-800"
                                         }`}
                                     >
-                                    {item.availability === "available" ? "Available" : "Unavailable"}
+                                    {item?.availability?.status ? "Available" : "Unavailable"}
                                     </span>
                                 </div>
 
                                 {/* Quick Actions */}
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                                     <button
-                                        onClick={() => handleViewDetails(item.id)}
+                                        onClick={() => handleViewDetails(item?._id)}
                                         className="p-2 rounded-full bg-white/90 text-gray-800 hover:bg-white transition-colors"
                                         aria-label="View details"
                                     >
                                         <FiEye size={18} />
                                     </button>
                                     <button
-                                        onClick={() => handleRemoveFromWishlist(item.id)}
+                                        onClick={() => handleRemoveFromWishlist(item?._id)}
                                         className="p-2 rounded-full bg-white/90 text-red-500 hover:bg-white transition-colors"
                                         aria-label="Remove from wishlist"
                                     >
@@ -214,37 +167,37 @@ const UserWishlistComponent = () => {
                                 {/* Category and Rating */}
                                 <div className="flex justify-between items-center mb-2">
                                     <div className="flex items-center">
-                                        <span className="mr-2">{getCategoryIcon(item.category)}</span>
-                                        <span className={`text-xs ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{item.category}</span>
+                                        <span className="mr-2">{getCategoryIcon(item?.category)}</span>
+                                        <span className={`text-xs ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{item?.category}</span>
                                     </div>
                                     <div className="flex items-center">
                                         <FiStar className="text-yellow-500 mr-1" size={16} />
-                                        <span className="text-sm font-medium">{item.rating}</span>
+                                        <span className="text-sm font-medium">{item?.average_rating}</span>
                                     </div>
                                 </div>
 
                                 {/* Name and Price */}
                                 <h3
                                     className="font-medium text-lg mb-1 cursor-pointer hover:underline"
-                                    onClick={() => handleViewDetails(item.id)}
+                                    onClick={() => handleViewDetails(item?._id)}
                                 >
-                                    {item.name}
+                                    {item?.name}
                                 </h3>
                                 <p className={`text-sm mb-3 line-clamp-2 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    {item.description}
+                                    {item?.description}
                                 </p>
                                 <div className="font-bold text-lg mb-4">
-                                    {formatCurrency(item.dailyRate)}
+                                {formatCurrency(item?.pricing?.perDay)}
                                     <span className={`text-xs font-normal ${darkMode ? "text-gray-400" : "text-gray-500"}`}>/day</span>
                                 </div>
 
                                 {/* Action Buttons */}
                                 <div className="flex gap-2">
                                     <button
-                                        onClick={() => handleRentNow(item.id)}
-                                        disabled={item.availability !== "available"}
+                                        onClick={() => handleRentNow(item?._id)}
+                                        disabled={!item?.availability?.status}
                                         className={`flex-1 px-3 py-2 rounded-lg transition-colors flex items-center justify-center cursor-pointer ${
-                                            item.availability === "available"
+                                            item?.availability?.status
                                                 ? darkMode
                                                     ? "bg-blue-600 hover:bg-blue-700 text-white"
                                                     : "bg-blue-600 hover:bg-blue-700 text-white"
@@ -257,7 +210,7 @@ const UserWishlistComponent = () => {
                                         Rent Now
                                     </button>
                                     <button
-                                        onClick={() => handleRemoveFromWishlist(item.id)}
+                                        onClick={() => handleRemoveFromWishlist(item?._id)}
                                         className={`px-3 py-2 rounded-lg transition-colors cursor-pointer ${
                                             darkMode
                                                 ? "bg-gray-700 hover:bg-gray-600 text-white"
@@ -285,7 +238,7 @@ const UserWishlistComponent = () => {
                     </p>
                     <button
                         onClick={() => (window.location.href = "/all-gadgets")}
-                        className={`px-4 py-2 rounded-lg transition-colors ${
+                        className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
                             darkMode ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-blue-600 hover:bg-blue-700 text-white"
                         }`}
                     >

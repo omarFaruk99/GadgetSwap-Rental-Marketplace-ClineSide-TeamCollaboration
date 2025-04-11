@@ -55,13 +55,17 @@ const HowItWorksComponent = () => {
 
     const handlePrevStep = () => {
         if (isTransitioning) return;
-
+    
         setIsTransitioning(true);
-        setTimeout(() => {
-            setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+    
+        const prevStep = () => {
+            setActiveStep((prevStep) => (prevStep - 1 + steps.length) % steps.length);
             setIsTransitioning(false);
-        }, 600);
+        };
+    
+        setTimeout(prevStep, 600);
     };
+    
 
 
     const handleStepClick = (index) => {

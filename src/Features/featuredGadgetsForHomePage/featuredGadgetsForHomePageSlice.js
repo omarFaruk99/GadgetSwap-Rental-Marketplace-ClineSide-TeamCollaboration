@@ -34,6 +34,8 @@ const featuredGadgetsForHomePageSlice = createSlice({
     builder.addCase(fetchFeaturedGadgets.fulfilled, (state, action) => {
       state.featuredGadgets = action.payload;
       state.isLoading = false;
+      state.isError = false;
+      state.error = null;
     });
     builder.addCase(fetchFeaturedGadgets.rejected, (state, action) => {
       state.isError = true;

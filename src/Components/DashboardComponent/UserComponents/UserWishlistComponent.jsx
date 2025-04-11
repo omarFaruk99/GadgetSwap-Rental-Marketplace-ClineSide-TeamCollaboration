@@ -28,71 +28,23 @@ const UserWishlistComponent = () => {
     const navigateTo = useNavigate();
 
 
-    // Initial fake wishlist data
-    const [wishlistItems, setWishlistItems] = useState([
-        {
-            id: "gadget001",
-            name: "iPhone 15 Pro Max",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Smartphones",
-            dailyRate: 24.99,
-            availability: "available",
-            rating: 4.9,
-            description: "Latest iPhone with A17 Pro chip, 48MP camera system, and titanium design.",
-        },
-        {
-            id: "gadget002",
-            name: 'MacBook Pro 16"',
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Laptops",
-            dailyRate: 49.99,
-            availability: "available",
-            rating: 4.8,
-            description:
-                "Powerful laptop with M2 Pro chip, 16-inch Liquid Retina XDR display, and up to 22 hours of battery life.",
-        },
-        {
-            id: "gadget003",
-            name: "Sony A7 IV Camera",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Cameras",
-            dailyRate: 39.99,
-            availability: "unavailable",
-            rating: 4.7,
-            description: "Full-frame mirrorless camera with 33MP sensor, 4K 60p video, and advanced autofocus.",
-        },
-        {
-            id: "gadget004",
-            name: "DJI Mavic 3 Pro",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Drones",
-            dailyRate: 59.99,
-            availability: "available",
-            rating: 4.9,
-            description: "Professional drone with Hasselblad camera, 4/3 CMOS sensor, and 46 minutes of flight time.",
-        },
-        {
-            id: "gadget005",
-            name: "Oculus Quest 3",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "VR",
-            dailyRate: 29.99,
-            availability: "available",
-            rating: 4.6,
-            description:
-                "Advanced VR headset with high-resolution display, wireless design, and immersive gaming experience.",
-        },
-        {
-            id: "gadget006",
-            name: "Bose QuietComfort Ultra",
-            image: "https://res.cloudinary.com/dxh2iyxjs/image/upload/v1742167881/use_rryd6c.jpg",
-            category: "Headphones",
-            dailyRate: 14.99,
-            availability: "unavailable",
-            rating: 4.8,
-            description: "Premium noise-cancelling headphones with spatial audio and up to 24 hours of battery life.",
-        },
-    ])
+     // Fetch wishlist gadget details on mount
+     useEffect(() => {
+        if (registeredUser?.email) {
+            dispatch(getWishlistGadgetsDetails(registeredUser?.email))
+        }
+    }, [dispatch, registeredUser?.email]);
+
+
+    // After fetching get wishlist gadget details data
+    useEffect(() => {
+        const getWishlistGadgetsDetails = async () => {
+            if (wishlistGadgetDetails !== null) {
+                setWishlistItems(wishlistGadgetDetails)
+            }
+        }
+        getWishlistGadgetsDetails().then();
+    }, [wishlistGadgetDetails]);
 
 
     // Format currency

@@ -233,9 +233,17 @@ const AuthProvider = ({ children }) => {
 
     const resetPassword = async (email) => {
         try {
-            await sendPasswordResetEmail(auth, email);
+            setUserLoading(true);
 
-            toast.success('Password reset email sent!');
+            const user_availability_in_database = await checking_user_availability_in_database(email);
+            if (!user_availability_in_database?.exists) {
+                toast.warning(user_availability_in_database?.message);
+                setUserLoading(false);
+                navigate('/sign-up');
+                return;
+            }
+
+            await sendPasswordResetEmail(auth, email);
 
         } catch (error) {
             toast.error(`ERROR MESSAGE: ${error.code}: ${error.message}`);

@@ -29,20 +29,24 @@ export const getUserProfileDetails = createAsyncThunk(
 
 export const updateUserProfileInfo = createAsyncThunk(
     "userProfileDetails/updateUserProfileInfo",
-    async ({userEmail, userInfoObj, axiosSecure}, { rejectWithValue }) => {
-        try {
-            const response = await axiosSecure.patch(
-                `/users/update_user_profile_info`,
-                { userEmail, userInfoObj }
-            );
-            const data = await response.data;
-            if (data.status !== 200) throw new Error(data.message || "Failed to update user profile info!");
-            return data.data;
-        } catch (error) {
-            return rejectWithValue(error.message);
+    async ({ userEmail, userInfoObj, axiosSecure }, { rejectWithValue }) => {
+      try {
+        const { data } = await axiosSecure.patch("/users/update_user_profile_info", {
+          userEmail,
+          userInfoObj,
+        });
+  
+        if (data.status !== 200) {
+          throw new Error(data.message || "Failed to update user profile info!");
         }
+  
+        return data.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-);
+  );
+  
 
 
 export const updateUserMembershipInfo = createAsyncThunk(

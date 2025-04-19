@@ -11,20 +11,23 @@ const initialState = {
 
 export const getUserProfileDetails = createAsyncThunk(
     "userProfileDetails/getUserProfileDetails",
-    async ({userEmail, axiosSecure}, { rejectWithValue }) => {
-        try {
-            const response = await axiosSecure.post(
-                `/users/get_full_user_profile_details`,
-                { userEmail }
-            );
-            const data = await response.data;
-            if (data.status !== 200) throw new Error(data.message || "Failed to get full user profile details!");
-            return data.data;
-        } catch (error) {
-            return rejectWithValue(error.message);
+    async ({ userEmail, axiosSecure }, { rejectWithValue }) => {
+      try {
+        const { data } = await axiosSecure.post("/users/get_full_user_profile_details", {
+          userEmail,
+        });
+  
+        if (data.status !== 200) {
+          throw new Error(data.message || "Failed to get full user profile details!");
         }
+  
+        return data.data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
     }
-);
+  );
+  
 
 
 export const updateUserProfileInfo = createAsyncThunk(

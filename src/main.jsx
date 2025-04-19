@@ -33,6 +33,7 @@ import AdminAllMessagesPage from "./Pages/DashboardPage/AdminDashboardPages/Admi
 import AdminAllGadgetsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllGadgetsPage.jsx";
 import AdminAllRentalsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminAllRentalsPage.jsx";
 import AdminSettingsPage from "./Pages/DashboardPage/AdminDashboardPages/AdminSettingsPage.jsx";
+import PasswordResetPage from './Pages/PasswordResetPage/PasswordResetPage.jsx';
 
 
 const queryClient = new QueryClient()
@@ -60,6 +61,7 @@ ReactDOM.createRoot(root).render(
 
                                 <Route path={'/sign-up'} element={<SignUpPage></SignUpPage>}></Route>
                                 <Route path={'/sign-in'} element={<SignInPage></SignInPage>}></Route>
+                                <Route path={'/password-reset'} element={<PasswordResetPage></PasswordResetPage>}></Route>
 
                                 <Route path={'/dashboard'} element={<DashboardLayout></DashboardLayout>}>
                                     <Route path={'/dashboard/user/overview'} element={<UserOverviewPage></UserOverviewPage>} />

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiUser, FiMail, FiLock, FiCheck } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { useSelector } from "react-redux";
@@ -9,7 +9,6 @@ import AuthContext from "../../Providers/AuthContext.jsx";
 const SignUpComponent = () => {
 
     const { signUpNewUser, signInWithGoogle } = useContext(AuthContext)
-    const navigate = useNavigate();
     const darkMode = useSelector((state) => state.darkMode.isDark);
 
 
@@ -57,18 +56,19 @@ const SignUpComponent = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    // Using destructuring to get name, value, type, and checked from the event target
-    const handleChange = ({ target: { name, value, type, checked } }) => {
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
 
-        setFormData(prev => ({
-            ...prev,
+        setFormData({
+            ...formData,
             [name]: newValue
-        }));
+        });
 
+        // Validate on change
         validateField(name, newValue);
     };
-
 
 
     const handleBlur = (e) => {
@@ -82,28 +82,23 @@ const SignUpComponent = () => {
         validateField(name, formData[name]);
     };
 
-    // Validate each field based on its name and value and set the corresponding error message if validation fails
-    const validateField = (name, value) => {
-        const trimmedValue = typeof value === 'string' ? value.trim() : value;
-        let errorMessage = '';
 
-        // Set confirm password error state separately to avoid unnecessary re-renders
-        const setConfirmPasswordError = (msg) =>
-            setErrors((prev) => ({ ...prev, confirmPassword: msg }));
+    const validateField = (name, value) => {
+        let errorMessage = '';
 
         switch (name) {
             case 'fullName':
-                if (!trimmedValue) {
+                if (!value.trim()) {
                     errorMessage = 'Full name is required';
-                } else if (trimmedValue.length < 3) {
+                } else if (value.trim().length < 3) {
                     errorMessage = 'Full name must be at least 3 characters';
                 }
                 break;
 
             case 'email':
-                if (!trimmedValue) {
+                if (!value.trim()) {
                     errorMessage = 'Email is required';
-                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue)) {
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
                     errorMessage = 'Please enter a valid email address';
                 }
                 break;
@@ -117,9 +112,17 @@ const SignUpComponent = () => {
                     errorMessage = 'Password must contain uppercase, lowercase, and number';
                 }
 
-                if (formData.confirmPassword) {
-                    const match = value === formData.confirmPassword;
-                    setConfirmPasswordError(match ? '' : 'Passwords do not match');
+                // Also validate confirm password if it has been entered
+                if (formData.confirmPassword && value !== formData.confirmPassword) {
+                    setErrors(prev => ({
+                        ...prev,
+                        confirmPassword: 'Passwords do not match'
+                    }));
+                } else if (formData.confirmPassword) {
+                    setErrors(prev => ({
+                        ...prev,
+                        confirmPassword: ''
+                    }));
                 }
                 break;
 
@@ -141,14 +144,13 @@ const SignUpComponent = () => {
                 break;
         }
 
-        setErrors((prev) => ({
+        setErrors(prev => ({
             ...prev,
             [name]: errorMessage
         }));
 
         return !errorMessage;
     };
-
 
 
     const validateForm = () => {
@@ -180,16 +182,12 @@ const SignUpComponent = () => {
 
             // Signing up using firebase.
             await signUpNewUser(fullName, email, password);
-
-            // Redirect to sign-in page
-            navigate('/sign-in');
         }
     };
 
 
     const handleGoogleSignIn = async () => {
         await signInWithGoogle();
-        // console.log('Sign in with Google clicked');
     };
 
 
@@ -440,7 +438,7 @@ const SignUpComponent = () => {
                     <div>
                         <button
                             type="submit"
-                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${darkMode
+                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white cursor-pointer ${darkMode
                                 ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
                                 : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
                                 } focus:outline-none focus:ring-2 focus:ring-offset-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
@@ -472,11 +470,10 @@ const SignUpComponent = () => {
                         <button
                             type="button"
                             onClick={handleGoogleSignIn}
-                            className={`group relative w-full flex justify-center py-2 px-4 border ${darkMode
+                            className={`group relative w-full flex justify-center py-2 px-4 border cursor-pointer ${darkMode
                                 ? 'border-gray-600 bg-gray-700/50 text-white hover:bg-gray-600/50'
                                 : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                                } rounded-lg text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-[1.02] ${darkMode ? 'focus:ring-purple-600' : 'focus:ring-indigo-500'
-                                }`}
+                                } rounded-lg text-sm font-medium transition-all duration-300`}
                         >
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                 <FcGoogle className="h-5 w-5" />

@@ -29,21 +29,23 @@ export const getUserMessagesChain = createAsyncThunk(
 export const addANewMessageToUserMessagesChain = createAsyncThunk(
     "userMessages/addANewMessageToUserMessagesChain",
     async ({ userEmail, newMessageObj, axiosSecure }, { rejectWithValue }) => {
-        try {
-            const response = await axiosSecure.post(
-                `/messages/add_new_message_from_a_user`,
-                {userEmail, newMessageObj}
-            );
-            const data = response.data;
-            // console.log(data)
-            if (data.status !== 200) throw new Error(data.message || "Failed to add new message!");
-            return data.data;
+      try {
+        const { data } = await axiosSecure.post("/messages/add_new_message_from_a_user", {
+          userEmail,
+          newMessageObj,
+        });
+  
+        if (data.status !== 200) {
+          throw new Error(data.message || "Failed to add new message!");
         }
-        catch (error) {
-            return rejectWithValue(error.message || "Network error while adding message");
-        }
+  
+        return data.data;
+      } catch (error) {
+        return rejectWithValue(error.message || "Network error while adding message");
+      }
     }
-);
+  );
+  
 
 const userMessagesSlice = createSlice({
     name: "userMessages",
@@ -93,5 +95,6 @@ const userMessagesSlice = createSlice({
             });
     },
 });
+
 
 export default userMessagesSlice.reducer;

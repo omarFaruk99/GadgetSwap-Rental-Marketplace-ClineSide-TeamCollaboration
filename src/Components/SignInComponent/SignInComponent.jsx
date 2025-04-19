@@ -163,8 +163,8 @@ const SignInComponent = () => {
         <div className={`min-h-[calc(100vh-421px)] flex items-center justify-center py-12 pt-32 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'
             }`}>
             <div className={`max-w-xl w-full space-y-8 relative ${darkMode
-                    ? 'bg-gray-800/70 border border-purple-900/30'
-                    : 'bg-white/80 border border-indigo-200/30'
+                ? 'bg-gray-800/70 border border-purple-900/30'
+                : 'bg-white/80 border border-indigo-200/30'
                 } backdrop-blur-md p-8 rounded-2xl shadow-xl transition-all duration-300`}>
 
                 {/* Decorative Elements */}
@@ -212,10 +212,10 @@ const SignInComponent = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={`appearance-none block w-full pl-10 pr-3 py-2 border ${errors.email && touched.email
-                                            ? 'border-red-500'
-                                            : darkMode
-                                                ? 'border-gray-600 bg-gray-700/50 text-white'
-                                                : 'border-gray-300 bg-white/80 text-gray-900'
+                                        ? 'border-red-500'
+                                        : darkMode
+                                            ? 'border-gray-600 bg-gray-700/50 text-white'
+                                            : 'border-gray-300 bg-white/80 text-gray-900'
                                         } rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${darkMode
                                             ? 'focus:ring-purple-500/50 focus:border-purple-500'
                                             : 'focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -259,10 +259,10 @@ const SignInComponent = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={`appearance-none block w-full pl-10 pr-10 py-2 border ${errors.password && touched.password
-                                            ? 'border-red-500'
-                                            : darkMode
-                                                ? 'border-gray-600 bg-gray-700/50 text-white'
-                                                : 'border-gray-300 bg-white/80 text-gray-900'
+                                        ? 'border-red-500'
+                                        : darkMode
+                                            ? 'border-gray-600 bg-gray-700/50 text-white'
+                                            : 'border-gray-300 bg-white/80 text-gray-900'
                                         } rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${darkMode
                                             ? 'focus:ring-purple-500/50 focus:border-purple-500'
                                             : 'focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -296,8 +296,8 @@ const SignInComponent = () => {
                         <button
                             type="submit"
                             className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white cursor-pointer ${darkMode
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
-                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
+                                ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                                : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
                                 } focus:outline-none focus:ring-2 focus:ring-offset-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
                                 } transition-all duration-300 transform hover:scale-[1.02]`}
                         >
@@ -328,8 +328,8 @@ const SignInComponent = () => {
                             type="button"
                             onClick={handleGoogleSignIn}
                             className={`group relative w-full flex justify-center py-2 px-4 border cursor-pointer ${darkMode
-                                    ? 'border-gray-600 bg-gray-700/50 text-white hover:bg-gray-600/50'
-                                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                                ? 'border-gray-600 bg-gray-700/50 text-white hover:bg-gray-600/50'
+                                : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
                                 } rounded-lg text-sm font-medium transition-all duration-300`}
                         >
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">

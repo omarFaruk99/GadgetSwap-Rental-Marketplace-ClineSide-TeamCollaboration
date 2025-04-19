@@ -10,21 +10,22 @@ const initialState = {
 export const getUserMessagesChain = createAsyncThunk(
     "userMessages/getUserMessagesChain",
     async ({ userEmail, axiosSecure }, { rejectWithValue }) => {
-        try {
-            const response = await axiosSecure.post(
-                `/messages/get_all_messages_of_a_user`,
-                { userEmail }
-            );
-            const data = response.data;
-            //console.log(data.data)
-            if (data.status !== 200) throw new Error(data.message || "Failed to get user's messages chain!");
-            return data.data;
+      try {
+        const { data } = await axiosSecure.post("/messages/get_all_messages_of_a_user", {
+          userEmail,
+        });
+  
+        if (data.status !== 200) {
+          throw new Error(data.message || "Failed to get user's messages chain!");
         }
-        catch (error) {
-            return rejectWithValue(error.message || "Network error while fetching messages");
-        }
+  
+        return data.data;
+      } catch (error) {
+        return rejectWithValue(error.message || "Network error while fetching messages");
+      }
     }
-);
+  );
+  
 
 export const addANewMessageToUserMessagesChain = createAsyncThunk(
     "userMessages/addANewMessageToUserMessagesChain",

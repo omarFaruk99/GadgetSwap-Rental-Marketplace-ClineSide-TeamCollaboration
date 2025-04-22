@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import {
-    createUserWithEmailAndPassword,
-    updateProfile,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
-    sendPasswordResetEmail,
     GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     signInWithPopup,
+    onAuthStateChanged,
+    updateProfile,
+    sendPasswordResetEmail,
+    validatePassword,
+    updatePassword,
+    signOut
 } from "firebase/auth";
 import AuthContext from "./AuthContext.jsx";
 import auth from "../Firebase/firebase.init.js";
@@ -103,7 +105,12 @@ const AuthProvider = ({ children }) => {
                     totalSpent: 0,
                     pointsEarned: 0,
                     reviewsGiven: 0
-                }
+                },
+                loginWith: "Personal Email",
+                failedLoginAttempts: 0,
+                lastFailedLoginAttempt: 0,
+                loginRestricted: false,
+                loginRestrictedUntil: null
             };
             // console.log('userInfoForDatabase: ', userInfoForDatabase);
 
@@ -134,10 +141,13 @@ const AuthProvider = ({ children }) => {
 
 
     const signInExistingUsers = async (email, password) => {
+        let userImpression = null;
         try {
             setUserLoading(true);
 
             const user_availability_in_database = await checking_user_availability_in_database(email);
+
+            // If the user is existed (not yet registered)
             if (!user_availability_in_database?.exists) {
                 toast.warning('Sign in failed. Email address not exists!');
                 setUserLoading(false);
@@ -145,9 +155,29 @@ const AuthProvider = ({ children }) => {
                 return;
             }
 
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            // console.log(userCredential)
+            // If registered then get the impression
+            userImpression = user_availability_in_database?.userImpression;
 
+            // If the user login is restricted
+            const currentTimestamp = new Date().getTime();
+            if (userImpression?.loginRestrictedUntil >= currentTimestamp && userImpression?.loginRestricted) {
+
+                const remainingTime = userImpression?.loginRestrictedUntil - currentTimestamp;
+                const minutes = Math.floor(remainingTime / (1000 * 60));
+                const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+                const readableremainingTime = `${minutes} minutes and ${seconds} seconds`;
+                // console.log(readableFormat);
+
+                toast.warning(`You are currently restricted from logging in. Please try again after ${readableremainingTime}.`);
+                setUserLoading(false);
+                navigate('/');
+                return;
+            }
+
+            // Try user login through Firebase
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+            // If user login is successful, get full data from database
             if (userCredential) {
                 const response = await axios.post(
                     `${BASE_URL}/users/get_user_by_email`,
@@ -160,7 +190,6 @@ const AuthProvider = ({ children }) => {
                     }
                 );
                 // console.log('Response: ', response?.data?.data);
-
                 await setUser(response?.data?.data);
 
                 // Redirect to respective dashboard after successful signing.
@@ -170,7 +199,19 @@ const AuthProvider = ({ children }) => {
             }
         }
         catch (error) {
-            toast.error(`Login failed. Error: ${error.message}`);
+            // console.log(userImpression);
+            const response = await axios.patch(
+                `${BASE_URL}/users/failed_login_attempt`,
+                { email: email },
+                {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            // console.log(response);
+            toast.warning(response?.data?.message || `Login failed. Error: ${error.message}`);
         }
         finally {
             setUserLoading(false);
@@ -211,6 +252,34 @@ const AuthProvider = ({ children }) => {
             }
         } catch (error) {
             toast.error(`Profile update failed. Error: ${error.message}`);
+        }
+    };
+
+
+
+    const updateExistingUsersPassword = async (oldPassword, newPassword) => {
+        try {
+            const previousPasswordValidation = await validatePassword(auth, oldPassword)
+            // console.log("previousPasswordValidation", previousPasswordValidation)
+
+            if (!previousPasswordValidation.isValid) {
+                toast.warning(`Your previous password is incorrect. Please try again.`);
+                return;
+            }
+
+            try {
+                if (auth.currentUser) {
+                    await updatePassword(auth.currentUser, newPassword)
+                    toast.success(`Your password has been updated successfully.`);
+                }
+            }
+            catch (error) {
+                console.log("Password update failed. Error: ", error)
+                toast.error(`Your password could not be updated. Please try again.`);
+            }
+        }
+        catch (error) {
+            toast.error(`Password update failed. Error: ${error.message}`);
         }
     };
 
@@ -303,7 +372,12 @@ const AuthProvider = ({ children }) => {
                         totalSpent: 0,
                         pointsEarned: 0,
                         reviewsGiven: 0
-                    }
+                    },
+                    loginWith: "Gmail",
+                    failedLoginAttempts: 0,
+                    lastFailedLoginAttempt: 0,
+                    loginRestricted: false,
+                    loginRestrictedUntil: null
                 };
                 // console.log('userInfoForDatabase: ', userInfoForDatabase);
 
@@ -424,7 +498,7 @@ const AuthProvider = ({ children }) => {
     }, []);
 
 
-    const authInfo = { user, userLoading, signUpNewUser, signInExistingUsers, updateExistingUsers, signOutCurrentUser, resetPassword, signInWithGoogle };
+    const authInfo = { user, userLoading, signUpNewUser, signInExistingUsers, updateExistingUsers, signOutCurrentUser, resetPassword, updateExistingUsersPassword, signInWithGoogle };
 
 
     return (

@@ -36,7 +36,7 @@ export const addANewRentalOrderForThisUser = createAsyncThunk(
         try {
             const response = await axiosSecure.post(
                 `/rental_orders/add_new_rental_order_from_a_user`,
-                { userEmail, gadgetId, newRentalOrderObj }
+                { userEmail, newRentalOrderObj }
             );
             const data = response.data;
             // console.log(data)

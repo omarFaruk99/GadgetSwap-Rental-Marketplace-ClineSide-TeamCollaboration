@@ -274,7 +274,7 @@ const AuthProvider = ({ children }) => {
                 }
             }
             catch (error) {
-                console.log("Password update failed. Error: ", error)
+                // console.log("Password update failed. Error: ", error)
                 toast.error(`Your password could not be updated. Please try again.`);
             }
         }
@@ -463,7 +463,7 @@ const AuthProvider = ({ children }) => {
                     if (tokenResponse?.data) console.log("JSON Web Token created and saved. User is logged in.");
                 }
                 catch (error) {
-                    console.error("Error during authentication flow:", error);
+                    // console.error("Error during authentication flow:", error);
                     setUser(null); // Reset user on error
                 }
                 finally {

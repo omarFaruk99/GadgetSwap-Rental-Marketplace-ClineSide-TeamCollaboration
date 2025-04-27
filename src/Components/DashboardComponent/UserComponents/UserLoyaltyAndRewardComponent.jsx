@@ -1,30 +1,33 @@
-import {useEffect, useState} from "react"
-import {
-    FiAward,
-    FiStar,
-    FiTrendingUp,
-    FiUserPlus,
-    FiClock,
-    FiDollarSign,
-    FiShoppingBag,
-    FiMessageSquare,
-    FiUsers,
-    FiChevronUp,
-    FiChevronDown,
-    FiGift,
-    FiCreditCard,
-    FiShield,
-    FiTruck,
-    FiHeadphones,
-    FiPercent,
-} from "react-icons/fi"
-import {useSelector} from "react-redux";
+import { useContext, useEffect, useState } from "react"
+import { FiAward, FiStar, FiTrendingUp, FiUserPlus, FiClock, FiDollarSign, FiShoppingBag, FiMessageSquare, FiUsers, FiChevronUp, FiChevronDown, FiGift, FiCreditCard, FiShield, FiTruck, FiHeadphones, FiPercent, FiAlertCircle, FiCheck } from "react-icons/fi"
+import { useDispatch, useSelector } from "react-redux"
+import AuthContext from "../../../Providers/AuthContext.jsx"
+import {getUserProfileDetails, updateUserMembershipInfo} from "../../../Features/userProfileDetails/userProfileDetailsSlice.js"
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure.jsx"
 
 
 const UserLoyaltyAndRewardComponent = () => {
 
     // State management
-    const darkMode = useSelector((state) => state.darkMode.isDark);
+      // State management
+      const darkMode = useSelector((state) => state?.darkMode?.isDark)
+      const { user: registeredUser } = useContext(AuthContext)
+      const dispatch = useDispatch()
+      const { userProfileDetails } = useSelector((state) => state?.userProfileDetails)
+      const axiosSecure = useAxiosSecure()
+      const [emailError, setEmailError] = useState("")
+      const [animateProgress, setAnimateProgress] = useState(false)
+  
+  
+      // Format date helper function
+      const formatJoinDate = (dateString) => {
+          if (!dateString) return "Unknown date"
+  
+          const date = new Date(dateString)
+          const options = { year: "numeric", month: "long" }
+          return date.toLocaleDateString("en-US", options)
+      }
+  
 
 
     // Initial fake user data

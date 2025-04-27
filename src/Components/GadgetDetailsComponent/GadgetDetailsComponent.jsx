@@ -291,11 +291,11 @@ const GadgetDetailsComponent = () => {
         }
     
 
-    // Format date for display
-    const formatDate = (dateString) => {
+     // Format date for display
+     const formatDate = (dateString) => {
         if (!dateString) return ""
         const date = new Date(dateString)
-        return date.toLocaleDateString("en-US", {weekday: "short", month: "short", day: "numeric"})
+        return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })
     }
 
 
@@ -309,8 +309,7 @@ const GadgetDetailsComponent = () => {
 
     // Render loading skeleton
     const renderSkeleton = () => (
-        <div
-            className={`mx-auto px-4 py-8 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}>
+        <div className={`mx-auto px-4 py-8 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}>
             <div className="container mx-auto animate-pulse">
                 <div className="flex items-center mb-6">
                     <div className={`h-10 w-10 rounded-full ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}></div>
@@ -338,14 +337,14 @@ const GadgetDetailsComponent = () => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
-        });
-    }, []);
+        })
+    }, [])
 
-
-    // If loading, show skeleton
+    // If loading, show the skeleton
     if (loading) {
         return renderSkeleton()
     }
+
 
 
     // If gadget not found

@@ -35,19 +35,19 @@ const GadgetDetailsComponent = () => {
 
     // Category icons mapping
     const categoryIcons = {
-        Smartphones: <FaMobileAlt className="text-blue-500"/>,
-        Laptops: <FaLaptop className="text-purple-500"/>,
-        Tablets: <FaTabletAlt className="text-green-500"/>,
-        Smartwatches: <FaClock className="text-pink-500"/>,
-        Cameras: <FaCamera className="text-red-500"/>,
-        Gaming: <FaGamepad className="text-indigo-500"/>,
-        Audio: <FaVolumeUp className="text-yellow-500"/>,
-        Headphones: <FaHeadphones className="text-cyan-500"/>,
-        Speakers: <FaSpeakerDeck className="text-orange-500"/>,
-        VR: <FaVrCardboard className="text-orange-500"/>,
-        Drones: <FaPlane className="text-teal-500"/>,
-        Projectors: <FaProjectDiagram className="text-amber-500"/>,
-        Wearables: <FaWifi className="text-lime-500"/>,
+        Smartphones: <FaMobileAlt className="text-blue-500" />,
+        Laptops: <FaLaptop className="text-purple-500" />,
+        Tablets: <FaTabletAlt className="text-green-500" />,
+        Smartwatches: <FaClock className="text-pink-500" />,
+        Cameras: <FaCamera className="text-red-500" />,
+        Gaming: <FaGamepad className="text-indigo-500" />,
+        Audio: <FaVolumeUp className="text-yellow-500" />,
+        Headphones: <FaHeadphones className="text-cyan-500" />,
+        Speakers: <FaSpeakerDeck className="text-orange-500" />,
+        VR: <FaVrCardboard className="text-orange-500" />,
+        Drones: <FaPlane className="text-teal-500" />,
+        Projectors: <FaProjectDiagram className="text-amber-500" />,
+        Wearables: <FaWifi className="text-lime-500" />,
     }
 
 

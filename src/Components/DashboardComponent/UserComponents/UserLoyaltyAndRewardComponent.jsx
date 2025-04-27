@@ -416,14 +416,10 @@ const UserLoyaltyAndRewardComponent = () => {
     }, [])
    
 
-
-
-
     return (
         <div
             className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-800"}`}
         >
-
             {/* Points and Membership Summary */}
             <div
                 className={`rounded-xl overflow-hidden shadow-sm mb-6 ${darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"}`}
@@ -434,24 +430,24 @@ const UserLoyaltyAndRewardComponent = () => {
                             <div className="flex items-center">
                                 <FiAward
                                     size={24}
-                                    className={`mr-2 ${userData.membershipTier === "Bronze" ? "text-amber-700" : userData.membershipTier === "Silver" ? "text-gray-400" : userData.membershipTier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
+                                    className={`mr-2 ${realUserData?.membershipDetails?.membershipTier === "Bronze" ? "text-amber-700" : realUserData?.membershipDetails?.membershipTier === "Silver" ? "text-gray-400" : realUserData?.membershipDetails?.membershipTier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
                                 />
-                                <h2 className="text-xl font-semibold">{userData.membershipTier} Member</h2>
+                                <h2 className="text-xl font-semibold">{realUserData?.membershipDetails?.membershipTier} Member</h2>
                                 <span
-                                    className={`ml-2 px-2 py-1 text-xs font-medium rounded-full text-white ${getTierColor(userData.membershipTier)}`}
+                                    className={`ml-2 px-2 py-1 text-xs font-medium rounded-full text-white ${getTierColor(realUserData?.membershipDetails?.membershipTier)}`}
                                 >
-                                    {userData.membershipTier}
+                                    {realUserData?.membershipDetails?.membershipTier}
                                 </span>
                             </div>
                             <p className={`mt-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                Member since {userData.memberSince}
+                                Member since {formatJoinDate(realUserData?.joinDate)}
                             </p>
                         </div>
 
                         <div className="flex items-center">
                             <FiStar size={24} className="mr-2 text-amber-400" />
                             <div>
-                                <div className="text-2xl font-bold">{userData.points.toLocaleString()}</div>
+                                <div className="text-2xl font-bold">{realUserData?.membershipDetails?.points?.toLocaleString()}</div>
                                 <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>Total Points</div>
                             </div>
                         </div>
@@ -461,16 +457,31 @@ const UserLoyaltyAndRewardComponent = () => {
                         <div className="mt-6">
                             <div className="flex justify-between mb-2">
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Progress to {getNextTier().tier}
+                                    Progress to {getNextTier()?.tier}
                                 </span>
                                 <span className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-                                    {getPointsNeededForNextTier().toLocaleString()} points needed
+                                    {canUpgradeToNextTier() ? (
+                                        <span className="flex items-center">
+                                            <FiCheck className="mr-1 text-green-500"/>
+                                            Ready to upgrade
+                                        </span>
+                                    ) : (
+                                        `${getPointsNeededForNextTier().toLocaleString()} points needed`
+                                    )}
                                 </span>
                             </div>
                             <div className={`h-2 rounded-full overflow-hidden ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}>
                                 <div
-                                    className={`h-full rounded-full ${userData.membershipTier === "Bronze" ? "bg-amber-700" : userData.membershipTier === "Silver" ? "bg-gray-400" : userData.membershipTier === "Gold" ? "bg-amber-400" : "bg-indigo-600"}`}
-                                    style={{ width: `${calculateProgressPercentage()}%` }}
+                                    className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                                        realUserData?.membershipDetails?.membershipTier === "Bronze"
+                                            ? "bg-amber-700"
+                                            : realUserData?.membershipDetails?.membershipTier === "Silver"
+                                                ? "bg-gray-400"
+                                                : realUserData?.membershipDetails?.membershipTier === "Gold"
+                                                    ? "bg-amber-400"
+                                                    : "bg-indigo-600"
+                                    }`}
+                                    style={{ width: animateProgress ? `${calculateProgressPercentage()}%` : "0%" }}
                                 ></div>
                             </div>
                         </div>
@@ -490,13 +501,13 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiGift size={20} className="mr-2 text-purple-500" />
                         <h3 className="text-lg font-semibold">Your Benefits</h3>
                     </div>
-                    {expandedSections.benefits ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.benefits ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.benefits && (
+                {expandedSections?.benefits && (
                     <div className="p-4 pt-0">
                         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {getCurrentTier().benefits.map((benefit, index) => (
+                            {getCurrentTier()?.benefits?.map((benefit, index) => (
                                 <div
                                     key={index}
                                     className={`p-4 rounded-lg flex items-start ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}
@@ -524,10 +535,10 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiTrendingUp size={20} className="mr-2 text-green-500" />
                         <h3 className="text-lg font-semibold">Membership Upgrade</h3>
                     </div>
-                    {expandedSections.upgrade ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.upgrade ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.upgrade && (
+                {expandedSections?.upgrade && (
                     <div className="p-4 pt-0">
                         {getNextTier() ? (
                             <div className="mt-4">
@@ -539,9 +550,9 @@ const UserLoyaltyAndRewardComponent = () => {
                                             <div className="flex items-center">
                                                 <FiAward
                                                     size={20}
-                                                    className={`mr-2 ${getNextTier().tier === "Bronze" ? "text-amber-700" : getNextTier().tier === "Silver" ? "text-gray-400" : getNextTier().tier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
+                                                    className={`mr-2 ${getNextTier()?.tier === "Bronze" ? "text-amber-700" : getNextTier()?.tier === "Silver" ? "text-gray-400" : getNextTier()?.tier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
                                                 />
-                                                <h4 className="text-lg font-semibold">{getNextTier().tier} Membership</h4>
+                                                <h4 className="text-lg font-semibold">{getNextTier()?.tier} Membership</h4>
                                             </div>
                                             <p className={`mt-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                                                 Unlock premium benefits and exclusive perks
@@ -550,7 +561,16 @@ const UserLoyaltyAndRewardComponent = () => {
 
                                         <div className="flex items-center">
                                             <FiStar size={20} className="mr-2 text-amber-400" />
-                                            <span className="font-medium">{getPointsNeededForNextTier().toLocaleString()} points needed</span>
+                                            <span className="font-medium">
+                                                {canUpgradeToNextTier() ? (
+                                                    <span className="flex items-center">
+                                                        <FiCheck className="mr-1 text-green-500" />
+                                                        Ready to upgrade
+                                                    </span>
+                                                ) : (
+                                                `${getPointsNeededForNextTier().toLocaleString()} points needed`
+                                                )}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -558,7 +578,7 @@ const UserLoyaltyAndRewardComponent = () => {
                                         <h5 className="font-medium mb-2">New Benefits You'll Unlock:</h5>
                                         <ul className="space-y-2">
                                             {getNextTier()
-                                                .benefits.filter((benefit) => !getCurrentTier().benefits.includes(benefit))
+                                                ?.benefits?.filter((benefit) => !getCurrentTier()?.benefits?.includes(benefit))
                                                 .map((benefit, index) => (
                                                     <li key={index} className="flex items-center">
                                                         <FiStar className="mr-2 text-amber-400" size={16} />
@@ -571,15 +591,15 @@ const UserLoyaltyAndRewardComponent = () => {
                                     <div className="mt-6">
                                         <button
                                             onClick={handleUpgrade}
-                                            disabled={userData.points < getNextTier().pointsRequired}
-                                            className={`px-4 py-2 rounded-lg font-medium ${
-                                                userData.points >= getNextTier().pointsRequired
+                                            disabled={!canUpgradeToNextTier()}
+                                            className={`px-4 py-2 rounded-lg font-medium cursor-pointer ${
+                                                canUpgradeToNextTier()
                                                     ? "bg-green-600 hover:bg-green-700 text-white"
-                                                    : `${darkMode ? "bg-gray-600 text-gray-300" : "bg-gray-200 text-gray-500"}`
+                                                    : `${darkMode ? "bg-gray-600 text-gray-300" : "bg-gray-200 text-gray-500"} cursor-not-allowed`
                                             }`}
                                         >
-                                            {userData.points >= getNextTier().pointsRequired
-                                                ? `Upgrade to ${getNextTier().tier}`
+                                            {canUpgradeToNextTier()
+                                                ? `Upgrade to ${getNextTier()?.tier} (${getUpgradeCost().toLocaleString()} points)`
                                                 : `Need ${getPointsNeededForNextTier().toLocaleString()} more points`}
                                         </button>
                                     </div>
@@ -610,10 +630,10 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiUserPlus size={20} className="mr-2 text-blue-500" />
                         <h3 className="text-lg font-semibold">Refer a Friend</h3>
                     </div>
-                    {expandedSections.referral ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.referral ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.referral && (
+                {expandedSections?.referral && (
                     <div className="p-4 pt-0">
                         <div className="mt-4">
                             <div className={`p-5 rounded-lg ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
@@ -642,15 +662,21 @@ const UserLoyaltyAndRewardComponent = () => {
                                                 darkMode
                                                     ? "bg-gray-800 border-gray-600 text-white focus:border-blue-500"
                                                     : "bg-white border-gray-300 text-gray-900 focus:border-blue-500"
-                                            } focus:outline-none`}
+                                            } focus:outline-none ${emailError ? "border-red-500" : ""}`}
                                             placeholder="Enter your friend's email"
-                                            required
+                                            onChange={() => setEmailError("")}
                                         />
+                                        {emailError && (
+                                            <div className="flex items-center mt-1 text-red-500 text-sm">
+                                                <FiAlertCircle className="mr-1" />
+                                                {emailError}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                                        className="px-4 py-2 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                                     >
                                         Send Invitation
                                     </button>
@@ -659,7 +685,8 @@ const UserLoyaltyAndRewardComponent = () => {
                                 <div className="mt-4 flex items-center">
                                     <FiUsers size={16} className="mr-2 text-purple-500" />
                                     <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                        You've referred {userData.referrals} {userData.referrals === 1 ? "friend" : "friends"} so far
+                                        You've referred {realUserData?.membershipDetails?.referrals}{" "}
+                                        {realUserData?.membershipDetails?.referrals === 1 ? "friend" : "friends"} so far
                                     </span>
                                 </div>
                             </div>
@@ -680,12 +707,12 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiClock size={20} className="mr-2 text-amber-500" />
                         <h3 className="text-lg font-semibold">Activity History</h3>
                     </div>
-                    {expandedSections.activity ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.activity ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.activity && (
+                {expandedSections?.activity && (
                     <div className="p-4 pt-0">
-                       <div className="mt-4 overflow-x-auto">
+                        <div className="mt-4 overflow-x-auto">
                             <table className={`min-w-full divide-y ${darkMode ? "divide-gray-700" : "divide-gray-300"}`}>
                                 <thead className={darkMode ? "bg-gray-700" : "bg-gray-50"}>
                                 <tr>
@@ -707,7 +734,7 @@ const UserLoyaltyAndRewardComponent = () => {
                                 </tr>
                                 </thead>
                                 <tbody className={`divide-y ${darkMode ? "divide-gray-700" : "divide-gray-200"}`}>
-                                {userData.activities.map((activity) => (
+                                {activities.map((activity) => (
                                     <tr key={activity.id} className={darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"}>
                                         <td className="px-4 py-4 whitespace-nowrap text-sm">
                                             {new Date(activity.date).toLocaleDateString()}
@@ -747,19 +774,19 @@ const UserLoyaltyAndRewardComponent = () => {
                             </table>
                         </div>
 
-                        <div className="mt-4 flex items-center justify-between">
+                        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                             <div className="flex items-center">
                                 <FiTrendingUp size={16} className="mr-2 text-green-500" />
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Current Rental Streak: {userData.rentalStreak} {userData.rentalStreak === 1 ? "day" : "days"}
+                                    Current Rental Streak: {realUserData?.membershipDetails?.rentalStreak}{" "}
+                                    {realUserData?.membershipDetails?.rentalStreak === 1 ? "day" : "days"}
                                 </span>
                             </div>
 
                             <div className="flex items-center">
                                 <FiCreditCard size={16} className="mr-2 text-blue-500" />
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Total Points Earned:{" "}
-                                    {userData.activities.reduce((sum, activity) => sum + (activity.pointsEarned || 0), 0)}
+                                    Total Points Earned: {activities.reduce((sum, activity) => sum + (activity?.pointsEarned || 0), 0)}
                                 </span>
                             </div>
                         </div>
@@ -770,4 +797,7 @@ const UserLoyaltyAndRewardComponent = () => {
     )
 }
 
-export default UserLoyaltyAndRewardComponent;
+export default UserLoyaltyAndRewardComponent
+
+
+

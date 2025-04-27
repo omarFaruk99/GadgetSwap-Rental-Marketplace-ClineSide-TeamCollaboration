@@ -174,7 +174,6 @@ const TermsAndConditionsComponent = () => {
         }
     ];
 
-
     return (
         <div className={`min-h-screen transition-colors duration-300 ${
             darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900"

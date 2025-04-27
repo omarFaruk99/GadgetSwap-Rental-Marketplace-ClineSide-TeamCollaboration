@@ -1,21 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import {
-    FiShoppingCart,
-    FiCalendar,
-    FiSearch,
-    FiFilter,
-    FiDownload,
-    FiStar,
-    FiCreditCard,
-    FiTag,
-    FiAward,
-    FiWifi,
-    FiFileText,
-    FiChevronDown,
-    FiChevronUp,
-    FiX,
-} from "react-icons/fi"
+import { FiShoppingCart, FiCalendar, FiSearch, FiFilter, FiDownload, FiStar, FiCreditCard, FiTag, FiAward, FiWifi, FiFileText, FiChevronDown, FiChevronUp, FiX } from "react-icons/fi"
 import { FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt, FaVrCardboard } from "react-icons/fa"
 
 
@@ -41,6 +26,7 @@ const UserMyRentalsComponent = () => {
             category: "Smartphones",
             startDate: "2023-11-10",
             endDate: "2023-11-17",
+            blockedDates: [],
             status: "active",
             amount: 175.5,
             discount: 10,

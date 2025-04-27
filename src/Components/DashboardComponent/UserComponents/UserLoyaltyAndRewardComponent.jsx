@@ -291,41 +291,56 @@ const UserLoyaltyAndRewardComponent = () => {
     }
 
 
-
-
-
-    // Handle refer a friend
-    const handleReferFriend = (e) => {
+    // Handle refers to a friend
+    const handleReferFriend = async (e) => {
         e.preventDefault()
         const referralPoints = 200
-        const friendEmail = e.target.email.value
+        const friendEmail = e.target?.email?.value
 
-        if (!friendEmail) return
-
-        // In a real app, this would be an API call
-        const updatedUserData = {
-            ...userData,
-            points: userData.points + referralPoints,
-            referrals: userData.referrals + 1,
-            activities: [
-                {
-                    id: userData.activities.length + 1,
-                    date: new Date().toISOString().split("T")[0],
-                    type: "referral",
-                    description: `Referred friend: ${friendEmail}`,
-                    pointsEarned: referralPoints,
-                    amountSpent: 0,
-                },
-                ...userData.activities,
-            ],
+        if (!friendEmail) {
+            setEmailError("Email address is required")
+            return
         }
 
-        setUserData(updatedUserData)
-        console.log("Friend Referred:", updatedUserData)
+        if (!validateEmail(friendEmail)) {
+            setEmailError("Please enter a valid email address")
+            return
+        }
+
+        setEmailError("")
+
+        // Update the realUserData with the correct structure
+        const updatedRealUserData = {
+            ...realUserData,
+            membershipDetails: {
+                ...realUserData?.membershipDetails,
+                points: (realUserData?.membershipDetails?.points || 0) + referralPoints,
+                referrals: (realUserData?.membershipDetails?.referrals || 0) + 1,
+            },
+        }
+
+        setRealUserData(updatedRealUserData)
+        await dispatch(updateUserMembershipInfo({userEmail: registeredUser?.email, userMembershipObj: updatedRealUserData, axiosSecure}))
+        // console.log("Friend Referred:", updatedRealUserData)
+
+        // Update activities
+        const newActivity = {
+            id: activities.length + 1,
+            date: new Date().toISOString().split("T")[0],
+            type: "referral",
+            description: `Referred friend: ${friendEmail}`,
+            pointsEarned: referralPoints,
+            amountSpent: 0,
+        }
+        setActivities([newActivity, ...activities])
 
         // Reset form
         e.target.reset()
     }
+
+
+
+    
 
 
     // Get icon for activity type

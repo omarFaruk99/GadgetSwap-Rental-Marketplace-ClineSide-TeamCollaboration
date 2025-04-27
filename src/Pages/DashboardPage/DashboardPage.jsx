@@ -105,7 +105,7 @@ const DashboardPage = () => {
         navigateTo("/")
     }
 
-    
+
     // Check for mobile view
     useEffect(() => {
         const handleResize = () => {
@@ -147,6 +147,7 @@ const DashboardPage = () => {
         { id: "loyalty_and_rewards", name: "Loyalty & Rewards", icon: <FiCreditCard className="mr-3" size={20} /> },
         { id: "settings", name: "Settings", icon: <FiSettings className="mr-3" size={20} /> },
     ]
+
 
 
 

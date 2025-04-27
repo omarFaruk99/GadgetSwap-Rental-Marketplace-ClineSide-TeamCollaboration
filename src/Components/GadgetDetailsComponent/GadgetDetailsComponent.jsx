@@ -87,7 +87,7 @@ const GadgetDetailsComponent = () => {
         setSelectedImage((prev) => (prev === gadget.images.length - 1 ? 0 : prev + 1))
     }
 
-    
+
     // Function to get fully booked dates
     const getBlockedDates = (blockedDates, totalCopy) => {
         if (!blockedDates || !totalCopy) return [];
@@ -118,24 +118,23 @@ const GadgetDetailsComponent = () => {
     }
 
 
-   // Update end date based on start date and duration
-   const updateEndDate = (start, duration) => {
-    if (start) {
-        const startDate = new Date(start)
-        const end = new Date(startDate)
-        end.setDate(startDate.getDate() + duration)
+    // Update end date based on start date and duration
+    const updateEndDate = (start, duration) => {
+        if (start) {
+            const startDate = new Date(start)
+            const end = new Date(startDate)
+            end.setDate(startDate.getDate() + duration)
 
-        // Format end date to YYYY-MM-DD
-        const formattedEndDate = end.toISOString().split("T")[0]
-        setEndDate(formattedEndDate)
-    } else {
-        setEndDate("")
+            // Format end date to YYYY-MM-DD
+            const formattedEndDate = end.toISOString().split("T")[0]
+            setEndDate(formattedEndDate)
+        } else {
+            setEndDate("")
+        }
     }
-}
 
 
-
-    // Handle tab change
+   // Handle tab change
     const handleTabChange = (tab) => {
         setActiveTab(tab)
     }
@@ -149,16 +148,14 @@ const GadgetDetailsComponent = () => {
 
     // Toggle wishlist
     const toggleWishlist = async () => {
-        setIsWishlisted(!isWishlisted)
-        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id}));
-        await dispatch(getWishlistGadgetsDetails(registeredUser?.email));
+        await dispatch(addOrRemoveWishlistGadget({ userEmail: registeredUser?.email, gadgetId: id, axiosSecure }))
     }
 
 
     // Handle back navigation
     const handleBack = () => {
         // navigate("/all-gadgets")
-        window.history.back();
+        window.history.back()
     }
 
 
@@ -168,28 +165,25 @@ const GadgetDetailsComponent = () => {
     }
 
 
-    // Toggle date picker visibility
-    const toggleDatePicker = () => {
-        setShowDatePicker(!showDatePicker)
+  // Calculate total price
+  const calculateTotalPrice = () => {
+    if (!gadget) return { basePrice: 0, insuranceFee: 0, total: 0 }
+
+    const perDayPrice = gadget?.pricing?.perDay
+    const basePrice = gadget?.pricing?.perDay * rentalDuration
+    const insuranceFee =
+        insuranceOption === "premium"
+            ? gadget?.pricing?.premiumInsuranceFee * rentalDuration
+            : gadget?.pricing?.basicInsuranceFee * rentalDuration
+
+    return {
+        perDayPrice: perDayPrice.toFixed(2),
+        basePrice: basePrice.toFixed(2),
+        insuranceFee: insuranceFee.toFixed(2),
+        total: (basePrice + insuranceFee).toFixed(2),
     }
+}
 
-
-    // Calculate total price
-    const calculateTotalPrice = () => {
-        if (!gadget) return {basePrice: 0, insuranceFee: 0, total: 0}
-
-        const basePrice = gadget?.pricing?.perDay * rentalDuration
-        const insuranceFee =
-            insuranceOption === "premium"
-                ? gadget?.pricing?.premiumInsuranceFee * rentalDuration
-                : gadget?.pricing?.basicInsuranceFee * rentalDuration
-
-        return {
-            basePrice: basePrice.toFixed(2),
-            insuranceFee: insuranceFee.toFixed(2),
-            total: (basePrice + insuranceFee).toFixed(2),
-        }
-    }
 
 
     // Format date for display

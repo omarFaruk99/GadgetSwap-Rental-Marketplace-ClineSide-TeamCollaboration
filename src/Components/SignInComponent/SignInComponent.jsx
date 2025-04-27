@@ -5,20 +5,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoWarningOutline } from 'react-icons/io5';
 import { useSelector } from "react-redux";
 import AuthContext from "../../Providers/AuthContext.jsx";
-import axios from 'axios';
-import { BASE_URL } from '../../SharedUtilities/SharedUtilities.jsx';
 
 
 const SignInComponent = () => {
 
-    const { signInExistingUsers, signInWithGoogle, resetPassword } = useContext(AuthContext);
-    const navigate = useNavigate();
     const darkMode = useSelector((state) => state.darkMode.isDark);
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [resetEmail, setResetEmail] = useState('');
-    const [resetError, setResetError] = useState('');
-
+    const { user: registeredUser, signInExistingUsers, signInWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     // Form state
@@ -145,15 +138,16 @@ const SignInComponent = () => {
             // Signing in using firebase.
             await signInExistingUsers(email, password);
 
-            // Redirect to home page
-            navigate('/');
+            // Redirect to dashboard page
+            if (registeredUser) {
+                await navigate(registeredUser?.role === 'admin' ? '/dashboard/admin/total_overview' : '/dashboard/user/overview');
+            }
         }
     };
 
+
     const handleGoogleSignIn = async () => {
         await signInWithGoogle();
-        navigate('/');
-        // console.log('Sign in with Google clicked');
     };
 
 
@@ -169,8 +163,8 @@ const SignInComponent = () => {
         <div className={`min-h-[calc(100vh-421px)] flex items-center justify-center py-12 pt-32 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'
             }`}>
             <div className={`max-w-xl w-full space-y-8 relative ${darkMode
-                    ? 'bg-gray-800/70 border border-purple-900/30'
-                    : 'bg-white/80 border border-indigo-200/30'
+                ? 'bg-gray-800/70 border border-purple-900/30'
+                : 'bg-white/80 border border-indigo-200/30'
                 } backdrop-blur-md p-8 rounded-2xl shadow-xl transition-all duration-300`}>
 
                 {/* Decorative Elements */}
@@ -218,10 +212,10 @@ const SignInComponent = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={`appearance-none block w-full pl-10 pr-3 py-2 border ${errors.email && touched.email
-                                            ? 'border-red-500'
-                                            : darkMode
-                                                ? 'border-gray-600 bg-gray-700/50 text-white'
-                                                : 'border-gray-300 bg-white/80 text-gray-900'
+                                        ? 'border-red-500'
+                                        : darkMode
+                                            ? 'border-gray-600 bg-gray-700/50 text-white'
+                                            : 'border-gray-300 bg-white/80 text-gray-900'
                                         } rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${darkMode
                                             ? 'focus:ring-purple-500/50 focus:border-purple-500'
                                             : 'focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -244,15 +238,11 @@ const SignInComponent = () => {
                                     } transition-colors duration-300`}>
                                     Password
                                 </label>
-                                <div 
-                                    type="button"
-                                    onClick={() => setIsModalOpen(true)}
-                                    className="text-sm">
-                                    <button  className={`font-medium cursor-pointer ${
-                                        darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
-                                    } transition-colors duration-300`}>
+                                <div className="text-sm">
+                                    <a href="#" className={`font-medium ${darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
+                                        } transition-colors duration-300`}>
                                         Forgot your password?
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <div className="mt-1 relative">
@@ -269,10 +259,10 @@ const SignInComponent = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={`appearance-none block w-full pl-10 pr-10 py-2 border ${errors.password && touched.password
-                                            ? 'border-red-500'
-                                            : darkMode
-                                                ? 'border-gray-600 bg-gray-700/50 text-white'
-                                                : 'border-gray-300 bg-white/80 text-gray-900'
+                                        ? 'border-red-500'
+                                        : darkMode
+                                            ? 'border-gray-600 bg-gray-700/50 text-white'
+                                            : 'border-gray-300 bg-white/80 text-gray-900'
                                         } rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 ${darkMode
                                             ? 'focus:ring-purple-500/50 focus:border-purple-500'
                                             : 'focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -305,9 +295,9 @@ const SignInComponent = () => {
                     <div>
                         <button
                             type="submit"
-                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white ${darkMode
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
-                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
+                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white cursor-pointer ${darkMode
+                                ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                                : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
                                 } focus:outline-none focus:ring-2 focus:ring-offset-2 ${darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
                                 } transition-all duration-300 transform hover:scale-[1.02]`}
                         >
@@ -337,9 +327,9 @@ const SignInComponent = () => {
                         <button
                             type="button"
                             onClick={handleGoogleSignIn}
-                            className={`group relative w-full flex justify-center py-2 px-4 border ${darkMode
-                                    ? 'border-gray-600 bg-gray-700/50 text-white hover:bg-gray-600/50'
-                                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                            className={`group relative w-full flex justify-center py-2 px-4 border cursor-pointer ${darkMode
+                                ? 'border-gray-600 bg-gray-700/50 text-white hover:bg-gray-600/50'
+                                : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
                                 } rounded-lg text-sm font-medium transition-all duration-300`}
                         >
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -350,7 +340,18 @@ const SignInComponent = () => {
                     </div>
 
                     {/* Sign Up Link */}
-                    <div className="text-center">
+                    <div className="text-center space-y-2">
+                        <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'
+                            } transition-colors duration-300`}>
+                            Forgot password?{' '}
+                            <Link
+                                to="/password-reset"
+                                className={`font-medium ${darkMode ? 'text-purple-400 hover:text-purple-300' : 'text-indigo-600 hover:text-indigo-500'
+                                    } transition-colors duration-300`}
+                            >
+                                Reset Password
+                            </Link>
+                        </p>
                         <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'
                             } transition-colors duration-300`}>
                             Not yet registered?{' '}
@@ -365,79 +366,6 @@ const SignInComponent = () => {
                     </div>
                 </form>
             </div>
-            {isModalOpen && (
-                <div 
-                    className="fixed inset-0 backdrop-blur-xl bg-black/10 flex items-center justify-center z-50"
-                    onClick={() => setIsModalOpen(false)}
-                >
-                    <div 
-                        className={`rounded-lg w-full max-w-md p-6 transform transition-all duration-300 ease-out ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-xl animate-fadeInSlide`}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <h2 className="text-lg font-semibold mb-4">Reset Password</h2>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={resetEmail}
-                            onChange={(e) => setResetEmail(e.target.value)}
-                            className="w-full border px-3 py-2 rounded mb-3 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        />
-                        {resetError && 
-                            <p className="mb-4 text-xs text-red-500 flex items-center">
-                                <IoWarningOutline className="mr-1 text-yellow-500" />
-                                {resetError}
-                            </p>
-                        }
-                        <div className="flex justify-end space-x-2">
-                        <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium bg-gray-500 text-white hover:bg-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-300 transform hover:scale-[1.02]"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={async () => {
-                                if (!resetEmail.trim()) {
-                                    setResetError('Email is required!');
-                                    return;
-                                }
-                                if(!resetEmail.includes("@")) {
-                                    setResetError('Email is invalid!');
-                                    return;
-                                }
-                                try {
-                                    const res = await axios.post(`${BASE_URL}/users/find_availability_by_email`, {
-                                        email: resetEmail
-                                    });
-                                    if (!res.data.exists) {
-                                        setResetError('No account found with this email');
-                                        return;
-                                    }
-                                    await resetPassword(resetEmail);
-                                    setResetError('');
-                                    setIsModalOpen(false);
-                                    // alert('Password reset email sent. Please check your inbox.');
-                                    setResetEmail('');
-                                } catch (err) {
-                                    setResetError(err.message || 'Failed to send email');
-                                }
-                            }}
-                            // className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700"
-                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent rounded-lg text-sm font-medium text-white cursor-pointer ${
-                                darkMode
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
-                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700'
-                            } focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                                darkMode ? 'focus:ring-purple-500' : 'focus:ring-indigo-500'
-                            } transition-all duration-300 transform hover:scale-[1.02]`}
-                        >
-                            Send Reset Link
-                        </button>
-                    </div>
-                </div>
-            </div>
-        )}
-
         </div>
     );
 };

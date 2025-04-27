@@ -358,18 +358,14 @@ const UserLoyaltyAndRewardComponent = () => {
 }
     
 
-
-   
-
-
     // Calculate membership progress percentage
     const calculateProgressPercentage = () => {
         const nextTier = getNextTier()
-        if (!nextTier) return 100 // Already at highest tier
+        if (!nextTier) return 100 // Already at the highest tier
 
         const currentTier = getCurrentTier()
-        const totalPointsNeeded = nextTier.pointsRequired - currentTier.pointsRequired
-        const pointsAchieved = userData.points - currentTier.pointsRequired
+        const totalPointsNeeded = nextTier?.pointsRequired - (currentTier?.pointsRequired || 0)
+        const pointsAchieved = (realUserData?.membershipDetails?.points || 0) - (currentTier?.pointsRequired || 0)
 
         return Math.min(100, Math.max(0, (pointsAchieved / totalPointsNeeded) * 100))
     }
@@ -394,17 +390,17 @@ const UserLoyaltyAndRewardComponent = () => {
 
     // Get benefit icon
     const getBenefitIcon = (benefit) => {
-        if (benefit.includes("discount")) {
+        if (benefit?.includes("discount")) {
             return <FiPercent className="text-green-500" />
-        } else if (benefit.includes("shipping")) {
+        } else if (benefit?.includes("shipping")) {
             return <FiTruck className="text-blue-500" />
-        } else if (benefit.includes("support")) {
+        } else if (benefit?.includes("support")) {
             return <FiHeadphones className="text-purple-500" />
-        } else if (benefit.includes("free rental")) {
+        } else if (benefit?.includes("free rental")) {
             return <FiGift className="text-red-500" />
-        } else if (benefit.includes("inventory")) {
+        } else if (benefit?.includes("inventory")) {
             return <FiShoppingBag className="text-amber-500" />
-        } else if (benefit.includes("account manager") || benefit.includes("events")) {
+        } else if (benefit?.includes("account manager") || benefit?.includes("events")) {
             return <FiShield className="text-indigo-500" />
         } else {
             return <FiStar className="text-blue-500" />
@@ -416,8 +412,11 @@ const UserLoyaltyAndRewardComponent = () => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
-        });
-    }, []);
+        })
+    }, [])
+   
+
+
 
 
     return (

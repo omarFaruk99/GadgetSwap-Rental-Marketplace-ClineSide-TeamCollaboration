@@ -18,7 +18,6 @@ import {
 import {useSelector} from "react-redux";
 
 
-
 const TermsAndConditionsComponent = () => {
 
     const darkMode = useSelector((state) => state.darkMode.isDark);
@@ -33,38 +32,32 @@ const TermsAndConditionsComponent = () => {
     };
 
 
-    // Handles navigation to a specific section and closes the mobile menu if open
-    const handleSectionChange = (sectionId) => {
+       // Handle section change
+       const handleSectionChange = (sectionId) => {
         setActiveSection(sectionId);
-
-        // Close mobile menu on section change
         if (isMobileMenuOpen) {
             setIsMobileMenuOpen(false);
         }
 
-        // Smooth scroll to the selected section
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
+        // Scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
 
-    // Automatically close the mobile menu when resizing to desktop width
+    // Close mobile menu on window resize
     useEffect(() => {
         const handleResize = () => {
-            const isDesktop = window.innerWidth >= 1024;
-            if (isDesktop && isMobileMenuOpen) {
+            if (window.innerWidth >= 1024 && isMobileMenuOpen) {
                 setIsMobileMenuOpen(false);
             }
         };
 
         window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => window.removeEventListener('resize', handleResize);
     }, [isMobileMenuOpen]);
-
 
 
     useEffect(() => {

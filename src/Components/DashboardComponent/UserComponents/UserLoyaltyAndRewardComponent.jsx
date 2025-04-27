@@ -339,27 +339,27 @@ const UserLoyaltyAndRewardComponent = () => {
     }
 
 
-
+   // Get icon for an activity type
+   const getActivityIcon = (type) => {
+    switch (type) {
+        case "rental":
+            return <FiShoppingBag className="text-blue-500" />
+        case "review":
+            return <FiMessageSquare className="text-green-500" />
+        case "referral":
+            return <FiUsers className="text-purple-500" />
+        case "benefit":
+            return <FiGift className="text-amber-500" />
+        case "upgrade":
+            return <FiAward className="text-red-500" />
+        default:
+            return <FiClock className="text-gray-500" />
+    }
+}
     
 
 
-    // Get icon for activity type
-    const getActivityIcon = (type) => {
-        switch (type) {
-            case "rental":
-                return <FiShoppingBag className="text-blue-500" />
-            case "review":
-                return <FiMessageSquare className="text-green-500" />
-            case "referral":
-                return <FiUsers className="text-purple-500" />
-            case "benefit":
-                return <FiGift className="text-amber-500" />
-            case "upgrade":
-                return <FiAward className="text-red-500" />
-            default:
-                return <FiClock className="text-gray-500" />
-        }
-    }
+   
 
 
     // Calculate membership progress percentage

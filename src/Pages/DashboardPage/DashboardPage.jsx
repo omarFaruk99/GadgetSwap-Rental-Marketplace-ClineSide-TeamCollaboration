@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import {useDispatch, useSelector} from "react-redux"
-import { FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt } from "react-icons/fa"
-import {FiHome, FiUsers, FiPackage, FiShoppingCart, FiHeart, FiMessageSquare, FiSettings, FiLogOut, FiX, FiHelpCircle, FiCreditCard, FiMenu, FiUser, FiAward} from "react-icons/fi"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { FiHome, FiUsers, FiPackage, FiShoppingCart, FiHeart, FiMessageSquare, FiSettings, FiLogOut, FiX, FiHelpCircle, FiCreditCard, FiMenu, FiUser, FiAward } from "react-icons/fi"
 import AuthContext from "../../Providers/AuthContext.jsx"
 import { Outlet } from "react-router"
-import LoadingSkeleton from "./LoadingSkeleton.jsx";
-import {getUserProfileDetails} from "../../Features/userProfileDetails/userProfileDetailsSlice.js";
+import LoadingSkeleton from "./LoadingSkeleton.jsx"
+import { getUserProfileDetails } from "../../Features/userProfileDetails/userProfileDetailsSlice.js"
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure.jsx"
+import {getUserMessagesChain} from "../../Features/userMessages/userMessagesSlice.js";
 
 
 const DashboardPage = () => {
@@ -15,13 +16,16 @@ const DashboardPage = () => {
     const darkMode = useSelector((state) => state.darkMode.isDark)
     const { user: registeredUser, signOutCurrentUser } = useContext(AuthContext)
     const dispatch = useDispatch()
-    const {userProfileDetails} = useSelector(state => state.userProfileDetails);
+    const { userProfileDetails } = useSelector((state) => state.userProfileDetails)
+    const { userMessagesChain } = useSelector((state) => state.userMessages)
 
+    const axiosSecure = useAxiosSecure()
     const [user, setUser] = useState({})
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isMobileView, setIsMobileView] = useState(false)
     const [activeTab, setActiveTab] = useState("overview")
     const [isLoading, setIsLoading] = useState(true)
+    const [imageError, setImageError] = useState(false)
     const navigateTo = useNavigate()
     const currentUrl = useLocation()
 

@@ -185,6 +185,111 @@ const GadgetDetailsComponent = () => {
 }
 
 
+    // Generate a unique order ID
+    const generateOrderId = () => {
+        const now = new Date()
+        const date = now.toISOString().split("T")[0].replace(/-/g, "")
+        const time =
+            now.getHours().toString().padStart(2, "0") +
+            now.getMinutes().toString().padStart(2, "0") +
+            now.getSeconds().toString().padStart(2, "0")
+        const random = Math.floor(Math.random() * 10000)
+            .toString()
+            .padStart(4, "0")
+        return `GSRO_${date}_${time}_${random}`
+    }
+
+
+        // Generate an array of dates between start and end date
+        const generateDateRange = (start, end) => {
+            const dates = []
+            const currentDate = new Date(start)
+            const endDate = new Date(end)
+    
+            while (currentDate <= endDate) {
+                dates.push(currentDate.toISOString().split("T")[0])
+                currentDate.setDate(currentDate.getDate() + 1)
+            }
+    
+            return dates
+        }
+    
+    
+        const handleRentNowClick = async () => {
+            if (!startDate || !endDate || !gadget) return
+    
+            if(userProfileDetails?.personalDetails?.verified === false){
+                toast.error("Please complete your profile, get verified to rent this gadget!")
+                navigate("/dashboard/user/settings")
+                return
+            }
+    
+            const blockedDates = generateDateRange(startDate, endDate)
+            const priceDetails = calculateTotalPrice()
+    
+            const perDayAmount = Number.parseFloat(priceDetails.perDayPrice)
+            const onlyRentAmount = Number.parseFloat(priceDetails.basePrice)
+            const onlyInsuranceAmount = Number.parseFloat(priceDetails.insuranceFee)
+            const rentAndInsuranceAmount = Number.parseFloat(priceDetails.total)
+    
+            const onlyShippingAmount = 5;
+    
+            const newRentalOrderObj = {
+                order_id: generateOrderId(),
+                gadget_id: id,
+                gadgetName: gadget?.name,
+                gadgetImage: gadget?.images?.[0],
+                category: gadget?.category,
+                rentalStreak: [
+                    {
+                        perDayPrice: perDayAmount,
+    
+                        startDate: startDate,
+                        endDate: endDate,
+                        rentalDuration: rentalDuration,
+    
+                        onlyRentAmount: onlyRentAmount,
+    
+                        insuranceOption: insuranceOption,
+                        onlyInsuranceAmount: onlyInsuranceAmount,
+                        rentAndInsuranceAmount: rentAndInsuranceAmount,
+    
+                        discountApplied: 0,
+                        onlyShippingAmount: onlyShippingAmount,
+    
+                        payableFinalAmount: rentAndInsuranceAmount + onlyShippingAmount,
+                        paymentMethod: "",
+    
+                        pointsEarned: Math.floor(onlyRentAmount),
+                        pointsRedeemed: 0,
+                    },
+                ],
+                blockedDates: blockedDates,
+                rentalStatus: "active",
+                shipmentStatus: "processing_order",
+                customerDetails: {
+                    name: userProfileDetails?.displayName,
+                    email: userProfileDetails?.email,
+                    phone: userProfileDetails?.personalDetails?.phone,
+                    billingAddress: {
+                        street: userProfileDetails?.personalDetails?.billingAddress?.street,
+                        city: userProfileDetails?.personalDetails?.billingAddress?.city,
+                        zipCode: userProfileDetails?.personalDetails?.billingAddress?.zipCode,
+                        state: userProfileDetails?.personalDetails?.billingAddress?.state,
+                        country: userProfileDetails?.personalDetails?.billingAddress?.country,
+                    },
+                    membershipTier: userProfileDetails?.membershipDetails?.membershipTier,
+                    currentPoint: userProfileDetails?.membershipDetails?.points,
+                },
+                hasInvoice: true,
+                isReviewed: false,
+                rating: 0,
+            }
+    
+            // console.log(newRentalOrderObj);
+            await navigate(`/selected-gadget/rental_order/${newRentalOrderObj?.order_id}/payment`, { state: { newRentalOrderObj } });
+        }
+    
 
     // Format date for display
     const formatDate = (dateString) => {

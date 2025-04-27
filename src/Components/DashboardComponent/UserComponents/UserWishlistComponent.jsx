@@ -97,11 +97,11 @@ const UserWishlistComponent = () => {
         >
 
             {/* Wishlist Grid */}
-            {wishlistItems.length > 0 ? (
+            {wishlistGadgetDetails?.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {wishlistItems.map((item) => (
+                    {wishlistGadgetDetails?.map((item) => (
                         <div
-                            key={item?.id}
+                            key={item?._id}
                             className={`rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-md ${
                                 darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                             }`}
@@ -109,7 +109,7 @@ const UserWishlistComponent = () => {
                             {/* Image Section */}
                             <div className="relative h-48 overflow-hidden group">
                                 <img
-                                    src={item?.image[0] || "/placeholder.svg"}
+                                    src={item?.images[0] || "/placeholder.svg"}
                                     alt={item?.name}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
@@ -175,7 +175,7 @@ const UserWishlistComponent = () => {
                                     {item?.description}
                                 </p>
                                 <div className="font-bold text-lg mb-4">
-                                {formatCurrency(item?.pricing?.perDay)}
+                                    {formatCurrency(item?.pricing?.perDay)}
                                     <span className={`text-xs font-normal ${darkMode ? "text-gray-400" : "text-gray-500"}`}>/day</span>
                                 </div>
 

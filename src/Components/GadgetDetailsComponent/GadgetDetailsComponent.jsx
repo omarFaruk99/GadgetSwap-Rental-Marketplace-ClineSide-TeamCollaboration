@@ -1,21 +1,26 @@
-import {useState, useEffect, useContext} from "react"
-import {useParams} from "react-router-dom"
-import { FiArrowLeft, FiStar, FiCalendar, FiClock, FiHeart, FiShare2, FiChevronLeft, FiChevronRight, FiMenu, FiX, FiMessageSquare, FiShield, FiCheckCircle, FiAlertCircle, FiInfo, FiPackage, FiBarChart2, FiLayers } from "react-icons/fi"
+import { useState, useEffect, useContext } from "react"
+import {useNavigate, useParams} from "react-router-dom"
+import { FiArrowLeft, FiStar, FiCalendar, FiClock, FiHeart, FiShare2, FiChevronLeft, FiChevronRight, FiMenu, FiX, FiShield, FiCheckCircle, FiAlertCircle, FiInfo, FiPackage, FiBarChart2, FiLayers } from "react-icons/fi"
 import { FaMobileAlt, FaLaptop, FaTabletAlt, FaHeadphones, FaCamera, FaGamepad, FaVolumeUp, FaVrCardboard, FaPlane, FaProjectDiagram, FaClock, FaWifi, FaSpeakerDeck } from "react-icons/fa"
-import {useDispatch, useSelector} from "react-redux";
-import {fetchGadgetDetails} from "../../Features/getGadgetDetailsById/getGadgetDetailsByIdSlice.js";
- import {addOrRemoveWishlistGadget} from "../../Features/gadgetWishlist/gadgetWishlistSlice.js";
- import AuthContext from "../../Providers/AuthContext.jsx";
+import { useDispatch, useSelector } from "react-redux"
+import { getUserProfileDetails } from "../../Features/userProfileDetails/userProfileDetailsSlice.js"
+import { fetchGadgetDetails } from "../../Features/getGadgetDetailsById/getGadgetDetailsByIdSlice.js"
+import { addOrRemoveWishlistGadget } from "../../Features/gadgetWishlist/gadgetWishlistSlice.js"
+import AuthContext from "../../Providers/AuthContext.jsx"
+import useAxiosSecure from "../../CustomHooks/useAxiosSecure.jsx"
+import {toast} from "react-toastify";
 
 
 const GadgetDetailsComponent = () => {
 
-    const darkMode = useSelector((state) => state.darkMode.isDark);
-    const {user: registeredUser} = useContext(AuthContext);
-    const dispatch = useDispatch();
-    const {gadgetDetails} = useSelector((state) => state.getGadgetDetailsById);
+    const darkMode = useSelector((state) => state.darkMode.isDark)
+    const { user: registeredUser } = useContext(AuthContext)
+    const dispatch = useDispatch()
+    const { userProfileDetails } = useSelector((state) => state.userProfileDetails)
+    const { gadgetDetails } = useSelector((state) => state.getGadgetDetailsById)
 
-    const {id} = useParams()
+    const axiosSecure = useAxiosSecure()
+    const { id } = useParams()
     const [gadget, setGadget] = useState(null)
     const [loading, setLoading] = useState(true)
     const [selectedImage, setSelectedImage] = useState(0)
@@ -24,9 +29,8 @@ const GadgetDetailsComponent = () => {
     const [endDate, setEndDate] = useState("")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeTab, setActiveTab] = useState("details")
-    const [isWishlisted, setIsWishlisted] = useState(registeredUser?.wishlist?.includes(id) || false)
     const [insuranceOption, setInsuranceOption] = useState("basic")
-    const [showDatePicker, setShowDatePicker] = useState(false)
+    const navigate = useNavigate()
 
 
     // Category icons mapping
@@ -98,20 +102,21 @@ const GadgetDetailsComponent = () => {
     }
 
 
-    // Update end date based on start date and duration
-    const updateEndDate = (start, duration) => {
-        if (start) {
-            const startDate = new Date(start)
-            const end = new Date(startDate)
-            end.setDate(startDate.getDate() + duration)
+   // Update end date based on start date and duration
+   const updateEndDate = (start, duration) => {
+    if (start) {
+        const startDate = new Date(start)
+        const end = new Date(startDate)
+        end.setDate(startDate.getDate() + duration)
 
-            // Format end date to YYYY-MM-DD
-            const formattedEndDate = end.toISOString().split("T")[0]
-            setEndDate(formattedEndDate)
-        } else {
-            setEndDate("")
-        }
+        // Format end date to YYYY-MM-DD
+        const formattedEndDate = end.toISOString().split("T")[0]
+        setEndDate(formattedEndDate)
+    } else {
+        setEndDate("")
     }
+}
+
 
 
     // Handle tab change

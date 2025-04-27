@@ -26,7 +26,7 @@ const TermsAndConditionsComponent = () => {
     const [lastUpdated] = useState("March 15, 2024");
 
 
-    // Toggle mobile menu /
+    // Toggle mobile menu
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };

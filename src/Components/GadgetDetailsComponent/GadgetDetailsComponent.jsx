@@ -340,6 +340,7 @@ const GadgetDetailsComponent = () => {
         })
     }, [])
 
+    
     // If loading, show the skeleton
     if (loading) {
         return renderSkeleton()
@@ -353,16 +354,16 @@ const GadgetDetailsComponent = () => {
             <div
                 className={`container mx-auto px-4 py-16 text-center ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}
             >
-                <FiAlertCircle className="mx-auto mb-4" size={48}/>
+                <FiAlertCircle className="mx-auto mb-4" size={48} />
                 <h2 className="text-2xl font-bold mb-2">Gadget Not Found</h2>
                 <p className="mb-6">The gadget you're looking for doesn't exist or has been removed.</p>
                 <button
                     onClick={handleBack}
-                    className={`px-6 py-2 rounded-lg flex items-center mx-auto ${
+                    className={`px-6 py-2 rounded-lg flex items-center mx-auto cursor-pointer ${
                         darkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-gray-100 text-gray-900 hover:bg-gray-200"
                     }`}
                 >
-                    <FiArrowLeft className="mr-2"/>
+                    <FiArrowLeft className="mr-2" />
                     Back to All Gadgets
                 </button>
             </div>

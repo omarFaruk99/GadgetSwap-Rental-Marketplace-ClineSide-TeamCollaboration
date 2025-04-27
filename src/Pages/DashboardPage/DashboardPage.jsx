@@ -42,7 +42,31 @@ const DashboardPage = () => {
         }
     }, [axiosSecure, dispatch, registeredUser?.email])
 
-    
+
+        // After fetching get user profile details data
+        useEffect(() => {
+            const getUserProfileDetailsData = async () => {
+                if (userProfileDetails !== null) {
+                    setUser({
+                        name: userProfileDetails?.displayName,
+                        email: userProfileDetails?.email,
+                        avatar: userProfileDetails?.personalDetails?.photoURL || defaultAvatar,
+                        role: userProfileDetails?.role,
+                        joinDate: userProfileDetails?.joinDate,
+                        activeRentals: userProfileDetails?.stats?.activeRentals,
+                        wishlistCount: userProfileDetails?.wishlist?.length,
+                    })
+                    // Reset image error state when user data changes
+                    setImageError(false)
+                }
+            }
+            getUserProfileDetailsData().then()
+        }, [userProfileDetails])
+
+
+
+
+
     // Fetch user profile detail on mount
     useEffect(() => {
         if (registeredUser?.email){

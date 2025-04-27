@@ -49,6 +49,20 @@ const UserLoyaltyAndRewardComponent = () => {
     })
 
 
+    // Update realUserData when userProfileDetails changes
+    useEffect(() => {
+        if (userProfileDetails) {
+            setRealUserData({
+                joinDate: userProfileDetails?.joinDate,
+                membershipDetails: {
+                    membershipTier: userProfileDetails?.membershipDetails?.membershipTier,
+                    points: userProfileDetails?.membershipDetails?.points,
+                    rentalStreak: userProfileDetails?.membershipDetails?.rentalStreak,
+                    referrals: userProfileDetails?.membershipDetails?.referrals,
+                },
+            })
+        }
+    }, [userProfileDetails])
 
 
 

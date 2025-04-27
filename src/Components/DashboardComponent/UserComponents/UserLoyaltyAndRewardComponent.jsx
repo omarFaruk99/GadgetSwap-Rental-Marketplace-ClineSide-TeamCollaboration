@@ -64,7 +64,14 @@ const UserLoyaltyAndRewardComponent = () => {
         }
     }, [userProfileDetails])
 
-
+    // Trigger progress bar animation after component mounts
+    useEffect(() => {
+        // Small delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+            setAnimateProgress(true)
+        }, 100)
+        return () => clearTimeout(timer)
+    }, [])
 
 
     // Initial fake user data

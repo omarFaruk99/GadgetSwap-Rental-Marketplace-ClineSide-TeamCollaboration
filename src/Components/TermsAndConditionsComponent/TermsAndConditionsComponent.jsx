@@ -18,6 +18,7 @@ import {
 import {useSelector} from "react-redux";
 
 
+
 const TermsAndConditionsComponent = () => {
 
     const darkMode = useSelector((state) => state.darkMode.isDark);
@@ -30,7 +31,6 @@ const TermsAndConditionsComponent = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-
 
 
     // Handles navigation to a specific section and closes the mobile menu if open

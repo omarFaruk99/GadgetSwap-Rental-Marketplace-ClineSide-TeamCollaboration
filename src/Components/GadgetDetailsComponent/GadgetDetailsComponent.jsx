@@ -87,6 +87,22 @@ const GadgetDetailsComponent = () => {
         setSelectedImage((prev) => (prev === gadget.images.length - 1 ? 0 : prev + 1))
     }
 
+    
+    // Function to get fully booked dates
+    const getBlockedDates = (blockedDates, totalCopy) => {
+        if (!blockedDates || !totalCopy) return [];
+
+        // Count occurrences of each date in blockedDates
+        const dateCounts = blockedDates.reduce((acc, date) => {
+            acc[date] = (acc[date] || 0) + 1;
+            return acc;
+        }, {});
+
+        // Filter dates where count >= total_copy
+        return Object.keys(dateCounts).filter((date) => dateCounts[date] >= totalCopy);
+    };
+
+
     // Handle rental duration change
     const handleDurationChange = (e) => {
         setRentalDuration(Number.parseInt(e.target.value))

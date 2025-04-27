@@ -140,46 +140,53 @@ const UserLoyaltyAndRewardComponent = () => {
         {
             tier: "Bronze",
             pointsRequired: 0,
-            benefits: ["5% discount on rentals", "Basic customer support", "Access to standard inventory"],
+            benefits: [
+                "Access to basic gadget catalog",
+                "5% discount on extended rentals",
+                "Standard delivery options",
+                "Basic customer support",
+            ],
         },
         {
             tier: "Silver",
-            pointsRequired: 2000,
+            pointsRequired: 500,
             benefits: [
-                "10% discount on rentals",
+                "All Bronze benefits",
                 "Priority customer support",
-                "Access to premium inventory",
+                "10% discount on extended rentals",
                 "Free standard shipping",
+                "Access to premium gadget catalog",
             ],
         },
         {
             tier: "Gold",
-            pointsRequired: 5000,
+            pointsRequired: 1500,
             benefits: [
-                "15% discount on rentals",
-                "24/7 VIP customer support",
-                "Access to exclusive inventory",
-                "Free express shipping",
-                "One free rental per month (up to $50)",
+                "All Silver benefits",
+                "15% discount on extended rentals",
+                "Free expedited shipping",
+                "Priority access to new gadgets",
+                "Dedicated customer support",
+                "Free basic insurance on rentals",
             ],
         },
         {
             tier: "Platinum",
-            pointsRequired: 10000,
+            pointsRequired: 5000,
             benefits: [
-                "20% discount on rentals",
-                "Dedicated account manager",
-                "Access to all inventory including pre-release items",
-                "Free express shipping",
-                "Two free rentals per month (up to $100)",
-                "Exclusive events and product previews",
+                "All Gold benefits",
+                "25% discount on extended rentals",
+                "Free premium insurance on all rentals",
+                "Free overnight shipping",
+                "VIP customer support",
+                "Early access to limited edition gadgets",
+                "Exclusive member events and workshops",
             ],
         },
     ]
 
 
     // States
-    const [userData, setUserData] = useState(initialUserData)
     const [expandedSections, setExpandedSections] = useState({
         benefits: true,
         upgrade: false,
@@ -190,13 +197,15 @@ const UserLoyaltyAndRewardComponent = () => {
 
     // Get current membership tier details
     const getCurrentTier = () => {
-        return membershipTiers.find((tier) => tier.tier === userData.membershipTier)
+        return membershipTiers.find((tier) => tier.tier === realUserData?.membershipDetails?.membershipTier)
     }
 
 
     // Get next membership tier details
     const getNextTier = () => {
-        const currentTierIndex = membershipTiers.findIndex((tier) => tier.tier === userData.membershipTier)
+        const currentTierIndex = membershipTiers.findIndex(
+            (tier) => tier.tier === realUserData?.membershipDetails?.membershipTier,
+        )
         if (currentTierIndex < membershipTiers.length - 1) {
             return membershipTiers[currentTierIndex + 1]
         }
@@ -204,11 +213,27 @@ const UserLoyaltyAndRewardComponent = () => {
     }
 
 
-    // Calculate points needed for next tier
+    // Check if the user can upgrade to the next tier
+    const canUpgradeToNextTier = () => {
+        const nextTier = getNextTier()
+        return nextTier && realUserData?.membershipDetails?.points >= nextTier?.pointsRequired
+    }
+
+
+    // Calculate points needed for the next tier
     const getPointsNeededForNextTier = () => {
         const nextTier = getNextTier()
+        if (!nextTier) return 0
+
+        return Math.max(0, nextTier.pointsRequired - (realUserData?.membershipDetails?.points || 0))
+    }
+
+
+    // Get the cost of upgrading to the next tier
+    const getUpgradeCost = () => {
+        const nextTier = getNextTier()
         if (nextTier) {
-            return Math.max(0, nextTier.pointsRequired - userData.points)
+            return nextTier.pointsRequired
         }
         return 0
     }
@@ -218,7 +243,7 @@ const UserLoyaltyAndRewardComponent = () => {
     const toggleSection = (section) => {
         setExpandedSections({
             ...expandedSections,
-            [section]: !expandedSections[section],
+            [section]: !expandedSections?.[section],
         })
     }
 

@@ -18,7 +18,6 @@ const UserLoyaltyAndRewardComponent = () => {
       const [emailError, setEmailError] = useState("")
       const [animateProgress, setAnimateProgress] = useState(false)
   
-  
       // Format date helper function
       const formatJoinDate = (dateString) => {
           if (!dateString) return "Unknown date"
@@ -28,6 +27,30 @@ const UserLoyaltyAndRewardComponent = () => {
           return date.toLocaleDateString("en-US", options)
       }
   
+
+
+    // Fetch user profile detail on mount
+    useEffect(() => {
+        if (registeredUser?.email) {
+            dispatch(getUserProfileDetails({ userEmail: registeredUser?.email, axiosSecure }))
+        }
+    }, [axiosSecure, dispatch, registeredUser?.email])
+
+
+    // Initial real user data from the backend
+    const [realUserData, setRealUserData] = useState({
+        joinDate: userProfileDetails?.joinDate,
+        membershipDetails: {
+            membershipTier: userProfileDetails?.membershipDetails?.membershipTier,
+            points: userProfileDetails?.membershipDetails?.points,
+            rentalStreak: userProfileDetails?.membershipDetails?.rentalStreak,
+            referrals: userProfileDetails?.membershipDetails?.referrals,
+        },
+    })
+
+
+
+
 
 
     // Initial fake user data

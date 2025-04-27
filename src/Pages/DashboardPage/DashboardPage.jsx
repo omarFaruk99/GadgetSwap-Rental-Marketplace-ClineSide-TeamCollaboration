@@ -30,6 +30,19 @@ const DashboardPage = () => {
     const currentUrl = useLocation()
 
 
+    // Default avatar image
+    const defaultAvatar = "/placeholder.svg"
+
+
+    // Fetch user profile detail on mount
+    useEffect(() => {
+        if (registeredUser?.email) {
+            dispatch(getUserProfileDetails({ userEmail: registeredUser?.email, axiosSecure }))
+            dispatch(getUserMessagesChain({ userEmail: registeredUser?.email, axiosSecure }))
+        }
+    }, [axiosSecure, dispatch, registeredUser?.email])
+
+    
     // Fetch user profile detail on mount
     useEffect(() => {
         if (registeredUser?.email){

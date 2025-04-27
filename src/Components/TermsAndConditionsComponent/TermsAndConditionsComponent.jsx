@@ -26,14 +26,14 @@ const TermsAndConditionsComponent = () => {
     const [lastUpdated] = useState("March 15, 2024");
 
 
-    // Toggle mobile menu
+    // Toggle mobile menu /
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
 
-       // Handle section change
-       const handleSectionChange = (sectionId) => {
+    // Handle section change
+    const handleSectionChange = (sectionId) => {
         setActiveSection(sectionId);
         if (isMobileMenuOpen) {
             setIsMobileMenuOpen(false);
@@ -68,7 +68,6 @@ const TermsAndConditionsComponent = () => {
     }, []);
 
 
-    // Sections data
     // Sections data
     const sections = [
         {
@@ -173,6 +172,7 @@ const TermsAndConditionsComponent = () => {
             `
         }
     ];
+
 
     return (
         <div className={`min-h-screen transition-colors duration-300 ${

@@ -64,7 +64,20 @@ const DashboardPage = () => {
         }, [userProfileDetails])
 
 
+    // Handle image loading error
+    const handleImageError = () => {
+        setImageError(true)
+    }
 
+
+    // Simulate loading data
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false)
+        }, 500)
+
+        return () => clearTimeout(timer)
+    }, [])    
 
 
     // Fetch user profile detail on mount

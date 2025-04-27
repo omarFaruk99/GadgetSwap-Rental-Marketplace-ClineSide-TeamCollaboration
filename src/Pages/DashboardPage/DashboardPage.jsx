@@ -149,6 +149,13 @@ const DashboardPage = () => {
     ]
 
 
+        // Get the appropriate avatar image
+        const getAvatarImage = () => {
+            if (imageError || !user?.avatar) {
+                return defaultAvatar
+            }
+            return user.avatar
+        }
 
 
     return (

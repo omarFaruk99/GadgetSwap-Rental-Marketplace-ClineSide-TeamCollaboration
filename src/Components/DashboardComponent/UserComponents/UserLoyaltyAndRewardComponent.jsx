@@ -74,74 +74,65 @@ const UserLoyaltyAndRewardComponent = () => {
     }, [])
 
 
-    // Initial fake user data
-    const initialUserData = {
-        id: "usr_123456",
-        name: "Alex Johnson",
-        points: 2750,
-        membershipTier: "Silver",
-        memberSince: "January 2023",
-        referrals: 3,
-        rentalStreak: 8,
-        activities: [
-            {
-                id: 1,
-                date: "2023-11-15",
-                type: "rental",
-                description: "Rented iPhone 13 Pro",
-                pointsEarned: 150,
-                amountSpent: 89.99,
-            },
-            {
-                id: 2,
-                date: "2023-11-10",
-                type: "review",
-                description: "Wrote review for MacBook Pro",
-                pointsEarned: 50,
-                amountSpent: 0,
-            },
-            {
-                id: 3,
-                date: "2023-11-05",
-                type: "referral",
-                description: "Referred Sarah Williams",
-                pointsEarned: 200,
-                amountSpent: 0,
-            },
-            {
-                id: 4,
-                date: "2023-10-28",
-                type: "rental",
-                description: "Rented DJI Drone",
-                pointsEarned: 120,
-                amountSpent: 75.5,
-            },
-            {
-                id: 5,
-                date: "2023-10-20",
-                type: "benefit",
-                description: "Used Free Express Shipping",
-                pointsDeducted: 100,
-                benefitUsed: "Express Shipping",
-            },
-            {
-                id: 6,
-                date: "2023-10-15",
-                type: "rental",
-                description: "Rented Sony A7 Camera",
-                pointsEarned: 180,
-                amountSpent: 110.0,
-            },
-            {
-                id: 7,
-                date: "2023-10-08",
-                type: "benefit",
-                description: "Used 10% Discount",
-                pointsDeducted: 300,
-                benefitUsed: "Discount Coupon",
-            },
-        ],
-    }
+       // Initial fake activities data //TODO: Replace with real activity data coming from backend
+       const [activities, setActivities] = useState([
+        {
+            id: 1,
+            date: "2023-11-15",
+            type: "rental",
+            description: "Rented iPhone 13 Pro",
+            pointsEarned: 150,
+            amountSpent: 89.99,
+        },
+        {
+            id: 2,
+            date: "2023-11-10",
+            type: "review",
+            description: "Wrote review for MacBook Pro",
+            pointsEarned: 50,
+            amountSpent: 0,
+        },
+        {
+            id: 3,
+            date: "2023-11-05",
+            type: "referral",
+            description: "Referred Sarah Williams",
+            pointsEarned: 200,
+            amountSpent: 0,
+        },
+        {
+            id: 4,
+            date: "2023-10-28",
+            type: "rental",
+            description: "Rented DJI Drone",
+            pointsEarned: 120,
+            amountSpent: 75.5,
+        },
+        {
+            id: 5,
+            date: "2023-10-20",
+            type: "benefit",
+            description: "Used Free Express Shipping",
+            pointsDeducted: 100,
+            benefitUsed: "Express Shipping",
+        },
+        {
+            id: 6,
+            date: "2023-10-15",
+            type: "rental",
+            description: "Rented Sony A7 Camera",
+            pointsEarned: 180,
+            amountSpent: 110.0,
+        },
+        {
+            id: 7,
+            date: "2023-10-08",
+            type: "benefit",
+            description: "Used 10% Discount",
+            pointsDeducted: 300,
+            benefitUsed: "Discount Coupon",
+        },
+    ])
 
 
     // Membership tiers data

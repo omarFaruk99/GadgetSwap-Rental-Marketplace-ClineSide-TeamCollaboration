@@ -1,41 +1,34 @@
-import {useContext, useEffect, useState} from "react"
-import {FiHeart, FiPackage,  FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
-import { useDispatch,useSelector } from "react-redux"
+import {useContext, useEffect} from "react"
+import {FiHeart, FiPackage, FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
+import {useDispatch, useSelector} from "react-redux"
 import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt, FaVrCardboard} from "react-icons/fa"
 import AuthContext from "../../../Providers/AuthContext.jsx";
 import {addOrRemoveWishlistGadget, getWishlistGadgetsDetails} from "../../../Features/gadgetWishlist/gadgetWishlistSlice.js";
 import {useNavigate} from "react-router-dom";
-
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure.jsx";
 
 const UserWishlistComponent = () => {
 
+    
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
     const {user: registeredUser} = useContext(AuthContext);
     const dispatch = useDispatch();
     const {wishlistGadgetDetails} = useSelector((state) => state.gadgetWishlist);
 
-    const [wishlistItems, setWishlistItems] = useState([]);
+    const axiosSecure = useAxiosSecure();
     const navigateTo = useNavigate();
 
 
-     // Fetch wishlist gadget details on mount
-     useEffect(() => {
-        if (registeredUser?.email) {
-            dispatch(getWishlistGadgetsDetails(registeredUser?.email))
-        }
-    }, [dispatch, registeredUser?.email]);
-
-
-    // After fetching get wishlist gadget details data
+    // Fetch wishlist gadget details on mount
     useEffect(() => {
-        const getWishlistGadgetsDetails = async () => {
-            if (wishlistGadgetDetails !== null) {
-                setWishlistItems(wishlistGadgetDetails)
-            }
+        if (registeredUser?.email) {
+            dispatch(getWishlistGadgetsDetails({userEmail: registeredUser?.email, axiosSecure}))
         }
-        getWishlistGadgetsDetails().then();
-    }, [wishlistGadgetDetails]);
+    }, [axiosSecure, dispatch, registeredUser?.email]);
+
+
+ 
 
 
     // Format currency

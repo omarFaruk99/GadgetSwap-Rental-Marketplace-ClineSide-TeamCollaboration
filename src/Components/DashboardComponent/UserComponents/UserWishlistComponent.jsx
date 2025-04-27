@@ -9,7 +9,7 @@ import useAxiosSecure from "../../../CustomHooks/useAxiosSecure.jsx";
 
 const UserWishlistComponent = () => {
 
-    
+
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
     const {user: registeredUser} = useContext(AuthContext);
@@ -28,11 +28,8 @@ const UserWishlistComponent = () => {
     }, [axiosSecure, dispatch, registeredUser?.email]);
 
 
- 
-
-
-    // Format currency
-    const formatCurrency = (amount) => {
+        // Format currency
+     const formatCurrency = (amount) => {
         return new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
@@ -41,29 +38,29 @@ const UserWishlistComponent = () => {
     }
 
 
-    // Get category icon
-    const getCategoryIcon = (category) => {
-        switch (category) {
-            case "Smartphones":
-                return <FaMobileAlt className="text-blue-500" />
-            case "Laptops":
-                return <FaLaptop className="text-purple-500" />
-            case "Tablets":
-                return <FaTabletAlt className="text-green-500" />
-            case "Headphones":
-                return <FaHeadphones className="text-cyan-500" />
-            case "Cameras":
-                return <FaCamera className="text-red-500" />
-            case "Gaming":
-                return <FaGamepad className="text-indigo-500" />
-            case "Drones":
-                return <FiWifi className="text-orange-500" />
-            case "VR":
-                return <FaVrCardboard className="text-pink-500" />
-            default:
-                return <FiPackage className="text-gray-500" />
-        }
+   // Get category icon
+   const getCategoryIcon = (category) => {
+    switch (category) {
+        case "Smartphones":
+            return <FaMobileAlt className="text-blue-500" />
+        case "Laptops":
+            return <FaLaptop className="text-purple-500" />
+        case "Tablets":
+            return <FaTabletAlt className="text-green-500" />
+        case "Headphones":
+            return <FaHeadphones className="text-cyan-500" />
+        case "Cameras":
+            return <FaCamera className="text-red-500" />
+        case "Gaming":
+            return <FaGamepad className="text-indigo-500" />
+        case "Drones":
+            return <FiWifi className="text-orange-500" />
+        case "VR":
+            return <FaVrCardboard className="text-pink-500" />
+        default:
+            return <FiPackage className="text-gray-500" />
     }
+}
 
 
     // Handle remove from wishlist

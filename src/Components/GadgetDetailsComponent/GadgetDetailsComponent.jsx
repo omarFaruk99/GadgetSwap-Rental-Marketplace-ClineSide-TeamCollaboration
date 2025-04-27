@@ -51,28 +51,29 @@ const GadgetDetailsComponent = () => {
     }
 
 
+
     // Fetch gadget details on mount
     useEffect(() => {
         dispatch(fetchGadgetDetails(id));
     }, [dispatch, id]);
 
 
-    // Fetch gadget details data
+       // Fetch gadget details data
     useEffect(() => {
         const fetchGadgetDetails = async () => {
             setLoading(true)
             setTimeout(() => {
-                if (gadgetDetails?.data !== null) {
-                    // console.log(gadgetDetails?.data)
-                    setGadget(gadgetDetails?.data)
+                if (gadgetDetails !== null) {
+                    setGadget(gadgetDetails)
                     setLoading(false)
                     return
                 }
                 setLoading(false)
-            }, 1000)
+            }, 200)
         }
         fetchGadgetDetails().then()
     }, [gadgetDetails, id])
+
 
     // Handle image navigation
     const handlePrevImage = () => {
@@ -84,8 +85,7 @@ const GadgetDetailsComponent = () => {
     const handleNextImage = () => {
         if (!gadget || !gadget.images || gadget.images.length === 0) return
         setSelectedImage((prev) => (prev === gadget.images.length - 1 ? 0 : prev + 1))
-    }   
-
+    }
 
     // Handle rental duration change
     const handleDurationChange = (e) => {

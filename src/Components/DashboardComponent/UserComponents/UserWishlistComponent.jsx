@@ -63,19 +63,17 @@ const UserWishlistComponent = () => {
 }
 
 
-    // Handle remove from wishlist
+
+    // Handle remove from the wishlist
     const handleRemoveFromWishlist = async (id) => {
-        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id}));
+        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id, axiosSecure}));
         await dispatch(getWishlistGadgetsDetails(registeredUser?.email));
     }
 
 
     // Handle rent now
     const handleRentNow = (id) => {
-        // In a real app, this would navigate to checkout or rental page
-        console.log(`Renting gadget with ID: ${id}`)
-        // For demo purposes, let's mark it as unavailable
-        setWishlistItems(wishlistItems.map((item) => (item.id === id ? { ...item, availability: "unavailable" } : item)))
+        navigateTo(`/all-gadgets/gadget-details/${id}`);
     }
 
 

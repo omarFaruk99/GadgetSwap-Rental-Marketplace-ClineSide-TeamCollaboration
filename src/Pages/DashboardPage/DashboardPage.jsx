@@ -80,82 +80,24 @@ const DashboardPage = () => {
     }, [])    
 
 
-    // Fetch user profile detail on mount
-    useEffect(() => {
-        if (registeredUser?.email){
-            dispatch(getUserProfileDetails(registeredUser?.email));
-        }
-    }, [dispatch, registeredUser?.email]);
-
-
-        // After fetching get user profile details data
-        useEffect(() => {
-            const getUserProfileDetailsData = async () => {
-                if (userProfileDetails !== null) {
-                    setUser({
-                        name: userProfileDetails?.displayName,
-                        email: userProfileDetails?.email,
-                        avatar: userProfileDetails?.personalDetails?.photoURL,
-                        role: userProfileDetails?.role,
-                        joinDate: userProfileDetails?.joinDate,
-                    })
-                }
-            }
-            getUserProfileDetailsData().then();
-        }, [userProfileDetails]);
-
-
-        // Mock data for dashboard
-    const [dashboardData, setDashboardData] = useState({
-        recentMessages: [
-            {
-                id: "msg001",
-                sender: "Support Team",
-                avatar: "/placeholder.svg",
-                message: "Your inquiry about the rental extension has been processed.",
-                time: "2 hours ago",
-                read: false,
-            },
-            {
-                id: "msg002",
-                sender: "Alice Johnson",
-                avatar: "/placeholder.svg",
-                message: "I'd like to know if the MacBook is available next week?",
-                time: "Yesterday",
-                read: false,
-            },
-        ]
-    })
-    // TODO: Replace with the real data from backend.
-
-
-    // Simulate loading data
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 500)
-
-        return () => clearTimeout(timer)
-    }, [])
-
-    // Toggle mobile menu
-    const toggleMobileMenu = () => {
+       // Toggle mobile menu
+       const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
     }
 
 
     // Handle tab change
     const handleTabChange = (tab) => {
-        navigateTo(`/dashboard/${user.role}/${tab}`);
+        navigateTo(`/dashboard/${user?.role}/${tab}`)
         if (isMobileMenuOpen) {
-            setIsMobileMenuOpen(false);
+            setIsMobileMenuOpen(false)
         }
     }
 
 
     useEffect(() => {
         setActiveTab(currentUrl.pathname.split("/")[3])
-    }, [currentUrl]);
+    }, [currentUrl])
 
 
     const handleSignOutClick = async () => {
@@ -163,6 +105,7 @@ const DashboardPage = () => {
         navigateTo("/")
     }
 
+    
     // Check for mobile view
     useEffect(() => {
         const handleResize = () => {

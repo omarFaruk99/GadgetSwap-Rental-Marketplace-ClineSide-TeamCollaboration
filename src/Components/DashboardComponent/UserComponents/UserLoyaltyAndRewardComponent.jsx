@@ -249,31 +249,39 @@ const UserLoyaltyAndRewardComponent = () => {
 
 
     // Handle membership upgrade
-    const handleUpgrade = () => {
+    const handleUpgrade = async () => {
         const nextTier = getNextTier()
-        if (nextTier) {
-            // In a real app, this would be an API call
-            const updatedUserData = {
-                ...userData,
-                membershipTier: nextTier.tier,
-                points: userData.points - getPointsNeededForNextTier(),
-                activities: [
-                    {
-                        id: userData.activities.length + 1,
-                        date: new Date().toISOString().split("T")[0],
-                        type: "upgrade",
-                        description: `Upgraded to ${nextTier.tier} Membership`,
-                        pointsDeducted: getPointsNeededForNextTier(),
-                        benefitUsed: "Membership Upgrade",
-                    },
-                    ...userData.activities,
-                ],
+        if (nextTier && realUserData?.membershipDetails?.points >= nextTier?.pointsRequired) {
+            // Calculate the upgrade cost (points required for the next tier)
+            const upgradeCost = nextTier.pointsRequired
+
+            // Update the realUserData with the correct structure
+            const updatedRealUserData = {
+                ...realUserData,
+                membershipDetails: {
+                    ...realUserData?.membershipDetails,
+                    membershipTier: nextTier.tier,
+                    points: (realUserData?.membershipDetails?.points || 0) - upgradeCost,
+                },
             }
 
-            setUserData(updatedUserData)
-            console.log("Membership Upgraded:", updatedUserData)
+            setRealUserData(updatedRealUserData)
+            await dispatch(updateUserMembershipInfo({userEmail: registeredUser?.email, userMembershipObj: updatedRealUserData, axiosSecure}))
+            // console.log("Membership Upgraded:", updatedRealUserData)
+
+            // Update activities
+            const newActivity = {
+                id: activities.length + 1,
+                date: new Date().toISOString().split("T")[0],
+                type: "upgrade",
+                description: `Upgraded to ${nextTier.tier} Membership`,
+                pointsDeducted: upgradeCost,
+                benefitUsed: "Membership Upgrade",
+            }
+            setActivities([newActivity, ...activities])
         }
     }
+
 
 
     // Handle refer a friend

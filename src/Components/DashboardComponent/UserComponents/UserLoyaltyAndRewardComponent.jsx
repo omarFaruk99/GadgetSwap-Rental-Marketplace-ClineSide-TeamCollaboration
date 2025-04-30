@@ -1,100 +1,138 @@
-import {useEffect, useState} from "react"
-import {
-    FiAward,
-    FiStar,
-    FiTrendingUp,
-    FiUserPlus,
-    FiClock,
-    FiDollarSign,
-    FiShoppingBag,
-    FiMessageSquare,
-    FiUsers,
-    FiChevronUp,
-    FiChevronDown,
-    FiGift,
-    FiCreditCard,
-    FiShield,
-    FiTruck,
-    FiHeadphones,
-    FiPercent,
-} from "react-icons/fi"
-import {useSelector} from "react-redux";
+import { useContext, useEffect, useState } from "react"
+import { FiAward, FiStar, FiTrendingUp, FiUserPlus, FiClock, FiDollarSign, FiShoppingBag, FiMessageSquare, FiUsers, FiChevronUp, FiChevronDown, FiGift, FiCreditCard, FiShield, FiTruck, FiHeadphones, FiPercent, FiAlertCircle, FiCheck } from "react-icons/fi"
+import { useDispatch, useSelector } from "react-redux"
+import AuthContext from "../../../Providers/AuthContext.jsx"
+import {getUserProfileDetails, updateUserMembershipInfo} from "../../../Features/userProfileDetails/userProfileDetailsSlice.js"
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure.jsx"
 
 
 const UserLoyaltyAndRewardComponent = () => {
 
     // State management
-    const darkMode = useSelector((state) => state.darkMode.isDark);
+      // State management
+      const darkMode = useSelector((state) => state?.darkMode?.isDark)
+      const { user: registeredUser } = useContext(AuthContext)
+      const dispatch = useDispatch()
+      const { userProfileDetails } = useSelector((state) => state?.userProfileDetails)
+      const axiosSecure = useAxiosSecure()
+      const [emailError, setEmailError] = useState("")
+      const [animateProgress, setAnimateProgress] = useState(false)
+  
+      // Format date helper function
+      const formatJoinDate = (dateString) => {
+          if (!dateString) return "Unknown date"
+  
+          const date = new Date(dateString)
+          const options = { year: "numeric", month: "long" }
+          return date.toLocaleDateString("en-US", options)
+      }
+  
 
 
-    // Initial fake user data
-    const initialUserData = {
-        id: "usr_123456",
-        name: "Alex Johnson",
-        points: 2750,
-        membershipTier: "Silver",
-        memberSince: "January 2023",
-        referrals: 3,
-        rentalStreak: 8,
-        activities: [
-            {
-                id: 1,
-                date: "2023-11-15",
-                type: "rental",
-                description: "Rented iPhone 13 Pro",
-                pointsEarned: 150,
-                amountSpent: 89.99,
-            },
-            {
-                id: 2,
-                date: "2023-11-10",
-                type: "review",
-                description: "Wrote review for MacBook Pro",
-                pointsEarned: 50,
-                amountSpent: 0,
-            },
-            {
-                id: 3,
-                date: "2023-11-05",
-                type: "referral",
-                description: "Referred Sarah Williams",
-                pointsEarned: 200,
-                amountSpent: 0,
-            },
-            {
-                id: 4,
-                date: "2023-10-28",
-                type: "rental",
-                description: "Rented DJI Drone",
-                pointsEarned: 120,
-                amountSpent: 75.5,
-            },
-            {
-                id: 5,
-                date: "2023-10-20",
-                type: "benefit",
-                description: "Used Free Express Shipping",
-                pointsDeducted: 100,
-                benefitUsed: "Express Shipping",
-            },
-            {
-                id: 6,
-                date: "2023-10-15",
-                type: "rental",
-                description: "Rented Sony A7 Camera",
-                pointsEarned: 180,
-                amountSpent: 110.0,
-            },
-            {
-                id: 7,
-                date: "2023-10-08",
-                type: "benefit",
-                description: "Used 10% Discount",
-                pointsDeducted: 300,
-                benefitUsed: "Discount Coupon",
-            },
-        ],
-    }
+    // Fetch user profile detail on mount
+    useEffect(() => {
+        if (registeredUser?.email) {
+            dispatch(getUserProfileDetails({ userEmail: registeredUser?.email, axiosSecure }))
+        }
+    }, [axiosSecure, dispatch, registeredUser?.email])
+
+
+    // Initial real user data from the backend
+    const [realUserData, setRealUserData] = useState({
+        joinDate: userProfileDetails?.joinDate,
+        membershipDetails: {
+            membershipTier: userProfileDetails?.membershipDetails?.membershipTier,
+            points: userProfileDetails?.membershipDetails?.points,
+            rentalStreak: userProfileDetails?.membershipDetails?.rentalStreak,
+            referrals: userProfileDetails?.membershipDetails?.referrals,
+        },
+    })
+
+
+    // Update realUserData when userProfileDetails changes
+    useEffect(() => {
+        if (userProfileDetails) {
+            setRealUserData({
+                joinDate: userProfileDetails?.joinDate,
+                membershipDetails: {
+                    membershipTier: userProfileDetails?.membershipDetails?.membershipTier,
+                    points: userProfileDetails?.membershipDetails?.points,
+                    rentalStreak: userProfileDetails?.membershipDetails?.rentalStreak,
+                    referrals: userProfileDetails?.membershipDetails?.referrals,
+                },
+            })
+        }
+    }, [userProfileDetails])
+
+    // Trigger progress bar animation after component mounts
+    useEffect(() => {
+        // Small delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+            setAnimateProgress(true)
+        }, 100)
+        return () => clearTimeout(timer)
+    }, [])
+
+
+       // Initial fake activities data //TODO: Replace with real activity data coming from backend
+       const [activities, setActivities] = useState([
+        {
+            id: 1,
+            date: "2023-11-15",
+            type: "rental",
+            description: "Rented iPhone 13 Pro",
+            pointsEarned: 150,
+            amountSpent: 89.99,
+        },
+        {
+            id: 2,
+            date: "2023-11-10",
+            type: "review",
+            description: "Wrote review for MacBook Pro",
+            pointsEarned: 50,
+            amountSpent: 0,
+        },
+        {
+            id: 3,
+            date: "2023-11-05",
+            type: "referral",
+            description: "Referred Sarah Williams",
+            pointsEarned: 200,
+            amountSpent: 0,
+        },
+        {
+            id: 4,
+            date: "2023-10-28",
+            type: "rental",
+            description: "Rented DJI Drone",
+            pointsEarned: 120,
+            amountSpent: 75.5,
+        },
+        {
+            id: 5,
+            date: "2023-10-20",
+            type: "benefit",
+            description: "Used Free Express Shipping",
+            pointsDeducted: 100,
+            benefitUsed: "Express Shipping",
+        },
+        {
+            id: 6,
+            date: "2023-10-15",
+            type: "rental",
+            description: "Rented Sony A7 Camera",
+            pointsEarned: 180,
+            amountSpent: 110.0,
+        },
+        {
+            id: 7,
+            date: "2023-10-08",
+            type: "benefit",
+            description: "Used 10% Discount",
+            pointsDeducted: 300,
+            benefitUsed: "Discount Coupon",
+        },
+    ])
 
 
     // Membership tiers data
@@ -102,46 +140,53 @@ const UserLoyaltyAndRewardComponent = () => {
         {
             tier: "Bronze",
             pointsRequired: 0,
-            benefits: ["5% discount on rentals", "Basic customer support", "Access to standard inventory"],
+            benefits: [
+                "Access to basic gadget catalog",
+                "5% discount on extended rentals",
+                "Standard delivery options",
+                "Basic customer support",
+            ],
         },
         {
             tier: "Silver",
-            pointsRequired: 2000,
+            pointsRequired: 500,
             benefits: [
-                "10% discount on rentals",
+                "All Bronze benefits",
                 "Priority customer support",
-                "Access to premium inventory",
+                "10% discount on extended rentals",
                 "Free standard shipping",
+                "Access to premium gadget catalog",
             ],
         },
         {
             tier: "Gold",
-            pointsRequired: 5000,
+            pointsRequired: 1500,
             benefits: [
-                "15% discount on rentals",
-                "24/7 VIP customer support",
-                "Access to exclusive inventory",
-                "Free express shipping",
-                "One free rental per month (up to $50)",
+                "All Silver benefits",
+                "15% discount on extended rentals",
+                "Free expedited shipping",
+                "Priority access to new gadgets",
+                "Dedicated customer support",
+                "Free basic insurance on rentals",
             ],
         },
         {
             tier: "Platinum",
-            pointsRequired: 10000,
+            pointsRequired: 5000,
             benefits: [
-                "20% discount on rentals",
-                "Dedicated account manager",
-                "Access to all inventory including pre-release items",
-                "Free express shipping",
-                "Two free rentals per month (up to $100)",
-                "Exclusive events and product previews",
+                "All Gold benefits",
+                "25% discount on extended rentals",
+                "Free premium insurance on all rentals",
+                "Free overnight shipping",
+                "VIP customer support",
+                "Early access to limited edition gadgets",
+                "Exclusive member events and workshops",
             ],
         },
     ]
 
 
     // States
-    const [userData, setUserData] = useState(initialUserData)
     const [expandedSections, setExpandedSections] = useState({
         benefits: true,
         upgrade: false,
@@ -152,13 +197,15 @@ const UserLoyaltyAndRewardComponent = () => {
 
     // Get current membership tier details
     const getCurrentTier = () => {
-        return membershipTiers.find((tier) => tier.tier === userData.membershipTier)
+        return membershipTiers.find((tier) => tier.tier === realUserData?.membershipDetails?.membershipTier)
     }
 
 
     // Get next membership tier details
     const getNextTier = () => {
-        const currentTierIndex = membershipTiers.findIndex((tier) => tier.tier === userData.membershipTier)
+        const currentTierIndex = membershipTiers.findIndex(
+            (tier) => tier.tier === realUserData?.membershipDetails?.membershipTier,
+        )
         if (currentTierIndex < membershipTiers.length - 1) {
             return membershipTiers[currentTierIndex + 1]
         }
@@ -166,11 +213,27 @@ const UserLoyaltyAndRewardComponent = () => {
     }
 
 
-    // Calculate points needed for next tier
+    // Check if the user can upgrade to the next tier
+    const canUpgradeToNextTier = () => {
+        const nextTier = getNextTier()
+        return nextTier && realUserData?.membershipDetails?.points >= nextTier?.pointsRequired
+    }
+
+
+    // Calculate points needed for the next tier
     const getPointsNeededForNextTier = () => {
         const nextTier = getNextTier()
+        if (!nextTier) return 0
+
+        return Math.max(0, nextTier.pointsRequired - (realUserData?.membershipDetails?.points || 0))
+    }
+
+
+    // Get the cost of upgrading to the next tier
+    const getUpgradeCost = () => {
+        const nextTier = getNextTier()
         if (nextTier) {
-            return Math.max(0, nextTier.pointsRequired - userData.points)
+            return nextTier.pointsRequired
         }
         return 0
     }
@@ -180,100 +243,129 @@ const UserLoyaltyAndRewardComponent = () => {
     const toggleSection = (section) => {
         setExpandedSections({
             ...expandedSections,
-            [section]: !expandedSections[section],
+            [section]: !expandedSections?.[section],
         })
     }
 
 
     // Handle membership upgrade
-    const handleUpgrade = () => {
+    const handleUpgrade = async () => {
         const nextTier = getNextTier()
-        if (nextTier) {
-            // In a real app, this would be an API call
-            const updatedUserData = {
-                ...userData,
-                membershipTier: nextTier.tier,
-                points: userData.points - getPointsNeededForNextTier(),
-                activities: [
-                    {
-                        id: userData.activities.length + 1,
-                        date: new Date().toISOString().split("T")[0],
-                        type: "upgrade",
-                        description: `Upgraded to ${nextTier.tier} Membership`,
-                        pointsDeducted: getPointsNeededForNextTier(),
-                        benefitUsed: "Membership Upgrade",
-                    },
-                    ...userData.activities,
-                ],
+        if (nextTier && realUserData?.membershipDetails?.points >= nextTier?.pointsRequired) {
+            // Calculate the upgrade cost (points required for the next tier)
+            const upgradeCost = nextTier.pointsRequired
+
+            // Update the realUserData with the correct structure
+            const updatedRealUserData = {
+                ...realUserData,
+                membershipDetails: {
+                    ...realUserData?.membershipDetails,
+                    membershipTier: nextTier.tier,
+                    points: (realUserData?.membershipDetails?.points || 0) - upgradeCost,
+                },
             }
 
-            setUserData(updatedUserData)
-            console.log("Membership Upgraded:", updatedUserData)
+            setRealUserData(updatedRealUserData)
+            await dispatch(updateUserMembershipInfo({userEmail: registeredUser?.email, userMembershipObj: updatedRealUserData, axiosSecure}))
+            // console.log("Membership Upgraded:", updatedRealUserData)
+
+            // Update activities
+            const newActivity = {
+                id: activities.length + 1,
+                date: new Date().toISOString().split("T")[0],
+                type: "upgrade",
+                description: `Upgraded to ${nextTier.tier} Membership`,
+                pointsDeducted: upgradeCost,
+                benefitUsed: "Membership Upgrade",
+            }
+            setActivities([newActivity, ...activities])
         }
     }
 
 
-    // Handle refer a friend
-    const handleReferFriend = (e) => {
+    // Validate email
+    const validateEmail = (email) => {
+        const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        return re.test(String(email).toLowerCase())
+    }
+
+
+    // Handle refers to a friend
+    const handleReferFriend = async (e) => {
         e.preventDefault()
         const referralPoints = 200
-        const friendEmail = e.target.email.value
+        const friendEmail = e.target?.email?.value
 
-        if (!friendEmail) return
-
-        // In a real app, this would be an API call
-        const updatedUserData = {
-            ...userData,
-            points: userData.points + referralPoints,
-            referrals: userData.referrals + 1,
-            activities: [
-                {
-                    id: userData.activities.length + 1,
-                    date: new Date().toISOString().split("T")[0],
-                    type: "referral",
-                    description: `Referred friend: ${friendEmail}`,
-                    pointsEarned: referralPoints,
-                    amountSpent: 0,
-                },
-                ...userData.activities,
-            ],
+        if (!friendEmail) {
+            setEmailError("Email address is required")
+            return
         }
 
-        setUserData(updatedUserData)
-        console.log("Friend Referred:", updatedUserData)
+        if (!validateEmail(friendEmail)) {
+            setEmailError("Please enter a valid email address")
+            return
+        }
+
+        setEmailError("")
+
+        // Update the realUserData with the correct structure
+        const updatedRealUserData = {
+            ...realUserData,
+            membershipDetails: {
+                ...realUserData?.membershipDetails,
+                points: (realUserData?.membershipDetails?.points || 0) + referralPoints,
+                referrals: (realUserData?.membershipDetails?.referrals || 0) + 1,
+            },
+        }
+
+        setRealUserData(updatedRealUserData)
+        await dispatch(updateUserMembershipInfo({userEmail: registeredUser?.email, userMembershipObj: updatedRealUserData, axiosSecure}))
+        // console.log("Friend Referred:", updatedRealUserData)
+
+        // Update activities
+        const newActivity = {
+            id: activities.length + 1,
+            date: new Date().toISOString().split("T")[0],
+            type: "referral",
+            description: `Referred friend: ${friendEmail}`,
+            pointsEarned: referralPoints,
+            amountSpent: 0,
+        }
+        setActivities([newActivity, ...activities])
 
         // Reset form
         e.target.reset()
     }
 
 
-    // Get icon for activity type
-    const getActivityIcon = (type) => {
-        switch (type) {
-            case "rental":
-                return <FiShoppingBag className="text-blue-500" />
-            case "review":
-                return <FiMessageSquare className="text-green-500" />
-            case "referral":
-                return <FiUsers className="text-purple-500" />
-            case "benefit":
-                return <FiGift className="text-amber-500" />
-            case "upgrade":
-                return <FiAward className="text-red-500" />
-            default:
-                return <FiClock className="text-gray-500" />
-        }
+   // Get icon for an activity type
+   const getActivityIcon = (type) => {
+    switch (type) {
+        case "rental":
+            return <FiShoppingBag className="text-blue-500" />
+        case "review":
+            return <FiMessageSquare className="text-green-500" />
+        case "referral":
+            return <FiUsers className="text-purple-500" />
+        case "benefit":
+            return <FiGift className="text-amber-500" />
+        case "upgrade":
+            return <FiAward className="text-red-500" />
+        default:
+            return <FiClock className="text-gray-500" />
     }
-
+}
+    
 
     // Calculate membership progress percentage
     const calculateProgressPercentage = () => {
         const nextTier = getNextTier()
-        if (!nextTier) return 100 // Already at highest tier
+        if (!nextTier) return 100 // Already at the highest tier
 
         const currentTier = getCurrentTier()
-        const totalPointsNeeded = nextTier.pointsRequired - currentTier.pointsRequired
-        const pointsAchieved = userData.points - currentTier.pointsRequired
+        const totalPointsNeeded = nextTier?.pointsRequired - (currentTier?.pointsRequired || 0)
+        const pointsAchieved = (realUserData?.membershipDetails?.points || 0) - (currentTier?.pointsRequired || 0)
 
         return Math.min(100, Math.max(0, (pointsAchieved / totalPointsNeeded) * 100))
     }
@@ -298,17 +390,17 @@ const UserLoyaltyAndRewardComponent = () => {
 
     // Get benefit icon
     const getBenefitIcon = (benefit) => {
-        if (benefit.includes("discount")) {
+        if (benefit?.includes("discount")) {
             return <FiPercent className="text-green-500" />
-        } else if (benefit.includes("shipping")) {
+        } else if (benefit?.includes("shipping")) {
             return <FiTruck className="text-blue-500" />
-        } else if (benefit.includes("support")) {
+        } else if (benefit?.includes("support")) {
             return <FiHeadphones className="text-purple-500" />
-        } else if (benefit.includes("free rental")) {
+        } else if (benefit?.includes("free rental")) {
             return <FiGift className="text-red-500" />
-        } else if (benefit.includes("inventory")) {
+        } else if (benefit?.includes("inventory")) {
             return <FiShoppingBag className="text-amber-500" />
-        } else if (benefit.includes("account manager") || benefit.includes("events")) {
+        } else if (benefit?.includes("account manager") || benefit?.includes("events")) {
             return <FiShield className="text-indigo-500" />
         } else {
             return <FiStar className="text-blue-500" />
@@ -320,15 +412,14 @@ const UserLoyaltyAndRewardComponent = () => {
         window.scrollTo({
             top: 0,
             // behavior: 'smooth'
-        });
-    }, []);
-
+        })
+    }, [])
+   
 
     return (
         <div
             className={`w-full mx-auto rounded-xl ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-800"}`}
         >
-
             {/* Points and Membership Summary */}
             <div
                 className={`rounded-xl overflow-hidden shadow-sm mb-6 ${darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"}`}
@@ -339,24 +430,24 @@ const UserLoyaltyAndRewardComponent = () => {
                             <div className="flex items-center">
                                 <FiAward
                                     size={24}
-                                    className={`mr-2 ${userData.membershipTier === "Bronze" ? "text-amber-700" : userData.membershipTier === "Silver" ? "text-gray-400" : userData.membershipTier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
+                                    className={`mr-2 ${realUserData?.membershipDetails?.membershipTier === "Bronze" ? "text-amber-700" : realUserData?.membershipDetails?.membershipTier === "Silver" ? "text-gray-400" : realUserData?.membershipDetails?.membershipTier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
                                 />
-                                <h2 className="text-xl font-semibold">{userData.membershipTier} Member</h2>
+                                <h2 className="text-xl font-semibold">{realUserData?.membershipDetails?.membershipTier} Member</h2>
                                 <span
-                                    className={`ml-2 px-2 py-1 text-xs font-medium rounded-full text-white ${getTierColor(userData.membershipTier)}`}
+                                    className={`ml-2 px-2 py-1 text-xs font-medium rounded-full text-white ${getTierColor(realUserData?.membershipDetails?.membershipTier)}`}
                                 >
-                                    {userData.membershipTier}
+                                    {realUserData?.membershipDetails?.membershipTier}
                                 </span>
                             </div>
                             <p className={`mt-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                Member since {userData.memberSince}
+                                Member since {formatJoinDate(realUserData?.joinDate)}
                             </p>
                         </div>
 
                         <div className="flex items-center">
                             <FiStar size={24} className="mr-2 text-amber-400" />
                             <div>
-                                <div className="text-2xl font-bold">{userData.points.toLocaleString()}</div>
+                                <div className="text-2xl font-bold">{realUserData?.membershipDetails?.points?.toLocaleString()}</div>
                                 <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>Total Points</div>
                             </div>
                         </div>
@@ -366,16 +457,31 @@ const UserLoyaltyAndRewardComponent = () => {
                         <div className="mt-6">
                             <div className="flex justify-between mb-2">
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Progress to {getNextTier().tier}
+                                    Progress to {getNextTier()?.tier}
                                 </span>
                                 <span className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-                                    {getPointsNeededForNextTier().toLocaleString()} points needed
+                                    {canUpgradeToNextTier() ? (
+                                        <span className="flex items-center">
+                                            <FiCheck className="mr-1 text-green-500"/>
+                                            Ready to upgrade
+                                        </span>
+                                    ) : (
+                                        `${getPointsNeededForNextTier().toLocaleString()} points needed`
+                                    )}
                                 </span>
                             </div>
                             <div className={`h-2 rounded-full overflow-hidden ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}>
                                 <div
-                                    className={`h-full rounded-full ${userData.membershipTier === "Bronze" ? "bg-amber-700" : userData.membershipTier === "Silver" ? "bg-gray-400" : userData.membershipTier === "Gold" ? "bg-amber-400" : "bg-indigo-600"}`}
-                                    style={{ width: `${calculateProgressPercentage()}%` }}
+                                    className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                                        realUserData?.membershipDetails?.membershipTier === "Bronze"
+                                            ? "bg-amber-700"
+                                            : realUserData?.membershipDetails?.membershipTier === "Silver"
+                                                ? "bg-gray-400"
+                                                : realUserData?.membershipDetails?.membershipTier === "Gold"
+                                                    ? "bg-amber-400"
+                                                    : "bg-indigo-600"
+                                    }`}
+                                    style={{ width: animateProgress ? `${calculateProgressPercentage()}%` : "0%" }}
                                 ></div>
                             </div>
                         </div>
@@ -395,13 +501,13 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiGift size={20} className="mr-2 text-purple-500" />
                         <h3 className="text-lg font-semibold">Your Benefits</h3>
                     </div>
-                    {expandedSections.benefits ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.benefits ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.benefits && (
+                {expandedSections?.benefits && (
                     <div className="p-4 pt-0">
                         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {getCurrentTier().benefits.map((benefit, index) => (
+                            {getCurrentTier()?.benefits?.map((benefit, index) => (
                                 <div
                                     key={index}
                                     className={`p-4 rounded-lg flex items-start ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}
@@ -429,10 +535,10 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiTrendingUp size={20} className="mr-2 text-green-500" />
                         <h3 className="text-lg font-semibold">Membership Upgrade</h3>
                     </div>
-                    {expandedSections.upgrade ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.upgrade ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.upgrade && (
+                {expandedSections?.upgrade && (
                     <div className="p-4 pt-0">
                         {getNextTier() ? (
                             <div className="mt-4">
@@ -444,9 +550,9 @@ const UserLoyaltyAndRewardComponent = () => {
                                             <div className="flex items-center">
                                                 <FiAward
                                                     size={20}
-                                                    className={`mr-2 ${getNextTier().tier === "Bronze" ? "text-amber-700" : getNextTier().tier === "Silver" ? "text-gray-400" : getNextTier().tier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
+                                                    className={`mr-2 ${getNextTier()?.tier === "Bronze" ? "text-amber-700" : getNextTier()?.tier === "Silver" ? "text-gray-400" : getNextTier()?.tier === "Gold" ? "text-amber-400" : "text-indigo-600"}`}
                                                 />
-                                                <h4 className="text-lg font-semibold">{getNextTier().tier} Membership</h4>
+                                                <h4 className="text-lg font-semibold">{getNextTier()?.tier} Membership</h4>
                                             </div>
                                             <p className={`mt-1 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                                                 Unlock premium benefits and exclusive perks
@@ -455,7 +561,16 @@ const UserLoyaltyAndRewardComponent = () => {
 
                                         <div className="flex items-center">
                                             <FiStar size={20} className="mr-2 text-amber-400" />
-                                            <span className="font-medium">{getPointsNeededForNextTier().toLocaleString()} points needed</span>
+                                            <span className="font-medium">
+                                                {canUpgradeToNextTier() ? (
+                                                    <span className="flex items-center">
+                                                        <FiCheck className="mr-1 text-green-500" />
+                                                        Ready to upgrade
+                                                    </span>
+                                                ) : (
+                                                `${getPointsNeededForNextTier().toLocaleString()} points needed`
+                                                )}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -463,7 +578,7 @@ const UserLoyaltyAndRewardComponent = () => {
                                         <h5 className="font-medium mb-2">New Benefits You'll Unlock:</h5>
                                         <ul className="space-y-2">
                                             {getNextTier()
-                                                .benefits.filter((benefit) => !getCurrentTier().benefits.includes(benefit))
+                                                ?.benefits?.filter((benefit) => !getCurrentTier()?.benefits?.includes(benefit))
                                                 .map((benefit, index) => (
                                                     <li key={index} className="flex items-center">
                                                         <FiStar className="mr-2 text-amber-400" size={16} />
@@ -476,15 +591,15 @@ const UserLoyaltyAndRewardComponent = () => {
                                     <div className="mt-6">
                                         <button
                                             onClick={handleUpgrade}
-                                            disabled={userData.points < getNextTier().pointsRequired}
-                                            className={`px-4 py-2 rounded-lg font-medium ${
-                                                userData.points >= getNextTier().pointsRequired
+                                            disabled={!canUpgradeToNextTier()}
+                                            className={`px-4 py-2 rounded-lg font-medium cursor-pointer ${
+                                                canUpgradeToNextTier()
                                                     ? "bg-green-600 hover:bg-green-700 text-white"
-                                                    : `${darkMode ? "bg-gray-600 text-gray-300" : "bg-gray-200 text-gray-500"}`
+                                                    : `${darkMode ? "bg-gray-600 text-gray-300" : "bg-gray-200 text-gray-500"} cursor-not-allowed`
                                             }`}
                                         >
-                                            {userData.points >= getNextTier().pointsRequired
-                                                ? `Upgrade to ${getNextTier().tier}`
+                                            {canUpgradeToNextTier()
+                                                ? `Upgrade to ${getNextTier()?.tier} (${getUpgradeCost().toLocaleString()} points)`
                                                 : `Need ${getPointsNeededForNextTier().toLocaleString()} more points`}
                                         </button>
                                     </div>
@@ -515,10 +630,10 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiUserPlus size={20} className="mr-2 text-blue-500" />
                         <h3 className="text-lg font-semibold">Refer a Friend</h3>
                     </div>
-                    {expandedSections.referral ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.referral ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.referral && (
+                {expandedSections?.referral && (
                     <div className="p-4 pt-0">
                         <div className="mt-4">
                             <div className={`p-5 rounded-lg ${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
@@ -547,15 +662,21 @@ const UserLoyaltyAndRewardComponent = () => {
                                                 darkMode
                                                     ? "bg-gray-800 border-gray-600 text-white focus:border-blue-500"
                                                     : "bg-white border-gray-300 text-gray-900 focus:border-blue-500"
-                                            } focus:outline-none`}
+                                            } focus:outline-none ${emailError ? "border-red-500" : ""}`}
                                             placeholder="Enter your friend's email"
-                                            required
+                                            onChange={() => setEmailError("")}
                                         />
+                                        {emailError && (
+                                            <div className="flex items-center mt-1 text-red-500 text-sm">
+                                                <FiAlertCircle className="mr-1" />
+                                                {emailError}
+                                            </div>
+                                        )}
                                     </div>
 
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                                        className="px-4 py-2 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                                     >
                                         Send Invitation
                                     </button>
@@ -564,7 +685,8 @@ const UserLoyaltyAndRewardComponent = () => {
                                 <div className="mt-4 flex items-center">
                                     <FiUsers size={16} className="mr-2 text-purple-500" />
                                     <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                        You've referred {userData.referrals} {userData.referrals === 1 ? "friend" : "friends"} so far
+                                        You've referred {realUserData?.membershipDetails?.referrals}{" "}
+                                        {realUserData?.membershipDetails?.referrals === 1 ? "friend" : "friends"} so far
                                     </span>
                                 </div>
                             </div>
@@ -585,12 +707,12 @@ const UserLoyaltyAndRewardComponent = () => {
                         <FiClock size={20} className="mr-2 text-amber-500" />
                         <h3 className="text-lg font-semibold">Activity History</h3>
                     </div>
-                    {expandedSections.activity ? <FiChevronUp /> : <FiChevronDown />}
+                    {expandedSections?.activity ? <FiChevronUp /> : <FiChevronDown />}
                 </div>
 
-                {expandedSections.activity && (
+                {expandedSections?.activity && (
                     <div className="p-4 pt-0">
-                       <div className="mt-4 overflow-x-auto">
+                        <div className="mt-4 overflow-x-auto">
                             <table className={`min-w-full divide-y ${darkMode ? "divide-gray-700" : "divide-gray-300"}`}>
                                 <thead className={darkMode ? "bg-gray-700" : "bg-gray-50"}>
                                 <tr>
@@ -612,7 +734,7 @@ const UserLoyaltyAndRewardComponent = () => {
                                 </tr>
                                 </thead>
                                 <tbody className={`divide-y ${darkMode ? "divide-gray-700" : "divide-gray-200"}`}>
-                                {userData.activities.map((activity) => (
+                                {activities.map((activity) => (
                                     <tr key={activity.id} className={darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"}>
                                         <td className="px-4 py-4 whitespace-nowrap text-sm">
                                             {new Date(activity.date).toLocaleDateString()}
@@ -652,19 +774,19 @@ const UserLoyaltyAndRewardComponent = () => {
                             </table>
                         </div>
 
-                        <div className="mt-4 flex items-center justify-between">
+                        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                             <div className="flex items-center">
                                 <FiTrendingUp size={16} className="mr-2 text-green-500" />
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Current Rental Streak: {userData.rentalStreak} {userData.rentalStreak === 1 ? "day" : "days"}
+                                    Current Rental Streak: {realUserData?.membershipDetails?.rentalStreak}{" "}
+                                    {realUserData?.membershipDetails?.rentalStreak === 1 ? "day" : "days"}
                                 </span>
                             </div>
 
                             <div className="flex items-center">
                                 <FiCreditCard size={16} className="mr-2 text-blue-500" />
                                 <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    Total Points Earned:{" "}
-                                    {userData.activities.reduce((sum, activity) => sum + (activity.pointsEarned || 0), 0)}
+                                    Total Points Earned: {activities.reduce((sum, activity) => sum + (activity?.pointsEarned || 0), 0)}
                                 </span>
                             </div>
                         </div>
@@ -675,4 +797,7 @@ const UserLoyaltyAndRewardComponent = () => {
     )
 }
 
-export default UserLoyaltyAndRewardComponent;
+export default UserLoyaltyAndRewardComponent
+
+
+

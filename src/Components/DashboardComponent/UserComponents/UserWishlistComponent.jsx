@@ -1,13 +1,14 @@
-import {useContext, useEffect, useState} from "react"
-import {FiHeart, FiPackage,  FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
-import { useDispatch,useSelector } from "react-redux"
+import {useContext, useEffect} from "react"
+import {FiHeart, FiPackage, FiStar, FiTrash2, FiShoppingCart, FiEye, FiWifi} from "react-icons/fi"
+import {useDispatch, useSelector} from "react-redux"
 import {FaCamera, FaGamepad, FaHeadphones, FaLaptop, FaMobileAlt, FaTabletAlt, FaVrCardboard} from "react-icons/fa"
 import AuthContext from "../../../Providers/AuthContext.jsx";
 import {addOrRemoveWishlistGadget, getWishlistGadgetsDetails} from "../../../Features/gadgetWishlist/gadgetWishlistSlice.js";
 import {useNavigate} from "react-router-dom";
-
+import useAxiosSecure from "../../../CustomHooks/useAxiosSecure.jsx";
 
 const UserWishlistComponent = () => {
+
 
     // State management
     const darkMode = useSelector((state) => state.darkMode.isDark)
@@ -15,31 +16,20 @@ const UserWishlistComponent = () => {
     const dispatch = useDispatch();
     const {wishlistGadgetDetails} = useSelector((state) => state.gadgetWishlist);
 
-    const [wishlistItems, setWishlistItems] = useState([]);
+    const axiosSecure = useAxiosSecure();
     const navigateTo = useNavigate();
 
 
-     // Fetch wishlist gadget details on mount
-     useEffect(() => {
-        if (registeredUser?.email) {
-            dispatch(getWishlistGadgetsDetails(registeredUser?.email))
-        }
-    }, [dispatch, registeredUser?.email]);
-
-
-    // After fetching get wishlist gadget details data
+    // Fetch wishlist gadget details on mount
     useEffect(() => {
-        const getWishlistGadgetsDetails = async () => {
-            if (wishlistGadgetDetails !== null) {
-                setWishlistItems(wishlistGadgetDetails)
-            }
+        if (registeredUser?.email) {
+            dispatch(getWishlistGadgetsDetails({userEmail: registeredUser?.email, axiosSecure}))
         }
-        getWishlistGadgetsDetails().then();
-    }, [wishlistGadgetDetails]);
+    }, [axiosSecure, dispatch, registeredUser?.email]);
 
 
-    // Format currency
-    const formatCurrency = (amount) => {
+        // Format currency
+     const formatCurrency = (amount) => {
         return new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
@@ -48,44 +38,42 @@ const UserWishlistComponent = () => {
     }
 
 
-    // Get category icon
-    const getCategoryIcon = (category) => {
-        switch (category) {
-            case "Smartphones":
-                return <FaMobileAlt className="text-blue-500" />
-            case "Laptops":
-                return <FaLaptop className="text-purple-500" />
-            case "Tablets":
-                return <FaTabletAlt className="text-green-500" />
-            case "Headphones":
-                return <FaHeadphones className="text-cyan-500" />
-            case "Cameras":
-                return <FaCamera className="text-red-500" />
-            case "Gaming":
-                return <FaGamepad className="text-indigo-500" />
-            case "Drones":
-                return <FiWifi className="text-orange-500" />
-            case "VR":
-                return <FaVrCardboard className="text-pink-500" />
-            default:
-                return <FiPackage className="text-gray-500" />
-        }
+   // Get category icon
+   const getCategoryIcon = (category) => {
+    switch (category) {
+        case "Smartphones":
+            return <FaMobileAlt className="text-blue-500" />
+        case "Laptops":
+            return <FaLaptop className="text-purple-500" />
+        case "Tablets":
+            return <FaTabletAlt className="text-green-500" />
+        case "Headphones":
+            return <FaHeadphones className="text-cyan-500" />
+        case "Cameras":
+            return <FaCamera className="text-red-500" />
+        case "Gaming":
+            return <FaGamepad className="text-indigo-500" />
+        case "Drones":
+            return <FiWifi className="text-orange-500" />
+        case "VR":
+            return <FaVrCardboard className="text-pink-500" />
+        default:
+            return <FiPackage className="text-gray-500" />
     }
+}
 
 
-    // Handle remove from wishlist
+
+    // Handle remove from the wishlist
     const handleRemoveFromWishlist = async (id) => {
-        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id}));
+        await dispatch(addOrRemoveWishlistGadget({userEmail: registeredUser?.email, gadgetId: id, axiosSecure}));
         await dispatch(getWishlistGadgetsDetails(registeredUser?.email));
     }
 
 
     // Handle rent now
     const handleRentNow = (id) => {
-        // In a real app, this would navigate to checkout or rental page
-        console.log(`Renting gadget with ID: ${id}`)
-        // For demo purposes, let's mark it as unavailable
-        setWishlistItems(wishlistItems.map((item) => (item.id === id ? { ...item, availability: "unavailable" } : item)))
+        navigateTo(`/all-gadgets/gadget-details/${id}`);
     }
 
 
@@ -109,11 +97,11 @@ const UserWishlistComponent = () => {
         >
 
             {/* Wishlist Grid */}
-            {wishlistItems.length > 0 ? (
+            {wishlistGadgetDetails?.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {wishlistItems.map((item) => (
+                    {wishlistGadgetDetails?.map((item) => (
                         <div
-                            key={item?.id}
+                            key={item?._id}
                             className={`rounded-xl overflow-hidden shadow-sm transition-all hover:shadow-md ${
                                 darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"
                             }`}
@@ -121,7 +109,7 @@ const UserWishlistComponent = () => {
                             {/* Image Section */}
                             <div className="relative h-48 overflow-hidden group">
                                 <img
-                                    src={item?.image[0] || "/placeholder.svg"}
+                                    src={item?.images[0] || "/placeholder.svg"}
                                     alt={item?.name}
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
@@ -187,7 +175,7 @@ const UserWishlistComponent = () => {
                                     {item?.description}
                                 </p>
                                 <div className="font-bold text-lg mb-4">
-                                {formatCurrency(item?.pricing?.perDay)}
+                                    {formatCurrency(item?.pricing?.perDay)}
                                     <span className={`text-xs font-normal ${darkMode ? "text-gray-400" : "text-gray-500"}`}>/day</span>
                                 </div>
 
